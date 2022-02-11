@@ -9,27 +9,6 @@ from AddFriend import Ui_AddFriend
 from LandP import Ui_LandP
 from Reg import Ui_Reg
 
-"""
-v0.4.0 - Добавлена возможность общаться не через локальный айпи а полноценно 
-         через интернет ВНЕ локального роутера
-
-v0.4.5 - Переработан дизайн (из-за утери старого) в лучшую сторону. 
-         Добалена возможность видеть кол-во пользователей онлайн
-
-v0.4.7 - Ипсравлен костылями баг, теперь можно нормально закрывать программу и будет все ок
-
-v0.4.9 - Убрана возможность отсылать пустые пробелы. 
-         Так же, больше нельзя отсылать сообщения с пробелами в начале и в концах
-
-v0.5.0 - Реализовано окно входа.
-         При попытке запуска программы вторым экземпляром,
-         пользователь не сможет отправлять сообщения
-         анти спам (доработать(ну желательно). 
-
-         После запуска каждое последнее окно дает СОР, но не первое )
-"""
-
-
 class Client(socket.socket):
     def __init__(self):  # Connect to server
         super().__init__()
@@ -481,17 +460,6 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         data_of_sign = pickle.dumps(data_of_sign)
 
         self.cl.send_data(data_of_sign)
-
-    # def send_text_with_enter(
-    #        self):  # Sending text to the client by pressing Enter NOT A CRAWLER BUT A TEMPORARY MEASURE
-    #
-    #       while True:
-    #          keyboard.wait('Enter')
-    #         if (self.textEdit.toPlainText()).strip() != "" and self.can_write:
-    #            text = (self.nickName).strip() + ": " + (self.textEdit.toPlainText()).strip()
-    #           text = pickle.dumps(text)
-    #          self.cl.send_data(text)
-    #         self.textEdit.setText("")
 
     def shotdown(self):  # К хренам обрумаем ему все его костыли и прога умирает от нажатия на Крестик
         print("ОКНО ЗАКРЫТО ПО ЖЕЛАНИЮ ПОЛЬЗОВАТЕЛЯ")
