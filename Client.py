@@ -6,8 +6,29 @@ import threading
 from PyQt5 import QtCore, QtWidgets, QtGui
 
 from AddFriend import Ui_AddFriend
-from LandP import Ui_LandP
+from LandP_Reg import Ui_LandP_Reg
 from Reg import Ui_Reg
+
+"""
+v0.4.0 - Добавлена возможность общаться не через локальный айпи а полноценно 
+         через интернет ВНЕ локального роутера
+
+v0.4.5 - Переработан дизайн (из-за утери старого) в лучшую сторону. 
+         Добалена возможность видеть кол-во пользователей онлайн
+
+v0.4.7 - Ипсравлен костылями баг, теперь можно нормально закрывать программу и будет все ок
+
+v0.4.9 - Убрана возможность отсылать пустые пробелы. 
+         Так же, больше нельзя отсылать сообщения с пробелами в начале и в концах
+
+v0.5.0 - Реализовано окно входа.
+         При попытке запуска программы вторым экземпляром,
+         пользователь не сможет отправлять сообщения
+         анти спам (доработать(ну желательно). 
+
+         После запуска каждое последнее окно дает СОР, но не первое )
+"""
+
 
 class Client(socket.socket):
     def __init__(self):  # Connect to server
@@ -29,8 +50,8 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         global ChildWindow
 
         ChildWindow = QtWidgets.QMainWindow()
-        self.LPForm = Ui_LandP()
-        self.LPForm.setupUi(ChildWindow)
+        self.LP_RForm = Ui_LandP_Reg()
+        self.LP_RForm.setupUi(ChildWindow)
 
         self.thr = threading.Thread(target=self.get_text).start()
 
@@ -42,12 +63,13 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.RegForm = Ui_Reg()
         self.RegForm.setupUi(self.RegWindow)
 
+
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1291, 865)
+        MainWindow.resize(1291, 858)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.stackedWidget = QtWidgets.QStackedWidget(self.centralwidget)
-        self.stackedWidget.setGeometry(QtCore.QRect(451, 0, 841, 866))
+        self.stackedWidget.setGeometry(QtCore.QRect(0, 0, 1291, 866))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -192,35 +214,181 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.stackedWidget.setFrameShadow(QtWidgets.QFrame.Plain)
         self.stackedWidget.setMidLineWidth(0)
         self.stackedWidget.setObjectName("stackedWidget")
-        self.page_1 = QtWidgets.QWidget()
-        self.page_1.setObjectName("page_1")
-        self.listWidget_chat = QtWidgets.QListWidget(self.page_1)
-        self.listWidget_chat.setGeometry(QtCore.QRect(0, 40, 902, 411))
-        self.listWidget_chat.setStyleSheet("color: rgb(158, 158, 158);")
-        self.listWidget_chat.setObjectName("listWidget_chat")
-
-        self.page_4 = QtWidgets.QWidget()
-        self.page_4.setObjectName("page_4")
-        self.listWidget_msgRoom = QtWidgets.QListWidget(self.page_4)
-        self.listWidget_msgRoom.setGeometry(QtCore.QRect(0, 50, 840, 651))
+        self.page_sign = QtWidgets.QWidget()
+        self.page_sign.setObjectName("page_sign")
+        self.label_2 = QtWidgets.QLabel(self.page_sign)
+        self.label_2.setGeometry(QtCore.QRect(450, 424, 71, 20))
         font = QtGui.QFont()
-        font.setPointSize(13)
+        font.setPointSize(12)
+        self.label_2.setFont(font)
+        self.label_2.setStyleSheet("color: rgb(158, 158, 158);")
+        self.label_2.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_2.setObjectName("label_2")
+        self.pushButton_toReg = QtWidgets.QPushButton(self.page_sign)
+        self.pushButton_toReg.setGeometry(QtCore.QRect(660, 490, 141, 31))
+        self.pushButton_toReg.setStyleSheet("color: rgb(158, 158, 158);")
+        self.pushButton_toReg.setObjectName("pushButton_toReg")
+        self.lineEdit_2 = QtWidgets.QLineEdit(self.page_sign)
+        self.lineEdit_2.setGeometry(QtCore.QRect(522, 420, 281, 31))
+        self.lineEdit_2.setInputMask("")
+        self.lineEdit_2.setText("")
+        self.lineEdit_2.setEchoMode(QtWidgets.QLineEdit.Password)
+        self.lineEdit_2.setObjectName("lineEdit_2")
+        self.label = QtWidgets.QLabel(self.page_sign)
+        self.label.setGeometry(QtCore.QRect(460, 332, 51, 20))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label.setFont(font)
+        self.label.setStyleSheet("color: rgb(158, 158, 158);")
+        self.label.setAlignment(QtCore.Qt.AlignCenter)
+        self.label.setObjectName("label")
+        self.lineEdit = QtWidgets.QLineEdit(self.page_sign)
+        self.lineEdit.setGeometry(QtCore.QRect(522, 330, 281, 31))
+        self.lineEdit.setStyleSheet("")
+        self.lineEdit.setObjectName("lineEdit")
+        self.pushButton_sign = QtWidgets.QPushButton(self.page_sign)
+        self.pushButton_sign.setGeometry(QtCore.QRect(514, 490, 81, 31))
+        self.pushButton_sign.setStyleSheet("color: rgb(158, 158, 158);")
+        self.pushButton_sign.setObjectName("pushButton_sign")
+        self.line_4 = QtWidgets.QFrame(self.page_sign)
+        self.line_4.setGeometry(QtCore.QRect(-3, 50, 1291, 20))
+        self.line_4.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line_4.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_4.setObjectName("line_4")
+        self.label_10 = QtWidgets.QLabel(self.page_sign)
+        self.label_10.setGeometry(QtCore.QRect(580, 10, 161, 31))
+        font = QtGui.QFont()
+        font.setPointSize(21)
+        self.label_10.setFont(font)
+        self.label_10.setStyleSheet("color: rgb(158, 158, 158);")
+        self.label_10.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_10.setObjectName("label_10")
+        self.stackedWidget.addWidget(self.page_sign)
+        self.page_reg = QtWidgets.QWidget()
+        self.page_reg.setObjectName("page_reg")
+        self.label_8 = QtWidgets.QLabel(self.page_reg)
+        self.label_8.setGeometry(QtCore.QRect(428, 500, 451, 20))
+        self.label_8.setStyleSheet("color: rgb(158, 158, 158);")
+        self.label_8.setText("")
+        self.label_8.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_8.setObjectName("label_8")
+        self.label_7 = QtWidgets.QLabel(self.page_reg)
+        self.label_7.setGeometry(QtCore.QRect(450, 400, 61, 21))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label_7.setFont(font)
+        self.label_7.setStyleSheet("color: rgb(158, 158, 158);")
+        self.label_7.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_7.setObjectName("label_7")
+        self.label_5 = QtWidgets.QLabel(self.page_reg)
+        self.label_5.setGeometry(QtCore.QRect(450, 300, 61, 31))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label_5.setFont(font)
+        self.label_5.setStyleSheet("color: rgb(158, 158, 158);")
+        self.label_5.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_5.setObjectName("label_5")
+        self.pushButton_reg = QtWidgets.QPushButton(self.page_reg)
+        self.pushButton_reg.setGeometry(QtCore.QRect(512, 530, 81, 31))
+        self.pushButton_reg.setStyleSheet("color: rgb(158, 158, 158);")
+        self.pushButton_reg.setObjectName("pushButton_reg")
+        self.pushButton_backToSign = QtWidgets.QPushButton(self.page_reg)
+        self.pushButton_backToSign.setGeometry(QtCore.QRect(710, 530, 81, 31))
+        self.pushButton_backToSign.setStyleSheet("color: rgb(158, 158, 158);")
+        self.pushButton_backToSign.setObjectName("pushButton_backToSign")
+        self.lineEdit_5 = QtWidgets.QLineEdit(self.page_reg)
+        self.lineEdit_5.setGeometry(QtCore.QRect(560, 460, 281, 31))
+        self.lineEdit_5.setObjectName("lineEdit_5")
+        self.label_6 = QtWidgets.QLabel(self.page_reg)
+        self.label_6.setGeometry(QtCore.QRect(400, 460, 141, 31))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label_6.setFont(font)
+        self.label_6.setStyleSheet("color: rgb(158, 158, 158);")
+        self.label_6.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_6.setObjectName("label_6")
+        self.lineEdit_7 = QtWidgets.QLineEdit(self.page_reg)
+        self.lineEdit_7.setGeometry(QtCore.QRect(560, 300, 281, 31))
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        self.lineEdit_7.setFont(font)
+        self.lineEdit_7.setObjectName("lineEdit_7")
+        self.lineEdit_6 = QtWidgets.QLineEdit(self.page_reg)
+        self.lineEdit_6.setGeometry(QtCore.QRect(560, 400, 281, 31))
+        self.lineEdit_6.setObjectName("lineEdit_6")
+        self.label_9 = QtWidgets.QLabel(self.page_reg)
+        self.label_9.setGeometry(QtCore.QRect(580, 10, 161, 31))
+        font = QtGui.QFont()
+        font.setPointSize(21)
+        self.label_9.setFont(font)
+        self.label_9.setStyleSheet("color: rgb(158, 158, 158);")
+        self.label_9.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_9.setObjectName("label_9")
+        self.line_3 = QtWidgets.QFrame(self.page_reg)
+        self.line_3.setGeometry(QtCore.QRect(-3, 50, 1291, 20))
+        self.line_3.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line_3.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_3.setObjectName("line_3")
+        self.stackedWidget.addWidget(self.page_reg)
+        self.page_main = QtWidgets.QWidget()
+        self.page_main.setObjectName("page_main")
+        self.listWidget_msgRoom = QtWidgets.QListWidget(self.page_main)
+        self.listWidget_msgRoom.setGeometry(QtCore.QRect(450, 48, 840, 651))
+        font = QtGui.QFont()
+        font.setPointSize(12)
         self.listWidget_msgRoom.setFont(font)
         self.listWidget_msgRoom.setStyleSheet("background-color: rgb(30, 30, 30);\n"
                                               "color: rgb(158, 158, 158);\n"
-                                              "border:0px;\n"
-                                              "border-top:1px solid rgb(158, 158, 158);")
+                                              "border:0px;")
         self.listWidget_msgRoom.setObjectName("listWidget_msgRoom")
-        self.frame_2 = QtWidgets.QFrame(self.page_4)
-        self.frame_2.setGeometry(QtCore.QRect(0, 680, 841, 191))
-        self.frame_2.setStyleSheet("background-color: rgb(30, 30, 30);\n"
-                                   "\n"
-                                   "border:0px;")
-        self.frame_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame_2.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame_2.setObjectName("frame_2")
-        self.textEdit_room = QtWidgets.QTextEdit(self.frame_2)
-        self.textEdit_room.setGeometry(QtCore.QRect(50, 40, 671, 95))
+        self.listWidget_title = QtWidgets.QLabel(self.page_main)
+        self.listWidget_title.setGeometry(QtCore.QRect(450, 0, 837, 51))
+        self.listWidget_title.setMaximumSize(QtCore.QSize(16777215, 16777214))
+        font = QtGui.QFont()
+        font.setFamily("Corbel Light")
+        font.setPointSize(23)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.listWidget_title.setFont(font)
+        self.listWidget_title.setStyleSheet("color: rgb(158, 158, 158);\n"
+                                            "background-color: rgb(30, 30, 30);")
+        self.listWidget_title.setAlignment(QtCore.Qt.AlignCenter)
+        self.listWidget_title.setObjectName("listWidget_title")
+        self.listWidget_people = QtWidgets.QListWidget(self.page_main)
+        self.listWidget_people.setGeometry(QtCore.QRect(0, 65, 450, 821))
+        self.listWidget_people.setAutoFillBackground(False)
+        self.listWidget_people.setStyleSheet("background-color: rgb(50, 50, 50);\n"
+                                                "font: 25 18pt \"Corbel Light\";\n"
+                                                "color: rgb(158, 158, 158);\n"
+                                                "border:0px;\n"
+                                                "")
+        self.listWidget_people.setObjectName("listWidget_people")
+        item = QtWidgets.QListWidgetItem()
+        self.pushButton_menu = QtWidgets.QPushButton(self.page_main)
+        self.pushButton_menu.setGeometry(QtCore.QRect(10, 20, 427, 31))
+        self.pushButton_menu.setStyleSheet("\n"
+                                           "\n"
+                                           "QPushButton{\n"
+                                           "background-color: rgb(100, 100, 100);\n"
+                                           "\n"
+                                           "color: rgb(50, 50, 50);\n"
+                                           "border:0px;\n"
+                                           "border-radius: 6px;\n"
+                                           "}\n"
+                                           "\n"
+                                           "QPushButton:hover{\n"
+                                           "background-color: rgb(130, 130, 130);\n"
+                                           "color: rgb(50, 50, 50);\n"
+                                           "border-radius: 6px;\n"
+                                           "}\n"
+                                           "\n"
+                                           "\n"
+                                           "\n"
+                                           "")
+        self.pushButton_menu.setObjectName("pushButton_menu")
+        self.textEdit_room = QtWidgets.QTextEdit(self.page_main)
+        self.textEdit_room.setGeometry(QtCore.QRect(500, 730, 671, 95))
         font = QtGui.QFont()
         font.setFamily("Candara")
         font.setPointSize(14)
@@ -240,97 +408,92 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.textEdit_room.setOverwriteMode(False)
         self.textEdit_room.setPlaceholderText("")
         self.textEdit_room.setObjectName("textEdit_room")
-        self.pushButton_room = QtWidgets.QPushButton(self.frame_2)
-        self.pushButton_room.setGeometry(QtCore.QRect(740, 40, 71, 95))
-        self.pushButton_room.setStyleSheet(
-                                            "\n\nQPushButton{\nbackground-color: rgb(50, 50, 50);\nborder-radius: 12px;\n"
-                                            "color:rgb(158, 158, 158);\n\n}\n\nQPushButton:hover{\n"
-                                            "background-color: rgb(65, 65, 65);\ncolor:rgb(158, 158, 158);\n"
-                                            "border-radius: 12px;\n}\n\n\n\n")
-        self.pushButton_room.setObjectName("pushButton_room")
-        self.listWidget_title = QtWidgets.QListWidget(self.page_4)
-        self.listWidget_title.setGeometry(QtCore.QRect(0, 0, 841, 51))
+        self.line = QtWidgets.QFrame(self.page_main)
+        self.line.setGeometry(QtCore.QRect(450, 530, 841, 331))
+        self.line.setStyleSheet("background-color: rgb(30, 30, 30);")
+        self.line.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line.setObjectName("line")
+        self.pushButton_room = QtWidgets.QPushButton(self.page_main)
+        self.pushButton_room.setGeometry(QtCore.QRect(1190, 730, 91, 91))
         font = QtGui.QFont()
-        font.setFamily("Candara")
-        font.setPointSize(22)
-        self.listWidget_title.setFont(font)
-        self.listWidget_title.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.listWidget_title.setStyleSheet("background-color: rgb(30, 30, 30);\n"
-                                            "color: rgb(158, 158, 158);\n"
-                                            "border:0px;\n"
-                                            "")
-        self.listWidget_title.setFlow(QtWidgets.QListView.TopToBottom)
-        self.listWidget_title.setObjectName("listWidget_title")
-        item = QtWidgets.QListWidgetItem()
-        item.setTextAlignment(QtCore.Qt.AlignCenter)
-        self.listWidget_title.addItem(item)
-        self.frame_2.raise_()
-        self.listWidget_title.raise_()
-        self.listWidget_msgRoom.raise_()
-        self.stackedWidget.addWidget(self.page_4)
-        self.listWidget_people = QtWidgets.QListWidget(self.centralwidget)
-        self.listWidget_people.setGeometry(QtCore.QRect(0, 60, 451, 806))
-        self.listWidget_people.setAutoFillBackground(False)
-        self.listWidget_people.setStyleSheet("background-color: rgb(50, 50, 50);\n"
-                                             "font: 25 18pt \"Microsoft YaHei\";\n"
-                                             "color: rgb(158, 158, 158);\n"
-                                             "border:0px;\n"
-                                             "")
-        self.listWidget_people.setObjectName("listWidget_people")
-
-        self.frame = QtWidgets.QFrame(self.centralwidget)
-        self.frame.setGeometry(QtCore.QRect(0, 0, 461, 80))
-        self.frame.setStyleSheet("background-color: rgb(50, 50, 50);")
-        self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame.setObjectName("frame")
-
-        font = QtGui.QFont()
-        font.setFamily("Arial")
-        font.setPointSize(18)
+        font.setFamily("Corbel Light")
+        font.setPointSize(14)
         font.setBold(False)
         font.setItalic(False)
+        font.setUnderline(False)
         font.setWeight(50)
-
-        self.pushButton_search = QtWidgets.QPushButton(self.frame)
-        self.pushButton_search.setGeometry(QtCore.QRect(10, 14, 427, 31))
-        self.pushButton_search.setStyleSheet(
-            "\n\nQPushButton{\nbackground-color: rgb(100, 100, 100);\n"
-            "\ncolor: rgb(50, 50, 50);\nborder:0px;\nborder-radius: 6px;\n"
-            "}\n\nQPushButton:hover{\nbackground-color: rgb(130, 130, 130);\n"
-            "color: rgb(50, 50, 50);\nborder-radius: 6px;\n}\n\n\n\n")
-        self.pushButton_search.setObjectName("pushButton_search")
-        self.frame.raise_()
-        self.stackedWidget.raise_()
+        font.setKerning(True)
+        font.setStyleStrategy(QtGui.QFont.PreferDefault)
+        self.pushButton_room.setFont(font)
+        self.pushButton_room.setStyleSheet("QPushButton{\n"
+                                           "background-color: rgb(50, 50, 50);\n"
+                                           "\n"
+                                           "color: rgb(158, 158, 158);\n"
+                                           "border:0px;\n"
+                                           "border-radius: 6px;\n"
+                                           "}\n"
+                                           "\n"
+                                           "QPushButton:hover{\n"
+                                           "background-color: rgb(70, 70, 70);\n"
+                                           "color: rgb(158, 158, 158);\n"
+                                           "border-radius: 6px;\n"
+                                           "}\n"
+                                           "")
+        self.pushButton_room.setObjectName("pushButton_room")
+        self.pushButton_room.hide()
+        self.line.raise_()
+        self.listWidget_msgRoom.raise_()
         self.listWidget_people.raise_()
+        self.listWidget_title.raise_()
+        self.pushButton_menu.raise_()
+        self.textEdit_room.raise_()
+        self.pushButton_room.raise_()
+        self.stackedWidget.addWidget(self.page_main)
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(3)
+        self.stackedWidget.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        self.RegForm.pushButton_2.clicked.connect(lambda: self.RegWindow.close())
+        self.LP_RForm.pushButton_back.clicked.connect(lambda: self.LP_RForm.stackedWidget.setCurrentIndex(0))
 
-        # self.pushButton_2.clicked.connect(self.searchPeople)
-        self.LPForm.pushButton.clicked.connect(self.Sign_in)
-        self.LPForm.pushButton_2.clicked.connect(lambda: self.RegWindow.show())
+        # НИЖЕ КНОПКИ ОКНА ВХОДА
+        self.LP_RForm.pushButton.clicked.connect(self.Sign_in)
+        self.LP_RForm.pushButton_toReg.clicked.connect(lambda: self.LP_RForm.stackedWidget.setCurrentIndex(1))
         self.RegForm.pushButton.clicked.connect(self.Reg_in)
 
-        self.pushButton_search.clicked.connect(lambda: self.AddFRNDWindow.show())
+        # НИЖЕ КНОПКИ ДОБАВЛЕНИЯ В ДРУЗЬЯ
+        self.pushButton_menu.clicked.connect(lambda: self.AddFRNDWindow.show())
         self.AddFRNDForm.pushButton_2.clicked.connect(self.searchPeople)
         self.AddFRNDForm.pushButton.clicked.connect(self.addNewFriend)
 
+        # НИЖЕ КНОПКА ОТПРАВКИ СООБЩЕНИЯ
         self.pushButton_room.clicked.connect(self.roomMessage)
 
+        # НИЖЕ ПРИ КЛИКЕ НА ИМЯ КОМНАТЫ ПРОИСХОДИТ ЗАГРУЗКА СООБЩЕНИЙ
         self.listWidget_people.clicked.connect(self.loadMSG)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.label_2.setText(_translate("MainWindow", "Пароль"))
+        self.pushButton_toReg.setText(_translate("MainWindow", "Создать аккаунт"))
+        self.label.setText(_translate("MainWindow", "Логин"))
+        self.pushButton_sign.setText(_translate("MainWindow", "Войти"))
+        self.label_10.setText(_translate("MainWindow", "Вход"))
+        self.label_7.setText(_translate("MainWindow", "Пароль"))
+        self.label_5.setText(_translate("MainWindow", "Логин"))
+        self.pushButton_reg.setText(_translate("MainWindow", "Готово"))
+        self.pushButton_backToSign.setText(_translate("MainWindow", "Отмена"))
+        self.label_6.setText(_translate("MainWindow", "Повторите пароль"))
+        self.label_9.setText(_translate("MainWindow", "Регистрация"))
+        self.listWidget_title.setText(_translate("MainWindow", ""))
+        __sortingEnabled = self.listWidget_people.isSortingEnabled()
+        self.listWidget_people.setSortingEnabled(False)
 
-        __sortingEnabled = self.listWidget_msgRoom.isSortingEnabled()
-        self.listWidget_msgRoom.setSortingEnabled(False)
-        self.listWidget_msgRoom.setSortingEnabled(__sortingEnabled)
+        self.listWidget_people.setSortingEnabled(__sortingEnabled)
+        self.pushButton_menu.setText(_translate("MainWindow", "Найти друзей"))
         self.textEdit_room.setHtml(_translate("MainWindow",
                                               "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
                                               "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
@@ -338,15 +501,6 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
                                               "</style></head><body style=\" font-family:\'Candara\'; font-size:14pt; font-weight:400; font-style:normal;\">\n"
                                               "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
         self.pushButton_room.setText(_translate("MainWindow", "Отправить"))
-        __sortingEnabled = self.listWidget_title.isSortingEnabled()
-        self.listWidget_title.setSortingEnabled(False)
-        item = self.listWidget_title.item(0)
-        item.setText(_translate("MainWindow", ""))
-        self.listWidget_title.setSortingEnabled(__sortingEnabled)
-        __sortingEnabled = self.listWidget_people.isSortingEnabled()
-        self.listWidget_people.setSortingEnabled(False)
-        self.listWidget_people.setSortingEnabled(__sortingEnabled)
-        self.pushButton_search.setText(_translate("MainWindow", "Найти друзей"))
 
     def get_text(self):
         # We receive text from the server USING the client (Client)
@@ -370,9 +524,10 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
                     except IndexError:
                         pass
 
-                    self.nickName = self.LPForm.lineEdit.text()
+                    self.nickName = self.LP_RForm.lineEdit.text()
                     ChildWindow.close()
                     self.load()
+                    self.pushButton_room.show()
 
                 elif data[0] == "USER_IS_REG":
                     self.RegWindow.close()
@@ -381,15 +536,20 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
                     self.RegForm.label_4.setText("Пользователь с таким Логином уже сущестует")
 
                 elif data[0] == "USER_IS_NOT_SIGN":
-                    self.LPForm.label.setText("Неправлиьный логин или пароль")
-                    self.LPForm.lineEdit.setStyleSheet("border: 1px solid rgb(94, 0, 1);")
-                    self.LPForm.lineEdit_2.setStyleSheet("border: 1px solid rgb(94, 0, 1);")
+                    self.LP_RForm.label.setText("Неправлиьный логин или пароль")
+                    self.LP_RForm.lineEdit.setStyleSheet("border: 1px solid rgb(94, 0, 1);")
+                    self.LP_RForm.lineEdit_2.setStyleSheet("border: 1px solid rgb(94, 0, 1);")
                     print("USER_IS_NOT_SIGN")
 
                 elif data[0] == "MSGROOM":
                     print(f"MSG FROM SRV FOR ROOM ---> {data[0]}")
                     x = " ".join(data[-1])
                     self.listWidget_msgRoom.addItem(f"{data[1]}: {x}")
+                    '''
+                    !!!!!!!Если буду писать 2 польз. одновременно, будут кидаться в один лист(к одному польз.)
+                    ПОФИКСИТЬ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                    '''
+
 
                 elif data[0] == "CRT_ROOM":
                     try:
@@ -397,7 +557,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
                         print(f"self.roomsForLoad --- >{self.roomsForLoad}")
                     except IndexError:
                         print(data[1])
-                        for key, value in data[1].items():
+                        for _, value in data[1].items():
 
                             self.listWidget_people.addItem(value)
                         self.roomsForLoad.append(data[1])
@@ -453,13 +613,14 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
 
     def Sign_in(self):  # ChildWindow
 
-        login = self.LPForm.lineEdit.text()
-        password = self.LPForm.lineEdit_2.text()
+        login = self.LP_RForm.lineEdit.text()
+        password = self.LP_RForm.lineEdit_2.text()
 
         data_of_sign = ["TRY_TO_ENTRY", login, password]
         data_of_sign = pickle.dumps(data_of_sign)
 
         self.cl.send_data(data_of_sign)
+
 
     def shotdown(self):  # К хренам обрумаем ему все его костыли и прога умирает от нажатия на Крестик
         print("ОКНО ЗАКРЫТО ПО ЖЕЛАНИЮ ПОЛЬЗОВАТЕЛЯ")
@@ -517,7 +678,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         try:
             for IDRoom, nameRoom in self.roomsForLoad[0].items():
                 self.listWidget_title.clear()
-                self.listWidget_title.addItem(nameRoom)
+                self.listWidget_title.setText(nameRoom)
                 print(f"self.IDRoom --- >{IDRoom}")
                 if self.listWidget_people.currentItem().text() == nameRoom:
                     msgRoom = ["LOADMSG", IDRoom]
