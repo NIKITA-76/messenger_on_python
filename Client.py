@@ -9,26 +9,6 @@ from AddFriend import Ui_AddFriend
 from LandP_Reg import Ui_LandP_Reg
 from Reg import Ui_Reg
 
-"""
-v0.4.0 - Добавлена возможность общаться не через локальный айпи а полноценно 
-         через интернет ВНЕ локального роутера
-
-v0.4.5 - Переработан дизайн (из-за утери старого) в лучшую сторону. 
-         Добалена возможность видеть кол-во пользователей онлайн
-
-v0.4.7 - Ипсравлен костылями баг, теперь можно нормально закрывать программу и будет все ок
-
-v0.4.9 - Убрана возможность отсылать пустые пробелы. 
-         Так же, больше нельзя отсылать сообщения с пробелами в начале и в концах
-
-v0.5.0 - Реализовано окно входа.
-         При попытке запуска программы вторым экземпляром,
-         пользователь не сможет отправлять сообщения
-         анти спам (доработать(ну желательно). 
-
-         После запуска каждое последнее окно дает СОР, но не первое )
-"""
-
 
 class Client(socket.socket):
     def __init__(self):  # Connect to server
@@ -287,7 +267,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.label_5.setFont(font)
         self.label_5.setStyleSheet("color: rgb(158, 158, 158);")
         self.label_5.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_5.setObjectName("label_5")
+        self.label_5.setObjectName("label_log")
         self.pushButton_reg = QtWidgets.QPushButton(self.page_reg)
         self.pushButton_reg.setGeometry(QtCore.QRect(512, 530, 81, 31))
         self.pushButton_reg.setStyleSheet("color: rgb(158, 158, 158);")
@@ -298,7 +278,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.pushButton_backToSign.setObjectName("pushButton_backToSign")
         self.lineEdit_5 = QtWidgets.QLineEdit(self.page_reg)
         self.lineEdit_5.setGeometry(QtCore.QRect(560, 460, 281, 31))
-        self.lineEdit_5.setObjectName("lineEdit_5")
+        self.lineEdit_5.setObjectName("lineEdit_pass")
         self.label_6 = QtWidgets.QLabel(self.page_reg)
         self.label_6.setGeometry(QtCore.QRect(400, 460, 141, 31))
         font = QtGui.QFont()
@@ -306,7 +286,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.label_6.setFont(font)
         self.label_6.setStyleSheet("color: rgb(158, 158, 158);")
         self.label_6.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_6.setObjectName("label_6")
+        self.label_6.setObjectName("label_pass")
         self.lineEdit_7 = QtWidgets.QLineEdit(self.page_reg)
         self.lineEdit_7.setGeometry(QtCore.QRect(560, 300, 281, 31))
         font = QtGui.QFont()
@@ -467,12 +447,14 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.pushButton_menu.clicked.connect(lambda: self.AddFRNDWindow.show())
         self.AddFRNDForm.pushButton_2.clicked.connect(self.searchPeople)
         self.AddFRNDForm.pushButton.clicked.connect(self.addNewFriend)
+        self.LP_RForm.pushButton_ready.clicked.connect(self.Reg_in)
 
         # НИЖЕ КНОПКА ОТПРАВКИ СООБЩЕНИЯ
         self.pushButton_room.clicked.connect(self.roomMessage)
 
         # НИЖЕ ПРИ КЛИКЕ НА ИМЯ КОМНАТЫ ПРОИСХОДИТ ЗАГРУЗКА СООБЩЕНИЙ
         self.listWidget_people.clicked.connect(self.loadMSG)
+
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -530,7 +512,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
                     self.pushButton_room.show()
 
                 elif data[0] == "USER_IS_REG":
-                    self.RegWindow.close()
+                    self.LP_RForm.stackedWidget.setCurrentIndex(0)
 
                 elif data[0] == "HAVE_THIS_USER":
                     self.RegForm.label_4.setText("Пользователь с таким Логином уже сущестует")
@@ -601,15 +583,16 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
                 input()
 
     def Reg_in(self):
-        login_reg = self.RegForm.lineEdit.text()
-        if self.RegForm.lineEdit_2.text().strip() == self.RegForm.lineEdit_3.text().strip():
-            password_reg = self.RegForm.lineEdit_3.text().strip()
+        login_reg = self.LP_RForm.lineEdit_log.text().strip()
+        if self.LP_RForm.lineEdit_pass.text().strip() == self.LP_RForm.lineEdit_pass2.text().strip():
+            password_reg = self.LP_RForm.lineEdit_pass.text().strip()
             data_of_reg = ["TRY_TO_REG", login_reg, password_reg]
             data_of_reg = pickle.dumps(data_of_reg)
             self.cl.send_data(data_of_reg)
 
+
         else:
-            self.RegForm.label_4.setText("Пороли не совпадают!")
+            self.RegForm.label_4.setText("Пароли не совпадают!")
 
     def Sign_in(self):  # ChildWindow
 
