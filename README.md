@@ -2,6 +2,7 @@
 Server, with Data Base and client.
 
 This program was created for the thesis.
+This project is still under development
 
 
 
