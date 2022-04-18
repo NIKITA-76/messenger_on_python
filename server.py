@@ -11,18 +11,17 @@ class Server(socket.socket):
             self.DB = json.load(json_file)
             self.idUser = self.DB["COUNT"]["USERS"]
             self.idRoom = self.DB["COUNT"]["ROOMS"]
-        self.bind(("192.168.0.3", 9090))
+        self.bind(("192.168.0.3", 8080))
         self.listen()
 
         print("Server Listen")
+
         self.users = []  # List of all users
         self.users_ip = []  # List of all users-ip
-        self.name_withIp = {"Gena": "89.179.112.93"}
+        self.name_withIp = {}
         self.userAndObject = {}
         self.rooms = {}
-        self.createRoom()
-
-        # "Data base"
+        self.create_room()
 
     def send_data(self, data):  # Send text to all users (in the list)
         try:
@@ -47,34 +46,22 @@ class Server(socket.socket):
                 self.data_s = socket_user.recv(2048)  # Accepting a message
                 self.data_s = pickle.loads(self.data_s)
                 print(f"ДАННЫЕ ОТ КЛИЕНТА --->{self.data_s}")
-                if self.data_s[0] == "TRY_TO_ENTRY":  # If there is an ENTRY signal from the client, we start the process of checking the data from the user
+                if self.data_s[
+                    0] == "TRY_TO_ENTRY":  # If there is an ENTRY signal from the client, we start the process of checking the data from the user
                     self.userSignIn(self.data_s, socket_user)
                     self.name_withIp[self.data_s[1]] = self.users_ip[0]
-                    self.RecreatingRoomFromJSON()
+                    self.recreating_room_from_JSON()
                 elif self.data_s[0] == "TRY_TO_REG":
                     self.registration(self.data_s, socket_user)
-                    self.userAndObject[self.data_s[1]] = socket_user
                 elif self.data_s[0] == "MSGROOM":
-                    self.PrivateMSG()
+                    self.private_MSG()
                 elif self.data_s[0] == "SEARCH":
-                    self.SearchPeople()
+                    self.search_people()
                 elif self.data_s[0] == "CRT_ROOM":
-                    self.createRoomJSON(socket_user)
+                    self.create_room_JSON(socket_user)
                 elif self.data_s[0] == "LOADMSG":
-                    self.LoadMSGForClient(socket_user)
-
-
-
-
-
-
-        except Exception as a:
-
-            print("---------------------------------------------------------------")
-            try:
-                print(f"{self.data_s}", f"{a}")
-                print(f"Ошибка --- >{a}")
-                if self.data_s[0] == "USER_OUT":
+                    self.load_MSG_for_client(socket_user)
+                elif self.data_s[0] == "USER_OUT":
                     """
                      Удаление пользователя из комнаты ЛС, так как при подключении пользователя меняеться его 'fd',
                      а в комнате все еще старый объект со старым 'fd'
@@ -84,6 +71,15 @@ class Server(socket.socket):
                         print(f"USER '{self.data_s[1]}' IS OUT")
                         self.rooms[roomID][0].pop(self.data_s[1])
                         self.userAndObject.pop(self.data_s[1])
+
+
+        except Exception as a:
+
+            print("---------------------------------------------------------------")
+            try:
+                print(f"{self.data_s}", f"{a}")
+                print(f"Ошибка --- >{a}")
+
             except Exception:
                 pass
 
@@ -115,8 +111,12 @@ class Server(socket.socket):
             print("HAVE_THIS_USER")
 
     def userSignIn(self, data,
-                   socket_user):
+                   socket_user):  # You need fix it Nikita. After bad sign, and close, and try again sign ERROR
         try:
+            print(f'self.DB["USERS"][data[1]]["password"]   {self.DB["USERS"][data[1]]["password"]}')
+            print(f'self.data_s[1]   {self.data_s[1]}')
+            print(f'self.userAndObject.keys()  {self.userAndObject.keys()}')
+            print()
             if self.DB["USERS"][data[1]]["password"] == data[2] and self.data_s[1] not in self.userAndObject.keys():
 
                 keys = self.DB["USERS"][data[1]]["ROOMS"][0].keys()
@@ -131,7 +131,6 @@ class Server(socket.socket):
                     signIN = ["USER IS SIGN", listRooms]
                     self.userAndObject[self.data_s[1]] = socket_user
 
-
                 print("USER IS SIGN")
                 self.userAndObject[self.data_s[1]] = socket_user
                 socket_user.send(pickle.dumps(signIN))
@@ -145,7 +144,7 @@ class Server(socket.socket):
             print("USER_IS_NOT_SIGN (BAD_LOGIN)")
             socket_user.send(pickle.dumps(no_sign_in))
 
-    def createRoomJSON(self, user):
+    def create_room_JSON(self, user):
         i = 1
         self.idRoom = self.idRoom + 1
         listUsers = []
@@ -163,8 +162,10 @@ class Server(socket.socket):
             a = self.DB
             json.dump(a, json_file, indent=4)
 
-        self.createRoom()
+        self.create_room()
+        self.create_room_now()
 
+    def create_room_now(self):
         nameOfRooms = self.DB["ROOMS"].keys()  # Создание комнаты, без неоюходимости перезагрузки сервера
         for name in nameOfRooms:
             print(f"name {name}")
@@ -187,14 +188,14 @@ class Server(socket.socket):
             self.userAndObject[self.data_s[2]].send(
                 pickle.dumps(["CRT_ROOM", {str(self.idRoom) + "R": self.data_s[1]}]))
 
-    def createRoom(self):
+    def create_room(self):
         nameOfRooms = self.DB["ROOMS"].keys()
 
         for name in nameOfRooms:
             self.rooms[name] = [{}]
         print(self.rooms)
 
-    def RecreatingRoomFromJSON(self):
+    def recreating_room_from_JSON(self):
         nameOfRooms = self.DB["ROOMS"].keys()  # Воссоздание комнат из JSON
         for name in nameOfRooms:
             for usersInRoom in self.DB["ROOMS"][name][0]["USERS"]:
@@ -204,7 +205,7 @@ class Server(socket.socket):
                 except KeyError:
                     pass
 
-    def PrivateMSG(self):
+    def private_MSG(self):
         print("------------КОМНАТА-------------")
         for roomID, roomName in self.DB["USERS"][self.data_s[2]]["ROOMS"][0].items():
 
@@ -223,7 +224,7 @@ class Server(socket.socket):
             json.dump(a, json_file, indent=4)
         print("------------КОНЕЦ КОМНАТЫ-------------")
 
-    def LoadMSGForClient(self, user):
+    def load_MSG_for_client(self, user):
         print(self.userAndObject)
         try:
             print(self.data_s)
@@ -241,7 +242,7 @@ class Server(socket.socket):
 
             self.DB["MESSAGE"][self.data_s[1]] = []
 
-    def SearchPeople(self):
+    def search_people(self):
         usersInJSON = self.DB["USERS"]
         userOfSearch = []
 
