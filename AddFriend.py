@@ -79,7 +79,7 @@ class Ui_AddFriend(object):
                                       "\n"
                                       "\n"
                                       "")
-        self.pushButton.setObjectName("pushButton")
+        self.pushButton.setObjectName("pushButton_sign")
         self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_2.setGeometry(QtCore.QRect(433, 24, 75, 35))
         self.pushButton_2.setStyleSheet("QPushButton{\n"
@@ -97,7 +97,7 @@ class Ui_AddFriend(object):
                                         "\n"
                                         "\n"
                                         "")
-        self.pushButton_2.setObjectName("pushButton_2")
+        self.pushButton_2.setObjectName("pushButton_toReg")
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)

@@ -6,7 +6,7 @@ import threading
 from PyQt5 import QtCore, QtWidgets, QtGui
 
 from AddFriend import Ui_AddFriend
-from LandP_Reg import Ui_LandP_Reg
+from users_login import Ui_LandP_Reg
 
 
 
