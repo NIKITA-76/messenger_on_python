@@ -9,13 +9,10 @@ from AddFriend import Ui_AddFriend
 from users_login import Ui_LandP_Reg
 
 
-
-
-
 class Client(socket.socket):
     def __init__(self):  # Connect to server
         super().__init__()
-        self.connect(("178.71.224.84", 9090))
+        self.connect(("178.71.224.84", 8080))
 
     def send_data(self, data_text):  # Send data on server
         self.send(data_text)
@@ -41,10 +38,9 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.AddFRNDForm = Ui_AddFriend()
         self.AddFRNDForm.setupUi(self.AddFRNDWindow)
 
-        #self.RegWindow = QtWidgets.QMainWindow()
-        #self.RegForm = Ui_Reg()
-        #self.RegForm.setupUi(self.RegWindow)
-
+        # self.RegWindow = QtWidgets.QMainWindow()
+        # self.RegForm = Ui_Reg()
+        # self.RegForm.setupUi(self.RegWindow)
 
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1291, 858)
@@ -341,10 +337,10 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.listWidget_people.setGeometry(QtCore.QRect(0, 65, 450, 821))
         self.listWidget_people.setAutoFillBackground(False)
         self.listWidget_people.setStyleSheet("background-color: rgb(50, 50, 50);\n"
-                                                "font: 25 18pt \"Corbel Light\";\n"
-                                                "color: rgb(158, 158, 158);\n"
-                                                "border:0px;\n"
-                                                "")
+                                             "font: 25 18pt \"Corbel Light\";\n"
+                                             "color: rgb(158, 158, 158);\n"
+                                             "border:0px;\n"
+                                             "")
         self.listWidget_people.setObjectName("listWidget_people")
         item = QtWidgets.QListWidgetItem()
         self.pushButton_menu = QtWidgets.QPushButton(self.page_main)
@@ -443,7 +439,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         # НИЖЕ КНОПКИ ОКНА ВХОДА
         self.LP_RForm.pushButton.clicked.connect(self.Sign_in)
         self.LP_RForm.pushButton_toReg.clicked.connect(lambda: self.LP_RForm.stackedWidget.setCurrentIndex(1))
-        #self.RegForm.pushButton.clicked.connect(self.Reg_in)
+        # self.RegForm.pushButton.clicked.connect(self.Reg_in)
 
         # НИЖЕ КНОПКИ ДОБАВЛЕНИЯ В ДРУЗЬЯ
         self.pushButton_menu.clicked.connect(lambda: self.AddFRNDWindow.show())
@@ -456,7 +452,6 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
 
         # НИЖЕ ПРИ КЛИКЕ НА ИМЯ КОМНАТЫ ПРОИСХОДИТ ЗАГРУЗКА СООБЩЕНИЙ
         self.listWidget_people.clicked.connect(self.loadMSG)
-
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -542,7 +537,6 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
                     except IndexError:
                         print(data[1])
                         for _, value in data[1].items():
-
                             self.listWidget_people.addItem(value)
                         self.roomsForLoad.append(data[1])
                         print(f"self.roomsForLoad --- >{self.roomsForLoad}")
@@ -606,7 +600,6 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
 
         self.cl.send_data(data_of_sign)
 
-
     def shotdown(self):  # К хренам обрумаем ему все его костыли и прога умирает от нажатия на Крестик
         print("ОКНО ЗАКРЫТО ПО ЖЕЛАНИЮ ПОЛЬЗОВАТЕЛЯ")
         msgError = ["USER_OUT", self.nickName]
@@ -623,15 +616,6 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
             self.canLoad = False
         except IndexError:
             pass
-
-    def send_text(self):  # Sending text to client on button click
-
-        if (self.textEdit_room.toPlainText()).strip() != "" and self.can_write:
-            text = (self.nickName).strip() + ": " + (self.textEdit.toPlainText()).strip()
-            text = pickle.dumps(text)
-            print(f"Сообщение отправленное на сервер в байтах ---> {text}")
-            self.cl.send_data(text)
-            self.textEdit.setText("")
 
     def correctItemInList(self):
         list_item = ["ITEM", self.listWidget_people.currentItem().text()]
@@ -679,9 +663,10 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
             for IDRoom, nameRoom in self.roomsForLoad[0].items():
                 print(f"self.roomsForLoad --- >{self.roomsForLoad}")
                 print(f"self.IDRoom --- >{IDRoom}")
-                if self.listWidget_people.currentItem().text() == nameRoom:
+                print(f"self.nameRoom --- >{nameRoom}")
+                if self.listWidget_people.currentItem().text() == nameRoom and self.textEdit_room.toPlainText().strip() != "" and self.can_write:
                     list = ["MSGROOM", IDRoom, self.nickName, self.listWidget_people.currentItem().text(),
-                            self.textEdit_room.toPlainText()]
+                            self.textEdit_room.toPlainText().strip()]
                     print(f"list to server --- >{list}")
                     list = pickle.dumps(list)
                     self.cl.send_data(list)
@@ -689,14 +674,19 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
 
     def addNewFriend(self):
         friend = self.AddFRNDForm.listWidget.currentItem()
-        self.listWidget_people.addItem(friend.text())
-        newRoom = [self.nickName]
-        newRoom.insert(0, "CRT_ROOM")
-        newRoom.insert(1, self.AddFRNDForm.listWidget.currentItem().text())
-        print(newRoom)
-        newRoom = pickle.dumps(newRoom)
-        self.cl.send_data(newRoom)
-        self.listWidget_people.addItem(friend)
+        try:
+            self.listWidget_people.addItem(friend.text())
+            self.listWidget_people.takeItem(0)
+            print(f"friend ---> {friend}")
+            newRoom = ["CRT_ROOM", self.AddFRNDForm.listWidget.currentItem().text(), self.nickName, ]
+            print(f"newRoom ---> {newRoom}")
+            newRoom = pickle.dumps(newRoom)
+            self.cl.send_data(newRoom)
+            self.listWidget_people.addItem(friend)
+        except AttributeError:
+            pass
+
+
 
 
 if __name__ == "__main__":
