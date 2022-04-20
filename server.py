@@ -25,14 +25,9 @@ class Server(socket.socket):
 
     def send_data(self, data):  # Send text to all users (in the list)
         try:
-
             for user in reversed(self.users):
-                count_users = len(self.users)
-                print(f"Кол-во польз.---> {count_users}")
-                count_users = str(count_users).encode('utf-8')
-                all_data = [count_users, data]
-                user.send(pickle.dumps(all_data))
-                print(f"ДАННЫЕ ОТ СЕРВЕРА ----> {all_data}")
+                user.send(pickle.dumps(data))
+                print(f"ДАННЫЕ ОТ СЕРВЕРА ----> {data}")
 
         except Exception as a:
             print(f"_SEND_DATA ---> {a}")
@@ -41,56 +36,56 @@ class Server(socket.socket):
 
         print("Listen User")
 
-        try:
-            while True:
-                self.data_s = socket_user.recv(2048)  # Accepting a message
-                self.data_s = pickle.loads(self.data_s)
-                print(f"ДАННЫЕ ОТ КЛИЕНТА --->{self.data_s}")
-                if self.data_s[
-                    0] == "TRY_TO_ENTRY":  # If there is an ENTRY signal from the client, we start the process of checking the data from the user
-                    self.userSignIn(self.data_s, socket_user)
-                    self.name_withIp[self.data_s[1]] = self.users_ip[0]
-                    self.recreating_room_from_JSON()
-                elif self.data_s[0] == "TRY_TO_REG":
-                    self.registration(self.data_s, socket_user)
-                elif self.data_s[0] == "MSGROOM":
-                    self.private_MSG()
-                elif self.data_s[0] == "SEARCH":
-                    self.search_people()
-                elif self.data_s[0] == "CRT_ROOM":
-                    self.create_room_JSON(socket_user)
-                elif self.data_s[0] == "LOADMSG":
-                    self.load_MSG_for_client(socket_user)
-                elif self.data_s[0] == "USER_OUT":
-                    """
-                     Удаление пользователя из комнаты ЛС, так как при подключении пользователя меняеться его 'fd',
-                     а в комнате все еще старый объект со старым 'fd'
-                    
-                    """
-                    for roomID, roomName in self.DB["USERS"][self.data_s[1]]["ROOMS"][0].items():
-                        print(f"USER '{self.data_s[1]}' IS OUT")
-                        self.rooms[roomID][0].pop(self.data_s[1])
-                        self.userAndObject.pop(self.data_s[1])
+        # try:
+        while True:
+            self.data_s = socket_user.recv(2048)  # Accepting a message
+            self.data_s = pickle.loads(self.data_s)
+            print(f"ДАННЫЕ ОТ КЛИЕНТА --->{self.data_s}")
+            if self.data_s[
+                0] == "TRY_TO_ENTRY":  # If there is an ENTRY signal from the client, we start the process of checking the data from the user
+                self.userSignIn(self.data_s, socket_user)
+                self.name_withIp[self.data_s[1]] = self.users_ip[0]
+                self.recreating_room_from_JSON()
+            elif self.data_s[0] == "TRY_TO_REG":
+                self.registration(self.data_s, socket_user)
+            elif self.data_s[0] == "MSGROOM":
+                self.private_MSG()
+            elif self.data_s[0] == "SEARCH":
+                self.search_people()
+            elif self.data_s[0] == "CRT_ROOM":
+                self.create_room_JSON(socket_user)
+            elif self.data_s[0] == "LOADMSG":
+                self.load_MSG_for_client(socket_user)
+            elif self.data_s[0] == "USER_OUT":
+                """
+                 Удаление пользователя из комнаты ЛС, так как при подключении пользователя меняеться его 'fd',
+                 а в комнате все еще старый объект со старым 'fd'
+                
+                """
+                for roomID, roomName in self.DB["USERS"][self.data_s[1]]["ROOMS"][0].items():
+                    print(f"USER '{self.data_s[1]}' IS OUT")
+                    self.rooms[roomID][0].pop(self.data_s[1])
+                    self.userAndObject.pop(self.data_s[1])
 
 
-        except Exception as a:
-
-            print("---------------------------------------------------------------")
-            try:
-                print(f"{self.data_s}", f"{a}")
-                print(f"Ошибка --- >{a}")
-
-            except Exception:
-                pass
-
-            """
-
-            If the client is disconnected, then we remove it from the user array and 
-            the IP array
-            users at the moment so. (While it works and thank God)
-            """
-            self.users.remove(socket_user)
-            self.users_ip.remove(ip_user)
+#         except Exception as a:
+#
+#             print("---------------------------------------------------------------")
+#             try:
+#                 print(f"{self.data_s}", f"{a}")
+#                 print(f"Ошибка --- >{a}")
+#
+#             except Exception:
+#                 pass
+#
+#             """
+# "
+#         "    If the client is disconnected, then we remove it from the user array and
+#         "    the IP array
+#         "    users at the moment so. (While it works and thank God)
+#             """
+#             self.users.remove(socket_user)
+#             self.users_ip.remove(ip_user)
 
     def registration(self, data, user):
         self.idUser += 1
@@ -166,7 +161,7 @@ class Server(socket.socket):
         self.create_room_now()
 
     def create_room_now(self):
-        nameOfRooms = self.DB["ROOMS"].keys()  # Создание комнаты, без неоюходимости перезагрузки сервера
+        nameOfRooms = self.DB["ROOMS"].keys()  # Создание комнаты, без необходимости перезагрузки сервера
         for name in nameOfRooms:
             print(f"name {name}")
             for usersInRoom in self.DB["ROOMS"][name][0]["USERS"]:
@@ -250,11 +245,12 @@ class Server(socket.socket):
             if self.data_s[1] in user:
                 print("ЕСТЬ СОВПАДЕНИЕ")
                 userOfSearch.append(user)
+                print(userOfSearch)
 
         userOfSearch = ["SEARCH", pickle.dumps(userOfSearch)]
         self.send_data(userOfSearch)
-        userOfSearch = []
-        print(f"userOfSearch --- >{userOfSearch}")
+        # #userOfSearch = []
+        # print(f"userOfSearch --- >{userOfSearch}")
 
     def start_server(self):
 
