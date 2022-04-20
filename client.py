@@ -521,6 +521,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
                     print("USER_IS_NOT_SIGN")
 
                 elif data[0] == "MSGROOM":
+                    #if self.listWidget_people.currentItem().text() ==
                     print(f"MSG FROM SRV FOR ROOM ---> {data[0]}")
                     x = " ".join(data[-1])
                     self.listWidget_msgRoom.addItem(f"{data[1]}: {x}")
@@ -533,13 +534,13 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
                 elif data[0] == "CRT_ROOM":
                     try:
                         self.roomsForLoad[0].update(data[1])
-                        print(f"self.roomsForLoad --- >{self.roomsForLoad}")
                     except IndexError:
-                        print(data[1])
-                        for _, value in data[1].items():
-                            self.listWidget_people.addItem(value)
                         self.roomsForLoad.append(data[1])
-                        print(f"self.roomsForLoad --- >{self.roomsForLoad}")
+                    print(f"self.roomsForLoad --- >{self.roomsForLoad}")
+                    print(f"data[1]) ---> {data[1]}")
+                    for _, value in data[1].items():
+                        self.listWidget_people.addItem(value)
+                    print(f"self.roomsForLoad --- >{self.roomsForLoad}")
 
                 elif data[0] == "LOADMSG":
                     if data[1] == "NOMSG":
@@ -547,23 +548,22 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
                     else:
                         self.listWidget_msgRoom.clear()
                         x = data[1]
-                        print(f"x--->{x}")
+                        print(f"Банк сообщений с сервера --->{x}")
                         self.listWidget_msgRoom.addItems(x)
 
-                elif data[1][0] == "SEARCH":
+                elif data[0] == "SEARCH":
 
-                    x = data[1][1]
-                    y = pickle.loads(x)
-                    print(y)
+                    matchOfPeople = pickle.loads(data[1])
+
                     self.AddFRNDForm.listWidget.clear()
-                    for item in y:
+                    for item in matchOfPeople:
                         try:
                             if item != self.nickName and (item not in self.listWidget_people.items()):
                                 self.AddFRNDForm.listWidget.addItem(item)
                         except TypeError as error:
                             if item != self.nickName:
                                 self.AddFRNDForm.listWidget.addItem(item)
-                            print(error)
+
 
 
             except EOFError or KeyError:
@@ -609,7 +609,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
 
     def load(self):
         try:
-            print(self.roomsForLoad[0])
+
             if self.canLoad:
                 for item in self.roomsForLoad[0].values():
                     self.listWidget_people.addItem(item)
@@ -620,7 +620,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
     def correctItemInList(self):
         list_item = ["ITEM", self.listWidget_people.currentItem().text()]
         list_item = pickle.dumps(list_item)
-        print(list_item)
+
         self.cl.send_data(list_item)
 
     def searchPeople(self):
@@ -632,13 +632,10 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
 
     def crtRoom(self):
         usersInNewRoom = self.listWidget.selectedItems()
-        newRoom = [self.nickName]
+        newRoom = ["CRT_ROOM", self.lineEdit_2.text(), self.nickName]
         for item in usersInNewRoom:
             item = item.text()
             newRoom.append(item)
-        newRoom.insert(0, "CRT_ROOM")
-        newRoom.insert(1, self.lineEdit_2.text())
-        print(newRoom)
         newRoom = pickle.dumps(newRoom)
         self.cl.send_data(newRoom)
         self.listWidget_rooms.addItem(self.lineEdit_2.text())
@@ -648,43 +645,31 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
             for IDRoom, nameRoom in self.roomsForLoad[0].items():
                 self.listWidget_title.clear()
                 self.listWidget_title.setText(nameRoom)
-                print(f"self.IDRoom --- >{IDRoom}")
+
                 if self.listWidget_people.currentItem().text() == nameRoom:
                     msgRoom = ["LOADMSG", IDRoom]
-                    print(msgRoom)
+
                     msgRoom = pickle.dumps(msgRoom)
                     self.cl.send_data(msgRoom)
                     break
         except IndexError:
-            print("IndexError")
+            print("IndexError IN loadMSG")
 
     def roomMessage(self):
         if self.can_write:
             for IDRoom, nameRoom in self.roomsForLoad[0].items():
-                print(f"self.roomsForLoad --- >{self.roomsForLoad}")
-                print(f"self.IDRoom --- >{IDRoom}")
-                print(f"self.nameRoom --- >{nameRoom}")
                 if self.listWidget_people.currentItem().text() == nameRoom and self.textEdit_room.toPlainText().strip() != "" and self.can_write:
                     list = ["MSGROOM", IDRoom, self.nickName, self.listWidget_people.currentItem().text(),
                             self.textEdit_room.toPlainText().strip()]
-                    print(f"list to server --- >{list}")
                     list = pickle.dumps(list)
                     self.cl.send_data(list)
                     self.textEdit_room.clear()
 
     def addNewFriend(self):
-        friend = self.AddFRNDForm.listWidget.currentItem()
-        try:
-            self.listWidget_people.addItem(friend.text())
-            self.listWidget_people.takeItem(0)
-            print(f"friend ---> {friend}")
-            newRoom = ["CRT_ROOM", self.AddFRNDForm.listWidget.currentItem().text(), self.nickName, ]
-            print(f"newRoom ---> {newRoom}")
-            newRoom = pickle.dumps(newRoom)
-            self.cl.send_data(newRoom)
-            self.listWidget_people.addItem(friend)
-        except AttributeError:
-            pass
+        newRoom = ["CRT_ROOM", self.AddFRNDForm.listWidget.currentItem().text(), self.nickName, ]
+        newRoom = pickle.dumps(newRoom)
+        self.cl.send_data(newRoom)
+
 
 
 
