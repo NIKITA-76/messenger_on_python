@@ -399,12 +399,7 @@ class UI_ForMain(object):
         self.stackedWidget.addWidget(self.page_main)
         MainWindow.setCentralWidget(self.centralwidget)
 
-        self.canLoad = True
-        self.user_is_sign = False
-        self.can_write = False
 
-
-        self.roomsForLoad = []
 
         self.LP_RForm = Ui_LandP_Reg()
         self.LP_RForm.setupUi(ChildWindow)
