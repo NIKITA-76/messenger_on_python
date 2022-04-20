@@ -3,7 +3,9 @@ import socket
 import sys
 import threading
 
+
 from PyQt5 import QtCore, QtWidgets, QtGui
+
 
 from AddFriend import Ui_AddFriend
 from users_login import Ui_LandP_Reg
@@ -20,6 +22,8 @@ class Client(socket.socket):
 
 class Ui_MainWindow(QtWidgets.QMainWindow):
     def setupUi(self):
+
+
         self.canLoad = True
         self.user_is_sign = False
         self.can_write = False
@@ -447,8 +451,10 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.AddFRNDForm.pushButton.clicked.connect(self.addNewFriend)
         self.LP_RForm.pushButton_ready.clicked.connect(self.Reg_in)
 
+
         # НИЖЕ КНОПКА ОТПРАВКИ СООБЩЕНИЯ
         self.pushButton_room.clicked.connect(self.roomMessage)
+        self.pushButton_room.setAutoDefault(True)
 
         # НИЖЕ ПРИ КЛИКЕ НА ИМЯ КОМНАТЫ ПРОИСХОДИТ ЗАГРУЗКА СООБЩЕНИЙ
         self.listWidget_people.clicked.connect(self.loadMSG)
@@ -491,6 +497,8 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
                 data = pickle.loads(data)
                 print(f"Данные от сервера --- >{data}")
 
+
+
                 if data[0] == "USER IS SIGN":  # Login check (Server confirmed login with a message)
 
                     print("YOU GOT IN")
@@ -521,26 +529,16 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
                     print("USER_IS_NOT_SIGN")
 
                 elif data[0] == "MSGROOM":
-                    #if self.listWidget_people.currentItem().text() ==
-                    print(f"MSG FROM SRV FOR ROOM ---> {data[0]}")
-                    x = " ".join(data[-1])
-                    self.listWidget_msgRoom.addItem(f"{data[1]}: {x}")
-                    '''
-                    !!!!!!!Если буду писать 2 польз. одновременно, будут кидаться в один лист(к одному польз.)
-                    ПОФИКСИТЬ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                    '''
-
+                    if self.listWidget_people.currentItem().text() == data[3]:
+                        self.listWidget_msgRoom.addItem(f"{data[1]}: {' '.join(data[2])}")
 
                 elif data[0] == "CRT_ROOM":
                     try:
                         self.roomsForLoad[0].update(data[1])
                     except IndexError:
                         self.roomsForLoad.append(data[1])
-                    print(f"self.roomsForLoad --- >{self.roomsForLoad}")
-                    print(f"data[1]) ---> {data[1]}")
                     for _, value in data[1].items():
                         self.listWidget_people.addItem(value)
-                    print(f"self.roomsForLoad --- >{self.roomsForLoad}")
 
                 elif data[0] == "LOADMSG":
                     if data[1] == "NOMSG":
@@ -656,6 +654,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
             print("IndexError IN loadMSG")
 
     def roomMessage(self):
+
         if self.can_write:
             for IDRoom, nameRoom in self.roomsForLoad[0].items():
                 if self.listWidget_people.currentItem().text() == nameRoom and self.textEdit_room.toPlainText().strip() != "" and self.can_write:
@@ -664,6 +663,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
                     list = pickle.dumps(list)
                     self.cl.send_data(list)
                     self.textEdit_room.clear()
+                    self.textEdit_room.setFocus()
 
     def addNewFriend(self):
         newRoom = ["CRT_ROOM", self.AddFRNDForm.listWidget.currentItem().text(), self.nickName, ]
