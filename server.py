@@ -5,7 +5,7 @@ import threading
 
 
 class Server(socket.socket):
-    def __init__(self):  # Инициализация сервера
+    def __init__(self):
         super().__init__(socket.AF_INET, socket.SOCK_STREAM)
         with open("DB.json", 'r') as json_file:
             self.DB = json.load(json_file)
@@ -36,56 +36,53 @@ class Server(socket.socket):
 
         print("Listen User")
 
-        # try:
-        while True:
-            self.data_s = socket_user.recv(2048)  # Accepting a message
-            self.data_s = pickle.loads(self.data_s)
-            print(f"ДАННЫЕ ОТ КЛИЕНТА --->{self.data_s}")
-            if self.data_s[
-                0] == "TRY_TO_ENTRY":  # If there is an ENTRY signal from the client, we start the process of checking the data from the user
-                self.userSignIn(self.data_s, socket_user)
-                self.name_withIp[self.data_s[1]] = self.users_ip[0]
-                self.recreating_room_from_JSON()
-            elif self.data_s[0] == "TRY_TO_REG":
-                self.registration(self.data_s, socket_user)
-            elif self.data_s[0] == "MSGROOM":
-                self.private_MSG()
-            elif self.data_s[0] == "SEARCH":
-                self.search_people()
-            elif self.data_s[0] == "CRT_ROOM":
-                self.create_room_JSON(socket_user)
-            elif self.data_s[0] == "LOADMSG":
-                self.load_MSG_for_client(socket_user)
-            elif self.data_s[0] == "USER_OUT":
-                """
-                 Удаление пользователя из комнаты ЛС, так как при подключении пользователя меняеться его 'fd',
-                 а в комнате все еще старый объект со старым 'fd'
-                
-                """
-                for roomID, roomName in self.DB["USERS"][self.data_s[1]]["ROOMS"][0].items():
-                    print(f"USER '{self.data_s[1]}' IS OUT")
-                    self.rooms[roomID][0].pop(self.data_s[1])
-                    self.userAndObject.pop(self.data_s[1])
+        try:
+            while True:
+                self.data_s = socket_user.recv(2048)  # Accepting a message
+                self.data_s = pickle.loads(self.data_s)
+                print(f"ДАННЫЕ ОТ КЛИЕНТА --->{self.data_s}")
+                if self.data_s[
+                    0] == "TRY_TO_ENTRY":  # If there is an ENTRY signal from the client, we start the process of checking the data from the user
+                    self.userSignIn(self.data_s, socket_user)
+                    self.name_withIp[self.data_s[1]] = self.users_ip[0]
+                    self.recreating_room_from_JSON()
+                elif self.data_s[0] == "TRY_TO_REG":
+                    self.registration(self.data_s, socket_user)
+                elif self.data_s[0] == "MSGROOM":
+                    self.private_MSG()
+                elif self.data_s[0] == "SEARCH":
+                    self.search_people()
+                elif self.data_s[0] == "CRT_ROOM":
+                    self.create_room_JSON(socket_user)
+                elif self.data_s[0] == "LOADMSG":
+                    self.load_MSG_for_client(socket_user)
+                elif self.data_s[0] == "USER_OUT":
+                    """
+                     Удаление пользователя из комнаты ЛС, так как при подключении пользователя меняеться его 'fd',
+                     а в комнате все еще старый объект со старым 'fd'
+                    
+                    """
+                    for roomID, roomName in self.DB["USERS"][self.data_s[1]]["ROOMS"][0].items():
+                        print(f"USER '{self.data_s[1]}' IS OUT")
+                        self.rooms[roomID][0].pop(self.data_s[1])
+                        self.userAndObject.pop(self.data_s[1])
 
 
-#         except Exception as a:
-#
-#             print("---------------------------------------------------------------")
-#             try:
-#                 print(f"{self.data_s}", f"{a}")
-#                 print(f"Ошибка --- >{a}")
-#
-#             except Exception:
-#                 pass
-#
-#             """
-# "
-#         "    If the client is disconnected, then we remove it from the user array and
-#         "    the IP array
-#         "    users at the moment so. (While it works and thank God)
-#             """
-#             self.users.remove(socket_user)
-#             self.users_ip.remove(ip_user)
+        except Exception as a:
+
+            print("---------------------------------------------------------------")
+            try:
+                print(f"{self.data_s}", f"{a}")
+                print(f"Ошибка --- >{a}")
+            except Exception:
+                pass
+            """
+               If the client is disconnected, then we remove it from the user array and
+               the IP array
+               users at the moment so. (While it works and thank God)
+            """
+            self.users.remove(socket_user)
+            self.users_ip.remove(ip_user)
 
     def registration(self, data, user):
         self.idUser += 1
@@ -106,7 +103,7 @@ class Server(socket.socket):
             print("HAVE_THIS_USER")
 
     def userSignIn(self, data,
-                   socket_user):  # You need fix it Nikita. After bad sign, and close, and try again sign ERROR
+                   socket_user):
         try:
             print(f'self.DB["USERS"][data[1]]["password"]   {self.DB["USERS"][data[1]]["password"]}')
             print(f'self.data_s[1]   {self.data_s[1]}')
@@ -210,8 +207,8 @@ class Server(socket.socket):
 
                 for userInRoom in self.rooms[roomID][0].values():
                     print(f"userInRoom --- >{userInRoom}")
-                    userInRoom.send(pickle.dumps(["MSGROOM", self.data_s[2], self.data_s[-1]]))
-                    print(f"FOR ROOM IN CL --- >{['MSGROOM', self.data_s[2], self.data_s[-1]]}")
+                    userInRoom.send(pickle.dumps(["MSGROOM", self.data_s[2], self.data_s[-1], self.data_s[3]]))
+                    print(f"FOR ROOM IN CL --- >{['MSGROOM', self.data_s[2], self.data_s[-1], self.data_s[3]]}")
 
         self.DB["MESSAGE"][self.data_s[1]].append(f"{self.data_s[2]}: {self.data_s[-1]}")
         with open("DB.json", 'w') as json_file:
@@ -249,8 +246,6 @@ class Server(socket.socket):
 
         userOfSearch = ["SEARCH", pickle.dumps(userOfSearch)]
         self.send_data(userOfSearch)
-        # #userOfSearch = []
-        # print(f"userOfSearch --- >{userOfSearch}")
 
     def start_server(self):
 
