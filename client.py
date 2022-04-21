@@ -1,13 +1,13 @@
 import pickle
 import socket
 import sys
+import time
 import threading
 
-from PyQt5 import QtCore, QtWidgets, QtGui
+from PyQt5 import QtWidgets
 
 import ui_client
-from AddFriend import Ui_AddFriend
-from users_login import Ui_LandP_Reg
+
 
 class Client(socket.socket):
     def __init__(self):  # Connect to server
@@ -16,7 +16,6 @@ class Client(socket.socket):
 
     def send_data(self, data_text):  # Send data on server
         self.send(data_text)
-
 
 
 class Ui_MainWindow(ui_client.UI_ForMain):
@@ -28,14 +27,6 @@ class Ui_MainWindow(ui_client.UI_ForMain):
         self.user_is_sign = False
         self.can_write = False
         self.roomsForLoad = []
-
-
-
-
-
-
-
-
 
     def get_text(self):
         # We receive text from the server USING the client (Client)
@@ -79,6 +70,10 @@ class Ui_MainWindow(ui_client.UI_ForMain):
                 elif data[0] == "MSGROOM":
                     if self.listWidget_people.currentItem().text() == data[3]:
                         self.listWidget_msgRoom.addItem(f"{data[1]}: {' '.join(data[2])}")
+                        time.sleep(0.01)
+                        self.listWidget_msgRoom.verticalScrollBar().setValue(
+                            self.listWidget_msgRoom.verticalScrollBar().maximum())
+
 
                 elif data[0] == "CRT_ROOM":
                     try:
@@ -92,11 +87,14 @@ class Ui_MainWindow(ui_client.UI_ForMain):
                     if data[1] == "NOMSG":
                         self.listWidget_msgRoom.clear()
                     else:
-                        self.listWidget_msgRoom.clear()
-                        x = data[1]
-                        print(f"Банк сообщений с сервера --->{x}")
-                        self.listWidget_msgRoom.addItems(x)
 
+                        self.listWidget_msgRoom.clear()
+                        bankOfMessage = data[1]
+                        print(f"Банк сообщений с сервера --->{bankOfMessage}")
+                        self.listWidget_msgRoom.addItems(bankOfMessage)
+                        time.sleep(0.01)
+                        self.listWidget_msgRoom.verticalScrollBar().setValue(
+                            self.listWidget_msgRoom.verticalScrollBar().maximum())
                 elif data[0] == "SEARCH":
 
                     matchOfPeople = pickle.loads(data[1])
@@ -114,7 +112,7 @@ class Ui_MainWindow(ui_client.UI_ForMain):
 
             except EOFError or KeyError:
                 """
-                Curve check to run the program more than once o n one pc, 
+                Curve check to run the program more than once on one pc, 
                 so that one user cannot run the client many times
                 """
 
@@ -214,6 +212,7 @@ class Ui_MainWindow(ui_client.UI_ForMain):
                     self.textEdit_room.clear()
                     self.textEdit_room.setFocus()
 
+
     def addNewFriend(self):
         newRoom = ["CRT_ROOM", self.AddFRNDForm.listWidget.currentItem().text(), self.nickName, ]
         newRoom = pickle.dumps(newRoom)
@@ -224,8 +223,6 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ChildWindow = QtWidgets.QMainWindow()
-
-
     ui = Ui_MainWindow(MainWindow, ChildWindow)
     ui.setupUi(MainWindow, ChildWindow)
     MainWindow.show()
