@@ -1,11 +1,7 @@
 from PyQt5 import QtCore, QtWidgets, QtGui
-import socket
-
 
 from AddFriend import Ui_AddFriend
 from users_login import Ui_LandP_Reg
-
-
 
 
 class UI_ForMain(object):
