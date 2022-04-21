@@ -28,12 +28,10 @@ class Server(socket.socket):
             for user in reversed(self.users):
                 user.send(pickle.dumps(data))
                 print(f"ДАННЫЕ ОТ СЕРВЕРА ----> {data}")
-
         except Exception as a:
             print(f"_SEND_DATA ---> {a}")
 
     def listen_socket(self, ip_user, socket_user=None, ):  # Accept text from client
-
         print("Listen User")
 
         # try:
@@ -68,24 +66,24 @@ class Server(socket.socket):
                     self.userAndObject.pop(self.data_s[1])
 
 
-#         except Exception as a:
-#
-#             print("---------------------------------------------------------------")
-#             try:
-#                 print(f"{self.data_s}", f"{a}")
-#                 print(f"Ошибка --- >{a}")
-#
-#             except Exception:
-#                 pass
-#
-#             """
-# "
-#         "    If the client is disconnected, then we remove it from the user array and
-#         "    the IP array
-#         "    users at the moment so. (While it works and thank God)
-#             """
-#             self.users.remove(socket_user)
-#             self.users_ip.remove(ip_user)
+    #         except Exception as a:
+    #
+    #             print("---------------------------------------------------------------")
+    #             try:
+    #                 print(f"{self.data_s}", f"{a}")
+    #                 print(f"Ошибка --- >{a}")
+    #
+    #             except Exception:
+    #                 pass
+    #
+    #             """
+    # "
+    #         "    If the client is disconnected, then we remove it from the user array and
+    #         "    the IP array
+    #         "    users at the moment so. (While it works and thank God)
+    #             """
+    #             self.users.remove(socket_user)
+    #             self.users_ip.remove(ip_user)
 
     def registration(self, data, user):
         self.idUser += 1
@@ -105,22 +103,20 @@ class Server(socket.socket):
             user.send(pickle.dumps(["HAVE_THIS_USER"]))
             print("HAVE_THIS_USER")
 
-    def userSignIn(self, data,
-                   socket_user):  # You need fix it Nikita. After bad sign, and close, and try again sign ERROR
+    # You need fix it Nikita. After bad sign, and close, and try again sign ERROR
+    def userSignIn(self, data, socket_user):
         try:
             print(f'self.DB["USERS"][data[1]]["password"]   {self.DB["USERS"][data[1]]["password"]}')
             print(f'self.data_s[1]   {self.data_s[1]}')
             print(f'self.userAndObject.keys()  {self.userAndObject.keys()}')
             print()
             if self.DB["USERS"][data[1]]["password"] == data[2] and self.data_s[1] not in self.userAndObject.keys():
-
                 keys = self.DB["USERS"][data[1]]["ROOMS"][0].keys()
                 listRooms = []
                 if not keys:
                     signIN = ["USER IS SIGN"]
                     self.userAndObject[self.data_s[1]] = socket_user
                 else:
-
                     listRooms.append(self.DB["USERS"][data[1]]["ROOMS"][0])
 
                     signIN = ["USER IS SIGN", listRooms]
@@ -173,7 +169,6 @@ class Server(socket.socket):
                     pass
 
         try:
-
             self.userAndObject[self.data_s[1]].send(
                 pickle.dumps(["CRT_ROOM", {str(self.idRoom) + "R": self.data_s[2]}]))
             self.userAndObject[self.data_s[2]].send(
@@ -234,7 +229,6 @@ class Server(socket.socket):
                 user.send(forLoadMSG)
 
         except KeyError as error:
-
             self.DB["MESSAGE"][self.data_s[1]] = []
 
     def search_people(self):
@@ -253,7 +247,6 @@ class Server(socket.socket):
         # print(f"userOfSearch --- >{userOfSearch}")
 
     def start_server(self):
-
         while True:
             users_socket, address = self.accept()
             print(f"users_socket --- >{users_socket}")

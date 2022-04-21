@@ -6,8 +6,7 @@ import threading
 from PyQt5 import QtCore, QtWidgets, QtGui
 
 import ui_client
-from AddFriend import Ui_AddFriend
-from users_login import Ui_LandP_Reg
+
 
 class Client(socket.socket):
     def __init__(self):  # Connect to server
@@ -16,7 +15,6 @@ class Client(socket.socket):
 
     def send_data(self, data_text):  # Send data on server
         self.send(data_text)
-
 
 
 class Ui_MainWindow(ui_client.UI_ForMain):
@@ -29,20 +27,11 @@ class Ui_MainWindow(ui_client.UI_ForMain):
         self.can_write = False
         self.roomsForLoad = []
 
-
-
-
-
-
-
-
-
     def get_text(self):
         # We receive text from the server USING the client (Client)
 
         while True:
             try:
-
                 data = self.cl.recv(2048)
                 data = pickle.loads(data)
                 print(f"Данные от сервера --- >{data}")
@@ -98,7 +87,6 @@ class Ui_MainWindow(ui_client.UI_ForMain):
                         self.listWidget_msgRoom.addItems(x)
 
                 elif data[0] == "SEARCH":
-
                     matchOfPeople = pickle.loads(data[1])
 
                     self.AddFRNDForm.listWidget.clear()
@@ -109,12 +97,9 @@ class Ui_MainWindow(ui_client.UI_ForMain):
                         except TypeError as error:
                             if item != self.nickName:
                                 self.AddFRNDForm.listWidget.addItem(item)
-
-
-
             except EOFError or KeyError:
                 """
-                Curve check to run the program more than once o n one pc, 
+                Curve check to run the program more than once on one pc, 
                 so that one user cannot run the client many times
                 """
 
@@ -156,7 +141,6 @@ class Ui_MainWindow(ui_client.UI_ForMain):
 
     def load(self):
         try:
-
             if self.canLoad:
                 for item in self.roomsForLoad[0].values():
                     self.listWidget_people.addItem(item)
@@ -203,7 +187,6 @@ class Ui_MainWindow(ui_client.UI_ForMain):
             print("IndexError IN loadMSG")
 
     def roomMessage(self):
-
         if self.can_write:
             for IDRoom, nameRoom in self.roomsForLoad[0].items():
                 if self.listWidget_people.currentItem().text() == nameRoom and self.textEdit_room.toPlainText().strip() != "" and self.can_write:
@@ -224,7 +207,6 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ChildWindow = QtWidgets.QMainWindow()
-
 
     ui = Ui_MainWindow(MainWindow, ChildWindow)
     ui.setupUi(MainWindow, ChildWindow)
