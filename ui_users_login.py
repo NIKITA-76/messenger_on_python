@@ -109,13 +109,3 @@ class Ui_LandP_Reg(object):
         self.pushButton_back.setText(_translate("MainWindow", "Отмена"))
         self.label_pass.setText(_translate("MainWindow", "Пароль"))
 
-
-if __name__ == "__main__":
-    import sys
-
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_LandP_Reg()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())
