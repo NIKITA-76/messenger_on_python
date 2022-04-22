@@ -212,7 +212,6 @@ class Ui_MainWindow(ui_client.UI_ForMain):
                     self.textEdit_room.clear()
                     self.textEdit_room.setFocus()
 
-
     def addNewFriend(self):
         newRoom = ["CRT_ROOM", self.AddFRNDForm.listWidget.currentItem().text(), self.nickName, ]
         newRoom = pickle.dumps(newRoom)
