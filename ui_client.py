@@ -1,7 +1,7 @@
 from PyQt5 import QtCore, QtWidgets, QtGui
 
-from AddFriend import Ui_AddFriend
-from users_login import Ui_LandP_Reg
+from ui_addFriend import Ui_AddFriend
+from ui_users_login import Ui_LandP_Reg
 
 
 class UI_ForMain(object):
@@ -426,7 +426,6 @@ class UI_ForMain(object):
 
         # НИЖЕ КНОПКА ОТПРАВКИ СООБЩЕНИЯ
         self.pushButton_room.clicked.connect(self.roomMessage)
-        self.pushButton_room.setAutoDefault(True)
 
         # НИЖЕ ПРИ КЛИКЕ НА ИМЯ КОМНАТЫ ПРОИСХОДИТ ЗАГРУЗКА СООБЩЕНИЙ
         self.listWidget_people.clicked.connect(self.loadMSG)
@@ -454,7 +453,6 @@ class UI_ForMain(object):
         self.listWidget_title.setText(_translate("MainWindow", ""))
         __sortingEnabled = self.listWidget_people.isSortingEnabled()
         self.listWidget_people.setSortingEnabled(False)
-
         self.listWidget_people.setSortingEnabled(__sortingEnabled)
         self.pushButton_menu.setText(_translate("MainWindow", "Найти друзей"))
         self.textEdit_room.setHtml(_translate("MainWindow",
