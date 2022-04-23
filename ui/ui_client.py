@@ -1,6 +1,6 @@
 from PyQt5 import QtCore, QtWidgets, QtGui
 
-from ui_addFriend import Ui_AddFriend
+from ui_add_friend import Ui_AddFriend
 from ui_users_login import Ui_LandP_Reg
 
 
