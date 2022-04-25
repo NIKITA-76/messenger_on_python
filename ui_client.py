@@ -1,5 +1,10 @@
 from PyQt5 import QtCore, QtWidgets, QtGui
 
+import sys
+
+# adding Folder_2 to the system path
+sys.path.insert(0, '/home/amninder/Desktop/Folder_2')
+
 from ui_add_friend import Ui_AddFriend
 from ui_users_login import Ui_LandP_Reg
 
