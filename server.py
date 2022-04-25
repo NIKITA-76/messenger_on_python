@@ -2,20 +2,34 @@ import json
 import pickle
 import socket
 import threading
+from configparser import ConfigParser
+import logging
 
 
 class Server(socket.socket):
     def __init__(self):
         super().__init__(socket.AF_INET, socket.SOCK_STREAM)
+        logging.basicConfig(level="INFO")
+        self.logger_login = logging.getLogger("log_in")
+        self.logger_package_MSG = logging.getLogger("load_MSG_for_client")
+        self.logger_accept = logging.getLogger("start_server")
+        self.logger_accept.setLevel("DEBUG")
+        self.logger_listen_socket = logging.getLogger("listen_socket")
+        self.logger_accept.setLevel("ERROR")
+        configfile = "config.ini"
+        config = ConfigParser()
+        config.read(configfile)
+
         with open("DB.json", 'r') as json_file:
-            self.DB = json.load(json_file)
+            self.DB = json.load(json_file)  # ----
             self.idUser = self.DB["COUNT"]["USERS"]
             self.idRoom = self.DB["COUNT"]["ROOMS"]
-        self.bind(("192.168.0.3", 8080))
+
+        self.bind((config["server"]["ip"], int(config["server"]["port"])))  # config, disconnect, log
         self.listen()
 
         print("Server Listen")
-
+        # ----
         self.users = []  # List of all users
         self.users_ip = []  # List of all users-ip
         self.name_withIp = {}
@@ -32,9 +46,8 @@ class Server(socket.socket):
         except Exception as a:
             print(f"_SEND_DATA ---> {a}")
 
-    def listen_socket(self, ip_user, socket_user=None, ):  # Accept text from client
+    def listen_socket(self, ip_user, socket_user, ):  # Accept text from client
 
-        print("Listen User")
 
         try:
             while True:
@@ -43,7 +56,7 @@ class Server(socket.socket):
                 print(f"ДАННЫЕ ОТ КЛИЕНТА --->{self.data_s}")
                 if self.data_s[
                     0] == "TRY_TO_ENTRY":  # If there is an ENTRY signal from the client, we start the process of checking the data from the user
-                    self.userSignIn(self.data_s, socket_user)
+                    self.log_in(self.data_s, socket_user)
                     self.name_withIp[self.data_s[1]] = self.users_ip[0]
                     self.recreating_room_from_JSON()
                 elif self.data_s[0] == "TRY_TO_REG":
@@ -53,7 +66,7 @@ class Server(socket.socket):
                 elif self.data_s[0] == "SEARCH":
                     self.search_people()
                 elif self.data_s[0] == "CRT_ROOM":
-                    self.create_room_JSON(socket_user)
+                    self.create_room_JSON()
                 elif self.data_s[0] == "LOADMSG":
                     self.load_MSG_for_client(socket_user)
                 elif self.data_s[0] == "USER_OUT":
@@ -70,10 +83,9 @@ class Server(socket.socket):
 
         except Exception as a:
 
-            print("---------------------------------------------------------------")
             try:
-                print(f"{self.data_s}", f"{a}")
-                print(f"Ошибка --- >{a}")
+                self.logger_listen_socket.error(a)
+                print(f"{self.data_s}")
             except Exception:
                 pass
             """
@@ -102,41 +114,37 @@ class Server(socket.socket):
             user.send(pickle.dumps(["HAVE_THIS_USER"]))
             print("HAVE_THIS_USER")
 
-    def userSignIn(self, data,
-                   socket_user):
+    def log_in(self, data,
+               socket_user):
         try:
-            print(f'self.DB["USERS"][data[1]]["password"]   {self.DB["USERS"][data[1]]["password"]}')
-            print(f'self.data_s[1]   {self.data_s[1]}')
-            print(f'self.userAndObject.keys()  {self.userAndObject.keys()}')
-            print()
             if self.DB["USERS"][data[1]]["password"] == data[2] and self.data_s[1] not in self.userAndObject.keys():
 
                 keys = self.DB["USERS"][data[1]]["ROOMS"][0].keys()
-                listRooms = []
+                list_rooms = []
                 if not keys:
-                    signIN = ["USER IS SIGN"]
+                    sign_in = ["USER IS SIGN"]
                     self.userAndObject[self.data_s[1]] = socket_user
                 else:
 
-                    listRooms.append(self.DB["USERS"][data[1]]["ROOMS"][0])
+                    list_rooms.append(self.DB["USERS"][data[1]]["ROOMS"][0])
 
-                    signIN = ["USER IS SIGN", listRooms]
+                    sign_in = ["USER IS SIGN", list_rooms]
                     self.userAndObject[self.data_s[1]] = socket_user
 
-                print("USER IS SIGN")
+                self.logger_login.info("USER_IS_SIGN")
                 self.userAndObject[self.data_s[1]] = socket_user
-                socket_user.send(pickle.dumps(signIN))
+                socket_user.send(pickle.dumps(sign_in))
 
             else:
                 no_sign_in = ["USER_IS_NOT_SIGN"]
-                print("USER_IS_NOT_SIGN (BAD_PASSWORD)")
+                self.logger_login.info("USER_IS_NOT_SIGN (BAD_PASSWORD)")
                 socket_user.send(pickle.dumps(no_sign_in))
         except KeyError:
             no_sign_in = ["USER_IS_NOT_SIGN"]
-            print("USER_IS_NOT_SIGN (BAD_LOGIN)")
+            self.logger_login.info("USER_IS_NOT_SIGN (BAD_LOGIN)")
             socket_user.send(pickle.dumps(no_sign_in))
 
-    def create_room_JSON(self, user):
+    def create_room_JSON(self):
         i = 1
         self.idRoom = self.idRoom + 1
         listUsers = []
@@ -158,11 +166,9 @@ class Server(socket.socket):
         self.create_room_now()
 
     def create_room_now(self):
-        nameOfRooms = self.DB["ROOMS"].keys()  # Создание комнаты, без необходимости перезагрузки сервера
-        for name in nameOfRooms:
-            print(f"name {name}")
+        name_of_rooms = self.DB["ROOMS"].keys()  # Создание комнаты, без необходимости перезагрузки сервера
+        for name in name_of_rooms:
             for usersInRoom in self.DB["ROOMS"][name][0]["USERS"]:
-                print(f"usersInRoom {usersInRoom}")
                 try:
                     if usersInRoom not in self.rooms[name][0]:  # Условие, что бы не дублировать в комнаты
                         self.rooms[name][0].update({usersInRoom: self.userAndObject[usersInRoom]})
@@ -181,15 +187,15 @@ class Server(socket.socket):
                 pickle.dumps(["CRT_ROOM", {str(self.idRoom) + "R": self.data_s[1]}]))
 
     def create_room(self):
-        nameOfRooms = self.DB["ROOMS"].keys()
+        name_of_rooms = self.DB["ROOMS"].keys()
 
-        for name in nameOfRooms:
+        for name in name_of_rooms:
             self.rooms[name] = [{}]
         print(self.rooms)
 
     def recreating_room_from_JSON(self):
-        nameOfRooms = self.DB["ROOMS"].keys()  # Воссоздание комнат из JSON
-        for name in nameOfRooms:
+        name_of_rooms = self.DB["ROOMS"].keys()  # Воссоздание комнат из JSON
+        for name in name_of_rooms:
             for usersInRoom in self.DB["ROOMS"][name][0]["USERS"]:
                 try:
                     if usersInRoom not in self.rooms[name][0]:  # Условие, что бы не дублировать в комнаты
@@ -217,18 +223,16 @@ class Server(socket.socket):
         print("------------КОНЕЦ КОМНАТЫ-------------")
 
     def load_MSG_for_client(self, user):
-        print(self.userAndObject)
         try:
-            print(self.data_s)
             if not self.DB["MESSAGE"][self.data_s[1]]:
-                forLoadMSG = pickle.dumps(["LOADMSG", "NOMSG"])
-                print(f"forLoadMSG клиенту --- >{['LOADMSG', 'NOMSG']}")
-                user.send(forLoadMSG)
+                for_load_MSG = pickle.dumps(["LOADMSG", "NOMSG"])
+                self.logger_package_MSG.info(f"{['LOADMSG', 'NOMSG']}")
+                user.send(for_load_MSG)
 
             else:
-                print(f"forLoadMSG клиенту --- >{['LOADMSG', self.DB['MESSAGE'][self.data_s[1]]]}")
-                forLoadMSG = pickle.dumps(["LOADMSG", self.DB["MESSAGE"][self.data_s[1]]])
-                user.send(forLoadMSG)
+                self.logger_package_MSG.info(f"{['LOADMSG', self.DB['MESSAGE'][self.data_s[1]]]}")
+                for_load_MSG = pickle.dumps(["LOADMSG", self.DB["MESSAGE"][self.data_s[1]]])
+                user.send(for_load_MSG)
 
         except KeyError as error:
 
@@ -240,9 +244,7 @@ class Server(socket.socket):
 
         for user in usersInJSON:
             if self.data_s[1] in user:
-                print("ЕСТЬ СОВПАДЕНИЕ")
                 userOfSearch.append(user)
-                print(userOfSearch)
 
         userOfSearch = ["SEARCH", pickle.dumps(userOfSearch)]
         self.send_data(userOfSearch)
@@ -251,7 +253,7 @@ class Server(socket.socket):
 
         while True:
             users_socket, address = self.accept()
-            print(f"users_socket --- >{users_socket}")
+            self.logger_accept.debug("USER ACCEPT")
 
             # if address[0] not in self.users_ip:
             """
