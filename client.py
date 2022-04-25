@@ -3,7 +3,7 @@ import socket
 import sys
 import time
 import threading
-
+from configparser import ConfigParser
 from PyQt5 import QtWidgets
 
 import ui_client
@@ -11,8 +11,11 @@ import ui_client
 
 class Client(socket.socket):
     def __init__(self):  # Connect to server
+        configfile = "config.ini"
+        config = ConfigParser()
+        config.read(configfile)
         super().__init__()
-        self.connect(("178.71.224.84", 8080))
+        self.connect((config["client"]["ip"], int(config["client"]["port"])))
 
     def send_data(self, data_text):  # Send data on server
         self.send(data_text)
@@ -73,7 +76,6 @@ class Ui_MainWindow(ui_client.UI_ForMain):
                         time.sleep(0.01)
                         self.listWidget_msgRoom.verticalScrollBar().setValue(
                             self.listWidget_msgRoom.verticalScrollBar().maximum())
-
 
                 elif data[0] == "CRT_ROOM":
                     try:
