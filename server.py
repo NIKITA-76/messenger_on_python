@@ -1,16 +1,25 @@
-import json
 import pickle
 import socket
 import threading
 import logging
-from pymongo import MongoClient
 
+from pymongo import MongoClient
 from configparser import ConfigParser
 
 
 class Server(socket.socket):
     def __init__(self):
+        configfile = "config.ini"
+        config = ConfigParser()
+        config.read(configfile)
         super().__init__(socket.AF_INET, socket.SOCK_STREAM)
+        client = MongoClient(config["database"]["ip"], int(config["database"]["port"]))
+        collect = client["Messanger"]
+        self.DB = collect["msgr"]
+
+        self.bind((config["server"]["ip"], int(config["server"]["port"])))
+        self.listen()
+
         logging.basicConfig(level="INFO")
         self.logger_login = logging.getLogger("log_in")
         self.logger_package_MSG = logging.getLogger("load_MSG_for_client")
@@ -18,31 +27,16 @@ class Server(socket.socket):
         self.logger_listen_socket = logging.getLogger("listen_socket")
         self.logger_accept.setLevel("DEBUG")
         self.logger_accept.setLevel("ERROR")
-        configfile = "config.ini"
-        config = ConfigParser()
-        config.read(configfile)
 
-        client = MongoClient(config["database"]["ip"], int(config["database"]["port"]))
-        collect = client["Messanger"]
-        self.DB = collect["msgr"]
-        self.idUser = self.DB.find_one({"_id": "COUNT"})["USERS"]
-        self.idRoom = self.DB.find_one({"_id": "COUNT"})["ROOMS"]
         print(self.idRoom)
-
-        # with open("DB.json", 'r') as json_file:
-        #     self.DB = json.load(json_file)  # ----
-        #     self.idRoom = self.DB["COUNT"]["ROOMS"]
-
-        self.bind((config["server"]["ip"], int(config["server"]["port"])))
-        self.listen()
-
         print("Server Listen")
-        # ----
         self.users = []  # List of all users
         self.users_ip = []  # List of all users-ip
         self.name_withIp = {}
         self.userAndObject = {}
         self.rooms = {}
+        self.idUser = self.DB.find_one({"_id": "COUNT"})["USERS"]
+        self.idRoom = self.DB.find_one({"_id": "COUNT"})["ROOMS"]
         self.create_room()
 
     def send_data(self, data):  # Send text to all users (in the list)
@@ -56,52 +50,45 @@ class Server(socket.socket):
 
     def listen_socket(self, ip_user, socket_user, ):  # Accept text from client
 
-        # try:
-        while True:
-            self.data_s = socket_user.recv(2048)  # Accepting a message
-            self.data_s = pickle.loads(self.data_s)
-            print(f"ДАННЫЕ ОТ КЛИЕНТА --->{self.data_s}")
-            if self.data_s[
-                0] == "TRY_TO_ENTRY":  # If there is an ENTRY signal from the client, we start the process of checking the data from the user
-                self.log_in(self.data_s, socket_user)
-                self.name_withIp[self.data_s[1]] = self.users_ip[0]
-                self.recreating_room_from_JSON()
-            elif self.data_s[0] == "TRY_TO_REG":
-                self.registration(self.data_s, socket_user)
-            elif self.data_s[0] == "MSGROOM":
-                self.private_MSG()
-            elif self.data_s[0] == "SEARCH":
-                self.search_people()
-            elif self.data_s[0] == "CRT_ROOM":
-                self.create_room_JSON()
-            elif self.data_s[0] == "LOADMSG":
-                self.load_MSG_for_client(socket_user)
-            elif self.data_s[0] == "USER_OUT":
-                """
-                 Удаление пользователя из комнаты ЛС, так как при подключении пользователя меняеться его 'fd',
-                 а в комнате все еще старый объект со старым 'fd'
-                
-                """
-                for roomID, roomName in self.DB.find_one({'_id': 'USERS'}, {'_id': 0})[self.data_s[1]]["ROOMS"].items():
-                    print(f"USER '{self.data_s[1]}' IS OUT")
-                    self.rooms[roomID][0].pop(self.data_s[1])
-                    self.userAndObject.pop(self.data_s[1])
-                    self.users.remove(socket_user)
-                    self.users_ip.remove(ip_user)
-
-        # except Exception as a:
-
-    #
-    #    try:
-    #        self.logger_listen_socket.error(a)
-    #        print(f"{self.data_s}")
-    #    except Exception:
-    #        pass
-    #    """
-    #       If the client is disconnected, then we remove it from the user array and
-    #       the IP array
-    #       users at the moment so. (While it works and thank God)
-    #    """
+        try:
+            while True:
+                self.data_s = socket_user.recv(2048)  # Accepting a message
+                self.data_s = pickle.loads(self.data_s)
+                print(f"ДАННЫЕ ОТ КЛИЕНТА --->{self.data_s}")
+                if self.data_s[
+                    0] == "TRY_TO_ENTRY":  # If there is an ENTRY signal from the client, we start the process of checking the data from the user
+                    self.log_in(self.data_s, socket_user)
+                    self.name_withIp[self.data_s[1]] = self.users_ip[0]
+                    self.recreating_room_from_JSON()
+                elif self.data_s[0] == "TRY_TO_REG":
+                    self.registration(self.data_s, socket_user)
+                elif self.data_s[0] == "MSGROOM":
+                    self.private_MSG()
+                elif self.data_s[0] == "SEARCH":
+                    self.search_people()
+                elif self.data_s[0] == "CRT_ROOM":
+                    self.create_room_JSON()
+                elif self.data_s[0] == "LOADMSG":
+                    self.load_MSG_for_client(socket_user)
+                elif self.data_s[0] == "USER_OUT":
+                    """
+                     Удаление пользователя из комнаты ЛС, так как при подключении пользователя меняеться его 'fd',
+                     а в комнате все еще старый объект со старым 'fd'
+                    
+                    """
+                    for roomID, roomName in self.DB.find_one({'_id': 'USERS'}, {'_id': 0})[self.data_s[1]]["ROOMS"].items():
+                        print(f"USER '{self.data_s[1]}' IS OUT")
+                        print(self.DB.find_one({'_id': 'USERS'}, {'_id': 0})[self.data_s[1]]["ROOMS"].items())
+                        try:
+                            self.rooms[roomID][0].pop(self.data_s[1])
+                            self.userAndObject.pop(self.data_s[1])
+                            self.users.remove(socket_user)
+                            self.users_ip.remove(ip_user)
+                        except:
+                            pass
+        except EOFError as error:
+            print(error)
+            pass
 
     def registration(self, data, user):
         self.idUser += 1
@@ -152,11 +139,11 @@ class Server(socket.socket):
     def create_room_JSON(self):
         i = 1
         self.idRoom = self.idRoom + 1
-        listUsers = []
+        list_users = []
         while i < len(self.data_s):
-            listUsers.append(self.data_s[i])
+            list_users.append(self.data_s[i])
             self.DB.update_one({'_id': 'ROOMS'}, {'$set': {str(self.idRoom) + "R": [
-                {"USERS": listUsers, "NAME": self.data_s[2]}]}})
+                {"USERS": list_users, "NAME": self.data_s[2]}]}})
             i += 1
         self.DB.update_one({'_id': 'COUNT'}, {'$set': {'ROOMS': self.idRoom}})
 
