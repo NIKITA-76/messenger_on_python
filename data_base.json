@@ -1,0 +1,106 @@
+[{
+  "_id": "USERS",
+  "T": {
+    "password": "N",
+    "ID": 1,
+    "ROOMS": {
+      "164R": "S",
+      "165R": "F",
+      "166R": "V"
+    }
+  },
+  "Q": {
+    "password": "Q",
+    "ID": 12,
+    "ROOMS": {}
+  },
+  "S": {
+    "password": "S",
+    "ID": 14,
+    "ROOMS": {
+      "164R": "T",
+      "167R": "V"
+    }
+  },
+  "A": {
+    "password": "A",
+    "ID": 17,
+    "ROOMS": {}
+  },
+  "F": {
+    "password": "F",
+    "ID": 18,
+    "ROOMS": {
+      "165R": "T"
+    }
+  },
+  "asdasd": {
+    "password": "asdasd",
+    "ID": 19,
+    "ROOMS": {}
+  },
+  "V": {
+    "password": "V",
+    "ID": 28,
+    "ROOMS": {
+      "166R": "T",
+      "167R": "S"
+    }
+  }
+},{
+  "_id": "ROOMS",
+  "164R": [
+    {
+      "USERS": [
+        "S",
+        "T"
+      ],
+      "NAME": "T"
+    }
+  ],
+  "165R": [
+    {
+      "USERS": [
+        "F",
+        "T"
+      ],
+      "NAME": "T"
+    }
+  ],
+  "166R": [
+    {
+      "USERS": [
+        "T",
+        "V"
+      ],
+      "NAME": "V"
+    }
+  ],
+  "167R": [
+    {
+      "USERS": [
+        "S",
+        "V"
+      ],
+      "NAME": "V"
+    }
+  ]
+},{
+  "_id": "MESSAGE",
+  "164R": [
+    "T: qwd"
+  ],
+  "165R": [
+    "T: wqd"
+  ],
+  "166R": [
+    "V: Привет"
+  ],
+  "167R": [
+    "V: !!!"
+  ]
+},{
+  "_id": "COUNT",
+  "USERS": 27,
+  "ROOMS": 167
+}]
