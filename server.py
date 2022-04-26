@@ -22,7 +22,7 @@ class Server(socket.socket):
         config = ConfigParser()
         config.read(configfile)
 
-        client = MongoClient("localhost", 27017)
+        client = MongoClient(config["database"]["ip"], int(config["database"]["port"]))
         collect = client["Messanger"]
         self.DB = collect["msgr"]
         self.idUser = self.DB.find_one({"_id": "COUNT"})["USERS"]
