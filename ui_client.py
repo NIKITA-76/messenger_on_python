@@ -1,17 +1,11 @@
 from PyQt5 import QtCore, QtWidgets, QtGui
 
-import sys
-
-# adding Folder_2 to the system path
-sys.path.insert(0, '/home/amninder/Desktop/Folder_2')
-
 from ui_add_friend import Ui_AddFriend
 from ui_users_login import Ui_LandP_Reg
 
 
 class UI_ForMain(object):
     def setupUi(self, MainWindow, ChildWindow):
-        print("sadqwdasd")
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1291, 858)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -292,6 +286,8 @@ class UI_ForMain(object):
         self.listWidget_title = QtWidgets.QLabel(self.page_main)
         self.listWidget_title.setGeometry(QtCore.QRect(450, 0, 837, 51))
         self.listWidget_title.setMaximumSize(QtCore.QSize(16777215, 16777214))
+
+
         font = QtGui.QFont()
         font.setFamily("Corbel Light")
         font.setPointSize(23)
@@ -312,9 +308,8 @@ class UI_ForMain(object):
                                              "border:0px;\n"
                                              "")
         self.listWidget_people.setObjectName("listWidget_people")
-        item = QtWidgets.QListWidgetItem()
         self.pushButton_menu = QtWidgets.QPushButton(self.page_main)
-        self.pushButton_menu.setGeometry(QtCore.QRect(10, 20, 427, 31))
+        self.pushButton_menu.setGeometry(QtCore.QRect(38, 20, 400, 31))
         self.pushButton_menu.setStyleSheet("\n"
                                            "\n"
                                            "QPushButton{\n"
@@ -338,19 +333,28 @@ class UI_ForMain(object):
         self.textEdit_room = QtWidgets.QTextEdit(self.page_main)
         self.textEdit_room.setGeometry(QtCore.QRect(500, 730, 671, 95))
         font = QtGui.QFont()
-        font.setFamily("Candara")
+        font.setFamily("Cantarell")
         font.setPointSize(14)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
+        self.pushButton_settings = QtWidgets.QPushButton(self.page_main)
+        self.pushButton_settings.setGeometry(QtCore.QRect(3, 19, 31, 36))
+        self.pushButton_settings.setStyleSheet("background-color: rgb(41, 41, 41);")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("free-icon-menu-1828859.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.pushButton_settings.setIcon(icon)
+        self.pushButton_settings.setObjectName("pushButton_settings")
         self.textEdit_room.setFont(font)
         self.textEdit_room.setMouseTracking(False)
         self.textEdit_room.setStyleSheet("background-color: rgb(50, 50, 50);\n"
-                                         "font: 14pt \"Candara\";\n"
+                                         "font: 14pt \"Cantarell\";\n"
                                          "color: rgb(158, 158, 158);\n"
                                          "border:0px;\n"
                                          "border-radius: 12px;\n"
                                          "")
+
+
         self.textEdit_room.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
         self.textEdit_room.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustIgnored)
         self.textEdit_room.setOverwriteMode(False)
@@ -362,6 +366,13 @@ class UI_ForMain(object):
         self.line.setFrameShape(QtWidgets.QFrame.HLine)
         self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line.setObjectName("line")
+        self.page = QtWidgets.QWidget()
+        self.page.setObjectName("page")
+        self.pushButton_quit = QtWidgets.QPushButton(self.page)
+        self.pushButton_quit.setGeometry(QtCore.QRect(480, 470, 301, 36))
+        self.pushButton_quit.setStyleSheet("background-color: rgb(41, 41, 41);")
+        self.pushButton_quit.setObjectName("pushButton_quit")
+
         self.pushButton_room = QtWidgets.QPushButton(self.page_main)
         self.pushButton_room.setGeometry(QtCore.QRect(1190, 730, 91, 91))
         font = QtGui.QFont()
@@ -375,6 +386,7 @@ class UI_ForMain(object):
         font.setStyleStrategy(QtGui.QFont.PreferDefault)
         self.pushButton_room.setFont(font)
         self.pushButton_room.setStyleSheet("QPushButton{\n"
+                                           "font: 11pt ;\n"
                                            "background-color: rgb(50, 50, 50);\n"
                                            "\n"
                                            "color: rgb(158, 158, 158);\n"
@@ -383,6 +395,7 @@ class UI_ForMain(object):
                                            "}\n"
                                            "\n"
                                            "QPushButton:hover{\n"
+                                           "font: 11pt ;\n"
                                            "background-color: rgb(70, 70, 70);\n"
                                            "color: rgb(158, 158, 158);\n"
                                            "border-radius: 6px;\n"
@@ -390,6 +403,8 @@ class UI_ForMain(object):
                                            "")
         self.pushButton_room.setObjectName("pushButton_room")
         self.pushButton_room.hide()
+
+
         self.line.raise_()
         self.listWidget_msgRoom.raise_()
         self.listWidget_people.raise_()
@@ -398,7 +413,10 @@ class UI_ForMain(object):
         self.textEdit_room.raise_()
         self.pushButton_room.raise_()
         self.stackedWidget.addWidget(self.page_main)
+        self.stackedWidget.addWidget(self.page)
+
         MainWindow.setCentralWidget(self.centralwidget)
+
 
 
 
@@ -413,7 +431,6 @@ class UI_ForMain(object):
 
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
         self.LP_RForm.pushButton_back.clicked.connect(lambda: self.LP_RForm.stackedWidget.setCurrentIndex(0))
@@ -421,7 +438,7 @@ class UI_ForMain(object):
         # НИЖЕ КНОПКИ ОКНА ВХОДА
         self.LP_RForm.pushButton.clicked.connect(self.Sign_in)
         self.LP_RForm.pushButton_toReg.clicked.connect(lambda: self.LP_RForm.stackedWidget.setCurrentIndex(1))
-        # self.RegForm.pushButton.clicked.connect(self.Reg_in)
+        # self.RegForm.pushButton_settings.clicked.connect(self.Reg_in)
 
         # НИЖЕ КНОПКИ ДОБАВЛЕНИЯ В ДРУЗЬЯ
         self.pushButton_menu.clicked.connect(lambda: self.AddFRNDWindow.show())
@@ -432,13 +449,17 @@ class UI_ForMain(object):
         # НИЖЕ КНОПКА ОТПРАВКИ СООБЩЕНИЯ
         self.pushButton_room.clicked.connect(self.roomMessage)
 
+        # НИЖЕ КНОПКА ВХОДА В НАСТРОЙКИ
+        self.pushButton_settings.clicked.connect(self.go_setting)
+        self.pushButton_quit.clicked.connect(self.quit)
+
+
+
         # НИЖЕ ПРИ КЛИКЕ НА ИМЯ КОМНАТЫ ПРОИСХОДИТ ЗАГРУЗКА СООБЩЕНИЙ
         self.listWidget_people.clicked.connect(self.loadMSG)
-
         self.retranslateUi(MainWindow)
         self.stackedWidget.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
         self.LP_RForm.pushButton_back.clicked.connect(lambda: self.LP_RForm.stackedWidget.setCurrentIndex(0))
 
     def retranslateUi(self, MainWindow):
@@ -467,3 +488,4 @@ class UI_ForMain(object):
                                               "</style></head><body style=\" font-family:\'Candara\'; font-size:14pt; font-weight:400; font-style:normal;\">\n"
                                               "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
         self.pushButton_room.setText(_translate("MainWindow", "Отправить"))
+        self.pushButton_quit.setText(_translate("MainWindow", "Выйти"))
