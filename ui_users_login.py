@@ -21,7 +21,7 @@ class Ui_LandP_Reg(object):
         self.stackedWidget.setMinimumSize(QtCore.QSize(8, 0))
         self.stackedWidget.setObjectName("stackedWidget")
         self.page = QtWidgets.QWidget()
-        self.page.setObjectName("page")
+        self.page.setObjectName("page_setting")
         self.lineEdit_2 = QtWidgets.QLineEdit(self.page)
         self.lineEdit_2.setGeometry(QtCore.QRect(147, 218, 245, 20))
         self.lineEdit_2.setInputMask("")
