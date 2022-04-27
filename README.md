@@ -23,4 +23,4 @@ In this project, it was decided to use a non-relational database - MongoDB
 
 ![App Screenshot](https://sun9-29.userapi.com/s/v1/ig2/84aKiLz0ZL184JxFelbiHa_yUqMHf5W6FbZzckKpCwDvnhe2fBJOv5IH5gUTdZTLrls5PmN0Am9feit_XX5E85z_.jpg?size=1861x896&quality=96&type=album)
 
- - [MongoDB](https://kivy.org/#home)
+ - [MongoDB](https://www.mongodb.com/)
