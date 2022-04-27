@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1290</width>
+    <width>1288</width>
     <height>858</height>
    </rect>
   </property>
@@ -482,7 +482,7 @@
      <number>0</number>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="page_sign">
      <widget class="QLabel" name="label_2">
@@ -844,7 +844,7 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>12</pointsize>
+        <pointsize>14</pointsize>
        </font>
       </property>
       <property name="styleSheet">
@@ -858,13 +858,23 @@ border:0px;</string>
       <property name="currentRow">
        <number>-1</number>
       </property>
+      <item>
+       <property name="text">
+        <string>New Item</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>New Item</string>
+       </property>
+      </item>
      </widget>
      <widget class="QLabel" name="listWidget_title">
       <property name="geometry">
        <rect>
         <x>450</x>
         <y>0</y>
-        <width>837</width>
+        <width>841</width>
         <height>51</height>
        </rect>
       </property>
@@ -894,11 +904,11 @@ background-color: rgb(30, 30, 30);</string>
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
-     <widget class="QListWidget" name="listWidget_msgRoom_2">
+     <widget class="QListWidget" name="listWidget_people">
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>65</y>
+        <y>70</y>
         <width>450</width>
         <height>821</height>
        </rect>
@@ -917,11 +927,14 @@ border:0px;
      <widget class="QPushButton" name="pushButton_menu">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>44</x>
         <y>20</y>
-        <width>427</width>
+        <width>391</width>
         <height>31</height>
        </rect>
+      </property>
+      <property name="whatsThis">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Rewr&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="styleSheet">
        <string notr="true">
@@ -959,7 +972,7 @@ border-radius: 6px;
       </property>
       <property name="font">
        <font>
-        <family>Candara</family>
+        <family>Cantarell</family>
         <pointsize>14</pointsize>
         <weight>50</weight>
         <italic>false</italic>
@@ -974,7 +987,7 @@ border-radius: 6px;
       </property>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(50, 50, 50);
-font: 14pt &quot;Candara&quot;;
+font: 14pt &quot;Cantarell&quot;;
 color: rgb(158, 158, 158);
 border:0px;
 border-radius: 12px;
@@ -993,7 +1006,7 @@ border-radius: 12px;
        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Candara'; font-size:14pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Cantarell'; font-size:14pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="overwriteMode">
@@ -1061,17 +1074,94 @@ border-radius: 6px;
        <string>Отправить</string>
       </property>
      </widget>
+     <widget class="QPushButton" name="pushButton">
+      <property name="geometry">
+       <rect>
+        <x>6</x>
+        <y>19</y>
+        <width>35</width>
+        <height>36</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(41, 41, 41);</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="sadwq.qrc">
+        <normaloff>:/newPrefix/free-icon-menu-1828859.png</normaloff>:/newPrefix/free-icon-menu-1828859.png</iconset>
+      </property>
+     </widget>
      <zorder>line</zorder>
      <zorder>listWidget_msgRoom</zorder>
-     <zorder>listWidget_msgRoom_2</zorder>
+     <zorder>listWidget_people</zorder>
      <zorder>listWidget_title</zorder>
      <zorder>pushButton_menu</zorder>
      <zorder>textEdit_room</zorder>
      <zorder>pushButton_room</zorder>
+     <zorder>pushButton</zorder>
+    </widget>
+    <widget class="QWidget" name="page">
+     <widget class="QPushButton" name="pushButton_quit">
+      <property name="geometry">
+       <rect>
+        <x>480</x>
+        <y>470</y>
+        <width>301</width>
+        <height>36</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(41, 41, 41);</string>
+      </property>
+      <property name="text">
+       <string>Выйти</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>483</x>
+        <y>520</y>
+        <width>451</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>The_messenger             |               Nikita Tarasov</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_back_tomain">
+      <property name="geometry">
+       <rect>
+        <x>6</x>
+        <y>19</y>
+        <width>35</width>
+        <height>36</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(41, 41, 41);</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="sadwq.qrc">
+        <normaloff>:/newPrefix/free-icon-back-130882.png</normaloff>:/newPrefix/free-icon-back-130882.png</iconset>
+      </property>
+     </widget>
     </widget>
    </widget>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="sadwq.qrc"/>
+ </resources>
  <connections/>
 </ui>
