@@ -44,7 +44,7 @@ class Ui_LandP_Reg(object):
         self.pushButton = QtWidgets.QPushButton(self.page)
         self.pushButton.setGeometry(QtCore.QRect(145, 268, 75, 23))
         self.pushButton.setStyleSheet("color: rgb(158, 158, 158);")
-        self.pushButton.setObjectName("pushButton")
+        self.pushButton.setObjectName("pushButton_settings")
         self.label_2 = QtWidgets.QLabel(self.page)
         self.label_2.setGeometry(QtCore.QRect(143, 198, 251, 20))
         self.label_2.setStyleSheet("color: rgb(158, 158, 158);")
