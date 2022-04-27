@@ -154,9 +154,6 @@ class Ui_MainWindow(ui_client.UI_ForMain):
         self.cl.send_data(pickle.dumps(msgError))
         raise Exception
 
-    def go_setting(self):
-        self.stackedWidget.setCurrentIndex(3)
-
     def quit(self):
         data_of_sign = ["USER_OUT", self.nickName]
         data_of_sign = pickle.dumps(data_of_sign)
@@ -178,11 +175,7 @@ class Ui_MainWindow(ui_client.UI_ForMain):
         except IndexError:
             pass
 
-    def correctItemInList(self):
-        list_item = ["ITEM", self.listWidget_people.currentItem().text()]
-        list_item = pickle.dumps(list_item)
 
-        self.cl.send_data(list_item)
 
     def searchPeople(self):
         self.AddFRNDWindow.show()
@@ -190,7 +183,6 @@ class Ui_MainWindow(ui_client.UI_ForMain):
             men = ["SEARCH", self.AddFRNDForm.lineEdit.text()]
             men = pickle.dumps(men)
             self.cl.send_data(men)
-
 
     def loadMSG(self):
         try:
@@ -207,7 +199,6 @@ class Ui_MainWindow(ui_client.UI_ForMain):
         except IndexError:
             print("IndexError IN loadMSG")
 
-
     def roomMessage(self):
 
         if self.can_write:
@@ -223,7 +214,7 @@ class Ui_MainWindow(ui_client.UI_ForMain):
     def addNewFriend(self):
         newRoom = ["CRT_ROOM", self.AddFRNDForm.listWidget.currentItem().text(), self.nickName, ]
         newRoom = pickle.dumps(newRoom)
-        print(newRoom)
+        self.AddFRNDWindow.close()
         self.cl.send_data(newRoom)
 
 
