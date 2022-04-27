@@ -9,10 +9,10 @@ from configparser import ConfigParser
 
 class Server(socket.socket):
     def __init__(self):
+        super().__init__(socket.AF_INET, socket.SOCK_STREAM)
         configfile = "config.ini"
         config = ConfigParser()
         config.read(configfile)
-        super().__init__(socket.AF_INET, socket.SOCK_STREAM)
         client = MongoClient(config["database"]["ip"], int(config["database"]["port"]))
         collect = client["Messanger"]
         self.DB = collect["msgr"]
@@ -37,15 +37,6 @@ class Server(socket.socket):
         self.idRoom = self.DB.find_one({"_id": "COUNT"})["ROOMS"]
         self.create_room()
 
-    def send_data(self, data):  # Send text to all users (in the list)
-        try:
-            for user in reversed(self.users):
-                user.send(pickle.dumps(data))
-                print(f"ДАННЫЕ ОТ СЕРВЕРА ----> {data}")
-
-        except Exception as a:
-            print(f"_SEND_DATA ---> {a}")
-
     def listen_socket(self, ip_user, socket_user, ):  # Accept text from client
 
         try:
@@ -53,8 +44,7 @@ class Server(socket.socket):
                 self.data_s = socket_user.recv(2048)  # Accepting a message
                 self.data_s = pickle.loads(self.data_s)
                 print(f"ДАННЫЕ ОТ КЛИЕНТА --->{self.data_s}")
-                if self.data_s[
-                    0] == "TRY_TO_ENTRY":  # If there is an ENTRY signal from the client, we start the process of checking the data from the user
+                if self.data_s[0] == "TRY_TO_ENTRY":
                     self.log_in(self.data_s, socket_user)
                     print(f"self.name_withIp {self.name_withIp}")
                     print(f"self.users_ip[0] {self.users_ip}")
@@ -79,7 +69,6 @@ class Server(socket.socket):
                     """
                     for roomID, roomName in self.DB.find_one({'_id': 'USERS'}, {'_id': 0})[self.data_s[1]]["ROOMS"].items():
                         try:
-                            print("asdwqdqqqqqqqqqqqqqqqqq")
                             self.rooms[roomID][0].pop(self.data_s[1])
                             self.userAndObject.pop(self.data_s[1])
                             self.users.remove(socket_user)
@@ -107,8 +96,7 @@ class Server(socket.socket):
     def log_in(self, data,
                socket_user):
         try:
-            if self.DB.find_one({"_id": "USERS"})[data[1]]["password"] == data[2] and self.data_s[
-                1]:
+            if self.DB.find_one({"_id": "USERS"})[data[1]]["password"] == data[2] and self.data_s[1]:
 
                 keys = self.DB.find_one({"_id": "USERS"})[data[1]]["ROOMS"].keys()
                 list_rooms = []
@@ -244,7 +232,6 @@ class Server(socket.socket):
         print(user_of_search)
         print()
         user_socket.send(user_of_search)
-        #self.send_data(user_of_search)
 
     def start_server(self):
 
@@ -252,7 +239,6 @@ class Server(socket.socket):
             users_socket, address = self.accept()
             self.logger_accept.debug("USER ACCEPT")
 
-            # if address[0] not in self.users_ip:
             """
             Checking that the user could not run many clients on one pc
             """
@@ -270,6 +256,6 @@ class Server(socket.socket):
             '''
 
 
-if __name__ == '__main__':  # Start
+if __name__ == '__main__':
     server = Server()
     server.start_server()
