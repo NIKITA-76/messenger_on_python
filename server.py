@@ -16,7 +16,6 @@ class Server(socket.socket):
         client = MongoClient(config["database"]["ip"], int(config["database"]["port"]))
         collect = client["Messanger"]
         self.DB = collect["msgr"]
-
         self.bind((config["server"]["ip"], int(config["server"]["port"])))
         self.listen()
 
@@ -27,14 +26,13 @@ class Server(socket.socket):
         self.logger_listen_socket = logging.getLogger("listen_socket")
         self.logger_accept.setLevel("DEBUG")
         self.logger_accept.setLevel("ERROR")
+        self.userAndObject = {}
+        self.rooms = {}
 
-        print(self.idRoom)
         print("Server Listen")
         self.users = []  # List of all users
         self.users_ip = []  # List of all users-ip
         self.name_withIp = {}
-        self.userAndObject = {}
-        self.rooms = {}
         self.idUser = self.DB.find_one({"_id": "COUNT"})["USERS"]
         self.idRoom = self.DB.find_one({"_id": "COUNT"})["ROOMS"]
         self.create_room()
@@ -58,6 +56,8 @@ class Server(socket.socket):
                 if self.data_s[
                     0] == "TRY_TO_ENTRY":  # If there is an ENTRY signal from the client, we start the process of checking the data from the user
                     self.log_in(self.data_s, socket_user)
+                    print(f"self.name_withIp {self.name_withIp}")
+                    print(f"self.users_ip[0] {self.users_ip}")
                     self.name_withIp[self.data_s[1]] = self.users_ip[0]
                     self.recreating_room_from_JSON()
                 elif self.data_s[0] == "TRY_TO_REG":
@@ -65,7 +65,8 @@ class Server(socket.socket):
                 elif self.data_s[0] == "MSGROOM":
                     self.private_MSG()
                 elif self.data_s[0] == "SEARCH":
-                    self.search_people()
+                    print(socket_user)
+                    self.search_people(socket_user)
                 elif self.data_s[0] == "CRT_ROOM":
                     self.create_room_JSON()
                 elif self.data_s[0] == "LOADMSG":
@@ -77,13 +78,11 @@ class Server(socket.socket):
                     
                     """
                     for roomID, roomName in self.DB.find_one({'_id': 'USERS'}, {'_id': 0})[self.data_s[1]]["ROOMS"].items():
-                        print(f"USER '{self.data_s[1]}' IS OUT")
-                        print(self.DB.find_one({'_id': 'USERS'}, {'_id': 0})[self.data_s[1]]["ROOMS"].items())
                         try:
+                            print("asdwqdqqqqqqqqqqqqqqqqq")
                             self.rooms[roomID][0].pop(self.data_s[1])
                             self.userAndObject.pop(self.data_s[1])
                             self.users.remove(socket_user)
-                            self.users_ip.remove(ip_user)
                         except:
                             pass
         except EOFError as error:
@@ -109,7 +108,7 @@ class Server(socket.socket):
                socket_user):
         try:
             if self.DB.find_one({"_id": "USERS"})[data[1]]["password"] == data[2] and self.data_s[
-                1] not in self.userAndObject.keys():
+                1]:
 
                 keys = self.DB.find_one({"_id": "USERS"})[data[1]]["ROOMS"].keys()
                 list_rooms = []
@@ -233,7 +232,7 @@ class Server(socket.socket):
 
             self.DB.find_one({"_id": "MESSAGE"}, {"_id": 0})[self.data_s[1]] = []
 
-    def search_people(self):
+    def search_people(self, user_socket):
         users_in_JSON = self.DB.find_one({'_id': 'USERS'}, {'_id': 0})
         user_of_search = []
 
@@ -241,8 +240,11 @@ class Server(socket.socket):
             if self.data_s[1] in user:
                 user_of_search.append(user)
 
-        user_of_search = ["SEARCH", pickle.dumps(user_of_search)]
-        self.send_data(user_of_search)
+        user_of_search = pickle.dumps(["SEARCH", pickle.dumps(user_of_search)])
+        print(user_of_search)
+        print()
+        user_socket.send(user_of_search)
+        #self.send_data(user_of_search)
 
     def start_server(self):
 
