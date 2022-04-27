@@ -3,10 +3,10 @@ import socket
 import sys
 import time
 import threading
+import ui_client
+
 from configparser import ConfigParser
 from PyQt5 import QtWidgets
-
-import ui_client
 
 
 class Client(socket.socket):
@@ -27,13 +27,13 @@ class Ui_MainWindow(ui_client.UI_ForMain):
         self.cl = Client()
         self.thr = threading.Thread(target=self.get_text).start()
         self.canLoad = True
-        self.user_is_sign = False
         self.can_write = False
         self.roomsForLoad = []
 
-    def get_text(self):
+    def get_text(self, shut=None):
         # We receive text from the server USING the client (Client)
-
+        if shut:
+            raise sys.exit()
         while True:
             try:
 
@@ -45,7 +45,7 @@ class Ui_MainWindow(ui_client.UI_ForMain):
 
                     print("YOU GOT IN")
                     self.can_write = True
-                    self.user_is_sign = True
+                    print(self.roomsForLoad)
                     try:
                         for item in data[1]:
                             self.roomsForLoad.append(item)
@@ -57,6 +57,7 @@ class Ui_MainWindow(ui_client.UI_ForMain):
                     ChildWindow.close()
                     self.load()
                     self.pushButton_room.show()
+
 
                 elif data[0] == "USER_IS_REG":
                     self.LP_RForm.stackedWidget.setCurrentIndex(0)
@@ -132,7 +133,6 @@ class Ui_MainWindow(ui_client.UI_ForMain):
             data_of_reg = pickle.dumps(data_of_reg)
             self.cl.send_data(data_of_reg)
 
-
         else:
             self.RegForm.label_4.setText("Пароли не совпадают!")
 
@@ -154,13 +154,27 @@ class Ui_MainWindow(ui_client.UI_ForMain):
         self.cl.send_data(pickle.dumps(msgError))
         raise Exception
 
+    def go_setting(self):
+        self.stackedWidget.setCurrentIndex(3)
+
+    def quit(self):
+        data_of_sign = ["USER_OUT", self.nickName]
+        data_of_sign = pickle.dumps(data_of_sign)
+        self.cl.send_data(data_of_sign)
+        self.textEdit_room.clear()
+        self.listWidget_msgRoom.clear()
+        self.listWidget_title.clear()
+        self.roomsForLoad.clear()
+        self.listWidget_people.clear()
+        self.stackedWidget.setCurrentIndex(2)
+        ChildWindow.show()
+
     def load(self):
         try:
 
-            if self.canLoad:
-                for item in self.roomsForLoad[0].values():
-                    self.listWidget_people.addItem(item)
-            self.canLoad = False
+
+            for item in self.roomsForLoad[0].values():
+                self.listWidget_people.addItem(item)
         except IndexError:
             pass
 
@@ -177,15 +191,6 @@ class Ui_MainWindow(ui_client.UI_ForMain):
             men = pickle.dumps(men)
             self.cl.send_data(men)
 
-    def crtRoom(self):
-        usersInNewRoom = self.listWidget.selectedItems()
-        newRoom = ["CRT_ROOM", self.lineEdit_2.text(), self.nickName]
-        for item in usersInNewRoom:
-            item = item.text()
-            newRoom.append(item)
-        newRoom = pickle.dumps(newRoom)
-        self.cl.send_data(newRoom)
-        self.listWidget_rooms.addItem(self.lineEdit_2.text())
 
     def loadMSG(self):
         try:
@@ -202,6 +207,7 @@ class Ui_MainWindow(ui_client.UI_ForMain):
         except IndexError:
             print("IndexError IN loadMSG")
 
+
     def roomMessage(self):
 
         if self.can_write:
@@ -217,6 +223,7 @@ class Ui_MainWindow(ui_client.UI_ForMain):
     def addNewFriend(self):
         newRoom = ["CRT_ROOM", self.AddFRNDForm.listWidget.currentItem().text(), self.nickName, ]
         newRoom = pickle.dumps(newRoom)
+        print(newRoom)
         self.cl.send_data(newRoom)
 
 
