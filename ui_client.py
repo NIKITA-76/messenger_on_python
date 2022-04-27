@@ -342,7 +342,7 @@ class UI_ForMain(object):
         self.pushButton_settings.setGeometry(QtCore.QRect(3, 19, 31, 36))
         self.pushButton_settings.setStyleSheet("background-color: rgb(41, 41, 41);")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("free-icon-menu-1828859.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("ui/free-icon-menu-1828859.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pushButton_settings.setIcon(icon)
         self.pushButton_settings.setObjectName("pushButton_settings")
         self.textEdit_room.setFont(font)
@@ -353,8 +353,20 @@ class UI_ForMain(object):
                                          "border:0px;\n"
                                          "border-radius: 12px;\n"
                                          "")
-
-
+        self.page_setting = QtWidgets.QWidget()
+        self.page_setting.setObjectName("page_setting")
+        self.pushButton_quit = QtWidgets.QPushButton(self.page_setting)
+        self.pushButton_quit.setGeometry(QtCore.QRect(480, 470, 301, 36))
+        self.pushButton_quit.setStyleSheet("background-color: rgb(41, 41, 41);")
+        self.pushButton_quit.setObjectName("pushButton_quit")
+        self.pushButton_back_tomain = QtWidgets.QPushButton(self.page_setting)
+        self.pushButton_back_tomain.setGeometry(QtCore.QRect(6, 19, 35, 36))
+        self.pushButton_back_tomain.setStyleSheet("background-color: rgb(41, 41, 41);")
+        self.pushButton_back_tomain.setText("")
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap("ui/free-icon-back-130882.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.pushButton_back_tomain.setIcon(icon1)
+        self.pushButton_back_tomain.setObjectName("pushButton_back_tomain")
         self.textEdit_room.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
         self.textEdit_room.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustIgnored)
         self.textEdit_room.setOverwriteMode(False)
@@ -366,15 +378,12 @@ class UI_ForMain(object):
         self.line.setFrameShape(QtWidgets.QFrame.HLine)
         self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line.setObjectName("line")
-        self.page = QtWidgets.QWidget()
-        self.page.setObjectName("page")
-        self.pushButton_quit = QtWidgets.QPushButton(self.page)
-        self.pushButton_quit.setGeometry(QtCore.QRect(480, 470, 301, 36))
-        self.pushButton_quit.setStyleSheet("background-color: rgb(41, 41, 41);")
-        self.pushButton_quit.setObjectName("pushButton_quit")
-
         self.pushButton_room = QtWidgets.QPushButton(self.page_main)
         self.pushButton_room.setGeometry(QtCore.QRect(1190, 730, 91, 91))
+        self.label_of_creator = QtWidgets.QLabel(self.page_setting)
+        self.label_of_creator.setGeometry(QtCore.QRect(483, 520, 451, 20))
+        self.label_of_creator.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
+        self.label_of_creator.setObjectName("label_of_creator")
         font = QtGui.QFont()
         font.setFamily("Corbel Light")
         font.setPointSize(14)
@@ -413,29 +422,22 @@ class UI_ForMain(object):
         self.textEdit_room.raise_()
         self.pushButton_room.raise_()
         self.stackedWidget.addWidget(self.page_main)
-        self.stackedWidget.addWidget(self.page)
+        self.stackedWidget.addWidget(self.page_setting)
 
         MainWindow.setCentralWidget(self.centralwidget)
 
-
-
-
         self.LP_RForm = Ui_LandP_Reg()
         self.LP_RForm.setupUi(ChildWindow)
-
 
         self.AddFRNDWindow = QtWidgets.QMainWindow()
         self.AddFRNDForm = Ui_AddFriend()
         self.AddFRNDForm.setupUi(self.AddFRNDWindow)
 
-
-
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        self.LP_RForm.pushButton_back.clicked.connect(lambda: self.LP_RForm.stackedWidget.setCurrentIndex(0))
-
         # НИЖЕ КНОПКИ ОКНА ВХОДА
+        self.LP_RForm.pushButton_back.clicked.connect(lambda: self.LP_RForm.stackedWidget.setCurrentIndex(0))
         self.LP_RForm.pushButton.clicked.connect(self.Sign_in)
         self.LP_RForm.pushButton_toReg.clicked.connect(lambda: self.LP_RForm.stackedWidget.setCurrentIndex(1))
         # self.RegForm.pushButton_settings.clicked.connect(self.Reg_in)
@@ -449,11 +451,10 @@ class UI_ForMain(object):
         # НИЖЕ КНОПКА ОТПРАВКИ СООБЩЕНИЯ
         self.pushButton_room.clicked.connect(self.roomMessage)
 
-        # НИЖЕ КНОПКА ВХОДА В НАСТРОЙКИ
-        self.pushButton_settings.clicked.connect(self.go_setting)
+        # НИЖЕ КНОПКИ С ОКНАМИ НАСТРОЙКИ
+        self.pushButton_settings.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(3))
         self.pushButton_quit.clicked.connect(self.quit)
-
-
+        self.pushButton_back_tomain.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(2))
 
         # НИЖЕ ПРИ КЛИКЕ НА ИМЯ КОМНАТЫ ПРОИСХОДИТ ЗАГРУЗКА СООБЩЕНИЙ
         self.listWidget_people.clicked.connect(self.loadMSG)
@@ -489,3 +490,5 @@ class UI_ForMain(object):
                                               "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
         self.pushButton_room.setText(_translate("MainWindow", "Отправить"))
         self.pushButton_quit.setText(_translate("MainWindow", "Выйти"))
+        self.label_of_creator.setText(_translate("MainWindow", "The_messenger             |               Nikita Tarasov"))
+
