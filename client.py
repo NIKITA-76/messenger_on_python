@@ -76,12 +76,17 @@ class Ui_MainWindow(ui_client.UI_ForMain):
                 for _, value in data[1].items():
                     self.listWidget_people.addItem(value)
 
+            elif data[0] == "LOADMSG_ADD":
+                data[1].reverse()
+                self.listWidget_msgRoom.insertItems(0, data[1])
+
             elif data[0] == "LOADMSG":
                 if data[1] == "NOMSG":
                     self.listWidget_msgRoom.clear()
                 else:
                     self.listWidget_msgRoom.clear()
                     bankOfMessage = data[1]
+                    bankOfMessage.reverse()
                     print(f"Банк сообщений с сервера --->{bankOfMessage}")
                     self.listWidget_msgRoom.addItems(bankOfMessage)
                     time.sleep(0.01)
@@ -150,15 +155,26 @@ class Ui_MainWindow(ui_client.UI_ForMain):
         except IndexError:
             pass
 
+    def adding_load(self, value_ofScrollBar):
+        if value_ofScrollBar == 0:
+            for IDRoom, nameRoom in self.roomsForLoad[0].items():
+                self.listWidget_title.clear()
+                self.listWidget_title.setText(nameRoom)
+                if self.listWidget_people.currentItem().text() == nameRoom:
+                    ind_start = self.listWidget_msgRoom.count()
+                    msg_room = ["LOADMSG_ADD", IDRoom, ind_start, ]
+                    msg_room = pickle.dumps(msg_room)
+                    self.cl.send_data(msg_room)
+                    break
+
     def loadMSG(self):
         try:
             for IDRoom, nameRoom in self.roomsForLoad[0].items():
                 self.listWidget_title.clear()
                 self.listWidget_title.setText(nameRoom)
-
                 if self.listWidget_people.currentItem().text() == nameRoom:
                     ind_start = self.listWidget_msgRoom.count()
-                    msgRoom = ["LOADMSG", IDRoom, ind_start, ]
+                    msgRoom = ["LOADMSG", IDRoom,]
                     msgRoom = pickle.dumps(msgRoom)
                     self.cl.send_data(msgRoom)
                     break
