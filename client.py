@@ -30,100 +30,78 @@ class Ui_MainWindow(ui_client.UI_ForMain):
         self.can_write = False
         self.roomsForLoad = []
 
-    def get_text(self, shut=None):
+    def get_text(self,):
         # We receive text from the server USING the client (Client)
-        if shut:
-            raise sys.exit()
         while True:
-            try:
+            data = self.cl.recv(2048)
+            data = pickle.loads(data)
+            print(f"Данные от сервера --- >{data}")
+            if data[0] == "USER IS SIGN":  # Login check (Server confirmed login with a message)
+                print("YOU GOT IN")
+                self.can_write = True
+                print(self.roomsForLoad)
+                try:
+                    for item in data[1]:
+                        self.roomsForLoad.append(item)
+                except IndexError:
+                    pass
+                self.nickName = self.LP_RForm.lineEdit.text()
+                ChildWindow.close()
+                self.load()
+                self.pushButton_room.show()
+            elif data[0] == "USER_IS_REG":
 
-                data = self.cl.recv(2048)
-                data = pickle.loads(data)
-                print(f"Данные от сервера --- >{data}")
+                self.LP_RForm.stackedWidget.setCurrentIndex(0)
+            elif data[0] == "HAVE_THIS_USER":
 
-                if data[0] == "USER IS SIGN":  # Login check (Server confirmed login with a message)
+                self.RegForm.label_4.setText("Пользователь с таким Логином уже сущестует")
+            elif data[0] == "USER_IS_NOT_SIGN":
+                self.LP_RForm.label.setText("Неправлиьный логин или пароль")
+                self.LP_RForm.lineEdit.setStyleSheet("border: 1px solid rgb(94, 0, 1);")
+                self.LP_RForm.lineEdit_2.setStyleSheet("border: 1px solid rgb(94, 0, 1);")
+                print("USER_IS_NOT_SIGN")
 
-                    print("YOU GOT IN")
-                    self.can_write = True
-                    print(self.roomsForLoad)
+            elif data[0] == "MSGROOM":
+                if self.listWidget_people.currentItem().text() == data[3]:
+                    self.listWidget_msgRoom.addItem(f"{data[1]}: {' '.join(data[2])}")
+                    time.sleep(0.01)
+                    self.listWidget_msgRoom.verticalScrollBar().setValue(
+                        self.listWidget_msgRoom.verticalScrollBar().maximum())
+
+            elif data[0] == "CRT_ROOM":
+                try:
+                    self.roomsForLoad[0].update(data[1])
+                except IndexError:
+                    self.roomsForLoad.append(data[1])
+                for _, value in data[1].items():
+                    self.listWidget_people.addItem(value)
+
+            elif data[0] == "LOADMSG":
+                if data[1] == "NOMSG":
+                    self.listWidget_msgRoom.clear()
+                else:
+                    self.listWidget_msgRoom.clear()
+                    bankOfMessage = data[1]
+                    print(f"Банк сообщений с сервера --->{bankOfMessage}")
+                    self.listWidget_msgRoom.addItems(bankOfMessage)
+                    time.sleep(0.01)
+                    self.listWidget_msgRoom.verticalScrollBar().setValue(
+                        self.listWidget_msgRoom.verticalScrollBar().maximum())
+
+            elif data[0] == "SEARCH":
+                matchOfPeople = pickle.loads(data[1])
+                self.AddFRNDForm.listWidget.clear()
+                for item in matchOfPeople:
                     try:
-                        for item in data[1]:
-                            self.roomsForLoad.append(item)
-
-                    except IndexError:
-                        pass
-
-                    self.nickName = self.LP_RForm.lineEdit.text()
-                    ChildWindow.close()
-                    self.load()
-                    self.pushButton_room.show()
-
-
-                elif data[0] == "USER_IS_REG":
-                    self.LP_RForm.stackedWidget.setCurrentIndex(0)
-
-                elif data[0] == "HAVE_THIS_USER":
-                    self.RegForm.label_4.setText("Пользователь с таким Логином уже сущестует")
-
-                elif data[0] == "USER_IS_NOT_SIGN":
-                    self.LP_RForm.label.setText("Неправлиьный логин или пароль")
-                    self.LP_RForm.lineEdit.setStyleSheet("border: 1px solid rgb(94, 0, 1);")
-                    self.LP_RForm.lineEdit_2.setStyleSheet("border: 1px solid rgb(94, 0, 1);")
-                    print("USER_IS_NOT_SIGN")
-
-                elif data[0] == "MSGROOM":
-                    if self.listWidget_people.currentItem().text() == data[3]:
-                        self.listWidget_msgRoom.addItem(f"{data[1]}: {' '.join(data[2])}")
-                        time.sleep(0.01)
-                        self.listWidget_msgRoom.verticalScrollBar().setValue(
-                            self.listWidget_msgRoom.verticalScrollBar().maximum())
-
-                elif data[0] == "CRT_ROOM":
-                    try:
-                        self.roomsForLoad[0].update(data[1])
-                    except IndexError:
-                        self.roomsForLoad.append(data[1])
-                    for _, value in data[1].items():
-                        self.listWidget_people.addItem(value)
-
-                elif data[0] == "LOADMSG":
-                    if data[1] == "NOMSG":
-                        self.listWidget_msgRoom.clear()
-                    else:
-
-                        self.listWidget_msgRoom.clear()
-                        bankOfMessage = data[1]
-                        print(f"Банк сообщений с сервера --->{bankOfMessage}")
-                        self.listWidget_msgRoom.addItems(bankOfMessage)
-                        time.sleep(0.01)
-                        self.listWidget_msgRoom.verticalScrollBar().setValue(
-                            self.listWidget_msgRoom.verticalScrollBar().maximum())
-                elif data[0] == "SEARCH":
-
-                    matchOfPeople = pickle.loads(data[1])
-
-                    self.AddFRNDForm.listWidget.clear()
-                    for item in matchOfPeople:
-                        try:
-                            if item != self.nickName and (item not in self.listWidget_people.items()):
-                                self.AddFRNDForm.listWidget.addItem(item)
-                        except TypeError as error:
-                            if item != self.nickName:
-                                self.AddFRNDForm.listWidget.addItem(item)
+                        if item != self.nickName and (item not in self.listWidget_people.items()):
+                            self.AddFRNDForm.listWidget.addItem(item)
+                    except TypeError as error:
+                        if item != self.nickName:
+                            self.AddFRNDForm.listWidget.addItem(item)
 
 
 
-            except EOFError or KeyError:
-                """
-                Curve check to run the program more than once on one pc, 
-                so that one user cannot run the client many times
-                """
 
-                print("EOFError")
-                self.label_countUser.setText("!ВЫ ЗАПУСТИЛИ !")
-                self.pushButton.setEnabled(False)
-
-                input()
 
     def Reg_in(self):
         login_reg = self.LP_RForm.lineEdit_log.text().strip()
@@ -137,7 +115,6 @@ class Ui_MainWindow(ui_client.UI_ForMain):
             self.RegForm.label_4.setText("Пароли не совпадают!")
 
     def Sign_in(self):  # ChildWindow
-        print("assdasdasdasdasdasd")
         login = self.LP_RForm.lineEdit.text()
         password = self.LP_RForm.lineEdit_2.text()
 
@@ -168,21 +145,10 @@ class Ui_MainWindow(ui_client.UI_ForMain):
 
     def load(self):
         try:
-
-
             for item in self.roomsForLoad[0].values():
                 self.listWidget_people.addItem(item)
         except IndexError:
             pass
-
-
-
-    def searchPeople(self):
-        self.AddFRNDWindow.show()
-        if self.AddFRNDForm.lineEdit.text().strip() != "":
-            men = ["SEARCH", self.AddFRNDForm.lineEdit.text()]
-            men = pickle.dumps(men)
-            self.cl.send_data(men)
 
     def loadMSG(self):
         try:
@@ -191,13 +157,20 @@ class Ui_MainWindow(ui_client.UI_ForMain):
                 self.listWidget_title.setText(nameRoom)
 
                 if self.listWidget_people.currentItem().text() == nameRoom:
-                    msgRoom = ["LOADMSG", IDRoom]
-
+                    ind_start = self.listWidget_msgRoom.count()
+                    msgRoom = ["LOADMSG", IDRoom, ind_start, ]
                     msgRoom = pickle.dumps(msgRoom)
                     self.cl.send_data(msgRoom)
                     break
         except IndexError:
             print("IndexError IN loadMSG")
+
+    def searchPeople(self):
+        self.AddFRNDWindow.show()
+        if self.AddFRNDForm.lineEdit.text().strip() != "":
+            men = ["SEARCH", self.AddFRNDForm.lineEdit.text()]
+            men = pickle.dumps(men)
+            self.cl.send_data(men)
 
     def roomMessage(self):
 
