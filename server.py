@@ -3,8 +3,6 @@ import socket
 import threading
 import logging
 from init_data import Data
-from configparser import ConfigParser
-
 
 class Server(socket.socket):
     def __init__(self):
@@ -21,7 +19,7 @@ class Server(socket.socket):
         self.logger_accept.setLevel("ERROR")
         self.create_room()
 
-    def listen_socket(self, ip_user, socket_user, ):  # Accept text from client
+    def listen_socket(self, ip_user, socket_user,):  # Accept text from client
 
         try:
             while True:
@@ -43,6 +41,8 @@ class Server(socket.socket):
                     self.search_people(socket_user)
                 elif self.signal[0] == "CRT_ROOM":
                     self.create_room_JSON()
+                elif self.signal[0] == "LOADMSG_ADD":
+                    self.add_load_MSG_for_client(socket_user, self.signal[2])
                 elif self.signal[0] == "LOADMSG":
                     self.load_MSG_for_client(socket_user)
                 elif self.signal[0] == "USER_OUT":
@@ -186,23 +186,47 @@ class Server(socket.socket):
 
         print("------------КОНЕЦ КОМНАТЫ-------------")
 
-    def load_MSG_for_client(self, user):
+    def load_MSG_for_client(self, user, ):
+        cut_bank_of_messg = []
+        bank_of_mess = self.data.DB.find_one({"_id": "MESSAGE"}, {"_id": 0})[self.signal[1]]
+        bank_of_mess.reverse()
         try:
-            if not self.data.DB.find_one({"_id": "MESSAGE"}, {"_id": 0})[self.signal[1]]:
+            if not bank_of_mess:
                 for_load_MSG = pickle.dumps(["LOADMSG", "NOMSG"])
                 self.logger_package_MSG.info(f"{['LOADMSG', 'NOMSG']}")
                 user.send(for_load_MSG)
-
             else:
-                self.logger_package_MSG.info(
-                    f"{['LOADMSG', self.data.DB.find_one({'_id': 'MESSAGE'}, {'_id': 0})[self.signal[1]]]}")
+                print(bank_of_mess)
+                for i in bank_of_mess:
+                    cut_bank_of_messg.append(i)
+                    if len(cut_bank_of_messg) == 50:
+                        break
+                print(f"1l{cut_bank_of_messg}")
                 for_load_MSG = pickle.dumps(
-                    ["LOADMSG", self.data.DB.find_one({'_id': 'MESSAGE'}, {'_id': 0})[self.signal[1]]])
+                    ["LOADMSG", cut_bank_of_messg])
                 user.send(for_load_MSG)
 
-        except KeyError as error:
 
+
+        except KeyError as error:
             self.data.DB.find_one({"_id": "MESSAGE"}, {"_id": 0})[self.signal[1]] = []
+
+    def add_load_MSG_for_client(self, user, index_of_start):
+        print("dddddddddddddddddddd")
+        print(f"index_of_start -- {index_of_start}")
+        bank_of_mess = self.data.DB.find_one({"_id": "MESSAGE"}, {"_id": 0})[self.signal[1]]
+        cut_bank_of_messg = []
+        index_of_end = len(bank_of_mess) - index_of_start
+        print(f"index_of_end -- {index_of_end}")
+        for i in reversed(range(index_of_end)):
+            cut_bank_of_messg.append(bank_of_mess[i])
+            if len(cut_bank_of_messg) == 50:
+                break
+        print(f"cut_bank_of_messg -- {cut_bank_of_messg}")
+        for_load_MSG = pickle.dumps(["LOADMSG_ADD", cut_bank_of_messg])
+        user.send(for_load_MSG)
+
+
 
     def search_people(self, user_socket):
         users_in_JSON = self.data.DB.find_one({'_id': 'USERS'}, {'_id': 0})
