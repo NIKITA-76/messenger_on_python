@@ -9,11 +9,8 @@ from configparser import ConfigParser
 class Server(socket.socket):
     def __init__(self):
         super().__init__(socket.AF_INET, socket.SOCK_STREAM)
-        configfile = "config.ini"
-        config = ConfigParser()
-        config.read(configfile)
         self.data = Data()
-        self.bind((config["server"]["ip"], int(config["server"]["port"])))
+        self.bind((self.data.config["server"]["ip"], int(self.data.config["server"]["port"])))
         self.listen()
         logging.basicConfig(level="INFO")
         self.logger_login = logging.getLogger("log_in")
