@@ -2,8 +2,7 @@ import pickle
 import socket
 import threading
 import logging
-
-from pymongo import MongoClient
+from init_data import Data
 from configparser import ConfigParser
 
 
@@ -13,12 +12,9 @@ class Server(socket.socket):
         configfile = "config.ini"
         config = ConfigParser()
         config.read(configfile)
-        client = MongoClient(config["database"]["ip"], int(config["database"]["port"]))
-        collect = client["Messanger"]
-        self.DB = collect["msgr"]
+        self.data = Data()
         self.bind((config["server"]["ip"], int(config["server"]["port"])))
         self.listen()
-
         logging.basicConfig(level="INFO")
         self.logger_login = logging.getLogger("log_in")
         self.logger_package_MSG = logging.getLogger("load_MSG_for_client")
@@ -26,52 +22,43 @@ class Server(socket.socket):
         self.logger_listen_socket = logging.getLogger("listen_socket")
         self.logger_accept.setLevel("DEBUG")
         self.logger_accept.setLevel("ERROR")
-        self.userAndObject = {}
-        self.rooms = {}
-
-        print("Server Listen")
-        self.users = []  # List of all users
-        self.users_ip = []  # List of all users-ip
-        self.name_withIp = {}
-        self.idUser = self.DB.find_one({"_id": "COUNT"})["USERS"]
-        self.idRoom = self.DB.find_one({"_id": "COUNT"})["ROOMS"]
         self.create_room()
 
     def listen_socket(self, ip_user, socket_user, ):  # Accept text from client
 
         try:
             while True:
-                self.data_s = socket_user.recv(2048)  # Accepting a message
-                self.data_s = pickle.loads(self.data_s)
-                print(f"ДАННЫЕ ОТ КЛИЕНТА --->{self.data_s}")
-                if self.data_s[0] == "TRY_TO_ENTRY":
-                    self.log_in(self.data_s, socket_user)
-                    print(f"self.name_withIp {self.name_withIp}")
-                    print(f"self.users_ip[0] {self.users_ip}")
-                    self.name_withIp[self.data_s[1]] = self.users_ip[0]
+                self.signal = socket_user.recv(2048)  # Accepting a message
+                self.signal = pickle.loads(self.signal)
+                print(f"ДАННЫЕ ОТ КЛИЕНТА --->{self.signal}")
+                if self.signal[0] == "TRY_TO_ENTRY":
+                    self.log_in(self.signal, socket_user)
+                    print(f"self.name_withIp {self.data.name_withIp}")
+                    print(f"self.users_ip[0] {self.data.users_ip}")
+                    self.data.name_withIp[self.signal[1]] = self.data.users_ip[0]
                     self.recreating_room_from_JSON()
-                elif self.data_s[0] == "TRY_TO_REG":
-                    self.registration(self.data_s, socket_user)
-                elif self.data_s[0] == "MSGROOM":
+                elif self.signal[0] == "TRY_TO_REG":
+                    self.registration(self.signal, socket_user)
+                elif self.signal[0] == "MSGROOM":
                     self.private_MSG()
-                elif self.data_s[0] == "SEARCH":
+                elif self.signal[0] == "SEARCH":
                     print(socket_user)
                     self.search_people(socket_user)
-                elif self.data_s[0] == "CRT_ROOM":
+                elif self.signal[0] == "CRT_ROOM":
                     self.create_room_JSON()
-                elif self.data_s[0] == "LOADMSG":
+                elif self.signal[0] == "LOADMSG":
                     self.load_MSG_for_client(socket_user)
-                elif self.data_s[0] == "USER_OUT":
+                elif self.signal[0] == "USER_OUT":
                     """
                      Удаление пользователя из комнаты ЛС, так как при подключении пользователя меняеться его 'fd',
                      а в комнате все еще старый объект со старым 'fd'
                     
                     """
-                    for roomID, roomName in self.DB.find_one({'_id': 'USERS'}, {'_id': 0})[self.data_s[1]]["ROOMS"].items():
+                    for roomID, roomName in self.data.DB.find_one({'_id': 'USERS'}, {'_id': 0})[self.signal[1]]["ROOMS"].items():
                         try:
-                            self.rooms[roomID][0].pop(self.data_s[1])
-                            self.userAndObject.pop(self.data_s[1])
-                            self.users.remove(socket_user)
+                            self.data.rooms[roomID][0].pop(self.signal[1])
+                            self.data.userAndObject.pop(self.signal[1])
+                            self.data.users.remove(socket_user)
                         except:
                             pass
         except EOFError as error:
@@ -79,13 +66,13 @@ class Server(socket.socket):
             pass
 
     def registration(self, data, user):
-        self.idUser += 1
-        if data[1] not in self.DB.find_one({'_id': 'USERS'}, {'_id': 0}):
-            self.DB.update_one({"_id": "USERS"}, {"$set": {data[1]: {"password": data[2],
-                                                                     "ID": self.idUser,  # Пока нигде не используется
+        self.data.idUser += 1
+        if data[1] not in self.data.DB.find_one({'_id': 'USERS'}, {'_id': 0}):
+            self.data.DB.update_one({"_id": "USERS"}, {"$set": {data[1]: {"password": data[2],
+                                                                     "ID": self.data.idUser,  # Пока нигде не используется
                                                                      "ROOMS": {}
-                                                                     }}})
-            self.DB.find_one({'_id': 'COUNT'}, {'_id': 0})["USERS"] = self.idUser
+                                                                       }}})
+            self.data.DB.find_one({'_id': 'COUNT'}, {'_id': 0})["USERS"] = self.data.idUser
             print(f"ПОЛЬЗОВАТЕЛЬ ЗАРЕГИСТРИРОВАН ")
             user.send(pickle.dumps(["USER_IS_REG"]))
 
@@ -96,22 +83,22 @@ class Server(socket.socket):
     def log_in(self, data,
                socket_user):
         try:
-            if self.DB.find_one({"_id": "USERS"})[data[1]]["password"] == data[2] and self.data_s[1]:
+            if self.data.DB.find_one({"_id": "USERS"})[data[1]]["password"] == data[2] and self.signal[1]:
 
-                keys = self.DB.find_one({"_id": "USERS"})[data[1]]["ROOMS"].keys()
+                keys = self.data.DB.find_one({"_id": "USERS"})[data[1]]["ROOMS"].keys()
                 list_rooms = []
                 if not keys:
                     sign_in = ["USER IS SIGN"]
-                    self.userAndObject[self.data_s[1]] = socket_user
+                    self.data.userAndObject[self.signal[1]] = socket_user
                 else:
 
-                    list_rooms.append(self.DB.find_one({"_id": "USERS"})[data[1]]["ROOMS"])
+                    list_rooms.append(self.data.DB.find_one({"_id": "USERS"})[data[1]]["ROOMS"])
 
                     sign_in = ["USER IS SIGN", list_rooms]
-                    self.userAndObject[self.data_s[1]] = socket_user
+                    self.data.userAndObject[self.signal[1]] = socket_user
 
                 self.logger_login.info("USER_IS_SIGN")
-                self.userAndObject[self.data_s[1]] = socket_user
+                self.data.userAndObject[self.signal[1]] = socket_user
                 socket_user.send(pickle.dumps(sign_in))
 
             else:
@@ -125,21 +112,21 @@ class Server(socket.socket):
 
     def create_room_JSON(self):
         i = 1
-        self.idRoom = self.idRoom + 1
+        self.idRoom = self.data.idRoom + 1
         list_users = []
-        while i < len(self.data_s):
-            list_users.append(self.data_s[i])
-            self.DB.update_one({'_id': 'ROOMS'}, {'$set': {str(self.idRoom) + "R": [
-                {"USERS": list_users, "NAME": self.data_s[2]}]}})
+        while i < len(self.signal):
+            list_users.append(self.signal[i])
+            self.data.DB.update_one({'_id': 'ROOMS'}, {'$set': {str(self.idRoom) + "R": [
+                {"USERS": list_users, "NAME": self.signal[2]}]}})
             i += 1
-        self.DB.update_one({'_id': 'COUNT'}, {'$set': {'ROOMS': self.idRoom}})
+        self.data.DB.update_one({'_id': 'COUNT'}, {'$set': {'ROOMS': self.idRoom}})
 
-        self.DB.update_one({'_id': 'USERS'},
-                           [{'$set': {f'{self.data_s[1]}.ROOMS': {str(self.idRoom) + "R": self.data_s[2]}}}])
+        self.data.DB.update_one({'_id': 'USERS'},
+                             [{'$set': {f'{self.signal[1]}.ROOMS': {str(self.idRoom) + "R": self.signal[2]}}}])
 
-        self.DB.update_one({'_id': 'USERS'},
-                           [{'$set': {f'{self.data_s[2]}.ROOMS': {str(self.idRoom) + "R": self.data_s[1]}}}])
-        self.DB.update_one({'_id': 'MESSAGE'}, {'$set': {str(self.idRoom) + 'R': []}})
+        self.data.DB.update_one({'_id': 'USERS'},
+                             [{'$set': {f'{self.signal[2]}.ROOMS': {str(self.idRoom) + "R": self.signal[1]}}}])
+        self.data.DB.update_one({'_id': 'MESSAGE'}, {'$set': {str(self.idRoom) + 'R': []}})
 
         print("ROOM IS CREATE")
 
@@ -147,85 +134,85 @@ class Server(socket.socket):
         self.create_room_now()
 
     def create_room_now(self):
-        name_of_rooms = self.DB.find_one({"_id": "ROOMS"},
-                                         {"_id": 0}).keys()  # Создание комнаты, без необходимости перезагрузки сервера
+        name_of_rooms = self.data.DB.find_one({"_id": "ROOMS"},
+                                           {"_id": 0}).keys()  # Создание комнаты, без необходимости перезагрузки сервера
         for name in name_of_rooms:
-            for usersInRoom in self.DB.find_one({"_id": "ROOMS"}, {"_id": 0})[name][0]["USERS"]:
+            for usersInRoom in self.data.DB.find_one({"_id": "ROOMS"}, {"_id": 0})[name][0]["USERS"]:
                 try:
-                    if usersInRoom not in self.rooms[name][0]:  # Условие, что бы не дублировать в комнаты
-                        self.rooms[name][0].update({usersInRoom: self.userAndObject[usersInRoom]})
+                    if usersInRoom not in self.data.rooms[name][0]:  # Условие, что бы не дублировать в комнаты
+                        self.data.rooms[name][0].update({usersInRoom: self.data.userAndObject[usersInRoom]})
                 except Exception:
                     pass
 
         try:
 
-            self.userAndObject[self.data_s[1]].send(
-                pickle.dumps(["CRT_ROOM", {str(self.idRoom) + "R": self.data_s[2]}]))
-            self.userAndObject[self.data_s[2]].send(
-                pickle.dumps(["CRT_ROOM", {str(self.idRoom) + "R": self.data_s[1]}]))
-            print(["CRT_ROOM", {str(self.idRoom) + "R": self.data_s[1]}])
+            self.data.userAndObject[self.signal[1]].send(
+                pickle.dumps(["CRT_ROOM", {str(self.idRoom) + "R": self.signal[2]}]))
+            self.data.userAndObject[self.signal[2]].send(
+                pickle.dumps(["CRT_ROOM", {str(self.idRoom) + "R": self.signal[1]}]))
+            print(["CRT_ROOM", {str(self.idRoom) + "R": self.signal[1]}])
         except KeyError:
-            self.userAndObject[self.data_s[2]].send(
-                pickle.dumps(["CRT_ROOM", {str(self.idRoom) + "R": self.data_s[1]}]))
+            self.data.userAndObject[self.signal[2]].send(
+                pickle.dumps(["CRT_ROOM", {str(self.idRoom) + "R": self.signal[1]}]))
 
     def create_room(self):
-        name_of_rooms = self.DB.find_one({"_id": "ROOMS"}, {"_id": 0}).keys()
+        name_of_rooms = self.data.DB.find_one({"_id": "ROOMS"}, {"_id": 0}).keys()
 
         for name in name_of_rooms:
-            self.rooms[name] = [{}]
-        print(self.rooms)
+            self.data.rooms[name] = [{}]
+        print(self.data.rooms)
 
     def recreating_room_from_JSON(self):
-        name_of_rooms = self.DB.find_one({"_id": "ROOMS"}, {"_id": 0}).keys()  # Воссоздание комнат из JSON
+        name_of_rooms = self.data.DB.find_one({"_id": "ROOMS"}, {"_id": 0}).keys()  # Воссоздание комнат из JSON
         for name in name_of_rooms:
-            for usersInRoom in self.DB.find_one({"_id": "ROOMS"}, {"_id": 0})[name][0]["USERS"]:
+            for usersInRoom in self.data.DB.find_one({"_id": "ROOMS"}, {"_id": 0})[name][0]["USERS"]:
                 try:
-                    if usersInRoom not in self.rooms[name][0]:  # Условие, что бы не дублировать в комнаты
-                        self.rooms[name][0].update({usersInRoom: self.userAndObject[usersInRoom]})
+                    if usersInRoom not in self.data.rooms[name][0]:  # Условие, что бы не дублировать в комнаты
+                        self.data.rooms[name][0].update({usersInRoom: self.data.userAndObject[usersInRoom]})
                 except KeyError:
                     pass
 
     def private_MSG(self):
         print("------------КОМНАТА-------------")
-        for roomID, roomName in self.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.data_s[2]]["ROOMS"].items():
+        for roomID, roomName in self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.signal[2]]["ROOMS"].items():
 
-            if roomName == self.data_s[3]:
+            if roomName == self.signal[3]:
                 print(f"roomID, roomName --- >{roomID, roomName}")
-                print(f"self.rooms[roomID][0] --- >{self.rooms[roomID][0]}")
+                print(f"self.rooms[roomID][0] --- >{self.data.rooms[roomID][0]}")
 
-                for userInRoom in self.rooms[roomID][0].values():
+                for userInRoom in self.data.rooms[roomID][0].values():
                     print(f"userInRoom --- >{userInRoom}")
-                    userInRoom.send(pickle.dumps(["MSGROOM", self.data_s[2], self.data_s[-1], self.data_s[3]]))
-                    print(f"FOR ROOM IN CL --- >{['MSGROOM', self.data_s[2], self.data_s[-1], self.data_s[3]]}")
+                    userInRoom.send(pickle.dumps(["MSGROOM", self.signal[2], self.signal[-1], self.signal[3]]))
+                    print(f"FOR ROOM IN CL --- >{['MSGROOM', self.signal[2], self.signal[-1], self.signal[3]]}")
 
-        self.DB.update_one({"_id": "MESSAGE"}, {"$push": {self.data_s[1]: f"{self.data_s[2]}: {self.data_s[-1]}"}})
+        self.data.DB.update_one({"_id": "MESSAGE"}, {"$push": {self.signal[1]: f"{self.signal[2]}: {self.signal[-1]}"}})
 
         print("------------КОНЕЦ КОМНАТЫ-------------")
 
     def load_MSG_for_client(self, user):
         try:
-            if not self.DB.find_one({"_id": "MESSAGE"}, {"_id": 0})[self.data_s[1]]:
+            if not self.data.DB.find_one({"_id": "MESSAGE"}, {"_id": 0})[self.signal[1]]:
                 for_load_MSG = pickle.dumps(["LOADMSG", "NOMSG"])
                 self.logger_package_MSG.info(f"{['LOADMSG', 'NOMSG']}")
                 user.send(for_load_MSG)
 
             else:
                 self.logger_package_MSG.info(
-                    f"{['LOADMSG', self.DB.find_one({'_id': 'MESSAGE'}, {'_id': 0})[self.data_s[1]]]}")
+                    f"{['LOADMSG', self.data.DB.find_one({'_id': 'MESSAGE'}, {'_id': 0})[self.signal[1]]]}")
                 for_load_MSG = pickle.dumps(
-                    ["LOADMSG", self.DB.find_one({'_id': 'MESSAGE'}, {'_id': 0})[self.data_s[1]]])
+                    ["LOADMSG", self.data.DB.find_one({'_id': 'MESSAGE'}, {'_id': 0})[self.signal[1]]])
                 user.send(for_load_MSG)
 
         except KeyError as error:
 
-            self.DB.find_one({"_id": "MESSAGE"}, {"_id": 0})[self.data_s[1]] = []
+            self.data.DB.find_one({"_id": "MESSAGE"}, {"_id": 0})[self.signal[1]] = []
 
     def search_people(self, user_socket):
-        users_in_JSON = self.DB.find_one({'_id': 'USERS'}, {'_id': 0})
+        users_in_JSON = self.data.DB.find_one({'_id': 'USERS'}, {'_id': 0})
         user_of_search = []
 
         for user in users_in_JSON:
-            if self.data_s[1] in user:
+            if self.signal[1] in user:
                 user_of_search.append(user)
 
         user_of_search = pickle.dumps(["SEARCH", pickle.dumps(user_of_search)])
@@ -242,13 +229,13 @@ class Server(socket.socket):
             """
             Checking that the user could not run many clients on one pc
             """
-            self.users_ip.append(address[0])
+            self.data.users_ip.append(address[0])
             '''
             accept() - Ожидает нового пользователя, и пока новый пользователь не придет
             код дальше не пойдет
             '''
             print("Users accept!" + address[0])  # Вывод айпи нового ползователя
-            self.users.append(users_socket)  # Добавление нового пользователя в список
+            self.data.users.append(users_socket)  # Добавление нового пользователя в список
             threading.Thread(target=self.listen_socket, args=(address[0], users_socket)).start()
             '''
             Старт потока для принятия сообщений, иначе из-за accept() код дальше не идет
