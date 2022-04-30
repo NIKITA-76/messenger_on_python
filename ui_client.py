@@ -451,6 +451,8 @@ class UI_ForMain(object):
         # НИЖЕ КНОПКА ОТПРАВКИ СООБЩЕНИЯ
         self.pushButton_room.clicked.connect(self.roomMessage)
 
+        self.listWidget_msgRoom.verticalScrollBar().valueChanged.connect(self.adding_load)
+
         # НИЖЕ КНОПКИ С ОКНАМИ НАСТРОЙКИ
         self.pushButton_settings.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(3))
         self.pushButton_quit.clicked.connect(self.quit)
