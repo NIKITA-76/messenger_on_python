@@ -206,13 +206,10 @@ class Server(socket.socket):
                     ["LOADMSG", cut_bank_of_messg])
                 user.send(for_load_MSG)
 
-
-
         except KeyError as error:
             self.data.DB.find_one({"_id": "MESSAGE"}, {"_id": 0})[self.signal[1]] = []
 
     def add_load_MSG_for_client(self, user, index_of_start):
-        print("dddddddddddddddddddd")
         print(f"index_of_start -- {index_of_start}")
         bank_of_mess = self.data.DB.find_one({"_id": "MESSAGE"}, {"_id": 0})[self.signal[1]]
         cut_bank_of_messg = []
@@ -222,9 +219,10 @@ class Server(socket.socket):
             cut_bank_of_messg.append(bank_of_mess[i])
             if len(cut_bank_of_messg) == 50:
                 break
-        print(f"cut_bank_of_messg -- {cut_bank_of_messg}")
-        for_load_MSG = pickle.dumps(["LOADMSG_ADD", cut_bank_of_messg])
-        user.send(for_load_MSG)
+        if cut_bank_of_messg:
+            print(f"cut_bank_of_messg -- {cut_bank_of_messg}")
+            for_load_MSG = pickle.dumps(["LOADMSG_ADD", cut_bank_of_messg])
+            user.send(for_load_MSG)
 
 
 

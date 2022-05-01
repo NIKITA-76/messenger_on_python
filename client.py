@@ -48,7 +48,7 @@ class Ui_MainWindow(ui_client.UI_ForMain):
                 self.nickName = self.LP_RForm.lineEdit.text()
                 ChildWindow.close()
                 self.load()
-                self.pushButton_room.show()
+
             elif data[0] == "USER_IS_REG":
 
                 self.LP_RForm.stackedWidget.setCurrentIndex(0)
@@ -78,6 +78,7 @@ class Ui_MainWindow(ui_client.UI_ForMain):
 
             elif data[0] == "LOADMSG_ADD":
                 data[1].reverse()
+                self.listWidget_msgRoom.verticalScrollBar().setValue(3)
                 self.listWidget_msgRoom.insertItems(0, data[1])
 
             elif data[0] == "LOADMSG":
@@ -146,6 +147,7 @@ class Ui_MainWindow(ui_client.UI_ForMain):
         self.roomsForLoad.clear()
         self.listWidget_people.clear()
         self.stackedWidget.setCurrentIndex(2)
+        self.pushButton_room.hide()
         ChildWindow.show()
 
     def load(self):
@@ -156,25 +158,28 @@ class Ui_MainWindow(ui_client.UI_ForMain):
             pass
 
     def adding_load(self, value_ofScrollBar):
-        if value_ofScrollBar == 0:
-            for IDRoom, nameRoom in self.roomsForLoad[0].items():
-                self.listWidget_title.clear()
-                self.listWidget_title.setText(nameRoom)
-                if self.listWidget_people.currentItem().text() == nameRoom:
-                    ind_start = self.listWidget_msgRoom.count()
-                    msg_room = ["LOADMSG_ADD", IDRoom, ind_start, ]
-                    msg_room = pickle.dumps(msg_room)
-                    self.cl.send_data(msg_room)
-                    break
+        try:
+            if value_ofScrollBar == 0:
+                for IDRoom, nameRoom in self.roomsForLoad[0].items():
+                    self.listWidget_title.clear()
+                    self.listWidget_title.setText(nameRoom)
+                    if self.listWidget_people.currentItem().text() == nameRoom:
+                        ind_start = self.listWidget_msgRoom.count()
+                        msg_room = ["LOADMSG_ADD", IDRoom, ind_start, ]
+                        msg_room = pickle.dumps(msg_room)
+                        self.cl.send_data(msg_room)
+                        break
+        except IndexError as error:
+            print(f"{error}, value_ofScrollBar --> {value_ofScrollBar}")
 
     def loadMSG(self):
+        self.pushButton_room.show()
         try:
             for IDRoom, nameRoom in self.roomsForLoad[0].items():
                 self.listWidget_title.clear()
                 self.listWidget_title.setText(nameRoom)
                 if self.listWidget_people.currentItem().text() == nameRoom:
-                    ind_start = self.listWidget_msgRoom.count()
-                    msgRoom = ["LOADMSG", IDRoom,]
+                    msgRoom = ["LOADMSG", IDRoom, ]
                     msgRoom = pickle.dumps(msgRoom)
                     self.cl.send_data(msgRoom)
                     break
