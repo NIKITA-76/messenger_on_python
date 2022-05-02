@@ -464,7 +464,8 @@ class UI_ForMain(object):
         self.stackedWidget.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         self.LP_RForm.pushButton_back.clicked.connect(lambda: self.LP_RForm.stackedWidget.setCurrentIndex(0))
-
+        self.pushButton_menu.hide()
+        self.pushButton_settings.hide()
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))

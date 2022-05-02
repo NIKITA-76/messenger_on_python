@@ -6,7 +6,7 @@ import threading
 import ui_client
 
 from configparser import ConfigParser
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtGui, QtCore
 
 
 class Client(socket.socket):
@@ -47,6 +47,9 @@ class Ui_MainWindow(ui_client.UI_ForMain):
                     pass
                 self.nickName = self.LP_RForm.lineEdit.text()
                 ChildWindow.close()
+                self.pushButton_room.show()
+                self.pushButton_menu.show()
+                self.pushButton_settings.show()
                 self.load()
 
             elif data[0] == "USER_IS_REG":
@@ -148,6 +151,8 @@ class Ui_MainWindow(ui_client.UI_ForMain):
         self.listWidget_people.clear()
         self.stackedWidget.setCurrentIndex(2)
         self.pushButton_room.hide()
+        self.pushButton_menu.hide()
+        self.pushButton_settings.hide()
         ChildWindow.show()
 
     def load(self):
@@ -220,5 +225,7 @@ if __name__ == "__main__":
     ui.setupUi(MainWindow, ChildWindow)
     MainWindow.show()
     ChildWindow.show()
+    ChildWindow.setWindowState(QtCore.Qt.WindowActive)
+    print(ChildWindow.windowState())
     app.lastWindowClosed.connect(ui.shotdown)
     sys.exit(app.exec_())
