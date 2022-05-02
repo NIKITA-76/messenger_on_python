@@ -1,8 +1,16 @@
-# messenger_on_python
-Server and client.
+
+# The_Messenger
+Server and client with database on MongoDB.
 
 This program was created for the thesis.
 This project is still under development
+
+![App Screenshot](https://sun9-3.userapi.com/s/v1/ig2/uYBbx-Q9o6LlAaqe26q7qgzLvxxD5Mf9aNteg_crOW-5gnsK2NOW7744CthN03n3NYkN4r9YUF-82SDBZwBqEmwL.jpg?size=1253x705&quality=96&type=album)
+
+At the moment, the messenger works on Windows and Linux (Mac os has not been tested)
+![App Screenshot](https://sun9-43.userapi.com/s/v1/ig2/mjTbCIdwKysVWg9O9prz3n2OfFyor-_fsMizEp0ZNJsMP0PEzl8ugQOyInmQUX4mVDp_j1dYNZN04mfBdQAxrG9p.jpg?size=815x507&quality=96&type=album)
+
+
 
 ## Libraries and Modules
 
@@ -14,6 +22,7 @@ Libraries/Modules used in this project
 | Pickle            | https://docs.python.org/3/library/pickle.html |
 | Socket            | https://docs.python.org/3/library/socket.html |
 | Json              | https://docs.python.org/3/library/json.html   |
+|PyMongo            | https://pymongo.readthedocs.io/en/stable/     |
 
 
 # Data Base
@@ -24,3 +33,4 @@ In this project, it was decided to use a non-relational database - MongoDB
 ![App Screenshot](https://sun9-29.userapi.com/s/v1/ig2/84aKiLz0ZL184JxFelbiHa_yUqMHf5W6FbZzckKpCwDvnhe2fBJOv5IH5gUTdZTLrls5PmN0Am9feit_XX5E85z_.jpg?size=1861x896&quality=96&type=album)
 
  - [MongoDB](https://www.mongodb.com/)
+
