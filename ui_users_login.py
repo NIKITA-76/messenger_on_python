@@ -110,4 +110,3 @@ class Ui_LandP_Reg(object):
         self.pushButton_ready.setText(_translate("MainWindow", "Готово"))
         self.pushButton_back.setText(_translate("MainWindow", "Отмена"))
         self.label_pass.setText(_translate("MainWindow", "Пароль"))
-
