@@ -2,8 +2,11 @@
 # The_Messenger
 Server and client with database on MongoDB.
 
-This program was created for the thesis.
-This project is still under development
+Corporate messenger for communication between employees in a closed network.
+
+This program is positioned as a way of communication between employees, as well as customer settings for them. This software will include an interface for the client, as well as an interface for configuring and working with the server.
+
+**This project is still under development**
 
 ![App Screenshot](https://sun9-3.userapi.com/s/v1/ig2/uYBbx-Q9o6LlAaqe26q7qgzLvxxD5Mf9aNteg_crOW-5gnsK2NOW7744CthN03n3NYkN4r9YUF-82SDBZwBqEmwL.jpg?size=1253x705&quality=96&type=album)
 
@@ -33,4 +36,3 @@ In this project, it was decided to use a non-relational database - MongoDB
 ![App Screenshot](https://sun9-29.userapi.com/s/v1/ig2/84aKiLz0ZL184JxFelbiHa_yUqMHf5W6FbZzckKpCwDvnhe2fBJOv5IH5gUTdZTLrls5PmN0Am9feit_XX5E85z_.jpg?size=1861x896&quality=96&type=album)
 
  - [MongoDB](https://www.mongodb.com/)
-
