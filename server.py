@@ -4,6 +4,7 @@ import threading
 import logging
 from init_data import Data
 
+
 class Server(socket.socket):
     def __init__(self):
         super().__init__(socket.AF_INET, socket.SOCK_STREAM)
@@ -19,7 +20,7 @@ class Server(socket.socket):
         self.logger_accept.setLevel("ERROR")
         self.create_room()
 
-    def listen_socket(self, ip_user, socket_user,):  # Accept text from client
+    def listen_socket(self, ip_user, socket_user, ):  # Accept text from client
 
         try:
             while True:
@@ -51,7 +52,8 @@ class Server(socket.socket):
                      а в комнате все еще старый объект со старым 'fd'
                     
                     """
-                    for roomID, roomName in self.data.DB.find_one({'_id': 'USERS'}, {'_id': 0})[self.signal[1]]["ROOMS"].items():
+                    for roomID, roomName in self.data.DB.find_one({'_id': 'USERS'}, {'_id': 0})[self.signal[1]][
+                        "ROOMS"].items():
                         try:
                             self.data.rooms[roomID][0].pop(self.signal[1])
                             self.data.userAndObject.pop(self.signal[1])
@@ -66,9 +68,10 @@ class Server(socket.socket):
         self.data.idUser += 1
         if data[1] not in self.data.DB.find_one({'_id': 'USERS'}, {'_id': 0}):
             self.data.DB.update_one({"_id": "USERS"}, {"$set": {data[1]: {"password": data[2],
-                                                                     "ID": self.data.idUser,  # Пока нигде не используется
-                                                                     "ROOMS": {}
-                                                                       }}})
+                                                                          "ID": self.data.idUser,
+                                                                          # Пока нигде не используется
+                                                                          "ROOMS": {}
+                                                                          }}})
             self.data.DB.find_one({'_id': 'COUNT'}, {'_id': 0})["USERS"] = self.data.idUser
             print(f"ПОЛЬЗОВАТЕЛЬ ЗАРЕГИСТРИРОВАН ")
             user.send(pickle.dumps(["USER_IS_REG"]))
@@ -112,17 +115,19 @@ class Server(socket.socket):
         self.idRoom = self.data.idRoom + 1
         list_users = []
         while i < len(self.signal):
+            i += 1
             list_users.append(self.signal[i])
             self.data.DB.update_one({'_id': 'ROOMS'}, {'$set': {str(self.idRoom) + "R": [
                 {"USERS": list_users, "NAME": self.signal[2]}]}})
-            i += 1
+
         self.data.DB.update_one({'_id': 'COUNT'}, {'$set': {'ROOMS': self.idRoom}})
 
         self.data.DB.update_one({'_id': 'USERS'},
-                             [{'$set': {f'{self.signal[1]}.ROOMS': {str(self.idRoom) + "R": self.signal[2]}}}])
+                                [{'$set': {f'{self.signal[1]}.ROOMS': {str(self.idRoom) + "R": self.signal[2]}}}])
 
         self.data.DB.update_one({'_id': 'USERS'},
-                             [{'$set': {f'{self.signal[2]}.ROOMS': {str(self.idRoom) + "R": self.signal[1]}}}])
+                                [{'$set': {f'{self.signal[2]}.ROOMS': {str(self.idRoom) + "R": self.signal[1]}}}])
+
         self.data.DB.update_one({'_id': 'MESSAGE'}, {'$set': {str(self.idRoom) + 'R': []}})
 
         print("ROOM IS CREATE")
@@ -132,7 +137,7 @@ class Server(socket.socket):
 
     def create_room_now(self):
         name_of_rooms = self.data.DB.find_one({"_id": "ROOMS"},
-                                           {"_id": 0}).keys()  # Создание комнаты, без необходимости перезагрузки сервера
+                                              {"_id": 0}).keys()  # Создание комнаты, без необходимости перезагрузки сервера
         for name in name_of_rooms:
             for usersInRoom in self.data.DB.find_one({"_id": "ROOMS"}, {"_id": 0})[name][0]["USERS"]:
                 try:
@@ -220,8 +225,6 @@ class Server(socket.socket):
         if cut_bank_of_messg:
             for_load_MSG = pickle.dumps(["LOADMSG_ADD", cut_bank_of_messg])
             user.send(for_load_MSG)
-
-
 
     def search_people(self, user_socket):
         users_in_JSON = self.data.DB.find_one({'_id': 'USERS'}, {'_id': 0})
