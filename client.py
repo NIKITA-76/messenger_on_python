@@ -30,7 +30,7 @@ class Ui_MainWindow(ui_client.UI_ForMain):
         self.can_write = False
         self.roomsForLoad = []
 
-    def get_text(self,):
+    def get_text(self, ):
         # We receive text from the server USING the client (Client)
         while True:
             data = self.cl.recv(2048)
