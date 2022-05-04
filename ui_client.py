@@ -287,7 +287,6 @@ class UI_ForMain(object):
         self.listWidget_title.setGeometry(QtCore.QRect(450, 0, 837, 51))
         self.listWidget_title.setMaximumSize(QtCore.QSize(16777215, 16777214))
 
-
         font = QtGui.QFont()
         font.setFamily("Corbel Light")
         font.setPointSize(23)
@@ -413,7 +412,6 @@ class UI_ForMain(object):
         self.pushButton_room.setObjectName("pushButton_room")
         self.pushButton_room.hide()
 
-
         self.line.raise_()
         self.listWidget_msgRoom.raise_()
         self.listWidget_people.raise_()
@@ -493,5 +491,5 @@ class UI_ForMain(object):
                                               "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
         self.pushButton_room.setText(_translate("MainWindow", "Отправить"))
         self.pushButton_quit.setText(_translate("MainWindow", "Выйти"))
-        self.label_of_creator.setText(_translate("MainWindow", "The_messenger             |               Nikita Tarasov"))
-
+        self.label_of_creator.setText(
+            _translate("MainWindow", "The_messenger             |               Nikita Tarasov"))
