@@ -210,17 +210,14 @@ class Server(socket.socket):
             self.data.DB.find_one({"_id": "MESSAGE"}, {"_id": 0})[self.signal[1]] = []
 
     def add_load_MSG_for_client(self, user, index_of_start):
-        print(f"index_of_start -- {index_of_start}")
         bank_of_mess = self.data.DB.find_one({"_id": "MESSAGE"}, {"_id": 0})[self.signal[1]]
         cut_bank_of_messg = []
         index_of_end = len(bank_of_mess) - index_of_start
-        print(f"index_of_end -- {index_of_end}")
         for i in reversed(range(index_of_end)):
             cut_bank_of_messg.append(bank_of_mess[i])
             if len(cut_bank_of_messg) == 50:
                 break
         if cut_bank_of_messg:
-            print(f"cut_bank_of_messg -- {cut_bank_of_messg}")
             for_load_MSG = pickle.dumps(["LOADMSG_ADD", cut_bank_of_messg])
             user.send(for_load_MSG)
 

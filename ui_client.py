@@ -425,7 +425,6 @@ class UI_ForMain(object):
         self.stackedWidget.addWidget(self.page_setting)
 
         MainWindow.setCentralWidget(self.centralwidget)
-
         self.LP_RForm = Ui_LandP_Reg()
         self.LP_RForm.setupUi(ChildWindow)
 
@@ -466,6 +465,7 @@ class UI_ForMain(object):
         self.LP_RForm.pushButton_back.clicked.connect(lambda: self.LP_RForm.stackedWidget.setCurrentIndex(0))
         self.pushButton_menu.hide()
         self.pushButton_settings.hide()
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))

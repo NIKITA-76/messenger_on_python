@@ -4,9 +4,8 @@ from pymongo import MongoClient
 
 class Data:
     def __init__(self):
-        self.configfile = "config.ini"
         self.config = ConfigParser()
-        self.config.read(self.configfile)
+        self.config.read("config.ini")
         self.client = MongoClient(self.config["database"]["ip"], int(self.config["database"]["port"]))
         self.collect = self.client["Messanger"]
         self.DB = self.collect["msgr"]

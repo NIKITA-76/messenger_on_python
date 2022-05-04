@@ -47,7 +47,6 @@ class Ui_MainWindow(ui_client.UI_ForMain):
                     pass
                 self.nickName = self.LP_RForm.lineEdit.text()
                 ChildWindow.close()
-                self.pushButton_room.show()
                 self.pushButton_menu.show()
                 self.pushButton_settings.show()
                 self.load()
@@ -56,7 +55,6 @@ class Ui_MainWindow(ui_client.UI_ForMain):
 
                 self.LP_RForm.stackedWidget.setCurrentIndex(0)
             elif data[0] == "HAVE_THIS_USER":
-
                 self.RegForm.label_4.setText("Пользователь с таким Логином уже сущестует")
             elif data[0] == "USER_IS_NOT_SIGN":
                 self.LP_RForm.label.setText("Неправлиьный логин или пароль")
@@ -88,6 +86,7 @@ class Ui_MainWindow(ui_client.UI_ForMain):
                 if data[1] == "NOMSG":
                     self.listWidget_msgRoom.clear()
                 else:
+                    self.pushButton_room.show()
                     self.listWidget_msgRoom.clear()
                     bankOfMessage = data[1]
                     bankOfMessage.reverse()
@@ -107,10 +106,6 @@ class Ui_MainWindow(ui_client.UI_ForMain):
                     except TypeError as error:
                         if item != self.nickName:
                             self.AddFRNDForm.listWidget.addItem(item)
-
-
-
-
 
     def Reg_in(self):
         login_reg = self.LP_RForm.lineEdit_log.text().strip()
