@@ -2,10 +2,11 @@ from PyQt5 import QtCore, QtWidgets, QtGui
 
 from ui_add_friend import Ui_AddFriend
 from ui_users_login import Ui_LandP_Reg
-
+from Connect import Ui_Connect
+from Server import Ui_Server
 
 class UI_ForMain(object):
-    def setupUi(self, MainWindow, ChildWindow):
+    def setupUi(self, MainWindow, ChildWindow, ConnectUI):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1291, 858)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -430,6 +431,9 @@ class UI_ForMain(object):
         self.AddFRNDForm = Ui_AddFriend()
         self.AddFRNDForm.setupUi(self.AddFRNDWindow)
 
+        self.ConnectForm = Ui_Connect()
+        self.ConnectForm.setupUi(ConnectUI)
+
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -454,7 +458,7 @@ class UI_ForMain(object):
         self.pushButton_settings.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(3))
         self.pushButton_quit.clicked.connect(self.quit)
         self.pushButton_back_tomain.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(2))
-
+        self.ConnectForm.pushButton_connect.clicked.connect(self.connect)
         # НИЖЕ ПРИ КЛИКЕ НА ИМЯ КОМНАТЫ ПРОИСХОДИТ ЗАГРУЗКА СООБЩЕНИЙ
         self.listWidget_people.clicked.connect(self.loadMSG)
         self.retranslateUi(MainWindow)
