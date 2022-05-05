@@ -10,31 +10,27 @@ from PyQt5 import QtWidgets, QtGui, QtCore
 
 
 class Client(socket.socket):
-    def __init__(self, ip, port):  # Connect to server
+    def __init__(self):  # Connect to server
         configfile = "config.ini"
         config = ConfigParser()
         config.read(configfile)
         super().__init__()
-        self.connect((ip, port))
+        self.connect((config["client"]["ip"], int(config["client"]["port"])))
 
     def send_data(self, data_text):  # Send data on server
         self.send(data_text)
 
 
 class Ui_MainWindow(ui_client.UI_ForMain):
-    def __init__(self, MainWindow, ChildWindow, ConnectUI):
-        super().setupUi(MainWindow, ChildWindow, ConnectUI)
+    def __init__(self, MainWindow, ChildWindow):
+        super().setupUi(MainWindow, ChildWindow)
+        self.cl = Client()
+        self.thr = threading.Thread(target=self.get_text).start()
         self.canLoad = True
         self.can_write = False
         self.roomsForLoad = []
 
-    def connect(self):
-        ip = self.ConnectForm.lineEdit_ip.text()
-        port = self.ConnectForm.lineEdit_port.text()
-        self.cl = Client(ip, int(port))
-        self.thr = threading.Thread(target=self.get_text).start()
-
-    def get_text(self, ):
+    def get_text(self,):
         # We receive text from the server USING the client (Client)
         while True:
             data = self.cl.recv(2048)
@@ -220,11 +216,11 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ChildWindow = QtWidgets.QMainWindow()
-    ConnectUI = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow(MainWindow, ChildWindow, ConnectUI)
-    ui.setupUi(MainWindow, ChildWindow, ConnectUI)
+    ui = Ui_MainWindow(MainWindow, ChildWindow)
+    ui.setupUi(MainWindow, ChildWindow)
     MainWindow.show()
     ChildWindow.show()
-    ConnectUI.show()
+    ChildWindow.setWindowState(QtCore.Qt.WindowActive)
+    print(ChildWindow.windowState())
     app.lastWindowClosed.connect(ui.shotdown)
     sys.exit(app.exec_())
