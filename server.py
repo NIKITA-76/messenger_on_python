@@ -29,8 +29,6 @@ class Server(socket.socket):
                 print(f"ДАННЫЕ ОТ КЛИЕНТА --->{self.signal}")
                 if self.signal[0] == "TRY_TO_ENTRY":
                     self.log_in(self.signal, socket_user)
-                    print(f"self.name_withIp {self.data.name_withIp}")
-                    print(f"self.users_ip[0] {self.data.users_ip}")
                     self.data.name_withIp[self.signal[1]] = self.data.users_ip[0]
                     self.recreating_room_from_JSON()
                 elif self.signal[0] == "TRY_TO_REG":
@@ -38,7 +36,6 @@ class Server(socket.socket):
                 elif self.signal[0] == "MSGROOM":
                     self.private_MSG()
                 elif self.signal[0] == "SEARCH":
-                    print(socket_user)
                     self.search_people(socket_user)
                 elif self.signal[0] == "CRT_ROOM":
                     self.create_room_JSON()
