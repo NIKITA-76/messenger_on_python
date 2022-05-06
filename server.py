@@ -2,23 +2,34 @@ import pickle
 import socket
 import threading
 import logging
+import sys
+
+from Server import Ui_Server
 from init_data import Data
+from PyQt5 import QtWidgets
 
 
-class Server(socket.socket):
-    def __init__(self):
+class Server(socket.socket, Ui_Server):
+    def __init__(self, ):
         super().__init__(socket.AF_INET, socket.SOCK_STREAM)
         self.data = Data()
         self.bind((self.data.config["server"]["ip"], int(self.data.config["server"]["port"])))
         self.listen()
         logging.basicConfig(level="INFO")
         self.logger_login = logging.getLogger("log_in")
+        print("111111111111")
         self.logger_package_MSG = logging.getLogger("load_MSG_for_client")
         self.logger_accept = logging.getLogger("start_server")
         self.logger_listen_socket = logging.getLogger("listen_socket")
         self.logger_accept.setLevel("DEBUG")
         self.logger_accept.setLevel("ERROR")
         self.create_room()
+        self.x = threading.Thread(target=self.start_server).start()
+        app = QtWidgets.QApplication(sys.argv)
+        Ui_Server = QtWidgets.QMainWindow()
+        super().setupUi(Ui_Server, )
+        Ui_Server.show()
+        sys.exit(app.exec_())
 
     def listen_socket(self, ip_user, socket_user, ):  # Accept text from client
 
@@ -237,6 +248,7 @@ class Server(socket.socket):
         user_socket.send(user_of_search)
 
     def start_server(self):
+        print("Listen")
 
         while True:
             users_socket, address = self.accept()
@@ -261,4 +273,4 @@ class Server(socket.socket):
 
 if __name__ == '__main__':
     server = Server()
-    server.start_server()
+
