@@ -255,22 +255,33 @@ class Server(socket.socket, Ui_Server):
 
         user_of_search = pickle.dumps(["SEARCH", pickle.dumps(user_of_search)])
         print(user_of_search)
-        print()
         user_socket.send(user_of_search)
 
     def crt_new_user(self, ):
         self.data.idUser += 1
         if self.lineEdit_login.text() not in self.data.DB.find_one({'_id': 'USERS'}, {'_id': 0}):
-            self.data.DB.update_one({"_id": "USERS"}, {"$set": {self.lineEdit_login.text(): {"password": self.lineEdit_pass.text(),
-                                                                          "ID": self.data.idUser,
-                                                                          # Пока нигде не используется
-                                                                          "ROOMS": {}
-                                                                          }}})
-            self.data.DB.update_one({'_id': 'COUNT'}, {'$set': {"USERS": self.data.idUser}})
-            print(f"ПОЛЬЗОВАТЕЛЬ ЗАРЕГИСТРИРОВАН ")
+            if self.lineEdit_pass.text() == self.lineEdit_passw_2.text():
+                self.data.DB.update_one({"_id": "USERS"}, {"$set": {self.lineEdit_login.text(): {"password": self.lineEdit_pass.text(),
+                                                                                                 "ID": self.data.idUser,
+                                                                                                 # Пока нигде не используется
+                                                                                                 "ROOMS": {}
+                                                                                                 }}})
+                self.data.DB.update_one({'_id': 'COUNT'}, {'$set': {"USERS": self.data.idUser}})
+                print(f"ПОЛЬЗОВАТЕЛЬ ЗАРЕГИСТРИРОВАН ")
+                self.label_info.setText("Пользователь успешно зарегистрирован!")
+                self.lineEdit_login.clear()
+                self.lineEdit_pass.clear()
+                self.lineEdit_passw_2.clear()
+            else:
+                self.label_info.setText("Пароли не совпадают!")
+                print("Passwords don't match")
 
         else:
+            self.label_info.setText("Такой пользователеь уже существует")
+            self.label_login.setStyleSheet("color: red")
             print("HAVE_THIS_USER")
+
+
 
 
     def start_server(self):
