@@ -23,14 +23,14 @@ class Client(socket.socket):
 
 class Ui_MainWindow(ui_client.UI_ForMain):
     def __init__(self, MainWindow, ChildWindow):
-        super().setupUi(MainWindow, ChildWindow,)
+        super().setupUi(MainWindow, ChildWindow, )
         self.cl = Client()
         self.thr = threading.Thread(target=self.get_text).start()
         self.canLoad = True
         self.can_write = False
         self.roomsForLoad = []
 
-    def get_text(self,):
+    def get_text(self, ):
         # We receive text from the server USING the client (Client)
         while True:
             data = self.cl.recv(2048)
@@ -101,7 +101,6 @@ class Ui_MainWindow(ui_client.UI_ForMain):
                     except TypeError as error:
                         if item != self.nick_name:
                             self.AddFRNDForm.listWidget.addItem(item)
-
 
     def Sign_in(self):  # ChildWindow
         login = self.LP_RForm.lineEdit.text()

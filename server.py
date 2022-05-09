@@ -156,7 +156,8 @@ class Server(socket.socket, Ui_Server):
 
     def create_room_now(self):
         name_of_rooms = self.data.DB.find_one({"_id": "ROOMS"},
-                                              {"_id": 0}).keys()  # Создание комнаты, без необходимости перезагрузки сервера
+                                              {
+                                                  "_id": 0}).keys()  # Создание комнаты, без необходимости перезагрузки сервера
         for name in name_of_rooms:
             for usersInRoom in self.data.DB.find_one({"_id": "ROOMS"}, {"_id": 0})[name][0]["USERS"]:
                 try:
@@ -261,11 +262,12 @@ class Server(socket.socket, Ui_Server):
         self.data.idUser += 1
         if self.lineEdit_login.text() not in self.data.DB.find_one({'_id': 'USERS'}, {'_id': 0}):
             if self.lineEdit_pass.text() == self.lineEdit_passw_2.text():
-                self.data.DB.update_one({"_id": "USERS"}, {"$set": {self.lineEdit_login.text(): {"password": self.lineEdit_pass.text(),
-                                                                                                 "ID": self.data.idUser,
-                                                                                                 # Пока нигде не используется
-                                                                                                 "ROOMS": {}
-                                                                                                 }}})
+                self.data.DB.update_one({"_id": "USERS"},
+                                        {"$set": {self.lineEdit_login.text(): {"password": self.lineEdit_pass.text(),
+                                                                               "ID": self.data.idUser,
+                                                                               # Пока нигде не используется
+                                                                               "ROOMS": {}
+                                                                               }}})
                 self.data.DB.update_one({'_id': 'COUNT'}, {'$set': {"USERS": self.data.idUser}})
                 print(f"ПОЛЬЗОВАТЕЛЬ ЗАРЕГИСТРИРОВАН ")
                 self.label_info.setText("Пользователь успешно зарегистрирован!")
@@ -280,9 +282,6 @@ class Server(socket.socket, Ui_Server):
             self.label_info.setText("Такой пользователеь уже существует")
             self.label_login.setStyleSheet("color: red")
             print("HAVE_THIS_USER")
-
-
-
 
     def start_server(self):
         print("Listen")
@@ -310,5 +309,3 @@ class Server(socket.socket, Ui_Server):
 
 if __name__ == '__main__':
     server = Server()
-
-

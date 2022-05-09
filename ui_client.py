@@ -430,7 +430,6 @@ class UI_ForMain(object):
         self.AddFRNDForm = Ui_AddFriend()
         self.AddFRNDForm.setupUi(self.AddFRNDWindow)
 
-
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
