@@ -258,6 +258,21 @@ class Server(socket.socket, Ui_Server):
         print()
         user_socket.send(user_of_search)
 
+    def crt_new_user(self, ):
+        self.data.idUser += 1
+        if self.lineEdit_login.text() not in self.data.DB.find_one({'_id': 'USERS'}, {'_id': 0}):
+            self.data.DB.update_one({"_id": "USERS"}, {"$set": {self.lineEdit_login.text(): {"password": self.lineEdit_pass.text(),
+                                                                          "ID": self.data.idUser,
+                                                                          # Пока нигде не используется
+                                                                          "ROOMS": {}
+                                                                          }}})
+            self.data.DB.update_one({'_id': 'COUNT'}, {'$set': {"USERS": self.data.idUser}})
+            print(f"ПОЛЬЗОВАТЕЛЬ ЗАРЕГИСТРИРОВАН ")
+
+        else:
+            print("HAVE_THIS_USER")
+
+
     def start_server(self):
         print("Listen")
 

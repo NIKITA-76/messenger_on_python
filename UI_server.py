@@ -77,6 +77,7 @@ class Ui_Server(object):
         self.pushButton_back_main_page_crt_usr.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(0))
         self.pushButton_crt_user.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(2))
         self.pushButton_crt_user.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(2))
+        self.pushButton_save.clicked.connect(self.crt_new_user)
 
 
     def retranslateUi(self, MainWindow):
