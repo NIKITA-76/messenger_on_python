@@ -58,7 +58,7 @@ class Ui_Server(object):
         self.label_passw_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_passw_2.setObjectName("label_passw_2")
         self.label_info = QtWidgets.QLabel(self.page_crt_usr)
-        self.label_info.setGeometry(QtCore.QRect(241, 50, 171, 20))
+        self.label_info.setGeometry(QtCore.QRect(158, 24, 321, 20))
         self.label_info.setAlignment(QtCore.Qt.AlignCenter)
         self.label_info.setObjectName("label_info")
         self.pushButton_back_main_page_crt_usr = QtWidgets.QPushButton(self.page_crt_usr)
