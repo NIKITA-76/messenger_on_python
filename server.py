@@ -34,7 +34,12 @@ class Server(socket.socket, Ui_Server):
         Ui_Server = QtWidgets.QMainWindow()
         super().setupUi(Ui_Server, )
         Ui_Server.show()
+        app.lastWindowClosed.connect(self.shotdown)
         sys.exit(app.exec_())
+
+    def shotdown(self):  # К хренам обрумаем ему все его костыли и прога умирает от нажатия на Крестик
+        print("ОКНО ЗАКРЫТО ПО ЖЕЛАНИЮ ПОЛЬЗОВАТЕЛЯ")
+        raise Exception
 
     def listen_socket(self, ip_user, socket_user, ):  # Accept text from client
 
@@ -44,11 +49,11 @@ class Server(socket.socket, Ui_Server):
                 self.signal = pickle.loads(self.signal)
                 print(f"ДАННЫЕ ОТ КЛИЕНТА --->{self.signal}")
                 if self.signal[0] == "TRY_TO_ENTRY":
-                    self.log_in(self.signal, socket_user)
+                    self.log_in(self.signal, socket_user, ip_user)
                     self.data.name_withIp[self.signal[1]] = self.data.users_ip[0]
                     self.recreating_room_from_JSON()
                 elif self.signal[0] == "TRY_TO_REG":
-                    self.registration(self.signal, socket_user)
+                    self.registration(self.signal, socket_user, )
                 elif self.signal[0] == "MSGROOM":
                     self.private_MSG()
                 elif self.signal[0] == "SEARCH":
@@ -77,7 +82,7 @@ class Server(socket.socket, Ui_Server):
             print(error)
             pass
 
-    def registration(self, data, user):
+    def registration(self, data, user, ):
         self.data.idUser += 1
         if data[1] not in self.data.DB.find_one({'_id': 'USERS'}, {'_id': 0}):
             self.data.DB.update_one({"_id": "USERS"}, {"$set": {data[1]: {"password": data[2],
@@ -94,7 +99,7 @@ class Server(socket.socket, Ui_Server):
             print("HAVE_THIS_USER")
 
     def log_in(self, data,
-               socket_user):
+               socket_user, ip_user):
         try:
             if self.data.DB.find_one({"_id": "USERS"})[data[1]]["password"] == data[2] and self.signal[1]:
 
@@ -113,7 +118,7 @@ class Server(socket.socket, Ui_Server):
                 self.logger_login.info("USER_IS_SIGN")
                 self.data.userAndObject[self.signal[1]] = socket_user
                 socket_user.send(pickle.dumps(sign_in))
-                self.listWidget_people.addItem(self.signal[1])
+                self.listWidget_people.addItem(self.signal[1] + " " + str(ip_user))
 
             else:
                 no_sign_in = ["USER_IS_NOT_SIGN"]
