@@ -435,16 +435,13 @@ class UI_ForMain(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
         # НИЖЕ КНОПКИ ОКНА ВХОДА
-        self.LP_RForm.pushButton_back.clicked.connect(lambda: self.LP_RForm.stackedWidget.setCurrentIndex(0))
         self.LP_RForm.pushButton.clicked.connect(self.Sign_in)
-        self.LP_RForm.pushButton_toReg.clicked.connect(lambda: self.LP_RForm.stackedWidget.setCurrentIndex(1))
         # self.RegForm.pushButton_settings.clicked.connect(self.Reg_in)
 
         # НИЖЕ КНОПКИ ДОБАВЛЕНИЯ В ДРУЗЬЯ
         self.pushButton_menu.clicked.connect(lambda: self.AddFRNDWindow.show())
         self.AddFRNDForm.pushButton_2.clicked.connect(self.searchPeople)
         self.AddFRNDForm.pushButton.clicked.connect(self.addNewFriend)
-        self.LP_RForm.pushButton_ready.clicked.connect(self.Reg_in)
 
         # НИЖЕ КНОПКА ОТПРАВКИ СООБЩЕНИЯ
         self.pushButton_room.clicked.connect(self.roomMessage)
@@ -461,7 +458,6 @@ class UI_ForMain(object):
         self.retranslateUi(MainWindow)
         self.stackedWidget.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-        self.LP_RForm.pushButton_back.clicked.connect(lambda: self.LP_RForm.stackedWidget.setCurrentIndex(0))
         self.pushButton_menu.hide()
         self.pushButton_settings.hide()
 
