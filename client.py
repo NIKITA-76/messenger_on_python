@@ -6,7 +6,7 @@ import threading
 import ui_client
 
 from configparser import ConfigParser
-from PyQt5 import QtWidgets, QtGui, QtCore
+from PyQt5 import QtWidgets, QtCore
 
 
 class Client(socket.socket):
@@ -23,7 +23,7 @@ class Client(socket.socket):
 
 class Ui_MainWindow(ui_client.UI_ForMain):
     def __init__(self, MainWindow, ChildWindow):
-        super().setupUi(MainWindow, ChildWindow)
+        super().setupUi(MainWindow, ChildWindow,)
         self.cl = Client()
         self.thr = threading.Thread(target=self.get_text).start()
         self.canLoad = True
@@ -45,7 +45,7 @@ class Ui_MainWindow(ui_client.UI_ForMain):
                         self.roomsForLoad.append(item)
                 except IndexError:
                     pass
-                self.nickName = self.LP_RForm.lineEdit.text()
+                self.nick_name = self.LP_RForm.lineEdit.text()
                 ChildWindow.close()
                 self.pushButton_menu.show()
                 self.pushButton_settings.show()
@@ -88,23 +88,23 @@ class Ui_MainWindow(ui_client.UI_ForMain):
                 else:
                     self.pushButton_room.show()
                     self.listWidget_msgRoom.clear()
-                    bankOfMessage = data[1]
-                    bankOfMessage.reverse()
-                    print(f"Банк сообщений с сервера --->{bankOfMessage}")
-                    self.listWidget_msgRoom.addItems(bankOfMessage)
+                    bank_of_message = data[1]
+                    bank_of_message.reverse()
+                    print(f"Банк сообщений с сервера --->{bank_of_message}")
+                    self.listWidget_msgRoom.addItems(bank_of_message)
                     time.sleep(0.01)
                     self.listWidget_msgRoom.verticalScrollBar().setValue(
                         self.listWidget_msgRoom.verticalScrollBar().maximum())
 
             elif data[0] == "SEARCH":
-                matchOfPeople = pickle.loads(data[1])
+                match_of_people = pickle.loads(data[1])
                 self.AddFRNDForm.listWidget.clear()
-                for item in matchOfPeople:
+                for item in match_of_people:
                     try:
-                        if item != self.nickName and (item not in self.listWidget_people.items()):
+                        if item != self.nick_name and (item not in self.listWidget_people.items()):
                             self.AddFRNDForm.listWidget.addItem(item)
                     except TypeError as error:
-                        if item != self.nickName:
+                        if item != self.nick_name:
                             self.AddFRNDForm.listWidget.addItem(item)
 
     def Reg_in(self):
@@ -130,13 +130,13 @@ class Ui_MainWindow(ui_client.UI_ForMain):
 
     def shotdown(self):  # К хренам обрумаем ему все его костыли и прога умирает от нажатия на Крестик
         print("ОКНО ЗАКРЫТО ПО ЖЕЛАНИЮ ПОЛЬЗОВАТЕЛЯ")
-        msgError = ["USER_OUT", self.nickName]
+        msg_error = ["USER_OUT", self.nick_name]
 
-        self.cl.send_data(pickle.dumps(msgError))
+        self.cl.send_data(pickle.dumps(msg_error))
         raise Exception
 
     def quit(self):
-        data_of_sign = ["USER_OUT", self.nickName]
+        data_of_sign = ["USER_OUT", self.nick_name]
         data_of_sign = pickle.dumps(data_of_sign)
         self.cl.send_data(data_of_sign)
         self.textEdit_room.clear()
@@ -179,9 +179,9 @@ class Ui_MainWindow(ui_client.UI_ForMain):
                 self.listWidget_title.clear()
                 self.listWidget_title.setText(nameRoom)
                 if self.listWidget_people.currentItem().text() == nameRoom:
-                    msgRoom = ["LOADMSG", IDRoom, ]
-                    msgRoom = pickle.dumps(msgRoom)
-                    self.cl.send_data(msgRoom)
+                    msg_room = ["LOADMSG", IDRoom, ]
+                    msg_room = pickle.dumps(msg_room)
+                    self.cl.send_data(msg_room)
                     break
         except IndexError:
             print("IndexError IN loadMSG")
@@ -198,18 +198,18 @@ class Ui_MainWindow(ui_client.UI_ForMain):
         if self.can_write:
             for IDRoom, nameRoom in self.roomsForLoad[0].items():
                 if self.listWidget_people.currentItem().text() == nameRoom and self.textEdit_room.toPlainText().strip() != "" and self.can_write:
-                    list = ["MSGROOM", IDRoom, self.nickName, self.listWidget_people.currentItem().text(),
-                            self.textEdit_room.toPlainText().strip()]
-                    list = pickle.dumps(list)
-                    self.cl.send_data(list)
+                    list_for_server = ["MSGROOM", IDRoom, self.nick_name, self.listWidget_people.currentItem().text(),
+                                       self.textEdit_room.toPlainText().strip()]
+                    list_for_server = pickle.dumps(list_for_server)
+                    self.cl.send_data(list_for_server)
                     self.textEdit_room.clear()
                     self.textEdit_room.setFocus()
 
     def addNewFriend(self):
-        newRoom = ["CRT_ROOM", self.AddFRNDForm.listWidget.currentItem().text(), self.nickName, ]
-        newRoom = pickle.dumps(newRoom)
+        new_room = ["CRT_ROOM", self.AddFRNDForm.listWidget.currentItem().text(), self.nick_name, ]
+        new_room = pickle.dumps(new_room)
         self.AddFRNDWindow.close()
-        self.cl.send_data(newRoom)
+        self.cl.send_data(new_room)
 
 
 if __name__ == "__main__":
