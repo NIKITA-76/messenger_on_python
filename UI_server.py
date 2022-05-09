@@ -14,15 +14,13 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Server(object):
     def setupUi(self, MainWindow,):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1043, 739)
+        MainWindow.resize(645, 420)
+        MainWindow.setStyleSheet("background-color: rgb(50, 50, 50);")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.listView = QtWidgets.QListView(self.centralwidget)
-        self.listView.setGeometry(QtCore.QRect(490, 0, 554, 740))
-        self.listView.setObjectName("listView")
-        self.listView_2 = QtWidgets.QListView(self.centralwidget)
-        self.listView_2.setGeometry(QtCore.QRect(0, 0, 489, 740))
-        self.listView_2.setObjectName("listView_2")
+        self.listWidget_people = QtWidgets.QListWidget(self.centralwidget)
+        self.listWidget_people.setGeometry(QtCore.QRect(10, 20, 621, 351))
+        self.listWidget_people.setObjectName("listWidget_people")
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -33,11 +31,3 @@ class Ui_Server(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
 
 
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_Server()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())

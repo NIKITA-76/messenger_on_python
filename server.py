@@ -4,9 +4,14 @@ import threading
 import logging
 import sys
 
-from Server import Ui_Server
+from UI_server import Ui_Server
 from init_data import Data
 from PyQt5 import QtWidgets
+
+
+class UI_Server(Ui_Server):
+    def __init__(self):
+        pass
 
 
 class Server(socket.socket, Ui_Server):
@@ -108,6 +113,7 @@ class Server(socket.socket, Ui_Server):
                 self.logger_login.info("USER_IS_SIGN")
                 self.data.userAndObject[self.signal[1]] = socket_user
                 socket_user.send(pickle.dumps(sign_in))
+                self.listWidget_people.addItem(str(socket_user))
 
             else:
                 no_sign_in = ["USER_IS_NOT_SIGN"]
@@ -273,4 +279,5 @@ class Server(socket.socket, Ui_Server):
 
 if __name__ == '__main__':
     server = Server()
+
 
