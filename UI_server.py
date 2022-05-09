@@ -27,9 +27,9 @@ class Ui_Server(object):
         self.listWidget_people.setStyleSheet("color: rgb(50, 50, 50);\n"
                                              "")
         self.listWidget_people.setObjectName("listWidget_people")
-        self.pushButton_3 = QtWidgets.QPushButton(self.page_usr)
-        self.pushButton_3.setGeometry(QtCore.QRect(270, 360, 103, 36))
-        self.pushButton_3.setObjectName("pushButton_3")
+        self.pushButton_back_main_page_usr = QtWidgets.QPushButton(self.page_usr)
+        self.pushButton_back_main_page_usr.setGeometry(QtCore.QRect(270, 360, 103, 36))
+        self.pushButton_back_main_page_usr.setObjectName("pushButton_back_main_page_usr")
         self.stackedWidget.addWidget(self.page_usr)
         self.page_crt_usr = QtWidgets.QWidget()
         self.page_crt_usr.setObjectName("page_crt_usr")
@@ -61,9 +61,9 @@ class Ui_Server(object):
         self.label_info.setGeometry(QtCore.QRect(241, 50, 171, 20))
         self.label_info.setAlignment(QtCore.Qt.AlignCenter)
         self.label_info.setObjectName("label_info")
-        self.pushButton = QtWidgets.QPushButton(self.page_crt_usr)
-        self.pushButton.setGeometry(QtCore.QRect(399, 310, 103, 36))
-        self.pushButton.setObjectName("pushButton")
+        self.pushButton_back_main_page_crt_usr = QtWidgets.QPushButton(self.page_crt_usr)
+        self.pushButton_back_main_page_crt_usr.setGeometry(QtCore.QRect(399, 310, 103, 36))
+        self.pushButton_back_main_page_crt_usr.setObjectName("pushButton")
         self.stackedWidget.addWidget(self.page_crt_usr)
         MainWindow.setCentralWidget(self.centralwidget)
 
@@ -71,17 +71,19 @@ class Ui_Server(object):
         self.stackedWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.pushButton_show_all_usr.setText(_translate("MainWindow", "Просмотр всех пользователей"))
         self.pushButton_crt_user.setText(_translate("MainWindow", "Создать пользователя"))
-        self.pushButton_3.setText(_translate("MainWindow", "Назад"))
+        self.pushButton_back_main_page_usr.setText(_translate("MainWindow", "Назад"))
         self.label_login.setText(_translate("MainWindow", "Логин:"))
         self.pushButton_save.setText(_translate("MainWindow", "Сохранить"))
         self.label_passw.setText(_translate("MainWindow", "Пароль:"))
         self.label_passw_2.setText(_translate("MainWindow", "Подтвердите пароль:"))
         self.label_info.setText(_translate("MainWindow", "Создание пользователя"))
-        self.pushButton.setText(_translate("MainWindow", "Отмена"))
+        self.pushButton_back_main_page_crt_usr.setText(_translate("MainWindow", "Отмена"))
 
 
