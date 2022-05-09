@@ -51,11 +51,6 @@ class Ui_MainWindow(ui_client.UI_ForMain):
                 self.pushButton_settings.show()
                 self.load()
 
-            elif data[0] == "USER_IS_REG":
-
-                self.LP_RForm.stackedWidget.setCurrentIndex(0)
-            elif data[0] == "HAVE_THIS_USER":
-                self.RegForm.label_4.setText("Пользователь с таким Логином уже сущестует")
             elif data[0] == "USER_IS_NOT_SIGN":
                 self.LP_RForm.label.setText("Неправлиьный логин или пароль")
                 self.LP_RForm.lineEdit.setStyleSheet("border: 1px solid rgb(94, 0, 1);")
@@ -107,16 +102,6 @@ class Ui_MainWindow(ui_client.UI_ForMain):
                         if item != self.nick_name:
                             self.AddFRNDForm.listWidget.addItem(item)
 
-    def Reg_in(self):
-        login_reg = self.LP_RForm.lineEdit_log.text().strip()
-        if self.LP_RForm.lineEdit_pass.text().strip() == self.LP_RForm.lineEdit_pass2.text().strip():
-            password_reg = self.LP_RForm.lineEdit_pass.text().strip()
-            data_of_reg = ["TRY_TO_REG", login_reg, password_reg]
-            data_of_reg = pickle.dumps(data_of_reg)
-            self.cl.send_data(data_of_reg)
-
-        else:
-            self.RegForm.label_4.setText("Пароли не совпадают!")
 
     def Sign_in(self):  # ChildWindow
         login = self.LP_RForm.lineEdit.text()
