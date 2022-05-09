@@ -71,6 +71,12 @@ class Ui_Server(object):
         self.stackedWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+        self.pushButton_show_all_usr.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(1))
+        self.pushButton_crt_user.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(2))
+        self.pushButton_back_main_page_usr.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(0))
+        self.pushButton_back_main_page_crt_usr.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(0))
+        self.pushButton_crt_user.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(2))
+        self.pushButton_crt_user.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(2))
 
 
     def retranslateUi(self, MainWindow):
