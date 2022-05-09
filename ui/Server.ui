@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>645</width>
+    <height>420</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(50, 50, 50);</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QStackedWidget" name="stackedWidget">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>10</y>
+      <width>631</width>
+      <height>401</height>
+     </rect>
+    </property>
+    <property name="currentIndex">
+     <number>1</number>
+    </property>
+    <widget class="QWidget" name="page">
+     <widget class="QPushButton" name="pushButton_show_all_usr">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>50</y>
+        <width>221</width>
+        <height>36</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Просмотр всех пользователей</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_crt_user">
+      <property name="geometry">
+       <rect>
+        <x>1</x>
+        <y>10</y>
+        <width>171</width>
+        <height>36</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Создать пользователя</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="page_usr">
+     <widget class="QListWidget" name="listWidget_people">
+      <property name="geometry">
+       <rect>
+        <x>5</x>
+        <y>0</y>
+        <width>621</width>
+        <height>351</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(50, 50, 50);
+</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_3">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>360</y>
+        <width>103</width>
+        <height>36</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Назад</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="page_crt_usr">
+     <widget class="QLabel" name="label_login">
+      <property name="geometry">
+       <rect>
+        <x>104</x>
+        <y>100</y>
+        <width>66</width>
+        <height>19</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Логин:</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_save">
+      <property name="geometry">
+       <rect>
+        <x>177</x>
+        <y>310</y>
+        <width>103</width>
+        <height>36</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Сохранить</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_passw">
+      <property name="geometry">
+       <rect>
+        <x>104</x>
+        <y>150</y>
+        <width>66</width>
+        <height>19</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Пароль:</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_login">
+      <property name="geometry">
+       <rect>
+        <x>194</x>
+        <y>90</y>
+        <width>321</width>
+        <height>36</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_pass">
+      <property name="geometry">
+       <rect>
+        <x>194</x>
+        <y>140</y>
+        <width>321</width>
+        <height>36</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_passw_2">
+      <property name="geometry">
+       <rect>
+        <x>194</x>
+        <y>190</y>
+        <width>321</width>
+        <height>36</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_passw_2">
+      <property name="geometry">
+       <rect>
+        <x>7</x>
+        <y>200</y>
+        <width>171</width>
+        <height>19</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Подтвердите пароль:</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_info">
+      <property name="geometry">
+       <rect>
+        <x>241</x>
+        <y>50</y>
+        <width>171</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Создание пользователя</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton">
+      <property name="geometry">
+       <rect>
+        <x>399</x>
+        <y>310</y>
+        <width>103</width>
+        <height>36</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Отмена</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
