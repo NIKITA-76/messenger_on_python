@@ -51,8 +51,6 @@ class Server(socket.socket, Ui_Server):
                     self.log_in(self.signal, socket_user, ip_user)
                     self.data.name_withIp[self.signal[1]] = self.data.users_ip[0]
                     self.recreating_room_from_JSON()
-                elif self.signal[0] == "TRY_TO_REG":
-                    self.registration(self.signal, socket_user, )
                 elif self.signal[0] == "MSGROOM":
                     self.private_MSG()
                 elif self.signal[0] == "SEARCH":
@@ -117,11 +115,11 @@ class Server(socket.socket, Ui_Server):
         self.idRoom = self.data.idRoom + 1
         list_users = []
         while i < len(self.signal):
-            i += 1
             list_users.append(self.signal[i])
             self.data.DB.update_one({'_id': 'ROOMS'}, {'$set': {str(self.idRoom) + "R": [
                 {"USERS": list_users, "NAME": self.signal[2]}]}})
-
+            i += 1
+        print("111111111111111111")
         self.data.DB.update_one({'_id': 'COUNT'}, {'$set': {'ROOMS': self.idRoom}})
 
         self.data.DB.update_one({'_id': 'USERS'},
@@ -232,7 +230,6 @@ class Server(socket.socket, Ui_Server):
     def search_people(self, user_socket):
         users_in_JSON = self.data.DB.find_one({'_id': 'USERS'}, {'_id': 0})
         user_of_search = []
-
         for user in users_in_JSON:
             if self.signal[1] in user:
                 user_of_search.append(user)
