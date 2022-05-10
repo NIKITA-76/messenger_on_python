@@ -22,7 +22,6 @@ class Server(socket.socket, Ui_Server):
         self.listen()
         logging.basicConfig(level="INFO")
         self.logger_login = logging.getLogger("log_in")
-        print("111111111111")
         self.logger_package_MSG = logging.getLogger("load_MSG_for_client")
         self.logger_accept = logging.getLogger("start_server")
         self.logger_listen_socket = logging.getLogger("listen_socket")
@@ -81,22 +80,6 @@ class Server(socket.socket, Ui_Server):
         except EOFError as error:
             print(error)
             pass
-
-    def registration(self, data, user, ):
-        self.data.idUser += 1
-        if data[1] not in self.data.DB.find_one({'_id': 'USERS'}, {'_id': 0}):
-            self.data.DB.update_one({"_id": "USERS"}, {"$set": {data[1]: {"password": data[2],
-                                                                          "ID": self.data.idUser,
-                                                                          # Пока нигде не используется
-                                                                          "ROOMS": {}
-                                                                          }}})
-            self.data.DB.find_one({'_id': 'COUNT'}, {'_id': 0})["USERS"] = self.data.idUser
-            print(f"ПОЛЬЗОВАТЕЛЬ ЗАРЕГИСТРИРОВАН ")
-            user.send(pickle.dumps(["USER_IS_REG"]))
-
-        else:
-            user.send(pickle.dumps(["HAVE_THIS_USER"]))
-            print("HAVE_THIS_USER")
 
     def log_in(self, data,
                socket_user, ip_user):
@@ -264,7 +247,7 @@ class Server(socket.socket, Ui_Server):
             if self.lineEdit_pass.text() == self.lineEdit_passw_2.text():
                 self.data.DB.update_one({"_id": "USERS"},
                                         {"$set": {self.lineEdit_login.text(): {"password": self.lineEdit_pass.text(),
-                                                                               "ID": self.data.idUser,
+                                                                               "name": self.lineEdit_name.text(),
                                                                                # Пока нигде не используется
                                                                                "ROOMS": {}
                                                                                }}})
