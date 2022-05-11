@@ -99,6 +99,14 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
                         if item != self.nick_name:
                             self.AddFRNDForm.listWidget.addItem(item)
 
+            elif data[0] == "FILE":
+                print(f"FILE ---> {data}")
+                file = open("file_from_client.txt", "wb")
+                file.write(data[2])
+                file.close()
+
+
+
     def Sign_in(self):  # ChildWindow
         login = self.LP_RForm.lineEdit.text()
         password = self.LP_RForm.lineEdit_2.text()
@@ -197,9 +205,12 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
         file = open(str(file_path), mode="rb")
         full_name = path.basename(file_path)
         name = path.splitext(full_name)[1]
-        data = ["FILE", self.nick_name, self.listWidget_people.currentItem().text(), name, file.read(2048)]
-        data = pickle.dumps(data)
-        self.cl.send_data(data)
+        for IDRoom, nameRoom in self.roomsForLoad[0].items():
+            list_for_server = ["FILE", IDRoom, self.nick_name, self.listWidget_people.currentItem().text(),
+                               file.read(), name]
+            list_for_server = pickle.dumps(list_for_server)
+            self.cl.send_data(list_for_server)
+        print("FILEFILE")
 
 
 if __name__ == "__main__":
