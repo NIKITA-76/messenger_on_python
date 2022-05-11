@@ -378,7 +378,27 @@ class UI_ForMain(object):
         self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line.setObjectName("line")
         self.pushButton_room = QtWidgets.QPushButton(self.page_main)
-        self.pushButton_room.setGeometry(QtCore.QRect(1190, 730, 91, 91))
+        self.pushButton_room.setGeometry(QtCore.QRect(1190, 730, 91, 45))
+        self.pushButton_room_file = QtWidgets.QPushButton(self.page_main)
+        self.pushButton_room_file.setGeometry(QtCore.QRect(1189, 795, 91, 29))
+
+        self.pushButton_room_file.setStyleSheet("QPushButton{\n"
+                                           "font: 11pt ;\n"
+                                           "background-color: rgb(50, 50, 50);\n"
+                                           "\n"
+                                           "color: rgb(158, 158, 158);\n"
+                                           "border:0px;\n"
+                                           "border-radius: 6px;\n"
+                                           "}\n"
+                                           "\n"
+                                           "QPushButton:hover{\n"
+                                           "font: 11pt ;\n"
+                                           "background-color: rgb(70, 70, 70);\n"
+                                           "color: rgb(158, 158, 158);\n"
+                                           "border-radius: 6px;\n"
+                                           "}\n"
+                                           "")
+        self.pushButton_room_file.setObjectName("pushButton_room_file")
         self.label_of_creator = QtWidgets.QLabel(self.page_setting)
         self.label_of_creator.setGeometry(QtCore.QRect(483, 520, 451, 20))
         self.label_of_creator.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
@@ -419,6 +439,7 @@ class UI_ForMain(object):
         self.pushButton_menu.raise_()
         self.textEdit_room.raise_()
         self.pushButton_room.raise_()
+        self.pushButton_room_file.raise_()
         self.stackedWidget.addWidget(self.page_main)
         self.stackedWidget.addWidget(self.page_setting)
 
@@ -451,7 +472,7 @@ class UI_ForMain(object):
         self.pushButton_settings.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(3))
         self.pushButton_quit.clicked.connect(self.quit)
         self.pushButton_back_tomain.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(2))
-
+        self.pushButton_room_file.clicked.connect(self.get_path_file)
         # НИЖЕ ПРИ КЛИКЕ НА ИМЯ КОМНАТЫ ПРОИСХОДИТ ЗАГРУЗКА СООБЩЕНИЙ
         self.listWidget_people.clicked.connect(self.loadMSG)
         self.retranslateUi(MainWindow)
@@ -486,6 +507,7 @@ class UI_ForMain(object):
                                               "</style></head><body style=\" font-family:\'Candara\'; font-size:14pt; font-weight:400; font-style:normal;\">\n"
                                               "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
         self.pushButton_room.setText(_translate("MainWindow", "Отправить"))
+        self.pushButton_room_file.setText(_translate("MainWindow", "Файл"))
         self.pushButton_quit.setText(_translate("MainWindow", "Выйти"))
         self.label_of_creator.setText(
             _translate("MainWindow", "The_messenger             |               Nikita Tarasov"))
