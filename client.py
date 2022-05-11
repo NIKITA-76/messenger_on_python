@@ -4,7 +4,7 @@ import sys
 import time
 import threading
 import ui_client
-from os import path
+import os
 
 from configparser import ConfigParser
 from PyQt5 import QtWidgets
@@ -101,11 +101,20 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
 
             elif data[0] == "FILE":
                 print(f"FILE ---> {data}")
-                file = open(f"{data[3]}", "wb")
-                file.write(data[2])
-                file.close()
+                try:
+                    file = open(f"files/{data[3]}", "wb")
+                    file.write(data[2])
+                    file.close()
+                except FileNotFoundError:
+                    os.mkdir("/home/n76/PycharmProjects/pythonProject/files")
+                    file = open(f"files/{data[3]}", "wb")
+                    file.write(data[2])
+                    file.close()
 
 
+
+    def open_dwnload(self):
+        dir_ = QtWidgets.QFileDialog.getExistingDirectory(directory="/home/n76/PycharmProjects/pythonProject/files")
 
     def Sign_in(self):  # ChildWindow
         login = self.LP_RForm.lineEdit.text()
@@ -203,7 +212,7 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
     def get_path_file(self):
         file_path, _ = QFileDialog.getOpenFileName(self, )
         file = open(str(file_path), mode="rb")
-        full_name = path.basename(file_path)
+        full_name = os.path.basename(file_path)
         for IDRoom, nameRoom in self.roomsForLoad[0].items():
             list_for_server = ["FILE", IDRoom, self.nick_name, self.listWidget_people.currentItem().text(),
                                file.read(), full_name]
