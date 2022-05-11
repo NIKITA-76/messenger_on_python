@@ -41,10 +41,10 @@ class Server(socket.socket, Ui_Server):
         raise Exception
 
     def listen_socket(self, ip_user, socket_user, ):  # Accept text from client
-
         try:
-            while True:
-                self.signal = socket_user.recv(2048)  # Accepting a message
+            while True:     # Accepting a message
+                self.signal = socket_user.recv(10000)
+                print(self.signal)
                 self.signal = pickle.loads(self.signal)
                 print(f"ДАННЫЕ ОТ КЛИЕНТА --->{self.signal}")
                 if self.signal[0] == "TRY_TO_ENTRY":
@@ -61,11 +61,12 @@ class Server(socket.socket, Ui_Server):
                     self.add_load_MSG_for_client(socket_user, self.signal[2])
                 elif self.signal[0] == "LOADMSG":
                     self.load_MSG_for_client(socket_user)
+                elif self.signal[0] == "FILE":
+                    self.get_file()
                 elif self.signal[0] == "USER_OUT":
                     """
                      Удаление пользователя из комнаты ЛС, так как при подключении пользователя меняеться его 'fd',
                      а в комнате все еще старый объект со старым 'fd'
-                    
                     """
                     for roomID, roomName in self.data.DB.find_one({'_id': 'USERS'}, {'_id': 0})[self.signal[1]][
                         "ROOMS"].items():
@@ -75,9 +76,14 @@ class Server(socket.socket, Ui_Server):
                             self.data.users.remove(socket_user)
                         except:
                             pass
+
         except EOFError as error:
             print(error)
             pass
+
+    def get_file(self):
+        file = open("license.txt", "wb")
+        file.write(self.signal[3])
 
     def log_in(self, data,
                socket_user, ip_user):
@@ -90,16 +96,14 @@ class Server(socket.socket, Ui_Server):
                     sign_in = ["USER IS SIGN"]
                     self.data.userAndObject[self.signal[1]] = socket_user
                 else:
-
                     list_rooms.append(self.data.DB.find_one({"_id": "USERS"})[data[1]]["ROOMS"])
-
                     sign_in = ["USER IS SIGN", list_rooms]
                     self.data.userAndObject[self.signal[1]] = socket_user
 
                 self.logger_login.info("USER_IS_SIGN")
                 self.data.userAndObject[self.signal[1]] = socket_user
                 socket_user.send(pickle.dumps(sign_in))
-                self.listWidget_people.addItem(self.signal[1] + " " + str(ip_user))
+                self.listWidget_people.addItem(self.signal[1])
 
             else:
                 no_sign_in = ["USER_IS_NOT_SIGN"]
@@ -285,6 +289,7 @@ class Server(socket.socket, Ui_Server):
             Старт потока для принятия сообщений, иначе из-за accept() код дальше не идет
             и функция для принятия сообщения стартует после входа нового пользователя
             '''
+
 
 
 if __name__ == '__main__':
