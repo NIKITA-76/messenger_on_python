@@ -358,6 +358,10 @@ class UI_ForMain(object):
         self.pushButton_quit.setGeometry(QtCore.QRect(480, 470, 301, 36))
         self.pushButton_quit.setStyleSheet("background-color: rgb(41, 41, 41);")
         self.pushButton_quit.setObjectName("pushButton_quit")
+        self.pushButton_dwnld = QtWidgets.QPushButton(self.page_setting)
+        self.pushButton_dwnld.setGeometry(QtCore.QRect(480, 430, 301, 36))
+        self.pushButton_dwnld.setStyleSheet("background-color: rgb(41, 41, 41);")
+        self.pushButton_dwnld.setObjectName("pushButton_dwnld")
         self.pushButton_back_tomain = QtWidgets.QPushButton(self.page_setting)
         self.pushButton_back_tomain.setGeometry(QtCore.QRect(6, 19, 35, 36))
         self.pushButton_back_tomain.setStyleSheet("background-color: rgb(41, 41, 41);")
@@ -473,6 +477,7 @@ class UI_ForMain(object):
         self.pushButton_quit.clicked.connect(self.quit)
         self.pushButton_back_tomain.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(2))
         self.pushButton_room_file.clicked.connect(self.get_path_file)
+        self.pushButton_dwnld.clicked.connect(self.open_dwnload)
         # НИЖЕ ПРИ КЛИКЕ НА ИМЯ КОМНАТЫ ПРОИСХОДИТ ЗАГРУЗКА СООБЩЕНИЙ
         self.listWidget_people.clicked.connect(self.loadMSG)
         self.retranslateUi(MainWindow)
@@ -511,3 +516,4 @@ class UI_ForMain(object):
         self.pushButton_quit.setText(_translate("MainWindow", "Выйти"))
         self.label_of_creator.setText(
             _translate("MainWindow", "The_messenger             |               Nikita Tarasov"))
+        self.pushButton_dwnld.setText(_translate("MainWindow", "Загрузки"))
