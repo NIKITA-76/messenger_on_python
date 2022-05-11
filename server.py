@@ -43,7 +43,7 @@ class Server(socket.socket, Ui_Server):
     def listen_socket(self, ip_user, socket_user, ):  # Accept text from client
         try:
             while True:     # Accepting a message
-                self.signal = socket_user.recv(10000)
+                self.signal = socket_user.recv(16000)
                 print(self.signal)
                 self.signal = pickle.loads(self.signal)
                 print(f"ДАННЫЕ ОТ КЛИЕНТА --->{self.signal}")
@@ -81,9 +81,11 @@ class Server(socket.socket, Ui_Server):
             print(error)
             pass
 
-    def get_file(self):
-        file = open(f"file{self.signal[3]}", "wb")
-        file.write(self.signal[4])
+    def get_file(self): #Когда будешь делать беседу сделай исключение для себя(чтобы себе же не кидать файл)
+        for roomID, roomName in self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.signal[2]]["ROOMS"].items():
+            if roomName == self.signal[3]:
+                for userInRoom in self.data.rooms[roomID][0].values():
+                    userInRoom.send(pickle.dumps(["FILE", self.signal[2], self.signal[4], self.signal[4]]))
 
     def log_in(self, data,
                socket_user, ip_user):
@@ -182,15 +184,9 @@ class Server(socket.socket, Ui_Server):
     def private_MSG(self):
         print("------------КОМНАТА-------------")
         for roomID, roomName in self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.signal[2]]["ROOMS"].items():
-
             if roomName == self.signal[3]:
-                print(f"roomID, roomName --- >{roomID, roomName}")
-                print(f"self.rooms[roomID][0] --- >{self.data.rooms[roomID][0]}")
-
                 for userInRoom in self.data.rooms[roomID][0].values():
-                    print(f"userInRoom --- >{userInRoom}")
                     userInRoom.send(pickle.dumps(["MSGROOM", self.signal[2], self.signal[-1], self.signal[3]]))
-                    print(f"FOR ROOM IN CL --- >{['MSGROOM', self.signal[2], self.signal[-1], self.signal[3]]}")
 
         self.data.DB.update_one({"_id": "MESSAGE"}, {"$push": {self.signal[1]: f"{self.signal[2]}: {self.signal[-1]}"}})
 
@@ -206,12 +202,10 @@ class Server(socket.socket, Ui_Server):
                 self.logger_package_MSG.info(f"{['LOADMSG', 'NOMSG']}")
                 user.send(for_load_MSG)
             else:
-                print(bank_of_mess)
                 for i in bank_of_mess:
                     cut_bank_of_messg.append(i)
                     if len(cut_bank_of_messg) == 50:
                         break
-                print(f"1l{cut_bank_of_messg}")
                 for_load_MSG = pickle.dumps(
                     ["LOADMSG", cut_bank_of_messg])
                 user.send(for_load_MSG)
