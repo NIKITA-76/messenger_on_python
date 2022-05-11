@@ -87,22 +87,6 @@
        <string notr="true"/>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_to_reg">
-      <property name="geometry">
-       <rect>
-        <x>249</x>
-        <y>268</y>
-        <width>145</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color: rgb(158, 158, 158);</string>
-      </property>
-      <property name="text">
-       <string>Создать аккаунт</string>
-      </property>
-     </widget>
      <widget class="QLabel" name="label_log_in">
       <property name="geometry">
        <rect>
@@ -125,7 +109,7 @@
      <widget class="QPushButton" name="pushButton_sign_in">
       <property name="geometry">
        <rect>
-        <x>145</x>
+        <x>231</x>
         <y>268</y>
         <width>75</width>
         <height>23</height>
@@ -155,137 +139,6 @@
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="page_2">
-     <widget class="QLabel" name="label_info">
-      <property name="geometry">
-       <rect>
-        <x>130</x>
-        <y>258</y>
-        <width>279</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color: rgb(158, 158, 158);</string>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEdit_log">
-      <property name="geometry">
-       <rect>
-        <x>180</x>
-        <y>78</y>
-        <width>271</width>
-        <height>20</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_pass2">
-      <property name="geometry">
-       <rect>
-        <x>50</x>
-        <y>219</y>
-        <width>101</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color: rgb(158, 158, 158);</string>
-      </property>
-      <property name="text">
-       <string>Повторите пароль</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_log">
-      <property name="geometry">
-       <rect>
-        <x>81</x>
-        <y>80</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color: rgb(158, 158, 158);</string>
-      </property>
-      <property name="text">
-       <string>Логин</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_ready">
-      <property name="geometry">
-       <rect>
-        <x>132</x>
-        <y>290</y>
-        <width>81</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color: rgb(158, 158, 158);</string>
-      </property>
-      <property name="text">
-       <string>Готово</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_cancel">
-      <property name="geometry">
-       <rect>
-        <x>330</x>
-        <y>290</y>
-        <width>81</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color: rgb(158, 158, 158);</string>
-      </property>
-      <property name="text">
-       <string>Отмена</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEdit_pass2">
-      <property name="geometry">
-       <rect>
-        <x>180</x>
-        <y>219</y>
-        <width>271</width>
-        <height>20</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEdit_pass">
-      <property name="geometry">
-       <rect>
-        <x>180</x>
-        <y>163</y>
-        <width>271</width>
-        <height>20</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_pass">
-      <property name="geometry">
-       <rect>
-        <x>79</x>
-        <y>166</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color: rgb(158, 158, 158);</string>
-      </property>
-      <property name="text">
-       <string>Пароль</string>
       </property>
      </widget>
     </widget>

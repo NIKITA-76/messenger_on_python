@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>645</width>
-    <height>420</height>
+    <width>1059</width>
+    <height>662</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,19 +22,19 @@
      <rect>
       <x>9</x>
       <y>10</y>
-      <width>631</width>
-      <height>401</height>
+      <width>1041</width>
+      <height>641</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="page">
      <widget class="QPushButton" name="pushButton_show_all_usr">
       <property name="geometry">
        <rect>
-        <x>0</x>
-        <y>50</y>
+        <x>407</x>
+        <y>160</y>
         <width>221</width>
         <height>36</height>
        </rect>
@@ -46,8 +46,8 @@
      <widget class="QPushButton" name="pushButton_crt_user">
       <property name="geometry">
        <rect>
-        <x>1</x>
-        <y>10</y>
+        <x>433</x>
+        <y>200</y>
         <width>171</width>
         <height>36</height>
        </rect>
@@ -61,9 +61,9 @@
      <widget class="QListWidget" name="listWidget_people">
       <property name="geometry">
        <rect>
-        <x>5</x>
+        <x>10</x>
         <y>0</y>
-        <width>621</width>
+        <width>1021</width>
         <height>351</height>
        </rect>
       </property>
@@ -75,7 +75,7 @@
      <widget class="QPushButton" name="pushButton_3">
       <property name="geometry">
        <rect>
-        <x>270</x>
+        <x>470</x>
         <y>360</y>
         <width>103</width>
         <height>36</height>
@@ -90,8 +90,8 @@
      <widget class="QLabel" name="label_login">
       <property name="geometry">
        <rect>
-        <x>104</x>
-        <y>100</y>
+        <x>330</x>
+        <y>150</y>
         <width>66</width>
         <height>19</height>
        </rect>
@@ -106,7 +106,7 @@
      <widget class="QPushButton" name="pushButton_save">
       <property name="geometry">
        <rect>
-        <x>177</x>
+        <x>378</x>
         <y>310</y>
         <width>103</width>
         <height>36</height>
@@ -119,8 +119,8 @@
      <widget class="QLabel" name="label_passw">
       <property name="geometry">
        <rect>
-        <x>104</x>
-        <y>150</y>
+        <x>330</x>
+        <y>200</y>
         <width>66</width>
         <height>19</height>
        </rect>
@@ -135,8 +135,8 @@
      <widget class="QLineEdit" name="lineEdit_login">
       <property name="geometry">
        <rect>
-        <x>194</x>
-        <y>90</y>
+        <x>420</x>
+        <y>140</y>
         <width>321</width>
         <height>36</height>
        </rect>
@@ -145,8 +145,8 @@
      <widget class="QLineEdit" name="lineEdit_pass">
       <property name="geometry">
        <rect>
-        <x>194</x>
-        <y>140</y>
+        <x>420</x>
+        <y>190</y>
         <width>321</width>
         <height>36</height>
        </rect>
@@ -155,8 +155,8 @@
      <widget class="QLineEdit" name="lineEdit_passw_2">
       <property name="geometry">
        <rect>
-        <x>194</x>
-        <y>190</y>
+        <x>420</x>
+        <y>240</y>
         <width>321</width>
         <height>36</height>
        </rect>
@@ -165,8 +165,8 @@
      <widget class="QLabel" name="label_passw_2">
       <property name="geometry">
        <rect>
-        <x>7</x>
-        <y>200</y>
+        <x>233</x>
+        <y>250</y>
         <width>171</width>
         <height>19</height>
        </rect>
@@ -181,9 +181,9 @@
      <widget class="QLabel" name="label_info">
       <property name="geometry">
        <rect>
-        <x>241</x>
-        <y>50</y>
-        <width>171</width>
+        <x>360</x>
+        <y>20</y>
+        <width>321</width>
         <height>20</height>
        </rect>
       </property>
@@ -197,7 +197,7 @@
      <widget class="QPushButton" name="pushButton">
       <property name="geometry">
        <rect>
-        <x>399</x>
+        <x>600</x>
         <y>310</y>
         <width>103</width>
         <height>36</height>
@@ -205,6 +205,32 @@
       </property>
       <property name="text">
        <string>Отмена</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_login_2">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>100</y>
+        <width>66</width>
+        <height>19</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Имя:</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_login_2">
+      <property name="geometry">
+       <rect>
+        <x>420</x>
+        <y>90</y>
+        <width>321</width>
+        <height>36</height>
+       </rect>
       </property>
      </widget>
     </widget>

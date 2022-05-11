@@ -1103,7 +1103,7 @@ border-radius: 6px;
      <zorder>pushButton_room</zorder>
      <zorder>pushButton</zorder>
     </widget>
-    <widget class="QWidget" name="page">
+    <widget class="QWidget" name="page_setting">
      <widget class="QPushButton" name="pushButton_quit">
       <property name="geometry">
        <rect>
