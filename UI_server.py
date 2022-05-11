@@ -24,7 +24,7 @@ class Ui_Server(object):
         self.page_usr.setObjectName("page_usr")
         self.listWidget_people = QtWidgets.QListWidget(self.page_usr)
         self.listWidget_people.setGeometry(QtCore.QRect(10, 0, 1021, 351))
-        self.listWidget_people.setStyleSheet("color: rgb(50, 50, 50);\n"
+        self.listWidget_people.setStyleSheet("color: rgb(100, 100, 100);\n"
                                              "")
         self.listWidget_people.setObjectName("listWidget_people")
         self.pushButton_back_main_page_usr = QtWidgets.QPushButton(self.page_usr)
