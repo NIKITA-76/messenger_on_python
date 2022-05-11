@@ -4,6 +4,7 @@ import sys
 import time
 import threading
 import ui_client
+from os import path
 
 from configparser import ConfigParser
 from PyQt5 import QtWidgets
@@ -194,8 +195,9 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
     def get_path_file(self):
         file_path, _ = QFileDialog.getOpenFileName(self, )
         file = open(str(file_path), mode="rb")
-        print(_)
-        data = ["FILE", self.nick_name, self.listWidget_people.currentItem().text(), file.read(2048)]
+        full_name = path.basename(file_path)
+        name = path.splitext(full_name)[1]
+        data = ["FILE", self.nick_name, self.listWidget_people.currentItem().text(), name, file.read(2048)]
         data = pickle.dumps(data)
         self.cl.send_data(data)
 
