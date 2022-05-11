@@ -85,7 +85,7 @@ class Server(socket.socket, Ui_Server):
         for roomID, roomName in self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.signal[2]]["ROOMS"].items():
             if roomName == self.signal[3]:
                 for userInRoom in self.data.rooms[roomID][0].values():
-                    userInRoom.send(pickle.dumps(["FILE", self.signal[2], self.signal[4], self.signal[4]]))
+                    userInRoom.send(pickle.dumps(["FILE", self.signal[2], self.signal[4], self.signal[5]]))
 
     def log_in(self, data,
                socket_user, ip_user):

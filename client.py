@@ -101,7 +101,7 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
 
             elif data[0] == "FILE":
                 print(f"FILE ---> {data}")
-                file = open("file_from_client.txt", "wb")
+                file = open(f"{data[3]}", "wb")
                 file.write(data[2])
                 file.close()
 
@@ -204,10 +204,9 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
         file_path, _ = QFileDialog.getOpenFileName(self, )
         file = open(str(file_path), mode="rb")
         full_name = path.basename(file_path)
-        name = path.splitext(full_name)[1]
         for IDRoom, nameRoom in self.roomsForLoad[0].items():
             list_for_server = ["FILE", IDRoom, self.nick_name, self.listWidget_people.currentItem().text(),
-                               file.read(), name]
+                               file.read(), full_name]
             list_for_server = pickle.dumps(list_for_server)
             self.cl.send_data(list_for_server)
         print("FILEFILE")
