@@ -82,8 +82,8 @@ class Server(socket.socket, Ui_Server):
             pass
 
     def get_file(self):
-        file = open("license.txt", "wb")
-        file.write(self.signal[3])
+        file = open(f"file{self.signal[3]}", "wb")
+        file.write(self.signal[4])
 
     def log_in(self, data,
                socket_user, ip_user):
