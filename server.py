@@ -37,7 +37,7 @@ class Server(socket.socket, Ui_Server):
 
     def listen_socket(self, ip_user, socket_user, ):  # Accept text from client
         try:
-            while True:     # Accepting a message
+            while True:  # Accepting a message
                 self.signal = socket_user.recv(16000)
                 print(self.signal)
                 self.signal = pickle.loads(self.signal)
@@ -73,16 +73,15 @@ class Server(socket.socket, Ui_Server):
                             pass
 
         except EOFError as error:
-            print(error)
-            pass
+            print(f"ERROR IN listen_socket(76) {error}")
 
-    def get_file(self):     #Когда будешь делать беседу сделай исключение для себя(чтобы себе же не кидать файл)
+
+    def get_file(self):  # Когда будешь делать беседу сделай исключение для себя(чтобы себе же не кидать файл)
         for roomID, roomName in self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.signal[2]]["ROOMS"].items():
             if roomName == self.signal[3]:
                 for userInRoom, socket_of_user in self.data.rooms[roomID][0].items():
                     if userInRoom is not self.signal[2]:
                         socket_of_user.send(pickle.dumps(["FILE", self.signal[2], self.signal[4], self.signal[5]]))
-        print()
 
     def log_in(self, data,
                socket_user, ip_user):
@@ -147,8 +146,8 @@ class Server(socket.socket, Ui_Server):
                 try:
                     if usersInRoom not in self.data.rooms[name][0]:  # Условие, что бы не дублировать в комнаты
                         self.data.rooms[name][0].update({usersInRoom: self.data.userAndObject[usersInRoom]})
-                except Exception:
-                    pass
+                except Exception as error:
+                    print(f"ERROR IN create_room_now(150) {error}")
 
         try:
 
@@ -175,8 +174,8 @@ class Server(socket.socket, Ui_Server):
                 try:
                     if usersInRoom not in self.data.rooms[name][0]:  # Условие, что бы не дублировать в комнаты
                         self.data.rooms[name][0].update({usersInRoom: self.data.userAndObject[usersInRoom]})
-                except KeyError:
-                    pass
+                except KeyError as error:
+                    print(f"ERROR IN recreating_room_from_JSON(178) {error}")
 
     def private_MSG(self):
         print("------------КОМНАТА-------------")
@@ -232,7 +231,6 @@ class Server(socket.socket, Ui_Server):
                 user_of_search.append(user)
 
         user_of_search = pickle.dumps(["SEARCH", pickle.dumps(user_of_search)])
-        print(user_of_search)
         user_socket.send(user_of_search)
 
     def crt_new_user(self, ):
