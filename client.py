@@ -25,7 +25,10 @@ class Client(socket.socket):
 
 class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
     def __init__(self, MainWindow, ChildWindow):
-        os.mkdir("/home/n76/PycharmProjects/pythonProject/files")
+        try:
+            os.mkdir("/home/n76/PycharmProjects/pythonProject/files")
+        except FileExistsError:
+            pass
         super().__init__()
         super().setupUi(MainWindow, ChildWindow, )
         self.cl = Client()
@@ -43,7 +46,6 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
             if data[0] == "USER IS SIGN":  # Login check (Server confirmed login with a message)
                 print("YOU GOT IN")
                 self.can_write = True
-                print(self.roomsForLoad)
                 try:
                     for item in data[1]:
                         self.roomsForLoad.append(item)
@@ -115,7 +117,6 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
 
         data_of_sign = ["TRY_TO_ENTRY", login, password]
         data_of_sign = pickle.dumps(data_of_sign)
-        print(data_of_sign)
 
         self.cl.send_data(data_of_sign)
 
@@ -211,7 +212,6 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
                                file.read(), full_name]
             list_for_server = pickle.dumps(list_for_server)
             self.cl.send_data(list_for_server)
-        print("FILEFILE")
 
 
 if __name__ == "__main__":
