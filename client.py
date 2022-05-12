@@ -204,14 +204,20 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
         self.cl.send_data(new_room)
 
     def get_path_file(self):
-        file_path, _ = QFileDialog.getOpenFileName(self, )
-        file = open(str(file_path), mode="rb")
-        full_name = os.path.basename(file_path)
-        for IDRoom, nameRoom in self.roomsForLoad[0].items():
-            list_for_server = ["FILE", IDRoom, self.nick_name, self.listWidget_people.currentItem().text(),
-                               file.read(), full_name]
-            list_for_server = pickle.dumps(list_for_server)
-            self.cl.send_data(list_for_server)
+        try:
+            file_path, _ = QFileDialog.getOpenFileName(self, )
+            file = open(str(file_path), mode="rb")
+            full_name = os.path.basename(file_path)
+            for IDRoom, nameRoom in self.roomsForLoad[0].items():
+                list_for_server = ["FILE", IDRoom, self.nick_name, self.listWidget_people.currentItem().text(),
+                                   file.read(), full_name]
+                list_for_server = pickle.dumps(list_for_server)
+                list_for_server_ = pickle.loads(list_for_server)
+                self.cl.send_data(list_for_server)
+                print(list_for_server)
+                print(list_for_server_)
+        except FileNotFoundError:
+            pass
 
 
 if __name__ == "__main__":
