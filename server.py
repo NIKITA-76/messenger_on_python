@@ -9,11 +9,6 @@ from init_data import Data
 from PyQt5 import QtWidgets
 
 
-class UI_Server(Ui_Server):
-    def __init__(self):
-        pass
-
-
 class Server(socket.socket, Ui_Server):
     def __init__(self, ):
         super().__init__(socket.AF_INET, socket.SOCK_STREAM)
@@ -81,11 +76,13 @@ class Server(socket.socket, Ui_Server):
             print(error)
             pass
 
-    def get_file(self): #Когда будешь делать беседу сделай исключение для себя(чтобы себе же не кидать файл)
+    def get_file(self):     #Когда будешь делать беседу сделай исключение для себя(чтобы себе же не кидать файл)
         for roomID, roomName in self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.signal[2]]["ROOMS"].items():
             if roomName == self.signal[3]:
-                for userInRoom in self.data.rooms[roomID][0].values():
-                    userInRoom.send(pickle.dumps(["FILE", self.signal[2], self.signal[4], self.signal[5]]))
+                for userInRoom, socket_of_user in self.data.rooms[roomID][0].items():
+                    if userInRoom is not self.signal[2]:
+                        socket_of_user.send(pickle.dumps(["FILE", self.signal[2], self.signal[4], self.signal[5]]))
+        print()
 
     def log_in(self, data,
                socket_user, ip_user):
@@ -185,9 +182,11 @@ class Server(socket.socket, Ui_Server):
         print("------------КОМНАТА-------------")
         for roomID, roomName in self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.signal[2]]["ROOMS"].items():
             if roomName == self.signal[3]:
-                for userInRoom in self.data.rooms[roomID][0].values():
-                    userInRoom.send(pickle.dumps(["MSGROOM", self.signal[2], self.signal[-1], self.signal[3]]))
-
+                for userInRoom, socket_of_user in self.data.rooms[roomID][0].items():
+                    socket_of_user.send(pickle.dumps(["MSGROOM", self.signal[2], self.signal[-1], self.signal[3]]))
+                    print(roomID)
+                    print(roomName)
+                    print(self.data.rooms[roomID][0])
         self.data.DB.update_one({"_id": "MESSAGE"}, {"$push": {self.signal[1]: f"{self.signal[2]}: {self.signal[-1]}"}})
 
         print("------------КОНЕЦ КОМНАТЫ-------------")
@@ -283,7 +282,6 @@ class Server(socket.socket, Ui_Server):
             Старт потока для принятия сообщений, иначе из-за accept() код дальше не идет
             и функция для принятия сообщения стартует после входа нового пользователя
             '''
-
 
 
 if __name__ == '__main__':
