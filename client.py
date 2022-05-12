@@ -25,6 +25,7 @@ class Client(socket.socket):
 
 class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
     def __init__(self, MainWindow, ChildWindow):
+        os.mkdir("/home/n76/PycharmProjects/pythonProject/files")
         super().__init__()
         super().setupUi(MainWindow, ChildWindow, )
         self.cl = Client()
@@ -101,20 +102,12 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
 
             elif data[0] == "FILE":
                 print(f"FILE ---> {data}")
-                try:
-                    file = open(f"files/{data[3]}", "wb")
-                    file.write(data[2])
-                    file.close()
-                except FileNotFoundError:
-                    os.mkdir("/home/n76/PycharmProjects/pythonProject/files")
-                    file = open(f"files/{data[3]}", "wb")
-                    file.write(data[2])
-                    file.close()
-
-
+                file = open(f"files/{data[3]}", "wb")
+                file.write(data[2])
+                file.close()
 
     def open_dwnload(self):
-        dir_ = QtWidgets.QFileDialog.getExistingDirectory(directory="/home/n76/PycharmProjects/pythonProject/files")
+        QtWidgets.QFileDialog.getExistingDirectory(directory="/home/n76/PycharmProjects/pythonProject/files")
 
     def Sign_in(self):  # ChildWindow
         login = self.LP_RForm.lineEdit.text()
