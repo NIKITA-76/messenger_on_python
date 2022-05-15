@@ -104,9 +104,15 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
 
             elif data[0] == "FILE":
                 print(f"FILE ---> {data}")
-                file = open(f"files/{data[3]}", "wb")
-                file.write(data[2])
-                file.close()
+                try:
+                    file = open(f"files/{data[3]}", "wb")
+                    file.write(data[2])
+                    file.close()
+                except FileNotFoundError:
+                    os.mkdir("/home/n76/PycharmProjects/pythonProject/files")
+                    file = open(f"files/{data[3]}", "wb")
+                    file.write(data[2])
+                    file.close()
 
     def open_dwnload(self):
         QtWidgets.QFileDialog.getExistingDirectory(directory="/home/n76/PycharmProjects/pythonProject/files")
