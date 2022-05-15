@@ -38,7 +38,7 @@ class Server(socket.socket, Ui_Server):
     def listen_socket(self, ip_user, socket_user, ):  # Accept text from client
         try:
             while True:  # Accepting a message
-                self.signal = socket_user.recv(16000)
+                self.signal = socket_user.recv(4096)
                 print(self.signal)
                 self.signal = pickle.loads(self.signal)
                 print(f"ДАННЫЕ ОТ КЛИЕНТА --->{self.signal}")
@@ -74,7 +74,6 @@ class Server(socket.socket, Ui_Server):
 
         except EOFError as error:
             print(f"ERROR IN listen_socket(76) {error}")
-
 
     def get_file(self):  # Когда будешь делать беседу сделай исключение для себя(чтобы себе же не кидать файл)
         for roomID, roomName in self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.signal[2]]["ROOMS"].items():
