@@ -32,7 +32,7 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
         super().__init__()
         super().setupUi(MainWindow, ChildWindow, )
         self.cl = Client()
-        self.thr = threading.Thread(target=self.get_text).start()
+        threading.Thread(target=self.get_text).start()
         self.canLoad = True
         self.can_write = False
         self.roomsForLoad = []
@@ -201,6 +201,7 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
                     self.cl.send_data(list_for_server)
                     self.textEdit_room.clear()
                     self.textEdit_room.setFocus()
+                    break
 
     def addNewFriend(self):
         new_room = ["CRT_ROOM", self.AddFRNDForm.listWidget.currentItem().text(), self.nick_name, ]
@@ -209,6 +210,10 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
         self.cl.send_data(new_room)
 
     def get_path_file(self):
+        self.fi = threading.Thread(target=self.get_path_file_fun)
+        self.fi.start()
+
+    def get_path_file_fun(self):
         try:
             file_path, _ = QFileDialog.getOpenFileName(self, )
             file = open(str(file_path), mode="rb")
@@ -219,12 +224,16 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
                         time.sleep(0.1)
                         x = file.read(1000)
                         print(f"X --- {x}")
-                        if not x: break
+                        if not x:
+                            self.fi.join()
+                            break
+
                         list_for_server = ["FILE", IDRoom, self.nick_name, self.listWidget_people.currentItem().text(),
                                            x, full_name]
 
                         list_for_server = pickle.dumps(list_for_server)
                         self.cl.send_data(list_for_server)
+                    break
         except FileNotFoundError:
             pass
 
