@@ -214,13 +214,17 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
             file = open(str(file_path), mode="rb")
             full_name = os.path.basename(file_path)
             for IDRoom, nameRoom in self.roomsForLoad[0].items():
-                list_for_server = ["FILE", IDRoom, self.nick_name, self.listWidget_people.currentItem().text(),
-                                   file.read(), full_name]
-                list_for_server = pickle.dumps(list_for_server)
-                list_for_server_ = pickle.loads(list_for_server)
-                self.cl.send_data(list_for_server)
-                print(list_for_server)
-                print(list_for_server_)
+                if self.listWidget_people.currentItem().text() == nameRoom:
+                    while True:
+                        time.sleep(0.1)
+                        x = file.read(1000)
+                        print(f"X --- {x}")
+                        if not x: break
+                        list_for_server = ["FILE", IDRoom, self.nick_name, self.listWidget_people.currentItem().text(),
+                                           x, full_name]
+
+                        list_for_server = pickle.dumps(list_for_server)
+                        self.cl.send_data(list_for_server)
         except FileNotFoundError:
             pass
 
