@@ -34,7 +34,6 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
         self.cl = Client()
         threading.Thread(target=self.get_text).start()
         self.canLoad = True
-        self.can_write = False
         self.roomsForLoad = []
 
     def get_text(self, ):
@@ -192,16 +191,15 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
             self.cl.send_data(men)
 
     def roomMessage(self):
-        if self.can_write:
-            for IDRoom, nameRoom in self.roomsForLoad[0].items():
-                if self.listWidget_people.currentItem().text() == nameRoom and self.textEdit_room.toPlainText().strip() != "" and self.can_write:
-                    list_for_server = ["MSGROOM", IDRoom, self.nick_name, self.listWidget_people.currentItem().text(),
-                                       self.textEdit_room.toPlainText().strip()]
-                    list_for_server = pickle.dumps(list_for_server)
-                    self.cl.send_data(list_for_server)
-                    self.textEdit_room.clear()
-                    self.textEdit_room.setFocus()
-                    break
+        for IDRoom, nameRoom in self.roomsForLoad[0].items():
+            if self.listWidget_people.currentItem().text() == nameRoom and self.textEdit_room.toPlainText().strip() != "" and self.can_write:
+                list_for_server = ["MSGROOM", IDRoom, self.nick_name, self.listWidget_people.currentItem().text(),
+                                   self.textEdit_room.toPlainText().strip()]
+                list_for_server = pickle.dumps(list_for_server)
+                self.cl.send_data(list_for_server)
+                self.textEdit_room.clear()
+                self.textEdit_room.setFocus()
+                break
 
     def addNewFriend(self):
         new_room = ["CRT_ROOM", self.AddFRNDForm.listWidget.currentItem().text(), self.nick_name, ]
