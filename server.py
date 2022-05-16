@@ -39,9 +39,8 @@ class Server(socket.socket, Ui_Server):
         try:
             while True:  # Accepting a message
                 self.signal = socket_user.recv(4096)
-                print(self.signal)
-                self.signal = pickle.loads(self.signal)
                 print(f"ДАННЫЕ ОТ КЛИЕНТА --->{self.signal}")
+                self.signal = pickle.loads(self.signal)
                 if self.signal[0] == "TRY_TO_ENTRY":
                     self.log_in(self.signal, socket_user, ip_user)
                     self.data.name_withIp[self.signal[1]] = self.data.users_ip[0]
@@ -75,12 +74,17 @@ class Server(socket.socket, Ui_Server):
         except EOFError as error:
             print(f"ERROR IN listen_socket(76) {error}")
 
-    def get_file(self):  # Когда будешь делать беседу сделай исключение для себя(чтобы себе же не кидать файл)
-        for roomID, roomName in self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.signal[2]]["ROOMS"].items():
-            if roomName == self.signal[3]:
-                for userInRoom, socket_of_user in self.data.rooms[roomID][0].items():
-                    if userInRoom is not self.signal[2]:
-                        socket_of_user.send(pickle.dumps(["FILE", self.signal[2], self.signal[4], self.signal[5]]))
+    def get_file(self):
+        file = open("_SERVER" + self.signal[5], 'ab')
+        file.write(self.signal[4])
+        file.close()
+
+    # def get_file(self):  # Когда будешь делать беседу сделай исключение для себя(чтобы себе же не кидать файл)
+    #    for roomID, roomName in self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.signal[2]]["ROOMS"].items():
+    #        if roomName == self.signal[3]:
+    #            for userInRoom, socket_of_user in self.data.rooms[roomID][0].items():
+    #                if userInRoom is not self.signal[2]:
+    #                    socket_of_user.send(pickle.dumps(["FILE", self.signal[2], self.signal[4], self.signal[5]]))
 
     def log_in(self, data,
                socket_user, ip_user):
