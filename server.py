@@ -242,7 +242,9 @@ class Server(socket.socket, Ui_Server):
             if self.lineEdit_pass.text() == self.lineEdit_passw_2.text():
                 self.data.DB.update_one({"_id": "USERS"},
                                         {"$set": {self.lineEdit_login.text(): {"password": self.lineEdit_pass.text(),
-                                                                               "name": self.lineEdit_name.text(),
+                                                                               "FIO": self.lineEdit_fio.text(),
+                                                                               "post": self.lineEdit_post.text(),
+                                                                               "cabinet": self.lineEdit_cabinet.text(),
                                                                                # Пока нигде не используется
                                                                                "ROOMS": {}
                                                                                }}})
