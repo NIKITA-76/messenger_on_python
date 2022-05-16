@@ -2,7 +2,7 @@ from PyQt5 import QtCore, QtWidgets
 
 
 class Ui_Server(object):
-    def setupUi(self, MainWindow,):
+    def setupUi(self, MainWindow, ):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1059, 662)
         MainWindow.setStyleSheet("background-color: rgb(50, 50, 50);")
@@ -98,5 +98,3 @@ class Ui_Server(object):
         self.label_passw_2.setText(_translate("MainWindow", "Подтвердите пароль:"))
         self.label_info.setText(_translate("MainWindow", "Создание пользователя"))
         self.pushButton_back_main_page_crt_usr.setText(_translate("MainWindow", "Отмена"))
-
-
