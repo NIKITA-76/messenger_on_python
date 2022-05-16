@@ -44,7 +44,6 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
             print(f"Данные от сервера --- >{data}")
             if data[0] == "USER IS SIGN":  # Login check (Server confirmed login with a message)
                 print("YOU GOT IN")
-                self.can_write = True
                 try:
                     for item in data[1]:
                         self.roomsForLoad.append(item)
