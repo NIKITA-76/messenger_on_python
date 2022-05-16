@@ -192,7 +192,6 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
             self.cl.send_data(men)
 
     def roomMessage(self):
-
         if self.can_write:
             for IDRoom, nameRoom in self.roomsForLoad[0].items():
                 if self.listWidget_people.currentItem().text() == nameRoom and self.textEdit_room.toPlainText().strip() != "" and self.can_write:

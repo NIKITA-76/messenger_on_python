@@ -4,7 +4,7 @@ import threading
 import logging
 import sys
 
-from UI_server import Ui_Server
+from ui_server import Ui_Server
 from init_data import Data
 from PyQt5 import QtWidgets
 
