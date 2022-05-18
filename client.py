@@ -112,7 +112,8 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
                     file.write(data[2])
                     file.close()
 
-    def open_dwnload(self):
+    @staticmethod
+    def open_dwnload():
         QtWidgets.QFileDialog.getExistingDirectory(directory="/home/n76/PycharmProjects/pythonProject/files")
 
     def Sign_in(self):  # ChildWindow
@@ -191,7 +192,7 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
 
     def roomMessage(self):
         for IDRoom, nameRoom in self.roomsForLoad[0].items():
-            if self.listWidget_people.currentItem().text() == nameRoom and self.textEdit_room.toPlainText().strip() != "" and self.can_write:
+            if self.listWidget_people.currentItem().text() == nameRoom and self.textEdit_room.toPlainText().strip() != "" :
                 list_for_server = ["MSGROOM", IDRoom, self.nick_name, self.listWidget_people.currentItem().text(),
                                    self.textEdit_room.toPlainText().strip()]
                 list_for_server = pickle.dumps(list_for_server)
@@ -206,11 +207,8 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
         self.AddFRNDWindow.close()
         self.cl.send_data(new_room)
 
-    def get_path_file(self):
-        self.fi = threading.Thread(target=self.get_path_file_fun)
-        self.fi.start()
 
-    def get_path_file_fun(self):
+    def get_path_file(self):
         try:
             file_path, _ = QFileDialog.getOpenFileName(self, )
             file = open(str(file_path), mode="rb")
@@ -222,7 +220,6 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
                         x = file.read(1000)
                         print(f"X --- {x}")
                         if not x:
-                            self.fi.join()
                             break
 
                         list_for_server = ["FILE", IDRoom, self.nick_name, self.listWidget_people.currentItem().text(),
