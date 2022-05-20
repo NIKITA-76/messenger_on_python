@@ -1,14 +1,15 @@
+import os
 import pickle
 import socket
 import sys
-import time
 import threading
-import ui_client
-import os
-
+import time
 from configparser import ConfigParser
+
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtWidgets import QWidget, QFileDialog
+
+import ui_client
 
 
 class Client(socket.socket):
@@ -198,7 +199,7 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
 
     def roomMessage(self):
         for IDRoom, nameRoom in self.roomsForLoad[0].items():
-            if self.listWidget_people.currentItem().text() == nameRoom and self.textEdit_room.toPlainText().strip() != "" :
+            if self.listWidget_people.currentItem().text() == nameRoom and self.textEdit_room.toPlainText().strip() != "":
                 list_for_server = ["MSGROOM", IDRoom, self.nick_name, self.listWidget_people.currentItem().text(),
                                    self.textEdit_room.toPlainText().strip()]
                 list_for_server = pickle.dumps(list_for_server)

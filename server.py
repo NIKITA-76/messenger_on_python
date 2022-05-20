@@ -204,7 +204,8 @@ class Server(socket.socket, Ui_Server):
         bank_of_mess.reverse()
         try:
             if not bank_of_mess:
-                for_load_MSG = pickle.dumps(["LOADMSG", fio_of_user, cabinet_of_mess, mail_of_mess, post_of_mess, "NOMSG", ])
+                for_load_MSG = pickle.dumps(
+                    ["LOADMSG", fio_of_user, cabinet_of_mess, mail_of_mess, post_of_mess, "NOMSG", ])
                 self.logger_package_MSG.info(f"{['LOADMSG', 'NOMSG']}")
                 user.send(for_load_MSG)
             else:
