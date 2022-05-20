@@ -1,12 +1,13 @@
+import logging
 import pickle
 import socket
-import threading
-import logging
 import sys
+import threading
 
-from ui_server import Ui_Server
-from init_data import Data
 from PyQt5 import QtWidgets
+
+from init_data import Data
+from ui_server import Ui_Server
 
 
 class Server(socket.socket, Ui_Server):
@@ -79,7 +80,7 @@ class Server(socket.socket, Ui_Server):
         file.write(self.signal[4])
         file.close()
 
-    # def get_file(self):  # Когда будешь делать беседу сделай исключение для себя(чтобы себе же не кидать файл)
+    # def get_file(self):
     #    for roomID, roomName in self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.signal[2]]["ROOMS"].items():
     #        if roomName == self.signal[3]:
     #            for userInRoom, socket_of_user in self.data.rooms[roomID][0].items():
@@ -196,6 +197,10 @@ class Server(socket.socket, Ui_Server):
     def load_MSG_for_client(self, user, ):
         cut_bank_of_messg = []
         bank_of_mess = self.data.DB.find_one({"_id": "MESSAGE"}, {"_id": 0})[self.signal[1]]
+        fio_of_user = self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.signal[2]]["FIO"]
+        cabinet_of_mess = self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.signal[2]]["post"]
+        mail_of_mess = self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.signal[2]]["mail"]
+        post_of_mess = self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.signal[2]]["phone"]
         bank_of_mess.reverse()
         try:
             if not bank_of_mess:
@@ -208,7 +213,7 @@ class Server(socket.socket, Ui_Server):
                     if len(cut_bank_of_messg) == 50:
                         break
                 for_load_MSG = pickle.dumps(
-                    ["LOADMSG", cut_bank_of_messg])
+                    ["LOADMSG", fio_of_user, cabinet_of_mess, mail_of_mess, post_of_mess, cut_bank_of_messg])
                 user.send(for_load_MSG)
 
         except KeyError as error:
@@ -244,7 +249,8 @@ class Server(socket.socket, Ui_Server):
                                         {"$set": {self.lineEdit_login.text(): {"password": self.lineEdit_pass.text(),
                                                                                "FIO": self.lineEdit_fio.text(),
                                                                                "post": self.lineEdit_post.text(),
-                                                                               "cabinet": self.lineEdit_cabinet.text(),
+                                                                               "phone": self.lineEdit_phone.text(),
+                                                                               "mail": self.lineEdit_mail.text(),
                                                                                # Пока нигде не используется
                                                                                "ROOMS": {}
                                                                                }}})
@@ -252,7 +258,7 @@ class Server(socket.socket, Ui_Server):
                 print(f"ПОЛЬЗОВАТЕЛЬ ЗАРЕГИСТРИРОВАН ")
                 self.label_info.setText("Пользователь успешно зарегистрирован!")
                 self.lineEdit_fio.clear()
-                self.lineEdit_cabinet.clear()
+                self.lineEdit_phone.clear()
                 self.lineEdit_post.clear()
                 self.lineEdit_login.clear()
                 self.lineEdit_pass.clear()
