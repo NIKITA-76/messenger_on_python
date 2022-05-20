@@ -37,6 +37,7 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
         threading.Thread(target=self.get_text).start()
         self.canLoad = True
         self.roomsForLoad = []
+        self.animation_play = True
 
     def get_text(self, ):
         # We receive text from the server USING the client (Client)
@@ -214,18 +215,20 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
                 break
 
     def show_card_of_user(self):
-        # self.anim = QPropertyAnimation(self.frame, b'geometry')
-        # self.anim.setDuration(500)
-        # self.anim.setStartValue(QRect(10, self.frame.y(), 100, 100))
-        # self.anim.setEndValue(QRect(10, self.frame.y(), 200, 200))
-        # self.anim.start()
-
-        width_frame = self.frame.width()
-
-        if width_frame > 0:
-            self.frame.setGeometry(QtCore.QRect(930, 0, 0, 731))
+        self.anim = QPropertyAnimation(self.frame, b'geometry')
+        if self.animation_play:
+            self.animation_play = False
+            self.anim.setDuration(50)
+            self.anim.setStartValue(QRect(1290, 0, 370, 731))
+            self.anim.setEndValue(QRect(930, 0, 370, 731))
+            self.anim.start()
         else:
-            self.frame.setGeometry(QtCore.QRect(930, 0, 370, 731))
+            self.animation_play = True
+            self.anim.setDuration(50)
+            self.anim.setStartValue(QRect(930, 0, 370, 731))
+            self.anim.setEndValue(QRect(1290, 0, 370, 731))
+            self.anim.start()
+
 
     def addNewFriend(self):
         new_room = ["CRT_ROOM", self.AddFRNDForm.listWidget.currentItem().text(), self.nick_name, ]
