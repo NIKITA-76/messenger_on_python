@@ -187,9 +187,6 @@ class Server(socket.socket, Ui_Server):
             if roomName == self.signal[3]:
                 for userInRoom, socket_of_user in self.data.rooms[roomID][0].items():
                     socket_of_user.send(pickle.dumps(["MSGROOM", self.signal[2], self.signal[-1], self.signal[3]]))
-                    print(roomID)
-                    print(roomName)
-                    print(self.data.rooms[roomID][0])
         self.data.DB.update_one({"_id": "MESSAGE"}, {"$push": {self.signal[1]: f"{self.signal[2]}: {self.signal[-1]}"}})
 
         print("------------КОНЕЦ КОМНАТЫ-------------")
