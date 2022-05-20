@@ -77,16 +77,17 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
                 self.listWidget_msgRoom.verticalScrollBar().setValue(3)
                 self.listWidget_msgRoom.insertItems(0, data[1])
             elif data[0] == "LOADMSG":
-                if data[1] == "NOMSG":
+                self.label_card_fio.setText(data[1])
+                self.label_card_post.setText("Должность: " + data[2])
+                self.label_card_phone.setText("Телефон: " + data[3])
+                self.label_card_mail.setText("Эл.Почта: " + data[4])
+                if data[-1] == "NOMSG":
                     self.listWidget_msgRoom.clear()
                 else:
-                    self.label_card_fio.setText("ФИО: " + data[1])
-                    self.label_card_post.setText("Должность: " + data[2])
-                    self.label_card_phone.setText("Телефон: " + data[3])
-                    self.label_card_mail.setText("Эл.Почта: " + data[4])
+
                     self.pushButton_room.show()
                     self.listWidget_msgRoom.clear()
-                    bank_of_message = data[5]
+                    bank_of_message = data[-1]
                     bank_of_message.reverse()
                     print(f"Банк сообщений с сервера --->{bank_of_message}")
                     self.listWidget_msgRoom.addItems(bank_of_message)
