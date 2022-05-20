@@ -211,9 +211,9 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
         width_frame = self.frame.width()
 
         if width_frame > 0:
-            self.frame.setGeometry(QtCore.QRect(980, 0, 0, 711))
+            self.frame.setGeometry(QtCore.QRect(930, 0, 0, 731))
         else:
-            self.frame.setGeometry(QtCore.QRect(980, 0, 361, 711))
+            self.frame.setGeometry(QtCore.QRect(930, 0, 370, 731))
 
     def addNewFriend(self):
         new_room = ["CRT_ROOM", self.AddFRNDForm.listWidget.currentItem().text(), self.nick_name, ]
