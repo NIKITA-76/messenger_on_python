@@ -7,7 +7,7 @@ import ui_client
 import os
 
 from configparser import ConfigParser
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtWidgets import QWidget, QFileDialog
 
 
@@ -51,7 +51,7 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
                     pass
                 self.nick_name = self.LP_RForm.lineEdit.text()
                 ChildWindow.close()
-                self.pushButton_menu.show()
+                self.pushButton_addFriend.show()
                 self.pushButton_settings.show()
                 self.load()
             elif data[0] == "USER_IS_NOT_SIGN":
@@ -80,9 +80,13 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
                 if data[1] == "NOMSG":
                     self.listWidget_msgRoom.clear()
                 else:
+                    self.label_card_fio.setText("ФИО: " + data[1])
+                    self.label_card_post.setText("Должность: " + data[2])
+                    self.label_card_phone.setText("Телефон: " + data[3])
+                    self.label_card_mail.setText("Эл.Почта: " + data[4])
                     self.pushButton_room.show()
                     self.listWidget_msgRoom.clear()
-                    bank_of_message = data[1]
+                    bank_of_message = data[5]
                     bank_of_message.reverse()
                     print(f"Банк сообщений с сервера --->{bank_of_message}")
                     self.listWidget_msgRoom.addItems(bank_of_message)
@@ -138,12 +142,12 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
         self.cl.send_data(data_of_sign)
         self.textEdit_room.clear()
         self.listWidget_msgRoom.clear()
-        self.listWidget_title.clear()
+        self.pushButton_label.setText("")
         self.roomsForLoad.clear()
         self.listWidget_people.clear()
         self.stackedWidget.setCurrentIndex(2)
         self.pushButton_room.hide()
-        self.pushButton_menu.hide()
+        self.pushButton_addFriend.hide()
         self.pushButton_settings.hide()
         ChildWindow.show()
 
@@ -158,8 +162,8 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
         try:
             if value_ofScrollBar == 0:
                 for IDRoom, nameRoom in self.roomsForLoad[0].items():
-                    self.listWidget_title.clear()
-                    self.listWidget_title.setText(nameRoom)
+                    self.pushButton_label.setText("")
+                    self.pushButton_label.setText(nameRoom)
                     if self.listWidget_people.currentItem().text() == nameRoom:
                         ind_start = self.listWidget_msgRoom.count()
                         msg_room = ["LOADMSG_ADD", IDRoom, ind_start, ]
@@ -173,10 +177,11 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
         self.pushButton_room.show()
         try:
             for IDRoom, nameRoom in self.roomsForLoad[0].items():
-                self.listWidget_title.clear()
-                self.listWidget_title.setText(nameRoom)
+                self.pushButton_label.setText("")
+                self.pushButton_label.setText(nameRoom)
+
                 if self.listWidget_people.currentItem().text() == nameRoom:
-                    msg_room = ["LOADMSG", IDRoom, ]
+                    msg_room = ["LOADMSG", IDRoom, nameRoom, ]
                     msg_room = pickle.dumps(msg_room)
                     self.cl.send_data(msg_room)
                     break
@@ -201,12 +206,19 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
                 self.textEdit_room.setFocus()
                 break
 
+    def show_card_of_user(self):
+        width_frame = self.frame.width()
+
+        if width_frame > 0:
+            self.frame.setGeometry(QtCore.QRect(980, 0, 0, 711))
+        else:
+            self.frame.setGeometry(QtCore.QRect(980, 0, 361, 711))
+
     def addNewFriend(self):
         new_room = ["CRT_ROOM", self.AddFRNDForm.listWidget.currentItem().text(), self.nick_name, ]
         new_room = pickle.dumps(new_room)
         self.AddFRNDWindow.close()
         self.cl.send_data(new_room)
-
 
     def get_path_file(self):
         try:
