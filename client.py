@@ -79,8 +79,8 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
             elif data[0] == "LOADMSG":
                 self.label_card_fio.setText(data[1])
                 self.label_card_post.setText("Должность: " + data[2])
-                self.label_card_phone.setText("Телефон: " + data[3])
-                self.label_card_mail.setText("Эл.Почта: " + data[4])
+                self.label_card_mail.setText("Эл.Почта: " + data[3])
+                self.label_card_phone.setText("Телефон: " + data[4])
                 if data[-1] == "NOMSG":
                     self.listWidget_msgRoom.clear()
                 else:
