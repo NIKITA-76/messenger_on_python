@@ -7,6 +7,7 @@ import time
 from configparser import ConfigParser
 
 from PyQt5 import QtWidgets, QtCore
+from PyQt5.QtCore import QPropertyAnimation, QRect
 from PyQt5.QtWidgets import QWidget, QFileDialog
 
 import ui_client
@@ -146,6 +147,10 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
         self.listWidget_msgRoom.clear()
         self.pushButton_label.setText("")
         self.roomsForLoad.clear()
+        self.label_card_mail.clear()
+        self.label_card_post.clear()
+        self.label_card_fio.clear()
+        self.label_card_phone.clear()
         self.listWidget_people.clear()
         self.stackedWidget.setCurrentIndex(2)
         self.pushButton_room.hide()
@@ -209,6 +214,12 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
                 break
 
     def show_card_of_user(self):
+        # self.anim = QPropertyAnimation(self.frame, b'geometry')
+        # self.anim.setDuration(500)
+        # self.anim.setStartValue(QRect(10, self.frame.y(), 100, 100))
+        # self.anim.setEndValue(QRect(10, self.frame.y(), 200, 200))
+        # self.anim.start()
+
         width_frame = self.frame.width()
 
         if width_frame > 0:
