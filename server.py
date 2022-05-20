@@ -204,7 +204,7 @@ class Server(socket.socket, Ui_Server):
         bank_of_mess.reverse()
         try:
             if not bank_of_mess:
-                for_load_MSG = pickle.dumps(["LOADMSG", "NOMSG"])
+                for_load_MSG = pickle.dumps(["LOADMSG", fio_of_user, cabinet_of_mess, mail_of_mess, post_of_mess, "NOMSG", ])
                 self.logger_package_MSG.info(f"{['LOADMSG', 'NOMSG']}")
                 user.send(for_load_MSG)
             else:
@@ -263,6 +263,7 @@ class Server(socket.socket, Ui_Server):
                 self.lineEdit_login.clear()
                 self.lineEdit_pass.clear()
                 self.lineEdit_passw_2.clear()
+                self.lineEdit_mail.clear()
             else:
                 self.label_info.setText("Пароли не совпадают!")
                 print("Passwords don't match")
