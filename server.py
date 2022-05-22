@@ -270,6 +270,16 @@ class Server(socket.socket, Ui_Server):
             self.label_login.setStyleSheet("color: red")
             print("HAVE_THIS_USER")
 
+
+    def change_user(self):
+        pass
+
+    def search_for_chenge(self):
+        users_in_JSON = self.data.DB.find_one({'_id': 'USERS'}, {'_id': 0})
+        for user in users_in_JSON:
+            if self.lineEdit_ch.text() in user:
+                self.listWidget_users.addItem(user)
+
     def start_server(self):
         print("Listen")
 
