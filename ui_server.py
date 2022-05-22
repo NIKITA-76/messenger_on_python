@@ -228,16 +228,16 @@ class Ui_Server(object):
         self.pushButton_delete_user.clicked.connect(lambda: self.stackedWidget_change.setCurrentIndex(2))
 
         self.pushButton_save.clicked.connect(self.crt_new_user)
-        self.pushButton_crt_cancel.clicked.connect(lambda: self.stackedWidget_change.setCurrentIndex(0))
+        self.pushButton_crt_cancel.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(0))
 
         self.pushButton_ch_save.clicked.connect(self.change_user)
         self.pushButton_ch_search.clicked.connect(self.search_for_change)
-        self.pushButton_ch_cancel.clicked.connect(lambda: self.stackedWidget_change.setCurrentIndex(0))
-        self.listWidget_users.clicked.connect(self.add_in_listwidget_ch)
+        self.pushButton_ch_cancel.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(0))
+        self.listWidget_users.clicked.connect(self.add_in_combo_ch)
         self.comboBox.activated.connect(self.combo_date_add)
 
         #self.pushButton_del_save.clicked.connect(self.del_user)
-        self.pushButton_del_cancel.clicked.connect(lambda: self.stackedWidget_change.setCurrentIndex(0))
+        self.pushButton_del_cancel.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(0))
         self.pushButton_del_save.clicked.connect(self.delete_user)
         self.pushButton_del_search.clicked.connect(self.search_for_delete)
 

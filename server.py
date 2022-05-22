@@ -271,12 +271,15 @@ class Server(socket.socket, Ui_Server):
             self.label_login.setStyleSheet("color: red")
             print("HAVE_THIS_USER")
 
-    def add_in_listwidget_ch(self):
+    def add_in_combo_ch(self):
+        self.comboBox.clear()
+        self.plainTextEdit_ch_data.setPlainText("")
         data = self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.listWidget_users.currentItem().text()].keys()
         for i in data:
             self.comboBox.addItem(i)
 
     def search_for_change(self):
+        self.listWidget_users.clear()
         users_in_JSON = self.data.DB.find_one({'_id': 'USERS'}, {'_id': 0})
         for user in users_in_JSON:
             if self.lineEdit_ch.text() in user:
@@ -296,6 +299,7 @@ class Server(socket.socket, Ui_Server):
         self.label_ch_info.setText("Пользователь успешно изменен")
 
     def search_for_delete(self):
+        self.listWidget_users.clear()
         users_in_JSON = self.data.DB.find_one({'_id': 'USERS'}, {'_id': 0})
         for user in users_in_JSON:
             if self.lineEdit_ch.text() in user:
