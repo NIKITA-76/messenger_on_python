@@ -238,6 +238,8 @@ class Ui_Server(object):
 
         #self.pushButton_del_save.clicked.connect(self.del_user)
         self.pushButton_del_cancel.clicked.connect(lambda: self.stackedWidget_change.setCurrentIndex(0))
+        self.pushButton_del_save.clicked.connect(self.delete_user)
+        self.pushButton_del_search.clicked.connect(self.search_for_delete)
 
         self.pushButton_show_all_usr.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(1))
         self.pushButton_back_main_page_usr.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(0))

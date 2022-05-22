@@ -295,6 +295,18 @@ class Server(socket.socket, Ui_Server):
         self.data.DB.update_one({'_id': 'USERS'}, {'$set': {user + "." + param: new_data}})
         self.label_ch_info.setText("Пользователь успешно изменен")
 
+    def search_for_delete(self):
+        users_in_JSON = self.data.DB.find_one({'_id': 'USERS'}, {'_id': 0})
+        for user in users_in_JSON:
+            if self.lineEdit_ch.text() in user:
+                self.listWidget_del_users.addItem(user)
+
+    def delete_user(self):
+        self.data.DB.update_one({'_id': 'USERS'}, {'$unset': {self.listWidget_del_users.currentItem().text(): ""}})
+        self.label_del_info.setText("Пользователь успешно удален")
+        self.listWidget_del_users.clear()
+        self.listWidget_del_users.clear()
+
     def start_server(self):
         print("Listen")
 
