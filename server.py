@@ -5,6 +5,7 @@ import sys
 import threading
 
 from PyQt5 import QtWidgets
+
 from init_data import Data
 from ui_server import Ui_Server
 
@@ -275,11 +276,17 @@ class Server(socket.socket, Ui_Server):
         for i in data:
             self.comboBox.addItem(i)
 
-    def search_for_chenge(self):
+    def search_for_change(self):
         users_in_JSON = self.data.DB.find_one({'_id': 'USERS'}, {'_id': 0})
         for user in users_in_JSON:
             if self.lineEdit_ch.text() in user:
                 self.listWidget_users.addItem(user)
+
+    def combo_date_add(self):
+        self.plainTextEdit_ch_data.setPlainText(
+            self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.listWidget_users.currentItem().text()][
+                self.comboBox.currentText()])
+        self.label_ch_inf.setText(self.comboBox.currentText())
 
     def start_server(self):
         print("Listen")
