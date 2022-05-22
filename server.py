@@ -270,9 +270,10 @@ class Server(socket.socket, Ui_Server):
             self.label_login.setStyleSheet("color: red")
             print("HAVE_THIS_USER")
 
-
     def change_user(self):
-        pass
+        data = self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.listWidget_users.currentItem().text()].keys()
+        for i in data:
+            self.comboBox.addItem(i)
 
     def search_for_chenge(self):
         users_in_JSON = self.data.DB.find_one({'_id': 'USERS'}, {'_id': 0})
