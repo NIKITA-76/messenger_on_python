@@ -4,13 +4,13 @@ import socket
 import sys
 import threading
 import time
-from configparser import ConfigParser
 
-from PyQt5 import QtWidgets, QtCore
+from configparser import ConfigParser
+from PyQt5 import QtWidgets, QtCore, QtGui
 from PyQt5.QtCore import QPropertyAnimation, QRect
 from PyQt5.QtWidgets import QWidget, QFileDialog
-
 import ui_client
+
 
 
 class Client(socket.socket):
@@ -228,7 +228,6 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
             self.anim.setStartValue(QRect(930, 0, 370, 731))
             self.anim.setEndValue(QRect(1290, 0, 370, 731))
             self.anim.start()
-
 
     def addNewFriend(self):
         new_room = ["CRT_ROOM", self.AddFRNDForm.listWidget.currentItem().text(), self.nick_name, ]
