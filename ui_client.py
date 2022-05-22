@@ -539,7 +539,7 @@ class UI_ForMain(object):
         __sortingEnabled = self.listWidget_people.isSortingEnabled()
         self.listWidget_people.setSortingEnabled(False)
         self.listWidget_people.setSortingEnabled(__sortingEnabled)
-        self.pushButton_label.setText(_translate("MainWindow", "UserName"))
+        self.pushButton_label.setText(_translate("MainWindow", ""))
         self.pushButton_addFriend.setText(_translate("MainWindow", "Найти друзей"))
         self.textEdit_room.setHtml(_translate("MainWindow",
                                               "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
