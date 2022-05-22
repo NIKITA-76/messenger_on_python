@@ -5,7 +5,6 @@ import sys
 import threading
 
 from PyQt5 import QtWidgets
-
 from init_data import Data
 from ui_server import Ui_Server
 
@@ -254,7 +253,7 @@ class Server(socket.socket, Ui_Server):
                                                                                }}})
                 self.data.DB.update_one({'_id': 'COUNT'}, {'$set': {"USERS": self.data.idUser}})
                 print(f"ПОЛЬЗОВАТЕЛЬ ЗАРЕГИСТРИРОВАН ")
-                self.label_info.setText("Пользователь успешно зарегистрирован!")
+                self.label_crt_info.setText("Пользователь успешно зарегистрирован!")
                 self.lineEdit_fio.clear()
                 self.lineEdit_phone.clear()
                 self.lineEdit_post.clear()
@@ -263,11 +262,11 @@ class Server(socket.socket, Ui_Server):
                 self.lineEdit_passw_2.clear()
                 self.lineEdit_mail.clear()
             else:
-                self.label_info.setText("Пароли не совпадают!")
+                self.label_crt_info.setText("Пароли не совпадают!")
                 print("Passwords don't match")
 
         else:
-            self.label_info.setText("Такой пользователеь уже существует")
+            self.label_crt_info.setText("Такой пользователеь уже существует")
             self.label_login.setStyleSheet("color: red")
             print("HAVE_THIS_USER")
 
