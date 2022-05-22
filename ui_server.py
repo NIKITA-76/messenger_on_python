@@ -233,7 +233,7 @@ class Ui_Server(object):
         self.pushButton_ch_save.clicked.connect(self.change_user)
         self.pushButton_ch_search.clicked.connect(self.search_for_change)
         self.pushButton_ch_cancel.clicked.connect(lambda: self.stackedWidget_change.setCurrentIndex(0))
-        self.listWidget_users.clicked.connect(self.change_user)
+        self.listWidget_users.clicked.connect(self.add_in_listwidget_ch)
         self.comboBox.activated.connect(self.combo_date_add)
 
         #self.pushButton_del_save.clicked.connect(self.del_user)

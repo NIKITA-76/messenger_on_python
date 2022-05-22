@@ -271,7 +271,7 @@ class Server(socket.socket, Ui_Server):
             self.label_login.setStyleSheet("color: red")
             print("HAVE_THIS_USER")
 
-    def change_user(self):
+    def add_in_listwidget_ch(self):
         data = self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.listWidget_users.currentItem().text()].keys()
         for i in data:
             self.comboBox.addItem(i)
@@ -287,6 +287,13 @@ class Server(socket.socket, Ui_Server):
             self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.listWidget_users.currentItem().text()][
                 self.comboBox.currentText()])
         self.label_ch_inf.setText(self.comboBox.currentText())
+
+    def change_user(self):
+        user = self.listWidget_users.currentItem().text()
+        param = self.comboBox.currentText()
+        new_data = self.plainTextEdit_ch_data.toPlainText()
+        self.data.DB.update_one({'_id': 'USERS'}, {'$set': {user + "." + param: new_data}})
+        self.label_ch_info.setText("Пользователь успешно изменен")
 
     def start_server(self):
         print("Listen")
