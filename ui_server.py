@@ -54,10 +54,10 @@ class Ui_Server(object):
         self.label_passw.setStyleSheet("color: rgb(158, 158, 158);")
         self.label_passw.setAlignment(QtCore.Qt.AlignCenter)
         self.label_passw.setObjectName("label_passw")
-        self.lineEdit_cabinet = QtWidgets.QLineEdit(self.page_crt_user)
-        self.lineEdit_cabinet.setGeometry(QtCore.QRect(110, 170, 321, 36))
-        self.lineEdit_cabinet.setStyleSheet("color: rgb(158, 158, 158);")
-        self.lineEdit_cabinet.setObjectName("lineEdit_cabinet")
+        self.lineEdit_phone = QtWidgets.QLineEdit(self.page_crt_user)
+        self.lineEdit_phone.setGeometry(QtCore.QRect(110, 170, 321, 36))
+        self.lineEdit_phone.setStyleSheet("color: rgb(158, 158, 158);")
+        self.lineEdit_phone.setObjectName("lineEdit_phone")
         self.label_phone = QtWidgets.QLabel(self.page_crt_user)
         self.label_phone.setGeometry(QtCore.QRect(18, 176, 66, 19))
         self.label_phone.setStyleSheet("color: rgb(158, 158, 158);")
@@ -231,10 +231,11 @@ class Ui_Server(object):
         self.pushButton_crt_cancel.clicked.connect(lambda: self.stackedWidget_change.setCurrentIndex(0))
 
         self.pushButton_ch_save.clicked.connect(self.change_user)
+        self.pushButton_ch_search.clicked.connect(self.search_for_chenge)
         self.pushButton_ch_cancel.clicked.connect(lambda: self.stackedWidget_change.setCurrentIndex(0))
 
 
-        self.pushButton_del_save.clicked.connect(self.del_user)
+        #self.pushButton_del_save.clicked.connect(self.del_user)
         self.pushButton_del_cancel.clicked.connect(lambda: self.stackedWidget_change.setCurrentIndex(0))
 
         self.pushButton_show_all_usr.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(1))
