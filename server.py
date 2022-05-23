@@ -1,3 +1,4 @@
+import json
 import logging
 import pickle
 import socket
@@ -40,8 +41,17 @@ class Server(socket.socket, Ui_Server):
         try:
             while True:  # Accepting a message
                 self.signal = socket_user.recv(4096)
-                print(f"ДАННЫЕ ОТ КЛИЕНТА --->{self.signal}")
-                self.signal = pickle.loads(self.signal)
+                # try:
+                print(self.signal[0:158])
+                self.signal = pickle.loads(self.signal[0:158])
+                # except pickle.UnpicklingError:
+                #     while True:
+                #         self.signal = socket_user.recv(4096)
+                #         print(self.signal)
+                #         self.signal = json.loads(self.signal)
+                #         file = open("_SERVER" + self.signal["full_name"], 'ab')
+                #         file.write(self.signal["x"].encode())
+                #         file.close()
                 if self.signal[0] == "TRY_TO_ENTRY":
                     self.log_in(self.signal, socket_user, ip_user)
                     self.data.name_withIp[self.signal[1]] = self.data.users_ip[0]

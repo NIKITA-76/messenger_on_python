@@ -1,16 +1,17 @@
+import json
 import os
 import pickle
 import socket
 import sys
 import threading
 import time
-
 from configparser import ConfigParser
-from PyQt5 import QtWidgets, QtCore, QtGui
+
+from PyQt5 import QtWidgets
 from PyQt5.QtCore import QPropertyAnimation, QRect
 from PyQt5.QtWidgets import QWidget, QFileDialog
-import ui_client
 
+import ui_client
 
 
 class Client(socket.socket):
@@ -22,7 +23,7 @@ class Client(socket.socket):
         self.connect((config["client"]["ip"], int(config["client"]["port"])))
 
     def send_data(self, data_text):  # Send data on server
-        self.send(data_text)
+        self.sendall(data_text)
 
 
 class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
@@ -243,18 +244,24 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
             for IDRoom, nameRoom in self.roomsForLoad[0].items():
                 if self.listWidget_people.currentItem().text() == nameRoom:
                     while True:
-                        time.sleep(0.1)
-                        x = file.read(1000)
-                        print(f"X --- {x}")
+                        x = file.read(100)
                         if not x:
                             break
-
                         list_for_server = ["FILE", IDRoom, self.nick_name, self.listWidget_people.currentItem().text(),
                                            x, full_name]
-
                         list_for_server = pickle.dumps(list_for_server)
+                        print(len(list_for_server))
                         self.cl.send_data(list_for_server)
+                        # self.list_for_server = {"FILE": "FILE",
+                        #                    "IDRoom": IDRoom,
+                        #                    "self.nick_name": self.nick_name,
+                        #                    "self.listWidget_people.currentItem().text()": self.listWidget_people.currentItem().text(),
+                        #                    "x": str(x),
+                        #                    "full_name": full_name}
+                        # self.list_for_server = json.dumps(self.list_for_server)
+                        # self.list_for_server = self.list_for_server.encode()
                     break
+
         except FileNotFoundError:
             pass
 
