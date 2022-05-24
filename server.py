@@ -1,5 +1,3 @@
-import json
-import logging
 import pickle
 import socket
 import sys
@@ -17,13 +15,6 @@ class Server(socket.socket, Ui_Server):
         self.data = Data()
         self.bind((self.data.config["server"]["ip"], int(self.data.config["server"]["port"])))
         self.listen()
-        logging.basicConfig(level="INFO")
-        self.logger_login = logging.getLogger("log_in")
-        self.logger_package_MSG = logging.getLogger("load_MSG_for_client")
-        self.logger_accept = logging.getLogger("start_server")
-        self.logger_listen_socket = logging.getLogger("listen_socket")
-        self.logger_accept.setLevel("DEBUG")
-        self.logger_accept.setLevel("ERROR")
         self.create_room()
         self.x = threading.Thread(target=self.start_server).start()
         app = QtWidgets.QApplication(sys.argv)
@@ -41,17 +32,8 @@ class Server(socket.socket, Ui_Server):
         try:
             while True:  # Accepting a message
                 self.signal = socket_user.recv(4096)
-                # try:
-                print(self.signal[0:158])
-                self.signal = pickle.loads(self.signal[0:158])
-                # except pickle.UnpicklingError:
-                #     while True:
-                #         self.signal = socket_user.recv(4096)
-                #         print(self.signal)
-                #         self.signal = json.loads(self.signal)
-                #         file = open("_SERVER" + self.signal["full_name"], 'ab')
-                #         file.write(self.signal["x"].encode())
-                #         file.close()
+                print(f"ДАННЫЕ ОТ КЛИЕНТА --->{self.signal}")
+                self.signal = pickle.loads(self.signal)
                 if self.signal[0] == "TRY_TO_ENTRY":
                     self.log_in(self.signal, socket_user, ip_user)
                     self.data.name_withIp[self.signal[1]] = self.data.users_ip[0]
@@ -90,6 +72,7 @@ class Server(socket.socket, Ui_Server):
         file.write(self.signal[4])
         file.close()
 
+
     # def get_file(self):
     #    for roomID, roomName in self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.signal[2]]["ROOMS"].items():
     #        if roomName == self.signal[3]:
@@ -112,18 +95,15 @@ class Server(socket.socket, Ui_Server):
                     sign_in = ["USER IS SIGN", list_rooms]
                     self.data.userAndObject[self.signal[1]] = socket_user
 
-                self.logger_login.info("USER_IS_SIGN")
                 self.data.userAndObject[self.signal[1]] = socket_user
                 socket_user.send(pickle.dumps(sign_in))
                 self.listWidget_people.addItem(self.signal[1])
 
             else:
                 no_sign_in = ["USER_IS_NOT_SIGN"]
-                self.logger_login.info("USER_IS_NOT_SIGN (BAD_PASSWORD)")
                 socket_user.send(pickle.dumps(no_sign_in))
         except KeyError:
             no_sign_in = ["USER_IS_NOT_SIGN"]
-            self.logger_login.info("USER_IS_NOT_SIGN (BAD_LOGIN)")
             socket_user.send(pickle.dumps(no_sign_in))
 
     def create_room_JSON(self):
@@ -213,7 +193,6 @@ class Server(socket.socket, Ui_Server):
             if not bank_of_mess:
                 for_load_MSG = pickle.dumps(
                     ["LOADMSG", fio_of_user, cabinet_of_mess, mail_of_mess, post_of_mess, "NOMSG", ])
-                self.logger_package_MSG.info(f"{['LOADMSG', 'NOMSG']}")
                 user.send(for_load_MSG)
             else:
                 for i in bank_of_mess:
@@ -326,7 +305,6 @@ class Server(socket.socket, Ui_Server):
 
         while True:
             users_socket, address = self.accept()
-            self.logger_accept.debug("USER ACCEPT")
 
             """
             Checking that the user could not run many clients on one pc
