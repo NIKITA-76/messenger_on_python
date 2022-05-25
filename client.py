@@ -154,7 +154,7 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
         self.label_card_fio.clear()
         self.label_card_phone.clear()
         self.listWidget_people.clear()
-        self.stackedWidget.setCurrentIndex(2)
+        self.stackedWidget.setCurrentIndex(0)
         self.pushButton_room.hide()
         self.pushButton_addFriend.hide()
         self.pushButton_settings.hide()
