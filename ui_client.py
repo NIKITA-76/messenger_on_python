@@ -292,7 +292,8 @@ class UI_ForMain(object):
         self.frame = QtWidgets.QFrame(self.page)
         self.frame.setMaximumSize(QtCore.QSize(0, 9000))
         self.frame.setFocusPolicy(QtCore.Qt.StrongFocus)
-        self.frame.setStyleSheet("border:0px;")
+        self.frame.setStyleSheet("border:0px;\n"
+                                 "background-color: rgb(50, 50, 50);")
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
@@ -350,12 +351,13 @@ class UI_ForMain(object):
         self.stackedWidget.addWidget(self.page)
         self.page_2 = QtWidgets.QWidget()
         self.page_2.setObjectName("page_2")
+        self.page_2.setStyleSheet("border:0px;\n"
+                                    "background-color: rgb(50, 50, 50);")
         self.verticalLayout_12 = QtWidgets.QVBoxLayout(self.page_2)
         self.verticalLayout_12.setObjectName("verticalLayout_12")
         self.frame_11 = QtWidgets.QFrame(self.page_2)
         self.frame_11.setMinimumSize(QtCore.QSize(0, 100))
         self.frame_11.setMaximumSize(QtCore.QSize(16777215, 100))
-        self.frame_11.setStyleSheet("border:0px;")
         self.frame_11.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_11.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_11.setObjectName("frame_11")
@@ -405,7 +407,8 @@ class UI_ForMain(object):
         self.horizontalLayout_6.addWidget(self.frame_17)
         self.verticalLayout_12.addWidget(self.frame_11)
         self.frame_10 = QtWidgets.QFrame(self.page_2)
-        self.frame_10.setStyleSheet("border:0px;")
+        self.frame_10.setStyleSheet("border:0px;\n"
+                                 "background-color: rgb(50, 50, 50);")
         self.frame_10.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_10.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_10.setObjectName("frame_10")
@@ -519,9 +522,9 @@ class UI_ForMain(object):
 
         self.listWidget_msgRoom.verticalScrollBar().valueChanged.connect(self.adding_load)
 
-        self.pushButton_settings.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(3))
+        self.pushButton_settings.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(1))
         self.pushButton_quit.clicked.connect(self.quit)
-        self.pushButton_back_tomain.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(2))
+        self.pushButton_back_tomain.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(0))
         self.pushButton_room.clicked.connect(self.roomMessage)
         self.pushButton_addFriend.clicked.connect(lambda: self.AddFRNDWindow.show())
         self.pushButton_label.clicked.connect(self.show_card_of_user)
