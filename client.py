@@ -216,18 +216,18 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
                 break
 
     def show_card_of_user(self):
-        self.anim = QPropertyAnimation(self.frame, b'geometry')
+        self.anim = QPropertyAnimation(self.frame, b'maximumWidth')
         if self.animation_play:
             self.animation_play = False
             self.anim.setDuration(50)
-            self.anim.setStartValue(QRect(1290, 0, 370, 731))
-            self.anim.setEndValue(QRect(930, 0, 370, 731))
+            self.anim.setStartValue(600)
+            self.anim.setEndValue(0)
             self.anim.start()
         else:
             self.animation_play = True
             self.anim.setDuration(50)
-            self.anim.setStartValue(QRect(930, 0, 370, 731))
-            self.anim.setEndValue(QRect(1290, 0, 370, 731))
+            self.anim.setStartValue(0)
+            self.anim.setEndValue(600)
             self.anim.start()
 
     def addNewFriend(self):
