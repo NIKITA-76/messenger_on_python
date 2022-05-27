@@ -1,4 +1,3 @@
-import json
 import os
 import pickle
 import socket
@@ -8,7 +7,7 @@ import time
 from configparser import ConfigParser
 
 from PyQt5 import QtWidgets
-from PyQt5.QtCore import QPropertyAnimation, QRect
+from PyQt5.QtCore import QPropertyAnimation
 from PyQt5.QtWidgets import QWidget, QFileDialog
 
 import ui_client

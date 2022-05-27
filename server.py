@@ -72,7 +72,6 @@ class Server(socket.socket, Ui_Server):
         file.write(self.signal[4])
         file.close()
 
-
     # def get_file(self):
     #    for roomID, roomName in self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.signal[2]]["ROOMS"].items():
     #        if roomName == self.signal[3]:
