@@ -352,7 +352,7 @@ class UI_ForMain(object):
         self.page_2 = QtWidgets.QWidget()
         self.page_2.setObjectName("page_2")
         self.page_2.setStyleSheet("border:0px;\n"
-                                    "background-color: rgb(50, 50, 50);")
+                                  "background-color: rgb(50, 50, 50);")
         self.verticalLayout_12 = QtWidgets.QVBoxLayout(self.page_2)
         self.verticalLayout_12.setObjectName("verticalLayout_12")
         self.frame_11 = QtWidgets.QFrame(self.page_2)
@@ -408,7 +408,7 @@ class UI_ForMain(object):
         self.verticalLayout_12.addWidget(self.frame_11)
         self.frame_10 = QtWidgets.QFrame(self.page_2)
         self.frame_10.setStyleSheet("border:0px;\n"
-                                 "background-color: rgb(50, 50, 50);")
+                                    "background-color: rgb(50, 50, 50);")
         self.frame_10.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_10.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_10.setObjectName("frame_10")

@@ -1,5 +1,3 @@
-
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
@@ -103,4 +101,3 @@ class Ui_AddFriend(object):
         self.listWidget.setSortingEnabled(__sortingEnabled)
         self.pushButton.setText(_translate("MainWindow", "Добавить"))
         self.pushButton_2.setText(_translate("MainWindow", "Поиск"))
-
