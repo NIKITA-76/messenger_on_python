@@ -44,24 +44,24 @@ class Ui_Server(object):
         self.pushButton_show_all_usr.setMinimumSize(QtCore.QSize(300, 35))
         self.pushButton_show_all_usr.setMaximumSize(QtCore.QSize(500, 35))
         self.pushButton_show_all_usr.setStyleSheet("\n"
-                                                     "\n"
-                                                     "QPushButton{\n"
-                                                     "background-color: rgb(100, 100, 100);\n"
-                                                     "\n"
-                                                     "color: rgb(50, 50, 50);\n"
-                                                     "border:0px;\n"
-                                                     "border-radius: 6px;\n"
-                                                     "}\n"
-                                                     "\n"
-                                                     "QPushButton:hover{\n"
-                                                     "background-color: rgb(130, 130, 130);\n"
-                                                     "color: rgb(50, 50, 50);\n"
-                                                     "border-radius: 6px;\n"
-                                                     "}\n"
-                                                     "\n"
-                                                     "\n"
-                                                     "\n"
-                                                     "")
+                                                   "\n"
+                                                   "QPushButton{\n"
+                                                   "background-color: rgb(100, 100, 100);\n"
+                                                   "\n"
+                                                   "color: rgb(50, 50, 50);\n"
+                                                   "border:0px;\n"
+                                                   "border-radius: 6px;\n"
+                                                   "}\n"
+                                                   "\n"
+                                                   "QPushButton:hover{\n"
+                                                   "background-color: rgb(130, 130, 130);\n"
+                                                   "color: rgb(50, 50, 50);\n"
+                                                   "border-radius: 6px;\n"
+                                                   "}\n"
+                                                   "\n"
+                                                   "\n"
+                                                   "\n"
+                                                   "")
         self.pushButton_show_all_usr.setObjectName("pushButton_show_all_usr")
         self.horizontalLayout_3.addWidget(self.pushButton_show_all_usr)
         self.verticalLayout_2.addWidget(self.frame_2)
@@ -76,24 +76,24 @@ class Ui_Server(object):
         self.pushButton_crt_user.setMinimumSize(QtCore.QSize(300, 35))
         self.pushButton_crt_user.setMaximumSize(QtCore.QSize(500, 35))
         self.pushButton_crt_user.setStyleSheet("\n"
-                                                 "\n"
-                                                 "QPushButton{\n"
-                                                 "background-color: rgb(100, 100, 100);\n"
-                                                 "\n"
-                                                 "color: rgb(50, 50, 50);\n"
-                                                 "border:0px;\n"
-                                                 "border-radius: 6px;\n"
-                                                 "}\n"
-                                                 "\n"
-                                                 "QPushButton:hover{\n"
-                                                 "background-color: rgb(130, 130, 130);\n"
-                                                 "color: rgb(50, 50, 50);\n"
-                                                 "border-radius: 6px;\n"
-                                                 "}\n"
-                                                 "\n"
-                                                 "\n"
-                                                 "\n"
-                                                 "")
+                                               "\n"
+                                               "QPushButton{\n"
+                                               "background-color: rgb(100, 100, 100);\n"
+                                               "\n"
+                                               "color: rgb(50, 50, 50);\n"
+                                               "border:0px;\n"
+                                               "border-radius: 6px;\n"
+                                               "}\n"
+                                               "\n"
+                                               "QPushButton:hover{\n"
+                                               "background-color: rgb(130, 130, 130);\n"
+                                               "color: rgb(50, 50, 50);\n"
+                                               "border-radius: 6px;\n"
+                                               "}\n"
+                                               "\n"
+                                               "\n"
+                                               "\n"
+                                               "")
         self.pushButton_crt_user.setObjectName("pushButton_crt_user")
         self.horizontalLayout_2.addWidget(self.pushButton_crt_user)
         self.verticalLayout_2.addWidget(self.frame_3)
@@ -120,7 +120,7 @@ class Ui_Server(object):
         self.listWidget_people = QtWidgets.QListWidget(self.frame_5)
         self.listWidget_people.setMaximumSize(QtCore.QSize(90000, 400))
         self.listWidget_people.setStyleSheet("color: rgb(50, 50, 50);\n"
-                                               "")
+                                             "")
         self.listWidget_people.setObjectName("listWidget_people")
         self.verticalLayout_5.addWidget(self.listWidget_people)
         self.verticalLayout_3.addWidget(self.frame_5)
@@ -135,24 +135,24 @@ class Ui_Server(object):
         self.pushButton_crt_cancel = QtWidgets.QPushButton(self.frame_6)
         self.pushButton_crt_cancel.setMaximumSize(QtCore.QSize(500, 300))
         self.pushButton_crt_cancel.setStyleSheet("\n"
-                                                           "\n"
-                                                           "QPushButton{\n"
-                                                           "background-color: rgb(100, 100, 100);\n"
-                                                           "\n"
-                                                           "color: rgb(50, 50, 50);\n"
-                                                           "border:0px;\n"
-                                                           "border-radius: 6px;\n"
-                                                           "}\n"
-                                                           "\n"
-                                                           "QPushButton:hover{\n"
-                                                           "background-color: rgb(130, 130, 130);\n"
-                                                           "color: rgb(50, 50, 50);\n"
-                                                           "border-radius: 6px;\n"
-                                                           "}\n"
-                                                           "\n"
-                                                           "\n"
-                                                           "\n"
-                                                           "")
+                                                 "\n"
+                                                 "QPushButton{\n"
+                                                 "background-color: rgb(100, 100, 100);\n"
+                                                 "\n"
+                                                 "color: rgb(50, 50, 50);\n"
+                                                 "border:0px;\n"
+                                                 "border-radius: 6px;\n"
+                                                 "}\n"
+                                                 "\n"
+                                                 "QPushButton:hover{\n"
+                                                 "background-color: rgb(130, 130, 130);\n"
+                                                 "color: rgb(50, 50, 50);\n"
+                                                 "border-radius: 6px;\n"
+                                                 "}\n"
+                                                 "\n"
+                                                 "\n"
+                                                 "\n"
+                                                 "")
         self.pushButton_crt_cancel.setObjectName("pushButton_crt_cancel")
         self.horizontalLayout_4.addWidget(self.pushButton_crt_cancel)
         self.verticalLayout_3.addWidget(self.frame_6)
@@ -176,7 +176,7 @@ class Ui_Server(object):
         self.frame_8.setObjectName("frame_8")
         self.horizontalLayout_6 = QtWidgets.QHBoxLayout(self.frame_8)
         self.horizontalLayout_6.setObjectName("horizontalLayout_6")
-        self.pushButton_crt_user_2   = QtWidgets.QPushButton(self.frame_8)
+        self.pushButton_crt_user_2 = QtWidgets.QPushButton(self.frame_8)
         self.pushButton_crt_user_2.setMaximumSize(QtCore.QSize(16777215, 33))
         self.pushButton_crt_user_2.setStyleSheet("\n"
                                                  "\n"
@@ -202,47 +202,47 @@ class Ui_Server(object):
         self.pushButton_change_user = QtWidgets.QPushButton(self.frame_8)
         self.pushButton_change_user.setMaximumSize(QtCore.QSize(16777215, 33))
         self.pushButton_change_user.setStyleSheet("\n"
-                                                    "\n"
-                                                    "QPushButton{\n"
-                                                    "background-color: rgb(100, 100, 100);\n"
-                                                    "\n"
-                                                    "color: rgb(50, 50, 50);\n"
-                                                    "border:0px;\n"
-                                                    "border-radius: 6px;\n"
-                                                    "}\n"
-                                                    "\n"
-                                                    "QPushButton:hover{\n"
-                                                    "background-color: rgb(130, 130, 130);\n"
-                                                    "color: rgb(50, 50, 50);\n"
-                                                    "border-radius: 6px;\n"
-                                                    "}\n"
-                                                    "\n"
-                                                    "\n"
-                                                    "\n"
-                                                    "")
+                                                  "\n"
+                                                  "QPushButton{\n"
+                                                  "background-color: rgb(100, 100, 100);\n"
+                                                  "\n"
+                                                  "color: rgb(50, 50, 50);\n"
+                                                  "border:0px;\n"
+                                                  "border-radius: 6px;\n"
+                                                  "}\n"
+                                                  "\n"
+                                                  "QPushButton:hover{\n"
+                                                  "background-color: rgb(130, 130, 130);\n"
+                                                  "color: rgb(50, 50, 50);\n"
+                                                  "border-radius: 6px;\n"
+                                                  "}\n"
+                                                  "\n"
+                                                  "\n"
+                                                  "\n"
+                                                  "")
         self.pushButton_change_user.setObjectName("pushButton_change_user")
         self.horizontalLayout_6.addWidget(self.pushButton_change_user)
         self.pushButton_delete_user = QtWidgets.QPushButton(self.frame_8)
         self.pushButton_delete_user.setMaximumSize(QtCore.QSize(16777215, 33))
         self.pushButton_delete_user.setStyleSheet("\n"
-                                                    "\n"
-                                                    "QPushButton{\n"
-                                                    "background-color: rgb(100, 100, 100);\n"
-                                                    "\n"
-                                                    "color: rgb(50, 50, 50);\n"
-                                                    "border:0px;\n"
-                                                    "border-radius: 6px;\n"
-                                                    "}\n"
-                                                    "\n"
-                                                    "QPushButton:hover{\n"
-                                                    "background-color: rgb(130, 130, 130);\n"
-                                                    "color: rgb(50, 50, 50);\n"
-                                                    "border-radius: 6px;\n"
-                                                    "}\n"
-                                                    "\n"
-                                                    "\n"
-                                                    "\n"
-                                                    "")
+                                                  "\n"
+                                                  "QPushButton{\n"
+                                                  "background-color: rgb(100, 100, 100);\n"
+                                                  "\n"
+                                                  "color: rgb(50, 50, 50);\n"
+                                                  "border:0px;\n"
+                                                  "border-radius: 6px;\n"
+                                                  "}\n"
+                                                  "\n"
+                                                  "QPushButton:hover{\n"
+                                                  "background-color: rgb(130, 130, 130);\n"
+                                                  "color: rgb(50, 50, 50);\n"
+                                                  "border-radius: 6px;\n"
+                                                  "}\n"
+                                                  "\n"
+                                                  "\n"
+                                                  "\n"
+                                                  "")
         self.pushButton_delete_user.setObjectName("pushButton_delete_user")
         self.horizontalLayout_6.addWidget(self.pushButton_delete_user)
         self.verticalLayout_6.addWidget(self.frame_8)
@@ -315,11 +315,11 @@ class Ui_Server(object):
         self.lineEdit_fio = QtWidgets.QLineEdit(self.frame_25)
         self.lineEdit_fio.setMaximumSize(QtCore.QSize(90000, 16777215))
         self.lineEdit_fio.setStyleSheet("background-color: rgb(30, 30, 30);\n"
-                                          "font: 14pt \"Cantarell\";\n"
-                                          "color: rgb(158, 158, 158);\n"
-                                          "border:0px;\n"
-                                          "border-radius: 12px;\n"
-                                          "")
+                                        "font: 14pt \"Cantarell\";\n"
+                                        "color: rgb(158, 158, 158);\n"
+                                        "border:0px;\n"
+                                        "border-radius: 12px;\n"
+                                        "")
         self.lineEdit_fio.setObjectName("lineEdit_fio")
         self.verticalLayout_16.addWidget(self.lineEdit_fio)
         self.horizontalLayout_8.addWidget(self.frame_25)
@@ -351,11 +351,11 @@ class Ui_Server(object):
         self.lineEdit_post = QtWidgets.QLineEdit(self.frame_26)
         self.lineEdit_post.setMaximumSize(QtCore.QSize(90000, 16777215))
         self.lineEdit_post.setStyleSheet("background-color: rgb(30, 30, 30);\n"
-                                           "font: 14pt \"Cantarell\";\n"
-                                           "color: rgb(158, 158, 158);\n"
-                                           "border:0px;\n"
-                                           "border-radius: 12px;\n"
-                                           "")
+                                         "font: 14pt \"Cantarell\";\n"
+                                         "color: rgb(158, 158, 158);\n"
+                                         "border:0px;\n"
+                                         "border-radius: 12px;\n"
+                                         "")
         self.lineEdit_post.setObjectName("lineEdit_post")
         self.verticalLayout_17.addWidget(self.lineEdit_post)
         self.horizontalLayout_9.addWidget(self.frame_26)
@@ -390,11 +390,11 @@ class Ui_Server(object):
         self.verticalLayout_18.setObjectName("verticalLayout_18")
         self.lineEdit_phone = QtWidgets.QLineEdit(self.frame_28)
         self.lineEdit_phone.setStyleSheet("background-color: rgb(30, 30, 30);\n"
-                                              "font: 14pt \"Cantarell\";\n"
-                                              "color: rgb(158, 158, 158);\n"
-                                              "border:0px;\n"
-                                              "border-radius: 12px;\n"
-                                              "")
+                                          "font: 14pt \"Cantarell\";\n"
+                                          "color: rgb(158, 158, 158);\n"
+                                          "border:0px;\n"
+                                          "border-radius: 12px;\n"
+                                          "")
         self.lineEdit_phone.setObjectName("lineEdit_phone")
         self.verticalLayout_18.addWidget(self.lineEdit_phone)
         self.horizontalLayout_10.addWidget(self.frame_28)
@@ -427,11 +427,11 @@ class Ui_Server(object):
         self.verticalLayout_19.setObjectName("verticalLayout_19")
         self.lineEdit_mail = QtWidgets.QLineEdit(self.frame_27)
         self.lineEdit_mail.setStyleSheet("background-color: rgb(30, 30, 30);\n"
-                                           "font: 14pt \"Cantarell\";\n"
-                                           "color: rgb(158, 158, 158);\n"
-                                           "border:0px;\n"
-                                           "border-radius: 12px;\n"
-                                           "")
+                                         "font: 14pt \"Cantarell\";\n"
+                                         "color: rgb(158, 158, 158);\n"
+                                         "border:0px;\n"
+                                         "border-radius: 12px;\n"
+                                         "")
         self.lineEdit_mail.setObjectName("lineEdit_mail")
         self.verticalLayout_19.addWidget(self.lineEdit_mail)
         self.horizontalLayout_11.addWidget(self.frame_27)
@@ -472,11 +472,11 @@ class Ui_Server(object):
         self.verticalLayout_15.setObjectName("verticalLayout_15")
         self.lineEdit_login = QtWidgets.QLineEdit(self.frame_29)
         self.lineEdit_login.setStyleSheet("background-color: rgb(30, 30, 30);\n"
-                                            "font: 14pt \"Cantarell\";\n"
-                                            "color: rgb(158, 158, 158);\n"
-                                            "border:0px;\n"
-                                            "border-radius: 12px;\n"
-                                            "")
+                                          "font: 14pt \"Cantarell\";\n"
+                                          "color: rgb(158, 158, 158);\n"
+                                          "border:0px;\n"
+                                          "border-radius: 12px;\n"
+                                          "")
         self.lineEdit_login.setObjectName("lineEdit_login")
         self.verticalLayout_15.addWidget(self.lineEdit_login)
         self.horizontalLayout_12.addWidget(self.frame_29)
@@ -509,11 +509,11 @@ class Ui_Server(object):
         self.verticalLayout_13.setObjectName("verticalLayout_13")
         self.lineEdit_pass = QtWidgets.QLineEdit(self.frame_30)
         self.lineEdit_pass.setStyleSheet("background-color: rgb(30, 30, 30);\n"
-                                           "font: 14pt \"Cantarell\";\n"
-                                           "color: rgb(158, 158, 158);\n"
-                                           "border:0px;\n"
-                                           "border-radius: 12px;\n"
-                                           "")
+                                         "font: 14pt \"Cantarell\";\n"
+                                         "color: rgb(158, 158, 158);\n"
+                                         "border:0px;\n"
+                                         "border-radius: 12px;\n"
+                                         "")
         self.lineEdit_pass.setObjectName("lineEdit_pass")
         self.verticalLayout_13.addWidget(self.lineEdit_pass)
         self.horizontalLayout_13.addWidget(self.frame_30)
@@ -571,49 +571,49 @@ class Ui_Server(object):
         self.pushButton_save = QtWidgets.QPushButton(self.frame_22)
         self.pushButton_save.setMaximumSize(QtCore.QSize(300, 30))
         self.pushButton_save.setStyleSheet("\n"
-                                             "\n"
-                                             "QPushButton{\n"
-                                             "background-color: rgb(100, 100, 100);\n"
-                                             "\n"
-                                             "color: rgb(50, 50, 50);\n"
-                                             "border:0px;\n"
-                                             "border-radius: 6px;\n"
-                                             "}\n"
-                                             "\n"
-                                             "QPushButton:hover{\n"
-                                             "background-color: rgb(130, 130, 130);\n"
-                                             "color: rgb(50, 50, 50);\n"
-                                             "border-radius: 6px;\n"
-                                             "}\n"
-                                             "\n"
-                                             "\n"
-                                             "\n"
-                                             "")
+                                           "\n"
+                                           "QPushButton{\n"
+                                           "background-color: rgb(100, 100, 100);\n"
+                                           "\n"
+                                           "color: rgb(50, 50, 50);\n"
+                                           "border:0px;\n"
+                                           "border-radius: 6px;\n"
+                                           "}\n"
+                                           "\n"
+                                           "QPushButton:hover{\n"
+                                           "background-color: rgb(130, 130, 130);\n"
+                                           "color: rgb(50, 50, 50);\n"
+                                           "border-radius: 6px;\n"
+                                           "}\n"
+                                           "\n"
+                                           "\n"
+                                           "\n"
+                                           "")
         self.pushButton_save.setObjectName("pushButton_save")
         self.horizontalLayout_15.addWidget(self.pushButton_save)
-        self.pushButton_back_main_page_crt_usr = QtWidgets.QPushButton(self.frame_22)
-        self.pushButton_back_main_page_crt_usr.setMaximumSize(QtCore.QSize(300, 35))
-        self.pushButton_back_main_page_crt_usr.setStyleSheet("\n"
-                                                               "\n"
-                                                               "QPushButton{\n"
-                                                               "background-color: rgb(100, 100, 100);\n"
-                                                               "\n"
-                                                               "color: rgb(50, 50, 50);\n"
-                                                               "border:0px;\n"
-                                                               "border-radius: 6px;\n"
-                                                               "}\n"
-                                                               "\n"
-                                                               "QPushButton:hover{\n"
-                                                               "background-color: rgb(130, 130, 130);\n"
-                                                               "color: rgb(50, 50, 50);\n"
-                                                               "border-radius: 6px;\n"
-                                                               "}\n"
-                                                               "\n"
-                                                               "\n"
-                                                               "\n"
-                                                               "")
-        self.pushButton_back_main_page_crt_usr.setObjectName("pushButton_back_main_page_crt_usr")
-        self.horizontalLayout_15.addWidget(self.pushButton_back_main_page_crt_usr)
+        self.pushButton_crt_cancel = QtWidgets.QPushButton(self.frame_22)
+        self.pushButton_crt_cancel.setMaximumSize(QtCore.QSize(300, 35))
+        self.pushButton_crt_cancel.setStyleSheet("\n"
+                                                             "\n"
+                                                             "QPushButton{\n"
+                                                             "background-color: rgb(100, 100, 100);\n"
+                                                             "\n"
+                                                             "color: rgb(50, 50, 50);\n"
+                                                             "border:0px;\n"
+                                                             "border-radius: 6px;\n"
+                                                             "}\n"
+                                                             "\n"
+                                                             "QPushButton:hover{\n"
+                                                             "background-color: rgb(130, 130, 130);\n"
+                                                             "color: rgb(50, 50, 50);\n"
+                                                             "border-radius: 6px;\n"
+                                                             "}\n"
+                                                             "\n"
+                                                             "\n"
+                                                             "\n"
+                                                             "")
+        self.pushButton_crt_cancel.setObjectName("pushButton_crt_cancel")
+        self.horizontalLayout_15.addWidget(self.pushButton_crt_cancel)
         self.verticalLayout_12.addWidget(self.frame_22)
         self.stackedWidget_change.addWidget(self.page_crt_user_3)
         self.page_change_user = QtWidgets.QWidget()
@@ -643,11 +643,11 @@ class Ui_Server(object):
         self.verticalLayout_27.addWidget(self.label_ch_srch_user)
         self.lineEdit_ch = QtWidgets.QLineEdit(self.frame_12)
         self.lineEdit_ch.setStyleSheet("background-color: rgb(30, 30, 30);\n"
-                                         "font: 14pt \"Cantarell\";\n"
-                                         "color: rgb(158, 158, 158);\n"
-                                         "border:0px;\n"
-                                         "border-radius: 12px;\n"
-                                         "")
+                                       "font: 14pt \"Cantarell\";\n"
+                                       "color: rgb(158, 158, 158);\n"
+                                       "border:0px;\n"
+                                       "border-radius: 12px;\n"
+                                       "")
         self.lineEdit_ch.setObjectName("lineEdit_ch")
         self.verticalLayout_27.addWidget(self.lineEdit_ch)
         self.pushButton_ch_search = QtWidgets.QPushButton(self.frame_12)
@@ -656,11 +656,11 @@ class Ui_Server(object):
         self.verticalLayout_27.addWidget(self.pushButton_ch_search)
         self.listWidget_users = QtWidgets.QListWidget(self.frame_12)
         self.listWidget_users.setStyleSheet("background-color: rgb(30, 30, 30);\n"
-                                              "font: 14pt \"Cantarell\";\n"
-                                              "color: rgb(158, 158, 158);\n"
-                                              "border:0px;\n"
-                                              "border-radius: 12px;\n"
-                                              "")
+                                            "font: 14pt \"Cantarell\";\n"
+                                            "color: rgb(158, 158, 158);\n"
+                                            "border:0px;\n"
+                                            "border-radius: 12px;\n"
+                                            "")
         self.listWidget_users.setObjectName("listWidget_users")
         self.verticalLayout_27.addWidget(self.listWidget_users)
         self.horizontalLayout_19.addWidget(self.frame_12)
@@ -681,11 +681,11 @@ class Ui_Server(object):
         self.comboBox = QtWidgets.QComboBox(self.frame_40)
         self.comboBox.setMaximumSize(QtCore.QSize(16777215, 20))
         self.comboBox.setStyleSheet("background-color: rgb(30, 30, 30);\n"
-                                      "font: 14pt \"Cantarell\";\n"
-                                      "color: rgb(158, 158, 158);\n"
-                                      "border:0px;\n"
-                                      "border-radius: 12px;\n"
-                                      "")
+                                    "font: 14pt \"Cantarell\";\n"
+                                    "color: rgb(158, 158, 158);\n"
+                                    "border:0px;\n"
+                                    "border-radius: 12px;\n"
+                                    "")
         self.comboBox.setObjectName("comboBox")
         self.verticalLayout_28.addWidget(self.comboBox)
         self.frame_44 = QtWidgets.QFrame(self.frame_40)
@@ -708,11 +708,11 @@ class Ui_Server(object):
         self.verticalLayout_29.addWidget(self.label_ch_inf)
         self.plainTextEdit_ch_data = QtWidgets.QPlainTextEdit(self.frame_41)
         self.plainTextEdit_ch_data.setStyleSheet("background-color: rgb(30, 30, 30);\n"
-                                                   "font: 14pt \"Cantarell\";\n"
-                                                   "color: rgb(158, 158, 158);\n"
-                                                   "border:0px;\n"
-                                                   "border-radius: 12px;\n"
-                                                   "")
+                                                 "font: 14pt \"Cantarell\";\n"
+                                                 "color: rgb(158, 158, 158);\n"
+                                                 "border:0px;\n"
+                                                 "border-radius: 12px;\n"
+                                                 "")
         self.plainTextEdit_ch_data.setObjectName("plainTextEdit_ch_data")
         self.verticalLayout_29.addWidget(self.plainTextEdit_ch_data)
         self.horizontalLayout_19.addWidget(self.frame_41)
@@ -727,6 +727,29 @@ class Ui_Server(object):
         self.pushButton_ch_save = QtWidgets.QPushButton(self.frame_42)
         self.pushButton_ch_save.setMaximumSize(QtCore.QSize(300, 40))
         self.pushButton_ch_save.setStyleSheet("\n"
+                                              "\n"
+                                              "QPushButton{\n"
+                                              "background-color: rgb(100, 100, 100);\n"
+                                              "\n"
+                                              "color: rgb(50, 50, 50);\n"
+                                              "border:0px;\n"
+                                              "border-radius: 6px;\n"
+                                              "}\n"
+                                              "\n"
+                                              "QPushButton:hover{\n"
+                                              "background-color: rgb(130, 130, 130);\n"
+                                              "color: rgb(50, 50, 50);\n"
+                                              "border-radius: 6px;\n"
+                                              "}\n"
+                                              "\n"
+                                              "\n"
+                                              "\n"
+                                              "")
+        self.pushButton_ch_save.setObjectName("pushButton_ch_save")
+        self.horizontalLayout_18.addWidget(self.pushButton_ch_save)
+        self.pushButton_ch_cancel = QtWidgets.QPushButton(self.frame_42)
+        self.pushButton_ch_cancel.setMaximumSize(QtCore.QSize(300, 40))
+        self.pushButton_ch_cancel.setStyleSheet("\n"
                                                 "\n"
                                                 "QPushButton{\n"
                                                 "background-color: rgb(100, 100, 100);\n"
@@ -745,29 +768,6 @@ class Ui_Server(object):
                                                 "\n"
                                                 "\n"
                                                 "")
-        self.pushButton_ch_save.setObjectName("pushButton_ch_save")
-        self.horizontalLayout_18.addWidget(self.pushButton_ch_save)
-        self.pushButton_ch_cancel = QtWidgets.QPushButton(self.frame_42)
-        self.pushButton_ch_cancel.setMaximumSize(QtCore.QSize(300, 40))
-        self.pushButton_ch_cancel.setStyleSheet("\n"
-                                                  "\n"
-                                                  "QPushButton{\n"
-                                                  "background-color: rgb(100, 100, 100);\n"
-                                                  "\n"
-                                                  "color: rgb(50, 50, 50);\n"
-                                                  "border:0px;\n"
-                                                  "border-radius: 6px;\n"
-                                                  "}\n"
-                                                  "\n"
-                                                  "QPushButton:hover{\n"
-                                                  "background-color: rgb(130, 130, 130);\n"
-                                                  "color: rgb(50, 50, 50);\n"
-                                                  "border-radius: 6px;\n"
-                                                  "}\n"
-                                                  "\n"
-                                                  "\n"
-                                                  "\n"
-                                                  "")
         self.pushButton_ch_cancel.setObjectName("pushButton_ch_cancel")
         self.horizontalLayout_18.addWidget(self.pushButton_ch_cancel)
         self.verticalLayout_30.addWidget(self.frame_42)
@@ -799,11 +799,11 @@ class Ui_Server(object):
         self.verticalLayout_8.addWidget(self.label_del_search)
         self.lineEdit_del_search = QtWidgets.QLineEdit(self.frame_10)
         self.lineEdit_del_search.setStyleSheet("background-color: rgb(30, 30, 30);\n"
-                                                 "font: 14pt \"Cantarell\";\n"
-                                                 "color: rgb(158, 158, 158);\n"
-                                                 "border:0px;\n"
-                                                 "border-radius: 12px;\n"
-                                                 "")
+                                               "font: 14pt \"Cantarell\";\n"
+                                               "color: rgb(158, 158, 158);\n"
+                                               "border:0px;\n"
+                                               "border-radius: 12px;\n"
+                                               "")
         self.lineEdit_del_search.setObjectName("lineEdit_del_search")
         self.verticalLayout_8.addWidget(self.lineEdit_del_search)
         self.pushButton_del_search = QtWidgets.QPushButton(self.frame_10)
@@ -814,11 +814,11 @@ class Ui_Server(object):
         self.listWidget_del_users = QtWidgets.QListWidget(self.frame_10)
         self.listWidget_del_users.setMaximumSize(QtCore.QSize(16777215, 9000))
         self.listWidget_del_users.setStyleSheet("background-color: rgb(30, 30, 30);\n"
-                                                  "font: 14pt \"Cantarell\";\n"
-                                                  "color: rgb(158, 158, 158);\n"
-                                                  "border:0px;\n"
-                                                  "border-radius: 12px;\n"
-                                                  "")
+                                                "font: 14pt \"Cantarell\";\n"
+                                                "color: rgb(158, 158, 158);\n"
+                                                "border:0px;\n"
+                                                "border-radius: 12px;\n"
+                                                "")
         self.listWidget_del_users.setObjectName("listWidget_del_users")
         self.verticalLayout_8.addWidget(self.listWidget_del_users)
         self.verticalLayout_9.addWidget(self.frame_10)
@@ -835,6 +835,29 @@ class Ui_Server(object):
         self.pushButton_del_save = QtWidgets.QPushButton(self.frame_11)
         self.pushButton_del_save.setMaximumSize(QtCore.QSize(300, 35))
         self.pushButton_del_save.setStyleSheet("\n"
+                                               "\n"
+                                               "QPushButton{\n"
+                                               "background-color: rgb(100, 100, 100);\n"
+                                               "\n"
+                                               "color: rgb(50, 50, 50);\n"
+                                               "border:0px;\n"
+                                               "border-radius: 6px;\n"
+                                               "}\n"
+                                               "\n"
+                                               "QPushButton:hover{\n"
+                                               "background-color: rgb(130, 130, 130);\n"
+                                               "color: rgb(50, 50, 50);\n"
+                                               "border-radius: 6px;\n"
+                                               "}\n"
+                                               "\n"
+                                               "\n"
+                                               "\n"
+                                               "")
+        self.pushButton_del_save.setObjectName("pushButton_del_save")
+        self.horizontalLayout_7.addWidget(self.pushButton_del_save)
+        self.pushButton_del_cancel = QtWidgets.QPushButton(self.frame_11)
+        self.pushButton_del_cancel.setMaximumSize(QtCore.QSize(300, 48))
+        self.pushButton_del_cancel.setStyleSheet("\n"
                                                  "\n"
                                                  "QPushButton{\n"
                                                  "background-color: rgb(100, 100, 100);\n"
@@ -853,29 +876,6 @@ class Ui_Server(object):
                                                  "\n"
                                                  "\n"
                                                  "")
-        self.pushButton_del_save.setObjectName("pushButton_del_save")
-        self.horizontalLayout_7.addWidget(self.pushButton_del_save)
-        self.pushButton_del_cancel = QtWidgets.QPushButton(self.frame_11)
-        self.pushButton_del_cancel.setMaximumSize(QtCore.QSize(300, 48))
-        self.pushButton_del_cancel.setStyleSheet("\n"
-                                                   "\n"
-                                                   "QPushButton{\n"
-                                                   "background-color: rgb(100, 100, 100);\n"
-                                                   "\n"
-                                                   "color: rgb(50, 50, 50);\n"
-                                                   "border:0px;\n"
-                                                   "border-radius: 6px;\n"
-                                                   "}\n"
-                                                   "\n"
-                                                   "QPushButton:hover{\n"
-                                                   "background-color: rgb(130, 130, 130);\n"
-                                                   "color: rgb(50, 50, 50);\n"
-                                                   "border-radius: 6px;\n"
-                                                   "}\n"
-                                                   "\n"
-                                                   "\n"
-                                                   "\n"
-                                                   "")
         self.pushButton_del_cancel.setObjectName("pushButton_del_cancel")
         self.horizontalLayout_7.addWidget(self.pushButton_del_cancel)
         self.verticalLayout_9.addWidget(self.frame_11)
@@ -893,7 +893,7 @@ class Ui_Server(object):
         self.stackedWidget_change.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        self.pushButton_crt_user.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(3))
+        self.pushButton_crt_user.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(2))
 
         self.pushButton_crt_user_2.clicked.connect(lambda: self.stackedWidget_change.setCurrentIndex(0))
         self.pushButton_change_user.clicked.connect(lambda: self.stackedWidget_change.setCurrentIndex(1))
@@ -913,7 +913,6 @@ class Ui_Server(object):
         self.pushButton_del_search.clicked.connect(self.search_for_delete)
 
         self.pushButton_show_all_usr.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(1))
-        self.pushButton_crt_cancel.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(0))
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -929,7 +928,6 @@ class Ui_Server(object):
         self.label_fio.setText(_translate("MainWindow", "ФИО:"))
         self.label_login.setText(_translate("MainWindow", "Логин:"))
         self.label_mail.setText(_translate("MainWindow", "Эл.почта:"))
-        self.pushButton_crt_cancel.setText(_translate("MainWindow", "Отмена"))
         self.pushButton_save.setText(_translate("MainWindow", "Сохранить"))
         self.label_ch_info.setStyleSheet(_translate("MainWindow", "color: rgb(158, 158, 158);"))
         self.label_ch_info.setText(_translate("MainWindow", "Изменение данных пользователя"))
