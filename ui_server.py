@@ -4,221 +4,893 @@ from PyQt5 import QtCore, QtWidgets
 class Ui_Server(object):
     def setupUi(self, MainWindow, ):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1059, 662)
-        MainWindow.setStyleSheet("background-color: rgb(50, 50, 50);")
+        MainWindow.resize(1250, 712)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setStyleSheet("border:0;background-color: rgb(50, 50, 50);")
         self.centralwidget.setObjectName("centralwidget")
-        self.stackedWidget = QtWidgets.QStackedWidget(self.centralwidget)
-        self.stackedWidget.setGeometry(QtCore.QRect(9, 10, 1041, 641))
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.frame = QtWidgets.QFrame(self.centralwidget)
+        self.frame.setMaximumSize(QtCore.QSize(9000, 9000))
+        self.frame.setStyleSheet("border:0;background-color: rgb(50, 50, 50);")
+        self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame.setObjectName("frame")
+        self.horizontalLayout = QtWidgets.QHBoxLayout(self.frame)
+        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout.setSpacing(0)
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.stackedWidget = QtWidgets.QStackedWidget(self.frame)
         self.stackedWidget.setObjectName("stackedWidget")
-        self.page = QtWidgets.QWidget()
-        self.page.setObjectName("page")
-        self.pushButton_show_all_usr = QtWidgets.QPushButton(self.page)
-        self.pushButton_show_all_usr.setGeometry(QtCore.QRect(407, 160, 221, 36))
+        self.page_3 = QtWidgets.QWidget()
+        self.page_3.setMaximumSize(QtCore.QSize(16777215, 1000))
+        self.page_3.setStyleSheet("")
+        self.page_3.setObjectName("page_3")
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.page_3)
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.frame_2 = QtWidgets.QFrame(self.page_3)
+        self.frame_2.setMaximumSize(QtCore.QSize(9000, 10000))
+        self.frame_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_2.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_2.setObjectName("frame_2")
+        self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.frame_2)
+        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
+        self.pushButton_show_all_usr = QtWidgets.QPushButton(self.frame_2)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.pushButton_show_all_usr.sizePolicy().hasHeightForWidth())
+        self.pushButton_show_all_usr.setSizePolicy(sizePolicy)
+        self.pushButton_show_all_usr.setMinimumSize(QtCore.QSize(300, 35))
+        self.pushButton_show_all_usr.setMaximumSize(QtCore.QSize(500, 35))
+        self.pushButton_show_all_usr.setStyleSheet("\n"
+                                                     "\n"
+                                                     "QPushButton{\n"
+                                                     "background-color: rgb(100, 100, 100);\n"
+                                                     "\n"
+                                                     "color: rgb(50, 50, 50);\n"
+                                                     "border:0px;\n"
+                                                     "border-radius: 6px;\n"
+                                                     "}\n"
+                                                     "\n"
+                                                     "QPushButton:hover{\n"
+                                                     "background-color: rgb(130, 130, 130);\n"
+                                                     "color: rgb(50, 50, 50);\n"
+                                                     "border-radius: 6px;\n"
+                                                     "}\n"
+                                                     "\n"
+                                                     "\n"
+                                                     "\n"
+                                                     "")
         self.pushButton_show_all_usr.setObjectName("pushButton_show_all_usr")
-        self.pushButton_crt_user = QtWidgets.QPushButton(self.page)
-        self.pushButton_crt_user.setGeometry(QtCore.QRect(405, 200, 223, 36))
+        self.horizontalLayout_3.addWidget(self.pushButton_show_all_usr)
+        self.verticalLayout_2.addWidget(self.frame_2)
+        self.frame_3 = QtWidgets.QFrame(self.page_3)
+        self.frame_3.setMaximumSize(QtCore.QSize(16777215, 500))
+        self.frame_3.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_3.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_3.setObjectName("frame_3")
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.frame_3)
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.pushButton_crt_user = QtWidgets.QPushButton(self.frame_3)
+        self.pushButton_crt_user.setMinimumSize(QtCore.QSize(300, 35))
+        self.pushButton_crt_user.setMaximumSize(QtCore.QSize(500, 35))
+        self.pushButton_crt_user.setStyleSheet("\n"
+                                                 "\n"
+                                                 "QPushButton{\n"
+                                                 "background-color: rgb(100, 100, 100);\n"
+                                                 "\n"
+                                                 "color: rgb(50, 50, 50);\n"
+                                                 "border:0px;\n"
+                                                 "border-radius: 6px;\n"
+                                                 "}\n"
+                                                 "\n"
+                                                 "QPushButton:hover{\n"
+                                                 "background-color: rgb(130, 130, 130);\n"
+                                                 "color: rgb(50, 50, 50);\n"
+                                                 "border-radius: 6px;\n"
+                                                 "}\n"
+                                                 "\n"
+                                                 "\n"
+                                                 "\n"
+                                                 "")
         self.pushButton_crt_user.setObjectName("pushButton_crt_user")
-        self.stackedWidget.addWidget(self.page)
-        self.page_usr = QtWidgets.QWidget()
-        self.page_usr.setObjectName("page_usr")
-        self.listWidget_people = QtWidgets.QListWidget(self.page_usr)
-        self.listWidget_people.setGeometry(QtCore.QRect(10, 0, 1021, 351))
+        self.horizontalLayout_2.addWidget(self.pushButton_crt_user)
+        self.verticalLayout_2.addWidget(self.frame_3)
+        self.stackedWidget.addWidget(self.page_3)
+        self.page_usr_3 = QtWidgets.QWidget()
+        self.page_usr_3.setMaximumSize(QtCore.QSize(16777215, 1000))
+        self.page_usr_3.setObjectName("page_usr_3")
+        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.page_usr_3)
+        self.verticalLayout_4.setObjectName("verticalLayout_4")
+        self.frame_4 = QtWidgets.QFrame(self.page_usr_3)
+        self.frame_4.setMaximumSize(QtCore.QSize(90000, 1000))
+        self.frame_4.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_4.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_4.setObjectName("frame_4")
+        self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.frame_4)
+        self.verticalLayout_3.setObjectName("verticalLayout_3")
+        self.frame_5 = QtWidgets.QFrame(self.frame_4)
+        self.frame_5.setMaximumSize(QtCore.QSize(16777215, 418))
+        self.frame_5.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_5.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_5.setObjectName("frame_5")
+        self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.frame_5)
+        self.verticalLayout_5.setObjectName("verticalLayout_5")
+        self.listWidget_people = QtWidgets.QListWidget(self.frame_5)
+        self.listWidget_people.setMaximumSize(QtCore.QSize(90000, 400))
         self.listWidget_people.setStyleSheet("color: rgb(50, 50, 50);\n"
-                                             "")
+                                               "")
         self.listWidget_people.setObjectName("listWidget_people")
-        self.pushButton_back_main_page_usr = QtWidgets.QPushButton(self.page_usr)
-        self.pushButton_back_main_page_usr.setGeometry(QtCore.QRect(470, 360, 103, 36))
-        self.pushButton_back_main_page_usr.setObjectName("pushButton_back_main_page_usr")
-        self.stackedWidget.addWidget(self.page_usr)
-        self.page_crt_usr = QtWidgets.QWidget()
-        self.page_crt_usr.setObjectName("page_crt_usr")
-        self.stackedWidget.addWidget(self.page_crt_usr)
-        self.page_change_usr = QtWidgets.QWidget()
-        self.page_change_usr.setObjectName("page_change_usr")
-        self.stackedWidget_change = QtWidgets.QStackedWidget(self.page_change_usr)
-        self.stackedWidget_change.setGeometry(QtCore.QRect(-10, 64, 1051, 590))
+        self.verticalLayout_5.addWidget(self.listWidget_people)
+        self.verticalLayout_3.addWidget(self.frame_5)
+        self.frame_6 = QtWidgets.QFrame(self.frame_4)
+        self.frame_6.setMinimumSize(QtCore.QSize(100, 52))
+        self.frame_6.setMaximumSize(QtCore.QSize(16777215, 52))
+        self.frame_6.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_6.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_6.setObjectName("frame_6")
+        self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.frame_6)
+        self.horizontalLayout_4.setObjectName("horizontalLayout_4")
+        self.pushButton_crt_cancel = QtWidgets.QPushButton(self.frame_6)
+        self.pushButton_crt_cancel.setMaximumSize(QtCore.QSize(500, 300))
+        self.pushButton_crt_cancel.setStyleSheet("\n"
+                                                           "\n"
+                                                           "QPushButton{\n"
+                                                           "background-color: rgb(100, 100, 100);\n"
+                                                           "\n"
+                                                           "color: rgb(50, 50, 50);\n"
+                                                           "border:0px;\n"
+                                                           "border-radius: 6px;\n"
+                                                           "}\n"
+                                                           "\n"
+                                                           "QPushButton:hover{\n"
+                                                           "background-color: rgb(130, 130, 130);\n"
+                                                           "color: rgb(50, 50, 50);\n"
+                                                           "border-radius: 6px;\n"
+                                                           "}\n"
+                                                           "\n"
+                                                           "\n"
+                                                           "\n"
+                                                           "")
+        self.pushButton_crt_cancel.setObjectName("pushButton_crt_cancel")
+        self.horizontalLayout_4.addWidget(self.pushButton_crt_cancel)
+        self.verticalLayout_3.addWidget(self.frame_6)
+        self.verticalLayout_4.addWidget(self.frame_4)
+        self.stackedWidget.addWidget(self.page_usr_3)
+        self.page_change_usr_3 = QtWidgets.QWidget()
+        self.page_change_usr_3.setObjectName("page_change_usr_3")
+        self.horizontalLayout_5 = QtWidgets.QHBoxLayout(self.page_change_usr_3)
+        self.horizontalLayout_5.setObjectName("horizontalLayout_5")
+        self.frame_7 = QtWidgets.QFrame(self.page_change_usr_3)
+        self.frame_7.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_7.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_7.setObjectName("frame_7")
+        self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.frame_7)
+        self.verticalLayout_6.setObjectName("verticalLayout_6")
+        self.frame_8 = QtWidgets.QFrame(self.frame_7)
+        self.frame_8.setMinimumSize(QtCore.QSize(800, 40))
+        self.frame_8.setMaximumSize(QtCore.QSize(16777215, 50))
+        self.frame_8.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_8.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_8.setObjectName("frame_8")
+        self.horizontalLayout_6 = QtWidgets.QHBoxLayout(self.frame_8)
+        self.horizontalLayout_6.setObjectName("horizontalLayout_6")
+        self.pushButton_crt_user_2   = QtWidgets.QPushButton(self.frame_8)
+        self.pushButton_crt_user_2.setMaximumSize(QtCore.QSize(16777215, 33))
+        self.pushButton_crt_user_2.setStyleSheet("\n"
+                                                 "\n"
+                                                 "QPushButton{\n"
+                                                 "background-color: rgb(100, 100, 100);\n"
+                                                 "\n"
+                                                 "color: rgb(50, 50, 50);\n"
+                                                 "border:0px;\n"
+                                                 "border-radius: 6px;\n"
+                                                 "}\n"
+                                                 "\n"
+                                                 "QPushButton:hover{\n"
+                                                 "background-color: rgb(130, 130, 130);\n"
+                                                 "color: rgb(50, 50, 50);\n"
+                                                 "border-radius: 6px;\n"
+                                                 "}\n"
+                                                 "\n"
+                                                 "\n"
+                                                 "\n"
+                                                 "")
+        self.pushButton_crt_user_2.setObjectName("pushButton_crt_user_2")
+        self.horizontalLayout_6.addWidget(self.pushButton_crt_user_2)
+        self.pushButton_change_user = QtWidgets.QPushButton(self.frame_8)
+        self.pushButton_change_user.setMaximumSize(QtCore.QSize(16777215, 33))
+        self.pushButton_change_user.setStyleSheet("\n"
+                                                    "\n"
+                                                    "QPushButton{\n"
+                                                    "background-color: rgb(100, 100, 100);\n"
+                                                    "\n"
+                                                    "color: rgb(50, 50, 50);\n"
+                                                    "border:0px;\n"
+                                                    "border-radius: 6px;\n"
+                                                    "}\n"
+                                                    "\n"
+                                                    "QPushButton:hover{\n"
+                                                    "background-color: rgb(130, 130, 130);\n"
+                                                    "color: rgb(50, 50, 50);\n"
+                                                    "border-radius: 6px;\n"
+                                                    "}\n"
+                                                    "\n"
+                                                    "\n"
+                                                    "\n"
+                                                    "")
+        self.pushButton_change_user.setObjectName("pushButton_change_user")
+        self.horizontalLayout_6.addWidget(self.pushButton_change_user)
+        self.pushButton_delete_user = QtWidgets.QPushButton(self.frame_8)
+        self.pushButton_delete_user.setMaximumSize(QtCore.QSize(16777215, 33))
+        self.pushButton_delete_user.setStyleSheet("\n"
+                                                    "\n"
+                                                    "QPushButton{\n"
+                                                    "background-color: rgb(100, 100, 100);\n"
+                                                    "\n"
+                                                    "color: rgb(50, 50, 50);\n"
+                                                    "border:0px;\n"
+                                                    "border-radius: 6px;\n"
+                                                    "}\n"
+                                                    "\n"
+                                                    "QPushButton:hover{\n"
+                                                    "background-color: rgb(130, 130, 130);\n"
+                                                    "color: rgb(50, 50, 50);\n"
+                                                    "border-radius: 6px;\n"
+                                                    "}\n"
+                                                    "\n"
+                                                    "\n"
+                                                    "\n"
+                                                    "")
+        self.pushButton_delete_user.setObjectName("pushButton_delete_user")
+        self.horizontalLayout_6.addWidget(self.pushButton_delete_user)
+        self.verticalLayout_6.addWidget(self.frame_8)
+        self.frame_9 = QtWidgets.QFrame(self.frame_7)
+        self.frame_9.setMaximumSize(QtCore.QSize(16777215, 10000))
+        self.frame_9.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_9.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_9.setObjectName("frame_9")
+        self.verticalLayout_7 = QtWidgets.QVBoxLayout(self.frame_9)
+        self.verticalLayout_7.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_7.setSpacing(0)
+        self.verticalLayout_7.setObjectName("verticalLayout_7")
+        self.stackedWidget_change = QtWidgets.QStackedWidget(self.frame_9)
         self.stackedWidget_change.setObjectName("stackedWidget_change")
-        self.page_crt_user = QtWidgets.QWidget()
-        self.page_crt_user.setObjectName("page_crt_user")
-        self.lineEdit_fio = QtWidgets.QLineEdit(self.page_crt_user)
-        self.lineEdit_fio.setGeometry(QtCore.QRect(110, 70, 321, 36))
-        self.lineEdit_fio.setStyleSheet("color: rgb(158, 158, 158);")
-        self.lineEdit_fio.setObjectName("lineEdit_fio")
-        self.lineEdit_login = QtWidgets.QLineEdit(self.page_crt_user)
-        self.lineEdit_login.setGeometry(QtCore.QRect(700, 70, 321, 36))
-        self.lineEdit_login.setStyleSheet("color: rgb(158, 158, 158);")
-        self.lineEdit_login.setObjectName("lineEdit_login")
-        self.label_passw = QtWidgets.QLabel(self.page_crt_user)
-        self.label_passw.setGeometry(QtCore.QRect(610, 130, 66, 19))
-        self.label_passw.setStyleSheet("color: rgb(158, 158, 158);")
-        self.label_passw.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_passw.setObjectName("label_passw")
-        self.lineEdit_phone = QtWidgets.QLineEdit(self.page_crt_user)
-        self.lineEdit_phone.setGeometry(QtCore.QRect(110, 170, 321, 36))
-        self.lineEdit_phone.setStyleSheet("color: rgb(158, 158, 158);")
-        self.lineEdit_phone.setObjectName("lineEdit_phone")
-        self.label_phone = QtWidgets.QLabel(self.page_crt_user)
-        self.label_phone.setGeometry(QtCore.QRect(18, 176, 66, 19))
-        self.label_phone.setStyleSheet("color: rgb(158, 158, 158);")
-        self.label_phone.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_phone.setObjectName("label_phone")
-        self.lineEdit_pass = QtWidgets.QLineEdit(self.page_crt_user)
-        self.lineEdit_pass.setGeometry(QtCore.QRect(700, 120, 321, 36))
-        self.lineEdit_pass.setStyleSheet("color: rgb(158, 158, 158);")
-        self.lineEdit_pass.setObjectName("lineEdit_pass")
-        self.label_crt_info = QtWidgets.QLabel(self.page_crt_user)
-        self.label_crt_info.setGeometry(QtCore.QRect(370, 20, 321, 20))
+        self.page_crt_user_3 = QtWidgets.QWidget()
+        self.page_crt_user_3.setObjectName("page_crt_user_3")
+        self.verticalLayout_12 = QtWidgets.QVBoxLayout(self.page_crt_user_3)
+        self.verticalLayout_12.setObjectName("verticalLayout_12")
+        self.frame_23 = QtWidgets.QFrame(self.page_crt_user_3)
+        self.frame_23.setMaximumSize(QtCore.QSize(16777215, 58))
+        self.frame_23.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_23.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_23.setObjectName("frame_23")
+        self.horizontalLayout_16 = QtWidgets.QHBoxLayout(self.frame_23)
+        self.horizontalLayout_16.setObjectName("horizontalLayout_16")
+        self.label_crt_info = QtWidgets.QLabel(self.frame_23)
+        self.label_crt_info.setMaximumSize(QtCore.QSize(16777215, 20))
         self.label_crt_info.setStyleSheet("color: rgb(158, 158, 158);")
         self.label_crt_info.setAlignment(QtCore.Qt.AlignCenter)
         self.label_crt_info.setObjectName("label_crt_info")
-        self.lineEdit_mail = QtWidgets.QLineEdit(self.page_crt_user)
-        self.lineEdit_mail.setGeometry(QtCore.QRect(110, 220, 321, 36))
-        self.lineEdit_mail.setStyleSheet("color: rgb(158, 158, 158);")
-        self.lineEdit_mail.setObjectName("lineEdit_mail")
-        self.lineEdit_post = QtWidgets.QLineEdit(self.page_crt_user)
-        self.lineEdit_post.setGeometry(QtCore.QRect(110, 120, 321, 36))
-        self.lineEdit_post.setStyleSheet("color: rgb(158, 158, 158);")
-        self.lineEdit_post.setObjectName("lineEdit_post")
-        self.label_passw_2 = QtWidgets.QLabel(self.page_crt_user)
-        self.label_passw_2.setGeometry(QtCore.QRect(513, 180, 171, 19))
-        self.label_passw_2.setStyleSheet("color: rgb(158, 158, 158);")
-        self.label_passw_2.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_passw_2.setObjectName("label_passw_2")
-        self.label_post = QtWidgets.QLabel(self.page_crt_user)
-        self.label_post.setGeometry(QtCore.QRect(10, 126, 91, 20))
-        self.label_post.setStyleSheet("color: rgb(158, 158, 158);")
-        self.label_post.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_post.setObjectName("label_post")
-        self.label_fio = QtWidgets.QLabel(self.page_crt_user)
-        self.label_fio.setGeometry(QtCore.QRect(20, 80, 66, 19))
+        self.horizontalLayout_16.addWidget(self.label_crt_info)
+        self.verticalLayout_12.addWidget(self.frame_23)
+        self.frame_24 = QtWidgets.QFrame(self.page_crt_user_3)
+        self.frame_24.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_24.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_24.setObjectName("frame_24")
+        self.horizontalLayout_17 = QtWidgets.QHBoxLayout(self.frame_24)
+        self.horizontalLayout_17.setObjectName("horizontalLayout_17")
+        self.frame_13 = QtWidgets.QFrame(self.frame_24)
+        self.frame_13.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_13.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_13.setObjectName("frame_13")
+        self.verticalLayout_10 = QtWidgets.QVBoxLayout(self.frame_13)
+        self.verticalLayout_10.setObjectName("verticalLayout_10")
+        self.frame_14 = QtWidgets.QFrame(self.frame_13)
+        self.frame_14.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_14.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_14.setObjectName("frame_14")
+        self.horizontalLayout_8 = QtWidgets.QHBoxLayout(self.frame_14)
+        self.horizontalLayout_8.setObjectName("horizontalLayout_8")
+        self.frame_32 = QtWidgets.QFrame(self.frame_14)
+        self.frame_32.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_32.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_32.setObjectName("frame_32")
+        self.verticalLayout_23 = QtWidgets.QVBoxLayout(self.frame_32)
+        self.verticalLayout_23.setObjectName("verticalLayout_23")
+        self.label_fio = QtWidgets.QLabel(self.frame_32)
         self.label_fio.setStyleSheet("color: rgb(158, 158, 158);")
         self.label_fio.setAlignment(QtCore.Qt.AlignCenter)
         self.label_fio.setObjectName("label_fio")
-        self.label_login = QtWidgets.QLabel(self.page_crt_user)
-        self.label_login.setGeometry(QtCore.QRect(610, 80, 66, 19))
-        self.label_login.setStyleSheet("color: rgb(158, 158, 158);")
-        self.label_login.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_login.setObjectName("label_login")
-        self.label_mail = QtWidgets.QLabel(self.page_crt_user)
-        self.label_mail.setGeometry(QtCore.QRect(18, 226, 71, 19))
+        self.verticalLayout_23.addWidget(self.label_fio)
+        self.horizontalLayout_8.addWidget(self.frame_32)
+        self.frame_25 = QtWidgets.QFrame(self.frame_14)
+        self.frame_25.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_25.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_25.setObjectName("frame_25")
+        self.verticalLayout_16 = QtWidgets.QVBoxLayout(self.frame_25)
+        self.verticalLayout_16.setContentsMargins(50, -1, -1, -1)
+        self.verticalLayout_16.setObjectName("verticalLayout_16")
+        self.lineEdit_fio = QtWidgets.QLineEdit(self.frame_25)
+        self.lineEdit_fio.setMaximumSize(QtCore.QSize(90000, 16777215))
+        self.lineEdit_fio.setStyleSheet("background-color: rgb(30, 30, 30);\n"
+                                          "font: 14pt \"Cantarell\";\n"
+                                          "color: rgb(158, 158, 158);\n"
+                                          "border:0px;\n"
+                                          "border-radius: 12px;\n"
+                                          "")
+        self.lineEdit_fio.setObjectName("lineEdit_fio")
+        self.verticalLayout_16.addWidget(self.lineEdit_fio)
+        self.horizontalLayout_8.addWidget(self.frame_25)
+        self.verticalLayout_10.addWidget(self.frame_14)
+        self.frame_16 = QtWidgets.QFrame(self.frame_13)
+        self.frame_16.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_16.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_16.setObjectName("frame_16")
+        self.horizontalLayout_9 = QtWidgets.QHBoxLayout(self.frame_16)
+        self.horizontalLayout_9.setObjectName("horizontalLayout_9")
+        self.frame_33 = QtWidgets.QFrame(self.frame_16)
+        self.frame_33.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_33.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_33.setObjectName("frame_33")
+        self.verticalLayout_22 = QtWidgets.QVBoxLayout(self.frame_33)
+        self.verticalLayout_22.setObjectName("verticalLayout_22")
+        self.label_post = QtWidgets.QLabel(self.frame_33)
+        self.label_post.setStyleSheet("color: rgb(158, 158, 158);")
+        self.label_post.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_post.setObjectName("label_post")
+        self.verticalLayout_22.addWidget(self.label_post)
+        self.horizontalLayout_9.addWidget(self.frame_33)
+        self.frame_26 = QtWidgets.QFrame(self.frame_16)
+        self.frame_26.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_26.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_26.setObjectName("frame_26")
+        self.verticalLayout_17 = QtWidgets.QVBoxLayout(self.frame_26)
+        self.verticalLayout_17.setObjectName("verticalLayout_17")
+        self.lineEdit_post_3 = QtWidgets.QLineEdit(self.frame_26)
+        self.lineEdit_post_3.setMaximumSize(QtCore.QSize(90000, 16777215))
+        self.lineEdit_post_3.setStyleSheet("background-color: rgb(30, 30, 30);\n"
+                                           "font: 14pt \"Cantarell\";\n"
+                                           "color: rgb(158, 158, 158);\n"
+                                           "border:0px;\n"
+                                           "border-radius: 12px;\n"
+                                           "")
+        self.lineEdit_post_3.setObjectName("lineEdit_post_3")
+        self.verticalLayout_17.addWidget(self.lineEdit_post_3)
+        self.horizontalLayout_9.addWidget(self.frame_26)
+        self.verticalLayout_10.addWidget(self.frame_16)
+        self.frame_17 = QtWidgets.QFrame(self.frame_13)
+        self.frame_17.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_17.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_17.setObjectName("frame_17")
+        self.horizontalLayout_10 = QtWidgets.QHBoxLayout(self.frame_17)
+        self.horizontalLayout_10.setObjectName("horizontalLayout_10")
+        self.frame_34 = QtWidgets.QFrame(self.frame_17)
+        self.frame_34.setMaximumSize(QtCore.QSize(9000, 16777215))
+        self.frame_34.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_34.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_34.setObjectName("frame_34")
+        self.verticalLayout_20 = QtWidgets.QVBoxLayout(self.frame_34)
+        self.verticalLayout_20.setObjectName("verticalLayout_20")
+        self.label_phone = QtWidgets.QLabel(self.frame_34)
+        self.label_phone.setMaximumSize(QtCore.QSize(75, 16777215))
+        self.label_phone.setStyleSheet("color: rgb(158, 158, 158);")
+        self.label_phone.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_phone.setObjectName("label_phone")
+        self.verticalLayout_20.addWidget(self.label_phone)
+        self.horizontalLayout_10.addWidget(self.frame_34)
+        self.frame_28 = QtWidgets.QFrame(self.frame_17)
+        self.frame_28.setMaximumSize(QtCore.QSize(9000, 16777215))
+        self.frame_28.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_28.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_28.setObjectName("frame_28")
+        self.verticalLayout_18 = QtWidgets.QVBoxLayout(self.frame_28)
+        self.verticalLayout_18.setContentsMargins(23, -1, -1, -1)
+        self.verticalLayout_18.setObjectName("verticalLayout_18")
+        self.lineEdit_cabinet_3 = QtWidgets.QLineEdit(self.frame_28)
+        self.lineEdit_cabinet_3.setStyleSheet("background-color: rgb(30, 30, 30);\n"
+                                              "font: 14pt \"Cantarell\";\n"
+                                              "color: rgb(158, 158, 158);\n"
+                                              "border:0px;\n"
+                                              "border-radius: 12px;\n"
+                                              "")
+        self.lineEdit_cabinet_3.setObjectName("lineEdit_cabinet_3")
+        self.verticalLayout_18.addWidget(self.lineEdit_cabinet_3)
+        self.horizontalLayout_10.addWidget(self.frame_28)
+        self.verticalLayout_10.addWidget(self.frame_17)
+        self.frame_15 = QtWidgets.QFrame(self.frame_13)
+        self.frame_15.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_15.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_15.setObjectName("frame_15")
+        self.horizontalLayout_11 = QtWidgets.QHBoxLayout(self.frame_15)
+        self.horizontalLayout_11.setObjectName("horizontalLayout_11")
+        self.frame_35 = QtWidgets.QFrame(self.frame_15)
+        self.frame_35.setMaximumSize(QtCore.QSize(75, 16777215))
+        self.frame_35.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_35.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_35.setObjectName("frame_35")
+        self.verticalLayout_21 = QtWidgets.QVBoxLayout(self.frame_35)
+        self.verticalLayout_21.setObjectName("verticalLayout_21")
+        self.label_mail = QtWidgets.QLabel(self.frame_35)
         self.label_mail.setStyleSheet("color: rgb(158, 158, 158);")
         self.label_mail.setAlignment(QtCore.Qt.AlignCenter)
         self.label_mail.setObjectName("label_mail")
-        self.lineEdit_passw_2 = QtWidgets.QLineEdit(self.page_crt_user)
-        self.lineEdit_passw_2.setGeometry(QtCore.QRect(700, 175, 321, 36))
-        self.lineEdit_passw_2.setStyleSheet("color: rgb(158, 158, 158);")
+        self.verticalLayout_21.addWidget(self.label_mail)
+        self.horizontalLayout_11.addWidget(self.frame_35)
+        self.frame_27 = QtWidgets.QFrame(self.frame_15)
+        self.frame_27.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_27.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_27.setObjectName("frame_27")
+        self.verticalLayout_19 = QtWidgets.QVBoxLayout(self.frame_27)
+        self.verticalLayout_19.setContentsMargins(25, -1, -1, -1)
+        self.verticalLayout_19.setObjectName("verticalLayout_19")
+        self.lineEdit_mail = QtWidgets.QLineEdit(self.frame_27)
+        self.lineEdit_mail.setStyleSheet("background-color: rgb(30, 30, 30);\n"
+                                           "font: 14pt \"Cantarell\";\n"
+                                           "color: rgb(158, 158, 158);\n"
+                                           "border:0px;\n"
+                                           "border-radius: 12px;\n"
+                                           "")
+        self.lineEdit_mail.setObjectName("lineEdit_mail")
+        self.verticalLayout_19.addWidget(self.lineEdit_mail)
+        self.horizontalLayout_11.addWidget(self.frame_27)
+        self.verticalLayout_10.addWidget(self.frame_15)
+        self.horizontalLayout_17.addWidget(self.frame_13)
+        self.frame_18 = QtWidgets.QFrame(self.frame_24)
+        self.frame_18.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_18.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_18.setObjectName("frame_18")
+        self.verticalLayout_11 = QtWidgets.QVBoxLayout(self.frame_18)
+        self.verticalLayout_11.setObjectName("verticalLayout_11")
+        self.frame_20 = QtWidgets.QFrame(self.frame_18)
+        self.frame_20.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_20.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_20.setObjectName("frame_20")
+        self.horizontalLayout_12 = QtWidgets.QHBoxLayout(self.frame_20)
+        self.horizontalLayout_12.setObjectName("horizontalLayout_12")
+        self.frame_36 = QtWidgets.QFrame(self.frame_20)
+        self.frame_36.setMaximumSize(QtCore.QSize(75, 16777215))
+        self.frame_36.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_36.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_36.setObjectName("frame_36")
+        self.verticalLayout_24 = QtWidgets.QVBoxLayout(self.frame_36)
+        self.verticalLayout_24.setObjectName("verticalLayout_24")
+        self.label_login = QtWidgets.QLabel(self.frame_36)
+        self.label_login.setMaximumSize(QtCore.QSize(103, 16777215))
+        self.label_login.setStyleSheet("color: rgb(158, 158, 158);")
+        self.label_login.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_login.setObjectName("label_login")
+        self.verticalLayout_24.addWidget(self.label_login)
+        self.horizontalLayout_12.addWidget(self.frame_36)
+        self.frame_29 = QtWidgets.QFrame(self.frame_20)
+        self.frame_29.setMaximumSize(QtCore.QSize(9000, 16777215))
+        self.frame_29.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_29.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_29.setObjectName("frame_29")
+        self.verticalLayout_15 = QtWidgets.QVBoxLayout(self.frame_29)
+        self.verticalLayout_15.setObjectName("verticalLayout_15")
+        self.lineEdit_login = QtWidgets.QLineEdit(self.frame_29)
+        self.lineEdit_login.setStyleSheet("background-color: rgb(30, 30, 30);\n"
+                                            "font: 14pt \"Cantarell\";\n"
+                                            "color: rgb(158, 158, 158);\n"
+                                            "border:0px;\n"
+                                            "border-radius: 12px;\n"
+                                            "")
+        self.lineEdit_login.setObjectName("lineEdit_login")
+        self.verticalLayout_15.addWidget(self.lineEdit_login)
+        self.horizontalLayout_12.addWidget(self.frame_29)
+        self.verticalLayout_11.addWidget(self.frame_20)
+        self.frame_19 = QtWidgets.QFrame(self.frame_18)
+        self.frame_19.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_19.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_19.setObjectName("frame_19")
+        self.horizontalLayout_13 = QtWidgets.QHBoxLayout(self.frame_19)
+        self.horizontalLayout_13.setObjectName("horizontalLayout_13")
+        self.frame_37 = QtWidgets.QFrame(self.frame_19)
+        self.frame_37.setMaximumSize(QtCore.QSize(78, 16777215))
+        self.frame_37.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_37.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_37.setObjectName("frame_37")
+        self.verticalLayout_25 = QtWidgets.QVBoxLayout(self.frame_37)
+        self.verticalLayout_25.setObjectName("verticalLayout_25")
+        self.label_passw = QtWidgets.QLabel(self.frame_37)
+        self.label_passw.setStyleSheet("color: rgb(158, 158, 158);")
+        self.label_passw.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_passw.setObjectName("label_passw")
+        self.verticalLayout_25.addWidget(self.label_passw)
+        self.horizontalLayout_13.addWidget(self.frame_37)
+        self.frame_30 = QtWidgets.QFrame(self.frame_19)
+        self.frame_30.setMaximumSize(QtCore.QSize(9000, 16777215))
+        self.frame_30.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_30.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_30.setObjectName("frame_30")
+        self.verticalLayout_13 = QtWidgets.QVBoxLayout(self.frame_30)
+        self.verticalLayout_13.setObjectName("verticalLayout_13")
+        self.lineEdit_pass = QtWidgets.QLineEdit(self.frame_30)
+        self.lineEdit_pass.setStyleSheet("background-color: rgb(30, 30, 30);\n"
+                                           "font: 14pt \"Cantarell\";\n"
+                                           "color: rgb(158, 158, 158);\n"
+                                           "border:0px;\n"
+                                           "border-radius: 12px;\n"
+                                           "")
+        self.lineEdit_pass.setObjectName("lineEdit_pass")
+        self.verticalLayout_13.addWidget(self.lineEdit_pass)
+        self.horizontalLayout_13.addWidget(self.frame_30)
+        self.verticalLayout_11.addWidget(self.frame_19)
+        self.frame_21 = QtWidgets.QFrame(self.frame_18)
+        self.frame_21.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_21.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_21.setObjectName("frame_21")
+        self.horizontalLayout_14 = QtWidgets.QHBoxLayout(self.frame_21)
+        self.horizontalLayout_14.setObjectName("horizontalLayout_14")
+        self.frame_38 = QtWidgets.QFrame(self.frame_21)
+        self.frame_38.setMaximumSize(QtCore.QSize(160, 16777215))
+        self.frame_38.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_38.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_38.setObjectName("frame_38")
+        self.verticalLayout_26 = QtWidgets.QVBoxLayout(self.frame_38)
+        self.verticalLayout_26.setObjectName("verticalLayout_26")
+        self.label_passw_2 = QtWidgets.QLabel(self.frame_38)
+        self.label_passw_2.setStyleSheet("color: rgb(158, 158, 158);")
+        self.label_passw_2.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_passw_2.setObjectName("label_passw_2")
+        self.verticalLayout_26.addWidget(self.label_passw_2)
+        self.horizontalLayout_14.addWidget(self.frame_38)
+        self.frame_31 = QtWidgets.QFrame(self.frame_21)
+        self.frame_31.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_31.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_31.setObjectName("frame_31")
+        self.verticalLayout_14 = QtWidgets.QVBoxLayout(self.frame_31)
+        self.verticalLayout_14.setObjectName("verticalLayout_14")
+        self.lineEdit_passw_2 = QtWidgets.QLineEdit(self.frame_31)
+        self.lineEdit_passw_2.setStyleSheet("background-color: rgb(30, 30, 30);\n"
+                                            "font: 14pt \"Cantarell\";\n"
+                                            "color: rgb(158, 158, 158);\n"
+                                            "border:0px;\n"
+                                            "border-radius: 12px;\n"
+                                            "")
         self.lineEdit_passw_2.setObjectName("lineEdit_passw_2")
-        self.pushButton_crt_cancel = QtWidgets.QPushButton(self.page_crt_user)
-        self.pushButton_crt_cancel.setGeometry(QtCore.QRect(630, 360, 191, 36))
-        self.pushButton_crt_cancel.setStyleSheet("color: rgb(158, 158, 158);")
-        self.pushButton_crt_cancel.setObjectName("pushButton_crt_cancel")
-        self.pushButton_save = QtWidgets.QPushButton(self.page_crt_user)
-        self.pushButton_save.setGeometry(QtCore.QRect(230, 360, 191, 36))
-        self.pushButton_save.setStyleSheet("color: rgb(158, 158, 158);")
+        self.verticalLayout_14.addWidget(self.lineEdit_passw_2)
+        self.horizontalLayout_14.addWidget(self.frame_31)
+        self.verticalLayout_11.addWidget(self.frame_21)
+        self.frame_39 = QtWidgets.QFrame(self.frame_18)
+        self.frame_39.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_39.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_39.setObjectName("frame_39")
+        self.verticalLayout_11.addWidget(self.frame_39)
+        self.horizontalLayout_17.addWidget(self.frame_18)
+        self.verticalLayout_12.addWidget(self.frame_24)
+        self.frame_22 = QtWidgets.QFrame(self.page_crt_user_3)
+        self.frame_22.setMaximumSize(QtCore.QSize(16777215, 125))
+        self.frame_22.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_22.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_22.setObjectName("frame_22")
+        self.horizontalLayout_15 = QtWidgets.QHBoxLayout(self.frame_22)
+        self.horizontalLayout_15.setObjectName("horizontalLayout_15")
+        self.pushButton_save = QtWidgets.QPushButton(self.frame_22)
+        self.pushButton_save.setMaximumSize(QtCore.QSize(300, 30))
+        self.pushButton_save.setStyleSheet("\n"
+                                             "\n"
+                                             "QPushButton{\n"
+                                             "background-color: rgb(100, 100, 100);\n"
+                                             "\n"
+                                             "color: rgb(50, 50, 50);\n"
+                                             "border:0px;\n"
+                                             "border-radius: 6px;\n"
+                                             "}\n"
+                                             "\n"
+                                             "QPushButton:hover{\n"
+                                             "background-color: rgb(130, 130, 130);\n"
+                                             "color: rgb(50, 50, 50);\n"
+                                             "border-radius: 6px;\n"
+                                             "}\n"
+                                             "\n"
+                                             "\n"
+                                             "\n"
+                                             "")
         self.pushButton_save.setObjectName("pushButton_save")
-        self.stackedWidget_change.addWidget(self.page_crt_user)
+        self.horizontalLayout_15.addWidget(self.pushButton_save)
+        self.pushButton_back_main_page_crt_usr = QtWidgets.QPushButton(self.frame_22)
+        self.pushButton_back_main_page_crt_usr.setMaximumSize(QtCore.QSize(300, 35))
+        self.pushButton_back_main_page_crt_usr.setStyleSheet("\n"
+                                                               "\n"
+                                                               "QPushButton{\n"
+                                                               "background-color: rgb(100, 100, 100);\n"
+                                                               "\n"
+                                                               "color: rgb(50, 50, 50);\n"
+                                                               "border:0px;\n"
+                                                               "border-radius: 6px;\n"
+                                                               "}\n"
+                                                               "\n"
+                                                               "QPushButton:hover{\n"
+                                                               "background-color: rgb(130, 130, 130);\n"
+                                                               "color: rgb(50, 50, 50);\n"
+                                                               "border-radius: 6px;\n"
+                                                               "}\n"
+                                                               "\n"
+                                                               "\n"
+                                                               "\n"
+                                                               "")
+        self.pushButton_back_main_page_crt_usr.setObjectName("pushButton_back_main_page_crt_usr")
+        self.horizontalLayout_15.addWidget(self.pushButton_back_main_page_crt_usr)
+        self.verticalLayout_12.addWidget(self.frame_22)
+        self.stackedWidget_change.addWidget(self.page_crt_user_3)
         self.page_change_user = QtWidgets.QWidget()
         self.page_change_user.setObjectName("page_change_user")
-        self.comboBox = QtWidgets.QComboBox(self.page_change_user)
-        self.comboBox.setGeometry(QtCore.QRect(408, 170, 194, 37))
-        self.comboBox.setStyleSheet("color: rgb(158, 158, 158);")
-        self.comboBox.setObjectName("comboBox")
+        self.verticalLayout_30 = QtWidgets.QVBoxLayout(self.page_change_user)
+        self.verticalLayout_30.setObjectName("verticalLayout_30")
         self.label_ch_info = QtWidgets.QLabel(self.page_change_user)
-        self.label_ch_info.setGeometry(QtCore.QRect(340, 30, 341, 20))
         self.label_ch_info.setAlignment(QtCore.Qt.AlignCenter)
         self.label_ch_info.setObjectName("label_ch_info")
-        self.label_ch_whtCh = QtWidgets.QLabel(self.page_change_user)
-        self.label_ch_whtCh.setGeometry(QtCore.QRect(380, 140, 261, 19))
-        self.label_ch_whtCh.setStyleSheet("color: rgb(158, 158, 158);")
-        self.label_ch_whtCh.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_ch_whtCh.setObjectName("label_ch_whtCh")
-        self.label_ch_srch_user = QtWidgets.QLabel(self.page_change_user)
-        self.label_ch_srch_user.setGeometry(QtCore.QRect(10, 70, 261, 19))
+        self.verticalLayout_30.addWidget(self.label_ch_info)
+        self.frame_43 = QtWidgets.QFrame(self.page_change_user)
+        self.frame_43.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_43.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_43.setObjectName("frame_43")
+        self.horizontalLayout_19 = QtWidgets.QHBoxLayout(self.frame_43)
+        self.horizontalLayout_19.setObjectName("horizontalLayout_19")
+        self.frame_12 = QtWidgets.QFrame(self.frame_43)
+        self.frame_12.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_12.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_12.setObjectName("frame_12")
+        self.verticalLayout_27 = QtWidgets.QVBoxLayout(self.frame_12)
+        self.verticalLayout_27.setObjectName("verticalLayout_27")
+        self.label_ch_srch_user = QtWidgets.QLabel(self.frame_12)
         self.label_ch_srch_user.setStyleSheet("color: rgb(158, 158, 158);")
         self.label_ch_srch_user.setAlignment(QtCore.Qt.AlignCenter)
         self.label_ch_srch_user.setObjectName("label_ch_srch_user")
-        self.listWidget_users = QtWidgets.QListWidget(self.page_change_user)
-        self.listWidget_users.setGeometry(QtCore.QRect(10, 199, 256, 231))
-        self.listWidget_users.setStyleSheet("color: rgb(158, 158, 158);")
-        self.listWidget_users.setObjectName("listWidget_users")
-        self.lineEdit_ch = QtWidgets.QLineEdit(self.page_change_user)
-        self.lineEdit_ch.setGeometry(QtCore.QRect(10, 100, 256, 36))
-        self.lineEdit_ch.setStyleSheet("color: rgb(158, 158, 158);")
+        self.verticalLayout_27.addWidget(self.label_ch_srch_user)
+        self.lineEdit_ch = QtWidgets.QLineEdit(self.frame_12)
+        self.lineEdit_ch.setStyleSheet("background-color: rgb(30, 30, 30);\n"
+                                         "font: 14pt \"Cantarell\";\n"
+                                         "color: rgb(158, 158, 158);\n"
+                                         "border:0px;\n"
+                                         "border-radius: 12px;\n"
+                                         "")
         self.lineEdit_ch.setObjectName("lineEdit_ch")
-        self.pushButton_ch_search = QtWidgets.QPushButton(self.page_change_user)
-        self.pushButton_ch_search.setGeometry(QtCore.QRect(84, 140, 103, 36))
+        self.verticalLayout_27.addWidget(self.lineEdit_ch)
+        self.pushButton_ch_search = QtWidgets.QPushButton(self.frame_12)
         self.pushButton_ch_search.setStyleSheet("color: rgb(158, 158, 158);")
         self.pushButton_ch_search.setObjectName("pushButton_ch_search")
-        self.plainTextEdit_ch_data = QtWidgets.QPlainTextEdit(self.page_change_user)
-        self.plainTextEdit_ch_data.setGeometry(QtCore.QRect(770, 150, 191, 111))
-        self.plainTextEdit_ch_data.setStyleSheet("color: rgb(158, 158, 158);")
-        self.plainTextEdit_ch_data.setObjectName("plainTextEdit_ch_data")
-        self.pushButton_ch_save = QtWidgets.QPushButton(self.page_change_user)
-        self.pushButton_ch_save.setGeometry(QtCore.QRect(200, 480, 190, 36))
-        self.pushButton_ch_save.setStyleSheet("color: rgb(158, 158, 158);")
-        self.pushButton_ch_save.setObjectName("pushButton_ch_save")
-        self.pushButton_ch_cancel = QtWidgets.QPushButton(self.page_change_user)
-        self.pushButton_ch_cancel.setGeometry(QtCore.QRect(610, 480, 190, 36))
-        self.pushButton_ch_cancel.setStyleSheet("color: rgb(158, 158, 158);")
-        self.pushButton_ch_cancel.setObjectName("pushButton_ch_cancel")
-        self.label_ch_inf = QtWidgets.QLabel(self.page_change_user)
-        self.label_ch_inf.setGeometry(QtCore.QRect(725, 110, 281, 20))
+        self.verticalLayout_27.addWidget(self.pushButton_ch_search)
+        self.listWidget_users = QtWidgets.QListWidget(self.frame_12)
+        self.listWidget_users.setStyleSheet("background-color: rgb(30, 30, 30);\n"
+                                              "font: 14pt \"Cantarell\";\n"
+                                              "color: rgb(158, 158, 158);\n"
+                                              "border:0px;\n"
+                                              "border-radius: 12px;\n"
+                                              "")
+        self.listWidget_users.setObjectName("listWidget_users")
+        self.verticalLayout_27.addWidget(self.listWidget_users)
+        self.horizontalLayout_19.addWidget(self.frame_12)
+        self.frame_40 = QtWidgets.QFrame(self.frame_43)
+        self.frame_40.setMaximumSize(QtCore.QSize(228, 8000))
+        self.frame_40.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_40.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_40.setObjectName("frame_40")
+        self.verticalLayout_28 = QtWidgets.QVBoxLayout(self.frame_40)
+        self.verticalLayout_28.setContentsMargins(-1, 12, -1, 6)
+        self.verticalLayout_28.setObjectName("verticalLayout_28")
+        self.label_ch_whtCh = QtWidgets.QLabel(self.frame_40)
+        self.label_ch_whtCh.setMaximumSize(QtCore.QSize(16777215, 15))
+        self.label_ch_whtCh.setStyleSheet("color: rgb(158, 158, 158);")
+        self.label_ch_whtCh.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_ch_whtCh.setObjectName("label_ch_whtCh")
+        self.verticalLayout_28.addWidget(self.label_ch_whtCh)
+        self.comboBox = QtWidgets.QComboBox(self.frame_40)
+        self.comboBox.setMaximumSize(QtCore.QSize(16777215, 20))
+        self.comboBox.setStyleSheet("background-color: rgb(30, 30, 30);\n"
+                                      "font: 14pt \"Cantarell\";\n"
+                                      "color: rgb(158, 158, 158);\n"
+                                      "border:0px;\n"
+                                      "border-radius: 12px;\n"
+                                      "")
+        self.comboBox.setObjectName("comboBox")
+        self.verticalLayout_28.addWidget(self.comboBox)
+        self.frame_44 = QtWidgets.QFrame(self.frame_40)
+        self.frame_44.setMaximumSize(QtCore.QSize(16777215, 8000))
+        self.frame_44.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_44.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_44.setObjectName("frame_44")
+        self.verticalLayout_28.addWidget(self.frame_44)
+        self.horizontalLayout_19.addWidget(self.frame_40)
+        self.frame_41 = QtWidgets.QFrame(self.frame_43)
+        self.frame_41.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_41.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_41.setObjectName("frame_41")
+        self.verticalLayout_29 = QtWidgets.QVBoxLayout(self.frame_41)
+        self.verticalLayout_29.setObjectName("verticalLayout_29")
+        self.label_ch_inf = QtWidgets.QLabel(self.frame_41)
         self.label_ch_inf.setText("")
         self.label_ch_inf.setAlignment(QtCore.Qt.AlignCenter)
         self.label_ch_inf.setObjectName("label_ch_inf")
+        self.verticalLayout_29.addWidget(self.label_ch_inf)
+        self.plainTextEdit_ch_data = QtWidgets.QPlainTextEdit(self.frame_41)
+        self.plainTextEdit_ch_data.setStyleSheet("background-color: rgb(30, 30, 30);\n"
+                                                   "font: 14pt \"Cantarell\";\n"
+                                                   "color: rgb(158, 158, 158);\n"
+                                                   "border:0px;\n"
+                                                   "border-radius: 12px;\n"
+                                                   "")
+        self.plainTextEdit_ch_data.setObjectName("plainTextEdit_ch_data")
+        self.verticalLayout_29.addWidget(self.plainTextEdit_ch_data)
+        self.horizontalLayout_19.addWidget(self.frame_41)
+        self.verticalLayout_30.addWidget(self.frame_43)
+        self.frame_42 = QtWidgets.QFrame(self.page_change_user)
+        self.frame_42.setMinimumSize(QtCore.QSize(0, 40))
+        self.frame_42.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_42.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_42.setObjectName("frame_42")
+        self.horizontalLayout_18 = QtWidgets.QHBoxLayout(self.frame_42)
+        self.horizontalLayout_18.setObjectName("horizontalLayout_18")
+        self.pushButton_ch_save = QtWidgets.QPushButton(self.frame_42)
+        self.pushButton_ch_save.setMaximumSize(QtCore.QSize(300, 40))
+        self.pushButton_ch_save.setStyleSheet("\n"
+                                                "\n"
+                                                "QPushButton{\n"
+                                                "background-color: rgb(100, 100, 100);\n"
+                                                "\n"
+                                                "color: rgb(50, 50, 50);\n"
+                                                "border:0px;\n"
+                                                "border-radius: 6px;\n"
+                                                "}\n"
+                                                "\n"
+                                                "QPushButton:hover{\n"
+                                                "background-color: rgb(130, 130, 130);\n"
+                                                "color: rgb(50, 50, 50);\n"
+                                                "border-radius: 6px;\n"
+                                                "}\n"
+                                                "\n"
+                                                "\n"
+                                                "\n"
+                                                "")
+        self.pushButton_ch_save.setObjectName("pushButton_ch_save")
+        self.horizontalLayout_18.addWidget(self.pushButton_ch_save)
+        self.pushButton_ch_cancel = QtWidgets.QPushButton(self.frame_42)
+        self.pushButton_ch_cancel.setMaximumSize(QtCore.QSize(300, 40))
+        self.pushButton_ch_cancel.setStyleSheet("\n"
+                                                  "\n"
+                                                  "QPushButton{\n"
+                                                  "background-color: rgb(100, 100, 100);\n"
+                                                  "\n"
+                                                  "color: rgb(50, 50, 50);\n"
+                                                  "border:0px;\n"
+                                                  "border-radius: 6px;\n"
+                                                  "}\n"
+                                                  "\n"
+                                                  "QPushButton:hover{\n"
+                                                  "background-color: rgb(130, 130, 130);\n"
+                                                  "color: rgb(50, 50, 50);\n"
+                                                  "border-radius: 6px;\n"
+                                                  "}\n"
+                                                  "\n"
+                                                  "\n"
+                                                  "\n"
+                                                  "")
+        self.pushButton_ch_cancel.setObjectName("pushButton_ch_cancel")
+        self.horizontalLayout_18.addWidget(self.pushButton_ch_cancel)
+        self.verticalLayout_30.addWidget(self.frame_42)
         self.stackedWidget_change.addWidget(self.page_change_user)
         self.page_delete_user = QtWidgets.QWidget()
         self.page_delete_user.setObjectName("page_delete_user")
-        self.listWidget_del_users = QtWidgets.QListWidget(self.page_delete_user)
-        self.listWidget_del_users.setGeometry(QtCore.QRect(380, 219, 256, 231))
-        self.listWidget_del_users.setStyleSheet("color: rgb(158, 158, 158);")
-        self.listWidget_del_users.setObjectName("listWidget_del_users")
-        self.lineEdit_del_search = QtWidgets.QLineEdit(self.page_delete_user)
-        self.lineEdit_del_search.setGeometry(QtCore.QRect(380, 120, 256, 36))
-        self.lineEdit_del_search.setStyleSheet("color: rgb(158, 158, 158);")
-        self.lineEdit_del_search.setObjectName("lineEdit_del_search")
-        self.label_del_search = QtWidgets.QLabel(self.page_delete_user)
-        self.label_del_search.setGeometry(QtCore.QRect(380, 90, 261, 19))
-        self.label_del_search.setStyleSheet("color: rgb(158, 158, 158);")
-        self.label_del_search.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_del_search.setObjectName("label_del_search")
-        self.pushButton_del_search = QtWidgets.QPushButton(self.page_delete_user)
-        self.pushButton_del_search.setGeometry(QtCore.QRect(454, 160, 103, 36))
-        self.pushButton_del_search.setStyleSheet("color: rgb(158, 158, 158);")
-        self.pushButton_del_search.setObjectName("pushButton_del_search")
-        self.label_del_info = QtWidgets.QLabel(self.page_delete_user)
-        self.label_del_info.setGeometry(QtCore.QRect(350, 40, 321, 20))
+        self.verticalLayout_9 = QtWidgets.QVBoxLayout(self.page_delete_user)
+        self.verticalLayout_9.setObjectName("verticalLayout_9")
+        self.frame_10 = QtWidgets.QFrame(self.page_delete_user)
+        self.frame_10.setMaximumSize(QtCore.QSize(16777215, 9000))
+        self.frame_10.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_10.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_10.setObjectName("frame_10")
+        self.verticalLayout_8 = QtWidgets.QVBoxLayout(self.frame_10)
+        self.verticalLayout_8.setObjectName("verticalLayout_8")
+        self.label_del_info = QtWidgets.QLabel(self.frame_10)
+        self.label_del_info.setMinimumSize(QtCore.QSize(0, 0))
+        self.label_del_info.setMaximumSize(QtCore.QSize(16777215, 45))
         self.label_del_info.setStyleSheet("color: rgb(158, 158, 158);")
         self.label_del_info.setAlignment(QtCore.Qt.AlignCenter)
         self.label_del_info.setObjectName("label_del_info")
-        self.pushButton_del_cancel = QtWidgets.QPushButton(self.page_delete_user)
-        self.pushButton_del_cancel.setGeometry(QtCore.QRect(610, 500, 191, 36))
-        self.pushButton_del_cancel.setStyleSheet("color: rgb(158, 158, 158);")
-        self.pushButton_del_cancel.setObjectName("pushButton_del_cancel")
-        self.pushButton_del_save = QtWidgets.QPushButton(self.page_delete_user)
-        self.pushButton_del_save.setGeometry(QtCore.QRect(210, 500, 191, 36))
-        self.pushButton_del_save.setStyleSheet("color: rgb(158, 158, 158);")
+        self.verticalLayout_8.addWidget(self.label_del_info)
+        self.label_del_search = QtWidgets.QLabel(self.frame_10)
+        self.label_del_search.setMinimumSize(QtCore.QSize(0, 40))
+        self.label_del_search.setMaximumSize(QtCore.QSize(16777215, 25))
+        self.label_del_search.setStyleSheet("color: rgb(158, 158, 158);")
+        self.label_del_search.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_del_search.setObjectName("label_del_search")
+        self.verticalLayout_8.addWidget(self.label_del_search)
+        self.lineEdit_del_search = QtWidgets.QLineEdit(self.frame_10)
+        self.lineEdit_del_search.setStyleSheet("background-color: rgb(30, 30, 30);\n"
+                                                 "font: 14pt \"Cantarell\";\n"
+                                                 "color: rgb(158, 158, 158);\n"
+                                                 "border:0px;\n"
+                                                 "border-radius: 12px;\n"
+                                                 "")
+        self.lineEdit_del_search.setObjectName("lineEdit_del_search")
+        self.verticalLayout_8.addWidget(self.lineEdit_del_search)
+        self.pushButton_del_search = QtWidgets.QPushButton(self.frame_10)
+        self.pushButton_del_search.setMinimumSize(QtCore.QSize(0, 50))
+        self.pushButton_del_search.setStyleSheet("color: rgb(158, 158, 158);")
+        self.pushButton_del_search.setObjectName("pushButton_del_search")
+        self.verticalLayout_8.addWidget(self.pushButton_del_search)
+        self.listWidget_del_users = QtWidgets.QListWidget(self.frame_10)
+        self.listWidget_del_users.setMaximumSize(QtCore.QSize(16777215, 9000))
+        self.listWidget_del_users.setStyleSheet("background-color: rgb(30, 30, 30);\n"
+                                                  "font: 14pt \"Cantarell\";\n"
+                                                  "color: rgb(158, 158, 158);\n"
+                                                  "border:0px;\n"
+                                                  "border-radius: 12px;\n"
+                                                  "")
+        self.listWidget_del_users.setObjectName("listWidget_del_users")
+        self.verticalLayout_8.addWidget(self.listWidget_del_users)
+        self.verticalLayout_9.addWidget(self.frame_10)
+        self.frame_11 = QtWidgets.QFrame(self.page_delete_user)
+        self.frame_11.setMinimumSize(QtCore.QSize(0, 40))
+        self.frame_11.setMaximumSize(QtCore.QSize(16777215, 40))
+        self.frame_11.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_11.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_11.setObjectName("frame_11")
+        self.horizontalLayout_7 = QtWidgets.QHBoxLayout(self.frame_11)
+        self.horizontalLayout_7.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_7.setSpacing(0)
+        self.horizontalLayout_7.setObjectName("horizontalLayout_7")
+        self.pushButton_del_save = QtWidgets.QPushButton(self.frame_11)
+        self.pushButton_del_save.setMaximumSize(QtCore.QSize(300, 35))
+        self.pushButton_del_save.setStyleSheet("\n"
+                                                 "\n"
+                                                 "QPushButton{\n"
+                                                 "background-color: rgb(100, 100, 100);\n"
+                                                 "\n"
+                                                 "color: rgb(50, 50, 50);\n"
+                                                 "border:0px;\n"
+                                                 "border-radius: 6px;\n"
+                                                 "}\n"
+                                                 "\n"
+                                                 "QPushButton:hover{\n"
+                                                 "background-color: rgb(130, 130, 130);\n"
+                                                 "color: rgb(50, 50, 50);\n"
+                                                 "border-radius: 6px;\n"
+                                                 "}\n"
+                                                 "\n"
+                                                 "\n"
+                                                 "\n"
+                                                 "")
         self.pushButton_del_save.setObjectName("pushButton_del_save")
+        self.horizontalLayout_7.addWidget(self.pushButton_del_save)
+        self.pushButton_del_cancel = QtWidgets.QPushButton(self.frame_11)
+        self.pushButton_del_cancel.setMaximumSize(QtCore.QSize(300, 48))
+        self.pushButton_del_cancel.setStyleSheet("\n"
+                                                   "\n"
+                                                   "QPushButton{\n"
+                                                   "background-color: rgb(100, 100, 100);\n"
+                                                   "\n"
+                                                   "color: rgb(50, 50, 50);\n"
+                                                   "border:0px;\n"
+                                                   "border-radius: 6px;\n"
+                                                   "}\n"
+                                                   "\n"
+                                                   "QPushButton:hover{\n"
+                                                   "background-color: rgb(130, 130, 130);\n"
+                                                   "color: rgb(50, 50, 50);\n"
+                                                   "border-radius: 6px;\n"
+                                                   "}\n"
+                                                   "\n"
+                                                   "\n"
+                                                   "\n"
+                                                   "")
+        self.pushButton_del_cancel.setObjectName("pushButton_del_cancel")
+        self.horizontalLayout_7.addWidget(self.pushButton_del_cancel)
+        self.verticalLayout_9.addWidget(self.frame_11)
         self.stackedWidget_change.addWidget(self.page_delete_user)
-        self.pushButton_crt_user_2 = QtWidgets.QPushButton(self.page_change_usr)
-        self.pushButton_crt_user_2.setGeometry(QtCore.QRect(20, 20, 231, 36))
-        self.pushButton_crt_user_2.setStyleSheet("color: rgb(158, 158, 158);")
-        self.pushButton_crt_user_2.setObjectName("pushButton_crt_user_2")
-        self.pushButton_delete_user = QtWidgets.QPushButton(self.page_change_usr)
-        self.pushButton_delete_user.setGeometry(QtCore.QRect(740, 20, 201, 36))
-        self.pushButton_delete_user.setStyleSheet("color: rgb(158, 158, 158);")
-        self.pushButton_delete_user.setObjectName("pushButton_delete_user")
-        self.pushButton_change_user = QtWidgets.QPushButton(self.page_change_usr)
-        self.pushButton_change_user.setGeometry(QtCore.QRect(400, 20, 211, 36))
-        self.pushButton_change_user.setStyleSheet("color: rgb(158, 158, 158);")
-        self.pushButton_change_user.setObjectName("pushButton_change_user")
-        self.stackedWidget.addWidget(self.page_change_usr)
+        self.verticalLayout_7.addWidget(self.stackedWidget_change)
+        self.verticalLayout_6.addWidget(self.frame_9)
+        self.horizontalLayout_5.addWidget(self.frame_7)
+        self.stackedWidget.addWidget(self.page_change_usr_3)
+        self.horizontalLayout.addWidget(self.stackedWidget)
+        self.verticalLayout.addWidget(self.frame)
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(0)
-        self.stackedWidget_change.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(2)
+        self.stackedWidget_change.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
         self.pushButton_crt_user.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(3))
@@ -241,14 +913,14 @@ class Ui_Server(object):
         self.pushButton_del_search.clicked.connect(self.search_for_delete)
 
         self.pushButton_show_all_usr.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(1))
-        self.pushButton_back_main_page_usr.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(0))
+        self.pushButton_crt_cancel.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(0))
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.pushButton_show_all_usr.setText(_translate("MainWindow", "Просмотр всех пользователей"))
         self.pushButton_crt_user.setText(_translate("MainWindow", "Настройка  пользователей"))
-        self.pushButton_back_main_page_usr.setText(_translate("MainWindow", "Назад"))
+        self.pushButton_crt_cancel.setText(_translate("MainWindow", "Назад"))
         self.label_passw.setText(_translate("MainWindow", "Пароль:"))
         self.label_phone.setText(_translate("MainWindow", "Телефон:"))
         self.label_crt_info.setText(_translate("MainWindow", "Создание пользователя"))
