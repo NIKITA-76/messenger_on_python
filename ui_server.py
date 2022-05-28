@@ -594,24 +594,24 @@ class Ui_Server(object):
         self.pushButton_crt_cancel = QtWidgets.QPushButton(self.frame_22)
         self.pushButton_crt_cancel.setMaximumSize(QtCore.QSize(300, 35))
         self.pushButton_crt_cancel.setStyleSheet("\n"
-                                                             "\n"
-                                                             "QPushButton{\n"
-                                                             "background-color: rgb(100, 100, 100);\n"
-                                                             "\n"
-                                                             "color: rgb(50, 50, 50);\n"
-                                                             "border:0px;\n"
-                                                             "border-radius: 6px;\n"
-                                                             "}\n"
-                                                             "\n"
-                                                             "QPushButton:hover{\n"
-                                                             "background-color: rgb(130, 130, 130);\n"
-                                                             "color: rgb(50, 50, 50);\n"
-                                                             "border-radius: 6px;\n"
-                                                             "}\n"
-                                                             "\n"
-                                                             "\n"
-                                                             "\n"
-                                                             "")
+                                                 "\n"
+                                                 "QPushButton{\n"
+                                                 "background-color: rgb(100, 100, 100);\n"
+                                                 "\n"
+                                                 "color: rgb(50, 50, 50);\n"
+                                                 "border:0px;\n"
+                                                 "border-radius: 6px;\n"
+                                                 "}\n"
+                                                 "\n"
+                                                 "QPushButton:hover{\n"
+                                                 "background-color: rgb(130, 130, 130);\n"
+                                                 "color: rgb(50, 50, 50);\n"
+                                                 "border-radius: 6px;\n"
+                                                 "}\n"
+                                                 "\n"
+                                                 "\n"
+                                                 "\n"
+                                                 "")
         self.pushButton_crt_cancel.setObjectName("pushButton_crt_cancel")
         self.horizontalLayout_15.addWidget(self.pushButton_crt_cancel)
         self.verticalLayout_12.addWidget(self.frame_22)
