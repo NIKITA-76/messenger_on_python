@@ -348,16 +348,16 @@ class Ui_Server(object):
         self.frame_26.setObjectName("frame_26")
         self.verticalLayout_17 = QtWidgets.QVBoxLayout(self.frame_26)
         self.verticalLayout_17.setObjectName("verticalLayout_17")
-        self.lineEdit_post_3 = QtWidgets.QLineEdit(self.frame_26)
-        self.lineEdit_post_3.setMaximumSize(QtCore.QSize(90000, 16777215))
-        self.lineEdit_post_3.setStyleSheet("background-color: rgb(30, 30, 30);\n"
+        self.lineEdit_post = QtWidgets.QLineEdit(self.frame_26)
+        self.lineEdit_post.setMaximumSize(QtCore.QSize(90000, 16777215))
+        self.lineEdit_post.setStyleSheet("background-color: rgb(30, 30, 30);\n"
                                            "font: 14pt \"Cantarell\";\n"
                                            "color: rgb(158, 158, 158);\n"
                                            "border:0px;\n"
                                            "border-radius: 12px;\n"
                                            "")
-        self.lineEdit_post_3.setObjectName("lineEdit_post_3")
-        self.verticalLayout_17.addWidget(self.lineEdit_post_3)
+        self.lineEdit_post.setObjectName("lineEdit_post")
+        self.verticalLayout_17.addWidget(self.lineEdit_post)
         self.horizontalLayout_9.addWidget(self.frame_26)
         self.verticalLayout_10.addWidget(self.frame_16)
         self.frame_17 = QtWidgets.QFrame(self.frame_13)
@@ -388,15 +388,15 @@ class Ui_Server(object):
         self.verticalLayout_18 = QtWidgets.QVBoxLayout(self.frame_28)
         self.verticalLayout_18.setContentsMargins(23, -1, -1, -1)
         self.verticalLayout_18.setObjectName("verticalLayout_18")
-        self.lineEdit_cabinet_3 = QtWidgets.QLineEdit(self.frame_28)
-        self.lineEdit_cabinet_3.setStyleSheet("background-color: rgb(30, 30, 30);\n"
+        self.lineEdit_phone = QtWidgets.QLineEdit(self.frame_28)
+        self.lineEdit_phone.setStyleSheet("background-color: rgb(30, 30, 30);\n"
                                               "font: 14pt \"Cantarell\";\n"
                                               "color: rgb(158, 158, 158);\n"
                                               "border:0px;\n"
                                               "border-radius: 12px;\n"
                                               "")
-        self.lineEdit_cabinet_3.setObjectName("lineEdit_cabinet_3")
-        self.verticalLayout_18.addWidget(self.lineEdit_cabinet_3)
+        self.lineEdit_phone.setObjectName("lineEdit_phone")
+        self.verticalLayout_18.addWidget(self.lineEdit_phone)
         self.horizontalLayout_10.addWidget(self.frame_28)
         self.verticalLayout_10.addWidget(self.frame_17)
         self.frame_15 = QtWidgets.QFrame(self.frame_13)
@@ -889,8 +889,8 @@ class Ui_Server(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(2)
-        self.stackedWidget_change.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget_change.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
         self.pushButton_crt_user.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(3))
