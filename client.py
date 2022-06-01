@@ -104,21 +104,6 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
                         if item != self.nick_name:
                             self.AddFRNDForm.listWidget.addItem(item)
 
-            elif data[0] == "FILE":
-                print(f"FILE ---> {data}")
-                try:
-                    file = open(f"files/{data[3]}", "wb")
-                    file.write(data[2])
-                    file.close()
-                except FileNotFoundError:
-                    os.mkdir("/home/n76/PycharmProjects/pythonProject/files")
-                    file = open(f"files/{data[3]}", "wb")
-                    file.write(data[2])
-                    file.close()
-
-    @staticmethod
-    def open_dwnload():
-        QtWidgets.QFileDialog.getExistingDirectory(directory="/home/n76/PycharmProjects/pythonProject/files")
 
     def Sign_in(self):
         login = self.LP_RForm.lineEdit.text()
@@ -231,34 +216,6 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
         self.AddFRNDWindow.close()
         self.cl.send_data(new_room)
 
-    def get_path_file(self):
-        try:
-            file_path, _ = QFileDialog.getOpenFileName(self, )
-            file = open(str(file_path), mode="rb")
-            full_name = os.path.basename(file_path)
-            for IDRoom, nameRoom in self.roomsForLoad[0].items():
-                if self.listWidget_people.currentItem().text() == nameRoom:
-                    while True:
-                        x = file.read(100)
-                        if not x:
-                            break
-                        list_for_server = ["FILE", IDRoom, self.nick_name, self.listWidget_people.currentItem().text(),
-                                           x, full_name]
-                        list_for_server = pickle.dumps(list_for_server)
-                        print(len(list_for_server))
-                        self.cl.send_data(list_for_server)
-                        # self.list_for_server = {"FILE": "FILE",
-                        #                    "IDRoom": IDRoom,
-                        #                    "self.nick_name": self.nick_name,
-                        #                    "self.listWidget_people.currentItem().text()": self.listWidget_people.currentItem().text(),
-                        #                    "x": str(x),
-                        #                    "full_name": full_name}
-                        # self.list_for_server = json.dumps(self.list_for_server)
-                        # self.list_for_server = self.list_for_server.encode()
-                    break
-
-        except FileNotFoundError:
-            pass
 
 
 if __name__ == "__main__":
