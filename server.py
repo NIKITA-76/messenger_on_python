@@ -48,8 +48,6 @@ class Server(socket.socket, Ui_Server):
                     self.add_load_MSG_for_client(socket_user, self.signal[2])
                 elif self.signal[0] == "LOADMSG":
                     self.load_MSG_for_client(socket_user)
-                elif self.signal[0] == "FILE":
-                    self.get_file()
                 elif self.signal[0] == "USER_OUT":
                     """
                      Удаление пользователя из комнаты ЛС, так как при подключении пользователя меняеться его 'fd',
@@ -66,18 +64,6 @@ class Server(socket.socket, Ui_Server):
 
         except EOFError as error:
             print(f"ERROR IN listen_socket(76) {error}")
-
-    def get_file(self):
-        file = open("_SERVER" + self.signal[5], 'ab')
-        file.write(self.signal[4])
-        file.close()
-
-    # def get_file(self):
-    #    for roomID, roomName in self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.signal[2]]["ROOMS"].items():
-    #        if roomName == self.signal[3]:
-    #            for userInRoom, socket_of_user in self.data.rooms[roomID][0].items():
-    #                if userInRoom is not self.signal[2]:
-    #                    socket_of_user.send(pickle.dumps(["FILE", self.signal[2], self.signal[4], self.signal[5]]))
 
     def log_in(self, data,
                socket_user, ip_user):
