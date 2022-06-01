@@ -27,10 +27,6 @@ class Client(socket.socket):
 
 class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
     def __init__(self, MainWindow, ChildWindow):
-        try:
-            os.mkdir("/home/n76/PycharmProjects/pythonProject/files")
-        except FileExistsError:
-            pass
         super().__init__()
         super().setupUi(MainWindow, ChildWindow, )
         self.cl = Client()
@@ -124,7 +120,7 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
     def open_dwnload():
         QtWidgets.QFileDialog.getExistingDirectory(directory="/home/n76/PycharmProjects/pythonProject/files")
 
-    def Sign_in(self):  # ChildWindow
+    def Sign_in(self):
         login = self.LP_RForm.lineEdit.text()
         password = self.LP_RForm.lineEdit_2.text()
 
