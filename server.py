@@ -32,8 +32,8 @@ class Server(socket.socket, Ui_Server):
         try:
             while True:  # Accepting a message
                 self.signal = socket_user.recv(4096)
-                print(f"ДАННЫЕ ОТ КЛИЕНТА --->{self.signal}")
                 self.signal = pickle.loads(self.signal)
+                print(f"ДАННЫЕ ОТ КЛИЕНТА --->{self.signal}")
                 if self.signal[0] == "TRY_TO_ENTRY":
                     self.log_in(self.signal, socket_user, ip_user)
                     self.data.name_withIp[self.signal[1]] = self.data.users_ip[0]
@@ -93,14 +93,14 @@ class Server(socket.socket, Ui_Server):
 
     def create_room_JSON(self):
         i = 1
-        self.idRoom = self.data.idRoom + 1
+        self.idRoom = self.data.DB.find_one({"_id": "COUNT"})["ROOMS"] + 1
+        print(self.idRoom)
         list_users = []
         while i < len(self.signal):
             list_users.append(self.signal[i])
             self.data.DB.update_one({'_id': 'ROOMS'}, {'$set': {str(self.idRoom) + "R": [
                 {"USERS": list_users, "NAME": self.signal[2]}]}})
             i += 1
-        print("111111111111111111")
         self.data.DB.update_one({'_id': 'COUNT'}, {'$set': {'ROOMS': self.idRoom}})
 
         self.data.DB.update_one({'_id': 'USERS'},
@@ -118,8 +118,7 @@ class Server(socket.socket, Ui_Server):
 
     def create_room_now(self):
         name_of_rooms = self.data.DB.find_one({"_id": "ROOMS"},
-                                              {
-                                                  "_id": 0}).keys()  # Создание комнаты, без необходимости перезагрузки сервера
+                                              {"_id": 0}).keys()  # Создание комнаты, без необходимости перезагрузки сервера
         for name in name_of_rooms:
             for usersInRoom in self.data.DB.find_one({"_id": "ROOMS"}, {"_id": 0})[name][0]["USERS"]:
                 try:
@@ -169,11 +168,11 @@ class Server(socket.socket, Ui_Server):
     def load_MSG_for_client(self, user, ):
         cut_bank_of_messg = []
         bank_of_mess = self.data.DB.find_one({"_id": "MESSAGE"}, {"_id": 0})[self.signal[1]]
+        bank_of_mess.reverse()
         fio_of_user = self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.signal[2]]["FIO"]
         cabinet_of_mess = self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.signal[2]]["post"]
         mail_of_mess = self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.signal[2]]["mail"]
         post_of_mess = self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.signal[2]]["phone"]
-        bank_of_mess.reverse()
         try:
             if not bank_of_mess:
                 for_load_MSG = pickle.dumps(
@@ -280,9 +279,14 @@ class Server(socket.socket, Ui_Server):
                 self.listWidget_del_users.addItem(user)
 
     def delete_user(self):
+        rooms_user_for_del = self.data.DB.find_one({'_id': 'USERS'}, {'_id': 0})[self.listWidget_del_users.currentItem().text()]["ROOMS"].keys()
+        all_users = self.data.DB.find_one({'_id': 'USERS'}, {'_id': 0}).keys()
+        for user in all_users:
+            for rooms_of_user in rooms_user_for_del:
+                self.data.DB.update_one({'_id': 'USERS'}, {'$unset': {f'{user}.ROOMS.{rooms_of_user}': ""}})
+
         self.data.DB.update_one({'_id': 'USERS'}, {'$unset': {self.listWidget_del_users.currentItem().text(): ""}})
         self.label_del_info.setText("Пользователь успешно удален")
-        self.listWidget_del_users.clear()
         self.listWidget_del_users.clear()
 
     def start_server(self):

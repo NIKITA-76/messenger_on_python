@@ -15,4 +15,4 @@ class Data:
         self.users_ip = []  # List of all users-ip
         self.name_withIp = {}
         self.idUser = self.DB.find_one({"_id": "COUNT"})["USERS"]
-        self.idRoom = self.DB.find_one({"_id": "COUNT"})["ROOMS"]
+
