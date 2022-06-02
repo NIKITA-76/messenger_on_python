@@ -284,6 +284,8 @@ class Server(socket.socket, Ui_Server):
         for user in all_users:
             for rooms_of_user in rooms_user_for_del:
                 self.data.DB.update_one({'_id': 'USERS'}, {'$unset': {f'{user}.ROOMS.{rooms_of_user}': ""}})
+                self.data.DB.update_one({'_id': 'ROOMS'}, {'$unset': {f'{rooms_of_user}': ""}})
+                self.data.DB.update_one({'_id': 'MESSAGE'}, {'$unset': {f'{rooms_of_user}': ""}})
 
         self.data.DB.update_one({'_id': 'USERS'}, {'$unset': {self.listWidget_del_users.currentItem().text(): ""}})
         self.label_del_info.setText("Пользователь успешно удален")
