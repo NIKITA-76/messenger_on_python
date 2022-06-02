@@ -289,6 +289,7 @@ class Server(socket.socket, Ui_Server):
 
         self.data.DB.update_one({'_id': 'USERS'}, {'$unset': {self.listWidget_del_users.currentItem().text(): ""}})
         self.label_del_info.setText("Пользователь успешно удален")
+        print("USER_WAS_DELETE")
         self.listWidget_del_users.clear()
 
     def start_server(self):
