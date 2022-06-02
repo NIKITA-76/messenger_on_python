@@ -249,7 +249,8 @@ class Server(socket.socket, Ui_Server):
         self.plainTextEdit_ch_data.setPlainText("")
         data = self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.listWidget_users.currentItem().text()].keys()
         for i in data:
-            self.comboBox.addItem(i)
+            if i != "ROOMS":
+                self.comboBox.addItem(i)
 
     def search_for_change(self):
         self.listWidget_users.clear()
