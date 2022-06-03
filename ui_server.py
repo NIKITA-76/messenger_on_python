@@ -916,7 +916,7 @@ class Ui_Server(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "The_CorpMess(Server)"))
         self.pushButton_show_all_usr.setText(_translate("MainWindow", "Просмотр всех пользователей"))
         self.pushButton_crt_user.setText(_translate("MainWindow", "Настройка  пользователей"))
         self.pushButton_crt_cancel.setText(_translate("MainWindow", "Назад"))
