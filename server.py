@@ -66,7 +66,7 @@ class Server(socket.socket, Ui_Server):
             print(f"ERROR IN listen_socket(76) {error}")
 
     def log_in(self, data,
-               socket_user, ip_user):
+               socket_user, ):
         try:
             if self.data.DB.find_one({"_id": "USERS"})[data[1]]["password"] == data[2] and self.signal[1]:
 
@@ -118,7 +118,8 @@ class Server(socket.socket, Ui_Server):
 
     def create_room_now(self):
         name_of_rooms = self.data.DB.find_one({"_id": "ROOMS"},
-                                              {"_id": 0}).keys()  # Создание комнаты, без необходимости перезагрузки сервера
+                                              {
+                                                  "_id": 0}).keys()  # Создание комнаты, без необходимости перезагрузки сервера
         for name in name_of_rooms:
             for usersInRoom in self.data.DB.find_one({"_id": "ROOMS"}, {"_id": 0})[name][0]["USERS"]:
                 try:
@@ -280,7 +281,9 @@ class Server(socket.socket, Ui_Server):
                 self.listWidget_del_users.addItem(user)
 
     def delete_user(self):
-        rooms_user_for_del = self.data.DB.find_one({'_id': 'USERS'}, {'_id': 0})[self.listWidget_del_users.currentItem().text()]["ROOMS"].keys()
+        rooms_user_for_del = \
+            self.data.DB.find_one({'_id': 'USERS'}, {'_id': 0})[self.listWidget_del_users.currentItem().text()][
+                "ROOMS"].keys()
         all_users = self.data.DB.find_one({'_id': 'USERS'}, {'_id': 0}).keys()
         for user in all_users:
             for rooms_of_user in rooms_user_for_del:

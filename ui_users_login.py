@@ -1,4 +1,4 @@
-from PyQt5 import QtCore, QtWidgets, QtGui
+from PyQt5 import QtCore, QtWidgets
 
 
 class Ui_LandP_Reg(object):
@@ -68,4 +68,3 @@ class Ui_LandP_Reg(object):
         self.label.setText(_translate("MainWindow", "Логин"))
         self.pushButton.setText(_translate("MainWindow", "Войти"))
         self.label_2.setText(_translate("MainWindow", "Пароль"))
-
