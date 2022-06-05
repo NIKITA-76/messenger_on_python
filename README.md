@@ -1,5 +1,5 @@
 
-# The_Messenger
+# The_CorpMess
 Server and client with database on MongoDB.
 
 Corporate messenger for communication between employees in a closed network.
@@ -19,9 +19,17 @@ for the document-oriented data type, which is the main one for this project
 ## [QtDesign](https://doc.qt.io/qt-5/qtdesigner-manual.html)
 At the moment, the messenger works on Windows and Linux (Mac os has not been tested)
 ![App Screenshot](https://sun9-77.userapi.com/s/v1/ig2/k15vOmr_svPjJ_fwpsWE_bosY3fDq8RFO6hfZM7mLyQUqXLXtwcxlCzAzG0m93HfUEee3ICv8_PErB1t-sTT4f01.jpg?size=1920x1080&quality=96&type=album)
+## The problems of similar messengers
+The problem of similar messengers is the lack of guarantees that your company will NOT be disconnected from the servers, thereby undermining the reliability of communication of your employees, which is a very important part
+![App Screenshot](https://sun9-84.userapi.com/s/v1/ig2/IxONIRwGj3kVHK-B7_GcGuXDLpamLSR3KV62Onw6DqtQ7P1sEJywCfZ0n_vVfAHk5Yi3vae8fZpQI--42rFU8j43.jpg?size=1850x1080&quality=96&type=album)
+
+'The_CorpMess' Solves the main problem of similar services.
 
 
-
+![App Screenshot](https://sun9-64.userapi.com/s/v1/ig2/txEgqz_xDGiYcGOP_G6dVAC2xmcx48JzUfluZ29LKriZ0w-PXL79JUfInkasH6CScMKtdoUxmXiEp9c2xHtVwEY7.jpg?size=1864x1080&quality=96&type=album)
+This software provides:
+- Server (and ui for server)
+- Client (and ui for server)
 ## Libraries and Modules
 
 Libraries/Modules used in this project
