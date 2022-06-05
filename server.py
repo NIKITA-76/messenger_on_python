@@ -35,7 +35,7 @@ class Server(socket.socket, Ui_Server):
                 self.signal = pickle.loads(self.signal)
                 print(f"ДАННЫЕ ОТ КЛИЕНТА --->{self.signal}")
                 if self.signal[0] == "TRY_TO_ENTRY":
-                    self.log_in(self.signal, socket_user, ip_user)
+                    self.log_in(self.signal, socket_user,)
                     self.data.name_withIp[self.signal[1]] = self.data.users_ip[0]
                     self.recreating_room_from_JSON()
                 elif self.signal[0] == "MSGROOM":
