@@ -65,9 +65,10 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
                     time.sleep(0.01)
                     self.listWidget_msgRoom.verticalScrollBar().setValue(
                         self.listWidget_msgRoom.verticalScrollBar().maximum())
-                    self.notify.title = f"New message from {data[1]}"
-                    self.notify.message = f"{' '.join(data[2])}"
-                    self.notify.send()
+                    self.notify.title = f"New message from '{data[1]}': "
+                    self.notify.message = f"{''.join(data[2])}"
+                    if data[1] != self.nick_name:
+                        self.notify.send()
             elif data[0] == "CRT_ROOM":
                 try:
                     self.roomsForLoad[0].update(data[1])
@@ -106,7 +107,10 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
                             self.AddFRNDForm.listWidget.addItem(item)
                     except TypeError as error:
                         print(error)
-                        if item != self.nick_name and item not in self.roomsForLoad[0].values():
+                        try:
+                            if item != self.nick_name and item not in self.roomsForLoad[0].values():
+                                self.AddFRNDForm.listWidget.addItem(item)
+                        except IndexError:
                             self.AddFRNDForm.listWidget.addItem(item)
 
 
