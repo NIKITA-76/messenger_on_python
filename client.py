@@ -1,9 +1,10 @@
-import os
 import pickle
 import socket
 import sys
 import threading
 import time
+from notifypy import Notify
+
 from configparser import ConfigParser
 
 from PyQt5 import QtWidgets
@@ -34,7 +35,7 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
         self.canLoad = True
         self.roomsForLoad = []
         self.animation_play = True
-
+        self.notify = Notify()
     def get_text(self, ):
         # We receive text from the server USING the client (Client)
         while True:
@@ -60,10 +61,13 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
                 print("USER_IS_NOT_SIGN")
             elif data[0] == "MSGROOM":
                 if self.listWidget_people.currentItem().text() == data[3]:
-                    self.listWidget_msgRoom.addItem(f"{data[1]}: {' '.join(data[2])}")
+                    self.listWidget_msgRoom.addItem(f"{data[1]}: {''.join(data[2])}")
                     time.sleep(0.01)
                     self.listWidget_msgRoom.verticalScrollBar().setValue(
                         self.listWidget_msgRoom.verticalScrollBar().maximum())
+                    self.notify.title = f"New message from {data[1]}"
+                    self.notify.message = f"{' '.join(data[2])}"
+                    self.notify.send()
             elif data[0] == "CRT_ROOM":
                 try:
                     self.roomsForLoad[0].update(data[1])
@@ -197,7 +201,6 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
                 break
 
     def show_card_of_user(self):
-        print(self.roomsForLoad)
         self.anim = QPropertyAnimation(self.frame, b'maximumWidth')
         if self.animation_play:
             self.animation_play = False
