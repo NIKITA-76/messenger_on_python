@@ -8,7 +8,7 @@ from configparser import ConfigParser
 
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import QPropertyAnimation
-from PyQt5.QtWidgets import QWidget, QFileDialog
+from PyQt5.QtWidgets import QWidget
 
 import ui_client
 
@@ -101,7 +101,8 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
                         if item != self.nick_name and (item not in self.listWidget_people.items()):
                             self.AddFRNDForm.listWidget.addItem(item)
                     except TypeError as error:
-                        if item != self.nick_name:
+                        print(error)
+                        if item != self.nick_name and item not in self.roomsForLoad[0].values():
                             self.AddFRNDForm.listWidget.addItem(item)
 
 
@@ -196,6 +197,7 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
                 break
 
     def show_card_of_user(self):
+        print(self.roomsForLoad)
         self.anim = QPropertyAnimation(self.frame, b'maximumWidth')
         if self.animation_play:
             self.animation_play = False
@@ -209,6 +211,7 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
             self.anim.setStartValue(0)
             self.anim.setEndValue(600)
             self.anim.start()
+
 
     def addNewFriend(self):
         new_room = ["CRT_ROOM", self.AddFRNDForm.listWidget.currentItem().text(), self.nick_name, ]
