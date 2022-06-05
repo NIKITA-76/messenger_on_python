@@ -17,7 +17,7 @@ for the document-oriented data type, which is the main one for this project
 
 ![App Screenshot](https://sun9-46.userapi.com/s/v1/ig2/Wj4VBEmYZb2Z_xLbWqNKtwZE0DQElupUmhYX1Nz2qLq1osssJFP6NBlZAQ1QldjtMJk10gT_34q5oKEddFr_ZYSA.jpg?size=1920x1080&quality=96&type=album)
 ## [QtDesign](https://doc.qt.io/qt-5/qtdesigner-manual.html)
-At the moment, the messenger works on Windows and Linux (Mac os has not been tested)
+
 ![App Screenshot](https://sun9-77.userapi.com/s/v1/ig2/k15vOmr_svPjJ_fwpsWE_bosY3fDq8RFO6hfZM7mLyQUqXLXtwcxlCzAzG0m93HfUEee3ICv8_PErB1t-sTT4f01.jpg?size=1920x1080&quality=96&type=album)
 ## The problems of similar messengers
 The problem of similar messengers is the lack of guarantees that your company will NOT be disconnected from the servers, thereby undermining the reliability of communication of your employees, which is a very important part
