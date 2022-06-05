@@ -552,7 +552,7 @@ class UI_ForMain(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "The_CormMess_v1.5.0"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "The_CorpMess_v1.5.0"))
         __sortingEnabled = self.listWidget_people.isSortingEnabled()
         self.listWidget_people.setSortingEnabled(False)
         self.listWidget_people.setSortingEnabled(__sortingEnabled)
