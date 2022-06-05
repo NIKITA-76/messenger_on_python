@@ -54,6 +54,7 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
                 self.pushButton_addFriend.show()
                 self.pushButton_settings.show()
                 self.load()
+                MainWindow.setWindowTitle(self.nick_name)
             elif data[0] == "USER_IS_NOT_SIGN":
                 self.LP_RForm.label.setText("Неправлиьный логин или пароль")
                 self.LP_RForm.lineEdit.setStyleSheet("border: 1px solid rgb(94, 0, 1);")
