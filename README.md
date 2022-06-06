@@ -29,7 +29,7 @@ The problem of similar messengers is the lack of guarantees that your company wi
 ![App Screenshot](https://sun9-64.userapi.com/s/v1/ig2/txEgqz_xDGiYcGOP_G6dVAC2xmcx48JzUfluZ29LKriZ0w-PXL79JUfInkasH6CScMKtdoUxmXiEp9c2xHtVwEY7.jpg?size=1864x1080&quality=96&type=album)
 This software provides:
 - Server (and ui for server)
-- Client (and ui for server)
+- Client (and ui for client)
 ## Libraries and Modules
 
 Libraries/Modules used in this project
