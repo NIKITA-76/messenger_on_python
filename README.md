@@ -41,5 +41,6 @@ Libraries/Modules used in this project
 | Socket            | https://docs.python.org/3/library/socket.html |
 | Json              | https://docs.python.org/3/library/json.html   |
 | PyMongo           | https://pymongo.readthedocs.io/en/stable/     |
+| Notify-py         | https://pypi.org/project/notify-py/           |
 
 
