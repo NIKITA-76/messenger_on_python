@@ -5,14 +5,15 @@ class Ui_Server(object):
     def setupUi(self, MainWindow, ):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1250, 712)
+        MainWindow.setStyleSheet("")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
-        self.centralwidget.setStyleSheet("border:0;background-color: rgb(50, 50, 50);")
+        self.centralwidget.setStyleSheet("border:0px;background-color: rgb(50, 50, 50);")
         self.centralwidget.setObjectName("centralwidget")
-        self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
-        self.verticalLayout.setObjectName("verticalLayout")
+        self.horizontalLayout_20 = QtWidgets.QHBoxLayout(self.centralwidget)
+        self.horizontalLayout_20.setObjectName("horizontalLayout_20")
         self.frame = QtWidgets.QFrame(self.centralwidget)
         self.frame.setMaximumSize(QtCore.QSize(9000, 9000))
-        self.frame.setStyleSheet("border:0;background-color: rgb(50, 50, 50);")
+        self.frame.setStyleSheet("background-color: rgb(50, 50, 50);")
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
@@ -119,7 +120,11 @@ class Ui_Server(object):
         self.verticalLayout_5.setObjectName("verticalLayout_5")
         self.listWidget_people = QtWidgets.QListWidget(self.frame_5)
         self.listWidget_people.setMaximumSize(QtCore.QSize(90000, 400))
-        self.listWidget_people.setStyleSheet("color: rgb(50, 50, 50);\n"
+        self.listWidget_people.setStyleSheet("background-color: rgb(30, 30, 30);\n"
+                                             "font: 14pt \"Cantarell\";\n"
+                                             "color: rgb(158, 158, 158);\n"
+                                             "border:0px;\n"
+                                             "border-radius: 12px;\n"
                                              "")
         self.listWidget_people.setObjectName("listWidget_people")
         self.verticalLayout_5.addWidget(self.listWidget_people)
@@ -132,29 +137,29 @@ class Ui_Server(object):
         self.frame_6.setObjectName("frame_6")
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.frame_6)
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
-        self.pushButton_crt_cancel = QtWidgets.QPushButton(self.frame_6)
-        self.pushButton_crt_cancel.setMaximumSize(QtCore.QSize(500, 300))
-        self.pushButton_crt_cancel.setStyleSheet("\n"
-                                                 "\n"
-                                                 "QPushButton{\n"
-                                                 "background-color: rgb(100, 100, 100);\n"
-                                                 "\n"
-                                                 "color: rgb(50, 50, 50);\n"
-                                                 "border:0px;\n"
-                                                 "border-radius: 6px;\n"
-                                                 "}\n"
-                                                 "\n"
-                                                 "QPushButton:hover{\n"
-                                                 "background-color: rgb(130, 130, 130);\n"
-                                                 "color: rgb(50, 50, 50);\n"
-                                                 "border-radius: 6px;\n"
-                                                 "}\n"
-                                                 "\n"
-                                                 "\n"
-                                                 "\n"
-                                                 "")
-        self.pushButton_crt_cancel.setObjectName("pushButton_crt_cancel")
-        self.horizontalLayout_4.addWidget(self.pushButton_crt_cancel)
+        self.pushButton_back_main_page_usr = QtWidgets.QPushButton(self.frame_6)
+        self.pushButton_back_main_page_usr.setMaximumSize(QtCore.QSize(500, 300))
+        self.pushButton_back_main_page_usr.setStyleSheet("\n"
+                                                         "\n"
+                                                         "QPushButton{\n"
+                                                         "background-color: rgb(100, 100, 100);\n"
+                                                         "\n"
+                                                         "color: rgb(50, 50, 50);\n"
+                                                         "border:0px;\n"
+                                                         "border-radius: 6px;\n"
+                                                         "}\n"
+                                                         "\n"
+                                                         "QPushButton:hover{\n"
+                                                         "background-color: rgb(130, 130, 130);\n"
+                                                         "color: rgb(50, 50, 50);\n"
+                                                         "border-radius: 6px;\n"
+                                                         "}\n"
+                                                         "\n"
+                                                         "\n"
+                                                         "\n"
+                                                         "")
+        self.pushButton_back_main_page_usr.setObjectName("pushButton_back_main_page_usr")
+        self.horizontalLayout_4.addWidget(self.pushButton_back_main_page_usr)
         self.verticalLayout_3.addWidget(self.frame_6)
         self.verticalLayout_4.addWidget(self.frame_4)
         self.stackedWidget.addWidget(self.page_usr_3)
@@ -163,6 +168,7 @@ class Ui_Server(object):
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout(self.page_change_usr_3)
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
         self.frame_7 = QtWidgets.QFrame(self.page_change_usr_3)
+        self.frame_7.setMaximumSize(QtCore.QSize(16777215, 9000))
         self.frame_7.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_7.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_7.setObjectName("frame_7")
@@ -247,7 +253,7 @@ class Ui_Server(object):
         self.horizontalLayout_6.addWidget(self.pushButton_delete_user)
         self.verticalLayout_6.addWidget(self.frame_8)
         self.frame_9 = QtWidgets.QFrame(self.frame_7)
-        self.frame_9.setMaximumSize(QtCore.QSize(16777215, 10000))
+        self.frame_9.setMaximumSize(QtCore.QSize(16777215, 9000))
         self.frame_9.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_9.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_9.setObjectName("frame_9")
@@ -406,6 +412,7 @@ class Ui_Server(object):
         self.horizontalLayout_11 = QtWidgets.QHBoxLayout(self.frame_15)
         self.horizontalLayout_11.setObjectName("horizontalLayout_11")
         self.frame_35 = QtWidgets.QFrame(self.frame_15)
+        self.frame_35.setMinimumSize(QtCore.QSize(83, 0))
         self.frame_35.setMaximumSize(QtCore.QSize(75, 16777215))
         self.frame_35.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_35.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -543,15 +550,15 @@ class Ui_Server(object):
         self.frame_31.setObjectName("frame_31")
         self.verticalLayout_14 = QtWidgets.QVBoxLayout(self.frame_31)
         self.verticalLayout_14.setObjectName("verticalLayout_14")
-        self.lineEdit_passw_2 = QtWidgets.QLineEdit(self.frame_31)
-        self.lineEdit_passw_2.setStyleSheet("background-color: rgb(30, 30, 30);\n"
-                                            "font: 14pt \"Cantarell\";\n"
-                                            "color: rgb(158, 158, 158);\n"
-                                            "border:0px;\n"
-                                            "border-radius: 12px;\n"
-                                            "")
-        self.lineEdit_passw_2.setObjectName("lineEdit_passw_2")
-        self.verticalLayout_14.addWidget(self.lineEdit_passw_2)
+        self.lineEdit_pass_2 = QtWidgets.QLineEdit(self.frame_31)
+        self.lineEdit_pass_2.setStyleSheet("background-color: rgb(30, 30, 30);\n"
+                                           "font: 14pt \"Cantarell\";\n"
+                                           "color: rgb(158, 158, 158);\n"
+                                           "border:0px;\n"
+                                           "border-radius: 12px;\n"
+                                           "")
+        self.lineEdit_pass_2.setObjectName("lineEdit_pass_2")
+        self.verticalLayout_14.addWidget(self.lineEdit_pass_2)
         self.horizontalLayout_14.addWidget(self.frame_31)
         self.verticalLayout_11.addWidget(self.frame_21)
         self.frame_39 = QtWidgets.QFrame(self.frame_18)
@@ -616,15 +623,17 @@ class Ui_Server(object):
         self.horizontalLayout_15.addWidget(self.pushButton_crt_cancel)
         self.verticalLayout_12.addWidget(self.frame_22)
         self.stackedWidget_change.addWidget(self.page_crt_user_3)
-        self.page_change_user = QtWidgets.QWidget()
-        self.page_change_user.setObjectName("page_change_user")
-        self.verticalLayout_30 = QtWidgets.QVBoxLayout(self.page_change_user)
+        self.page_change_user_3 = QtWidgets.QWidget()
+        self.page_change_user_3.setObjectName("page_change_user_3")
+        self.verticalLayout_30 = QtWidgets.QVBoxLayout(self.page_change_user_3)
         self.verticalLayout_30.setObjectName("verticalLayout_30")
-        self.label_ch_info = QtWidgets.QLabel(self.page_change_user)
+        self.label_ch_info = QtWidgets.QLabel(self.page_change_user_3)
+        self.label_ch_info.setMaximumSize(QtCore.QSize(16777215, 40))
         self.label_ch_info.setAlignment(QtCore.Qt.AlignCenter)
         self.label_ch_info.setObjectName("label_ch_info")
         self.verticalLayout_30.addWidget(self.label_ch_info)
-        self.frame_43 = QtWidgets.QFrame(self.page_change_user)
+        self.frame_43 = QtWidgets.QFrame(self.page_change_user_3)
+        self.frame_43.setMaximumSize(QtCore.QSize(9000, 9000))
         self.frame_43.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_43.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_43.setObjectName("frame_43")
@@ -634,14 +643,23 @@ class Ui_Server(object):
         self.frame_12.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_12.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_12.setObjectName("frame_12")
-        self.verticalLayout_27 = QtWidgets.QVBoxLayout(self.frame_12)
-        self.verticalLayout_27.setObjectName("verticalLayout_27")
-        self.label_ch_srch_user = QtWidgets.QLabel(self.frame_12)
+        self.horizontalLayout_21 = QtWidgets.QHBoxLayout(self.frame_12)
+        self.horizontalLayout_21.setObjectName("horizontalLayout_21")
+        self.frame_40 = QtWidgets.QFrame(self.frame_12)
+        self.frame_40.setMaximumSize(QtCore.QSize(300, 16777215))
+        self.frame_40.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_40.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_40.setObjectName("frame_40")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.frame_40)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.label_ch_srch_user = QtWidgets.QLabel(self.frame_40)
+        self.label_ch_srch_user.setMaximumSize(QtCore.QSize(300, 16777215))
         self.label_ch_srch_user.setStyleSheet("color: rgb(158, 158, 158);")
         self.label_ch_srch_user.setAlignment(QtCore.Qt.AlignCenter)
         self.label_ch_srch_user.setObjectName("label_ch_srch_user")
-        self.verticalLayout_27.addWidget(self.label_ch_srch_user)
-        self.lineEdit_ch = QtWidgets.QLineEdit(self.frame_12)
+        self.verticalLayout.addWidget(self.label_ch_srch_user)
+        self.lineEdit_ch = QtWidgets.QLineEdit(self.frame_40)
+        self.lineEdit_ch.setMaximumSize(QtCore.QSize(300, 16777215))
         self.lineEdit_ch.setStyleSheet("background-color: rgb(30, 30, 30);\n"
                                        "font: 14pt \"Cantarell\";\n"
                                        "color: rgb(158, 158, 158);\n"
@@ -649,12 +667,33 @@ class Ui_Server(object):
                                        "border-radius: 12px;\n"
                                        "")
         self.lineEdit_ch.setObjectName("lineEdit_ch")
-        self.verticalLayout_27.addWidget(self.lineEdit_ch)
-        self.pushButton_ch_search = QtWidgets.QPushButton(self.frame_12)
-        self.pushButton_ch_search.setStyleSheet("color: rgb(158, 158, 158);")
+        self.verticalLayout.addWidget(self.lineEdit_ch)
+        self.pushButton_ch_search = QtWidgets.QPushButton(self.frame_40)
+        self.pushButton_ch_search.setMinimumSize(QtCore.QSize(100, 25))
+        self.pushButton_ch_search.setMaximumSize(QtCore.QSize(300, 16777215))
+        self.pushButton_ch_search.setStyleSheet("\n"
+                                                "\n"
+                                                "QPushButton{\n"
+                                                "background-color: rgb(100, 100, 100);\n"
+                                                "\n"
+                                                "color: rgb(50, 50, 50);\n"
+                                                "border:0px;\n"
+                                                "border-radius: 6px;\n"
+                                                "}\n"
+                                                "\n"
+                                                "QPushButton:hover{\n"
+                                                "background-color: rgb(130, 130, 130);\n"
+                                                "color: rgb(50, 50, 50);\n"
+                                                "border-radius: 6px;\n"
+                                                "}\n"
+                                                "\n"
+                                                "\n"
+                                                "\n"
+                                                "")
         self.pushButton_ch_search.setObjectName("pushButton_ch_search")
-        self.verticalLayout_27.addWidget(self.pushButton_ch_search)
-        self.listWidget_users = QtWidgets.QListWidget(self.frame_12)
+        self.verticalLayout.addWidget(self.pushButton_ch_search)
+        self.listWidget_users = QtWidgets.QListWidget(self.frame_40)
+        self.listWidget_users.setMaximumSize(QtCore.QSize(300, 16777215))
         self.listWidget_users.setStyleSheet("background-color: rgb(30, 30, 30);\n"
                                             "font: 14pt \"Cantarell\";\n"
                                             "color: rgb(158, 158, 158);\n"
@@ -662,63 +701,192 @@ class Ui_Server(object):
                                             "border-radius: 12px;\n"
                                             "")
         self.listWidget_users.setObjectName("listWidget_users")
-        self.verticalLayout_27.addWidget(self.listWidget_users)
-        self.horizontalLayout_19.addWidget(self.frame_12)
-        self.frame_40 = QtWidgets.QFrame(self.frame_43)
-        self.frame_40.setMaximumSize(QtCore.QSize(228, 8000))
-        self.frame_40.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame_40.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame_40.setObjectName("frame_40")
-        self.verticalLayout_28 = QtWidgets.QVBoxLayout(self.frame_40)
-        self.verticalLayout_28.setContentsMargins(-1, 12, -1, 6)
-        self.verticalLayout_28.setObjectName("verticalLayout_28")
-        self.label_ch_whtCh = QtWidgets.QLabel(self.frame_40)
-        self.label_ch_whtCh.setMaximumSize(QtCore.QSize(16777215, 15))
-        self.label_ch_whtCh.setStyleSheet("color: rgb(158, 158, 158);")
-        self.label_ch_whtCh.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_ch_whtCh.setObjectName("label_ch_whtCh")
-        self.verticalLayout_28.addWidget(self.label_ch_whtCh)
-        self.comboBox = QtWidgets.QComboBox(self.frame_40)
-        self.comboBox.setMaximumSize(QtCore.QSize(16777215, 20))
-        self.comboBox.setStyleSheet("background-color: rgb(30, 30, 30);\n"
-                                    "font: 14pt \"Cantarell\";\n"
-                                    "color: rgb(158, 158, 158);\n"
-                                    "border:0px;\n"
-                                    "border-radius: 12px;\n"
-                                    "")
-        self.comboBox.setObjectName("comboBox")
-        self.verticalLayout_28.addWidget(self.comboBox)
-        self.frame_44 = QtWidgets.QFrame(self.frame_40)
-        self.frame_44.setMaximumSize(QtCore.QSize(16777215, 8000))
-        self.frame_44.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame_44.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame_44.setObjectName("frame_44")
-        self.verticalLayout_28.addWidget(self.frame_44)
-        self.horizontalLayout_19.addWidget(self.frame_40)
-        self.frame_41 = QtWidgets.QFrame(self.frame_43)
+        self.verticalLayout.addWidget(self.listWidget_users)
+        self.horizontalLayout_21.addWidget(self.frame_40)
+        self.frame_41 = QtWidgets.QFrame(self.frame_12)
         self.frame_41.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_41.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_41.setObjectName("frame_41")
-        self.verticalLayout_29 = QtWidgets.QVBoxLayout(self.frame_41)
+        self.verticalLayout_27 = QtWidgets.QVBoxLayout(self.frame_41)
+        self.verticalLayout_27.setObjectName("verticalLayout_27")
+        self.frame_44 = QtWidgets.QFrame(self.frame_41)
+        self.frame_44.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_44.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_44.setObjectName("frame_44")
+        self.horizontalLayout_22 = QtWidgets.QHBoxLayout(self.frame_44)
+        self.horizontalLayout_22.setObjectName("horizontalLayout_22")
+        self.frame_50 = QtWidgets.QFrame(self.frame_44)
+        self.frame_50.setMinimumSize(QtCore.QSize(100, 0))
+        self.frame_50.setMaximumSize(QtCore.QSize(60, 16777215))
+        self.frame_50.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_50.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_50.setObjectName("frame_50")
+        self.horizontalLayout_27 = QtWidgets.QHBoxLayout(self.frame_50)
+        self.horizontalLayout_27.setObjectName("horizontalLayout_27")
+        self.label = QtWidgets.QLabel(self.frame_50)
+        self.label.setStyleSheet("color: rgb(158, 158, 158);")
+        self.label.setObjectName("label")
+        self.horizontalLayout_27.addWidget(self.label)
+        self.horizontalLayout_22.addWidget(self.frame_50)
+        self.textEdit_ch_fio = QtWidgets.QTextEdit(self.frame_44)
+        self.textEdit_ch_fio.setStyleSheet("background-color: rgb(30, 30, 30);\n"
+                                           "font: 14pt \"Cantarell\";\n"
+                                           "color: rgb(158, 158, 158);\n"
+                                           "border:0px;\n"
+                                           "border-radius: 12px;\n"
+                                           "")
+        self.textEdit_ch_fio.setObjectName("textEdit_ch_fio")
+        self.horizontalLayout_22.addWidget(self.textEdit_ch_fio)
+        self.verticalLayout_27.addWidget(self.frame_44)
+        self.frame_47 = QtWidgets.QFrame(self.frame_41)
+        self.frame_47.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_47.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_47.setObjectName("frame_47")
+        self.horizontalLayout_23 = QtWidgets.QHBoxLayout(self.frame_47)
+        self.horizontalLayout_23.setObjectName("horizontalLayout_23")
+        self.frame_51 = QtWidgets.QFrame(self.frame_47)
+        self.frame_51.setMaximumSize(QtCore.QSize(105, 16777215))
+        self.frame_51.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_51.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_51.setObjectName("frame_51")
+        self.horizontalLayout_28 = QtWidgets.QHBoxLayout(self.frame_51)
+        self.horizontalLayout_28.setObjectName("horizontalLayout_28")
+        self.label_2 = QtWidgets.QLabel(self.frame_51)
+        self.label_2.setStyleSheet("color: rgb(158, 158, 158);")
+        self.label_2.setObjectName("label_2")
+        self.horizontalLayout_28.addWidget(self.label_2)
+        self.horizontalLayout_23.addWidget(self.frame_51)
+        self.frame_55 = QtWidgets.QFrame(self.frame_47)
+        self.frame_55.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_55.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_55.setObjectName("frame_55")
+        self.verticalLayout_29 = QtWidgets.QVBoxLayout(self.frame_55)
         self.verticalLayout_29.setObjectName("verticalLayout_29")
-        self.label_ch_inf = QtWidgets.QLabel(self.frame_41)
-        self.label_ch_inf.setText("")
-        self.label_ch_inf.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_ch_inf.setObjectName("label_ch_inf")
-        self.verticalLayout_29.addWidget(self.label_ch_inf)
-        self.plainTextEdit_ch_data = QtWidgets.QPlainTextEdit(self.frame_41)
-        self.plainTextEdit_ch_data.setStyleSheet("background-color: rgb(30, 30, 30);\n"
-                                                 "font: 14pt \"Cantarell\";\n"
-                                                 "color: rgb(158, 158, 158);\n"
-                                                 "border:0px;\n"
-                                                 "border-radius: 12px;\n"
-                                                 "")
-        self.plainTextEdit_ch_data.setObjectName("plainTextEdit_ch_data")
-        self.verticalLayout_29.addWidget(self.plainTextEdit_ch_data)
-        self.horizontalLayout_19.addWidget(self.frame_41)
+        self.textEdit_ch_post = QtWidgets.QTextEdit(self.frame_55)
+        self.textEdit_ch_post.setStyleSheet("background-color: rgb(30, 30, 30);\n"
+                                            "font: 14pt \"Cantarell\";\n"
+                                            "color: rgb(158, 158, 158);\n"
+                                            "border:0px;\n"
+                                            "border-radius: 12px;\n"
+                                            "")
+        self.textEdit_ch_post.setObjectName("textEdit_ch_post")
+        self.verticalLayout_29.addWidget(self.textEdit_ch_post)
+        self.horizontalLayout_23.addWidget(self.frame_55)
+        self.verticalLayout_27.addWidget(self.frame_47)
+        self.frame_45 = QtWidgets.QFrame(self.frame_41)
+        self.frame_45.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_45.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_45.setObjectName("frame_45")
+        self.horizontalLayout_24 = QtWidgets.QHBoxLayout(self.frame_45)
+        self.horizontalLayout_24.setObjectName("horizontalLayout_24")
+        self.frame_52 = QtWidgets.QFrame(self.frame_45)
+        self.frame_52.setMinimumSize(QtCore.QSize(95, 0))
+        self.frame_52.setMaximumSize(QtCore.QSize(90, 16777215))
+        self.frame_52.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_52.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_52.setObjectName("frame_52")
+        self.horizontalLayout_29 = QtWidgets.QHBoxLayout(self.frame_52)
+        self.horizontalLayout_29.setObjectName("horizontalLayout_29")
+        self.label_3 = QtWidgets.QLabel(self.frame_52)
+        self.label_3.setStyleSheet("color: rgb(158, 158, 158);")
+        self.label_3.setObjectName("label_3")
+        self.horizontalLayout_29.addWidget(self.label_3)
+        self.horizontalLayout_24.addWidget(self.frame_52)
+        self.frame_56 = QtWidgets.QFrame(self.frame_45)
+        self.frame_56.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_56.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_56.setObjectName("frame_56")
+        self.verticalLayout_31 = QtWidgets.QVBoxLayout(self.frame_56)
+        self.verticalLayout_31.setObjectName("verticalLayout_31")
+        self.textEdit_ch_phone = QtWidgets.QTextEdit(self.frame_56)
+        self.textEdit_ch_phone.setStyleSheet("background-color: rgb(30, 30, 30);\n"
+                                             "font: 14pt \"Cantarell\";\n"
+                                             "color: rgb(158, 158, 158);\n"
+                                             "border:0px;\n"
+                                             "border-radius: 12px;\n"
+                                             "")
+        self.textEdit_ch_phone.setObjectName("textEdit_ch_phone")
+        self.verticalLayout_31.addWidget(self.textEdit_ch_phone)
+        self.horizontalLayout_24.addWidget(self.frame_56)
+        self.verticalLayout_27.addWidget(self.frame_45)
+        self.frame_46 = QtWidgets.QFrame(self.frame_41)
+        self.frame_46.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_46.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_46.setObjectName("frame_46")
+        self.horizontalLayout_25 = QtWidgets.QHBoxLayout(self.frame_46)
+        self.horizontalLayout_25.setObjectName("horizontalLayout_25")
+        self.frame_53 = QtWidgets.QFrame(self.frame_46)
+        self.frame_53.setMinimumSize(QtCore.QSize(94, 0))
+        self.frame_53.setMaximumSize(QtCore.QSize(90, 16777215))
+        self.frame_53.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_53.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_53.setObjectName("frame_53")
+        self.horizontalLayout_30 = QtWidgets.QHBoxLayout(self.frame_53)
+        self.horizontalLayout_30.setObjectName("horizontalLayout_30")
+        self.label_4 = QtWidgets.QLabel(self.frame_53)
+        self.label_4.setStyleSheet("color: rgb(158, 158, 158);")
+        self.label_4.setObjectName("label_4")
+        self.horizontalLayout_30.addWidget(self.label_4)
+        self.horizontalLayout_25.addWidget(self.frame_53)
+        self.frame_57 = QtWidgets.QFrame(self.frame_46)
+        self.frame_57.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_57.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_57.setObjectName("frame_57")
+        self.verticalLayout_32 = QtWidgets.QVBoxLayout(self.frame_57)
+        self.verticalLayout_32.setObjectName("verticalLayout_32")
+        self.textEdit_ch_mail = QtWidgets.QTextEdit(self.frame_57)
+        self.textEdit_ch_mail.setStyleSheet("background-color: rgb(30, 30, 30);\n"
+                                            "font: 14pt \"Cantarell\";\n"
+                                            "color: rgb(158, 158, 158);\n"
+                                            "border:0px;\n"
+                                            "border-radius: 12px;\n"
+                                            "")
+        self.textEdit_ch_mail.setObjectName("textEdit_ch_mail")
+        self.verticalLayout_32.addWidget(self.textEdit_ch_mail)
+        self.horizontalLayout_25.addWidget(self.frame_57)
+        self.verticalLayout_27.addWidget(self.frame_46)
+        self.frame_48 = QtWidgets.QFrame(self.frame_41)
+        self.frame_48.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_48.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_48.setObjectName("frame_48")
+        self.horizontalLayout_26 = QtWidgets.QHBoxLayout(self.frame_48)
+        self.horizontalLayout_26.setObjectName("horizontalLayout_26")
+        self.frame_54 = QtWidgets.QFrame(self.frame_48)
+        self.frame_54.setMinimumSize(QtCore.QSize(94, 0))
+        self.frame_54.setMaximumSize(QtCore.QSize(76, 16777215))
+        self.frame_54.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_54.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_54.setObjectName("frame_54")
+        self.horizontalLayout_31 = QtWidgets.QHBoxLayout(self.frame_54)
+        self.horizontalLayout_31.setObjectName("horizontalLayout_31")
+        self.label_5 = QtWidgets.QLabel(self.frame_54)
+        self.label_5.setStyleSheet("color: rgb(158, 158, 158);")
+        self.label_5.setObjectName("label_5")
+        self.horizontalLayout_31.addWidget(self.label_5)
+        self.horizontalLayout_26.addWidget(self.frame_54)
+        self.frame_58 = QtWidgets.QFrame(self.frame_48)
+        self.frame_58.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_58.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_58.setObjectName("frame_58")
+        self.verticalLayout_33 = QtWidgets.QVBoxLayout(self.frame_58)
+        self.verticalLayout_33.setObjectName("verticalLayout_33")
+        self.textEdit_ch_pass = QtWidgets.QTextEdit(self.frame_58)
+        self.textEdit_ch_pass.setStyleSheet("background-color: rgb(30, 30, 30);\n"
+                                            "font: 14pt \"Cantarell\";\n"
+                                            "color: rgb(158, 158, 158);\n"
+                                            "border:0px;\n"
+                                            "border-radius: 12px;\n"
+                                            "")
+        self.textEdit_ch_pass.setObjectName("textEdit_ch_pass")
+        self.verticalLayout_33.addWidget(self.textEdit_ch_pass)
+        self.horizontalLayout_26.addWidget(self.frame_58)
+        self.verticalLayout_27.addWidget(self.frame_48)
+        self.horizontalLayout_21.addWidget(self.frame_41)
+        self.horizontalLayout_19.addWidget(self.frame_12)
         self.verticalLayout_30.addWidget(self.frame_43)
-        self.frame_42 = QtWidgets.QFrame(self.page_change_user)
-        self.frame_42.setMinimumSize(QtCore.QSize(0, 40))
+        self.frame_42 = QtWidgets.QFrame(self.page_change_user_3)
+        self.frame_42.setMinimumSize(QtCore.QSize(0, 55))
+        self.frame_42.setMaximumSize(QtCore.QSize(16777215, 55))
         self.frame_42.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_42.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_42.setObjectName("frame_42")
@@ -771,12 +939,12 @@ class Ui_Server(object):
         self.pushButton_ch_cancel.setObjectName("pushButton_ch_cancel")
         self.horizontalLayout_18.addWidget(self.pushButton_ch_cancel)
         self.verticalLayout_30.addWidget(self.frame_42)
-        self.stackedWidget_change.addWidget(self.page_change_user)
-        self.page_delete_user = QtWidgets.QWidget()
-        self.page_delete_user.setObjectName("page_delete_user")
-        self.verticalLayout_9 = QtWidgets.QVBoxLayout(self.page_delete_user)
+        self.stackedWidget_change.addWidget(self.page_change_user_3)
+        self.page_delete_user_3 = QtWidgets.QWidget()
+        self.page_delete_user_3.setObjectName("page_delete_user_3")
+        self.verticalLayout_9 = QtWidgets.QVBoxLayout(self.page_delete_user_3)
         self.verticalLayout_9.setObjectName("verticalLayout_9")
-        self.frame_10 = QtWidgets.QFrame(self.page_delete_user)
+        self.frame_10 = QtWidgets.QFrame(self.page_delete_user_3)
         self.frame_10.setMaximumSize(QtCore.QSize(16777215, 9000))
         self.frame_10.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_10.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -822,7 +990,7 @@ class Ui_Server(object):
         self.listWidget_del_users.setObjectName("listWidget_del_users")
         self.verticalLayout_8.addWidget(self.listWidget_del_users)
         self.verticalLayout_9.addWidget(self.frame_10)
-        self.frame_11 = QtWidgets.QFrame(self.page_delete_user)
+        self.frame_11 = QtWidgets.QFrame(self.page_delete_user_3)
         self.frame_11.setMinimumSize(QtCore.QSize(0, 40))
         self.frame_11.setMaximumSize(QtCore.QSize(16777215, 40))
         self.frame_11.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -879,18 +1047,18 @@ class Ui_Server(object):
         self.pushButton_del_cancel.setObjectName("pushButton_del_cancel")
         self.horizontalLayout_7.addWidget(self.pushButton_del_cancel)
         self.verticalLayout_9.addWidget(self.frame_11)
-        self.stackedWidget_change.addWidget(self.page_delete_user)
+        self.stackedWidget_change.addWidget(self.page_delete_user_3)
         self.verticalLayout_7.addWidget(self.stackedWidget_change)
         self.verticalLayout_6.addWidget(self.frame_9)
         self.horizontalLayout_5.addWidget(self.frame_7)
         self.stackedWidget.addWidget(self.page_change_usr_3)
         self.horizontalLayout.addWidget(self.stackedWidget)
-        self.verticalLayout.addWidget(self.frame)
+        self.horizontalLayout_20.addWidget(self.frame)
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(0)
-        self.stackedWidget_change.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(2)
+        self.stackedWidget_change.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
         self.pushButton_crt_user.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(2))
@@ -905,8 +1073,6 @@ class Ui_Server(object):
         self.pushButton_ch_save.clicked.connect(self.change_user)
         self.pushButton_ch_search.clicked.connect(self.search_for_change)
         self.pushButton_ch_cancel.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(0))
-        self.listWidget_users.clicked.connect(self.add_in_combo_ch)
-        self.comboBox.activated.connect(self.combo_date_add)
 
         self.pushButton_del_cancel.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(0))
         self.pushButton_del_save.clicked.connect(self.delete_user)
@@ -931,8 +1097,12 @@ class Ui_Server(object):
         self.pushButton_save.setText(_translate("MainWindow", "Сохранить"))
         self.label_ch_info.setStyleSheet(_translate("MainWindow", "color: rgb(158, 158, 158);"))
         self.label_ch_info.setText(_translate("MainWindow", "Изменение данных пользователя"))
-        self.label_ch_whtCh.setText(_translate("MainWindow", "Выберите что нужно изменить"))
         self.label_ch_srch_user.setText(_translate("MainWindow", "Поиск пользователя"))
+        self.label.setText(_translate("MainWindow", "ФИО:"))
+        self.label_2.setText(_translate("MainWindow", "Должность:"))
+        self.label_3.setText(_translate("MainWindow", "Телефон:"))
+        self.label_4.setText(_translate("MainWindow", "Эл.почта:"))
+        self.label_5.setText(_translate("MainWindow", "Пароль:"))
         self.pushButton_ch_search.setText(_translate("MainWindow", "Поиск"))
         self.pushButton_ch_save.setText(_translate("MainWindow", "Сохранить "))
         self.pushButton_ch_cancel.setText(_translate("MainWindow", "Отмена"))
