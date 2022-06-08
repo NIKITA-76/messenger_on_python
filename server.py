@@ -19,7 +19,7 @@ class Server(socket.socket, Ui_Server):
         self.x = threading.Thread(target=self.start_server).start()
         app = QtWidgets.QApplication(sys.argv)
         Ui_Server = QtWidgets.QMainWindow()
-        super().setupUi(Ui_Server,)
+        super().setupUi(Ui_Server, )
         Ui_Server.show()
         app.lastWindowClosed.connect(self.shotdown)
         sys.exit(app.exec_())
@@ -27,7 +27,7 @@ class Server(socket.socket, Ui_Server):
     def shotdown(self):  # К хренам обрумаем ему все его костыли и прога умирает от нажатия на Крестик
         print("ОКНО ЗАКРЫТО ПО ЖЕЛАНИЮ ПОЛЬЗОВАТЕЛЯ")
         raise Exception
-    
+
     def listen_socket(self, ip_user, socket_user, ):  # Accept text from client
         try:
             while True:  # Accepting a message
@@ -35,7 +35,7 @@ class Server(socket.socket, Ui_Server):
                 self.signal = pickle.loads(self.signal)
                 print(f"ДАННЫЕ ОТ КЛИЕНТА --->{self.signal}")
                 if self.signal[0] == "TRY_TO_ENTRY":
-                    self.log_in(self.signal, socket_user,)
+                    self.log_in(self.signal, socket_user, )
                     self.data.name_withIp[self.signal[1]] = self.data.users_ip[0]
                     self.recreating_room_from_JSON()
                 elif self.signal[0] == "MSGROOM":
@@ -245,31 +245,46 @@ class Server(socket.socket, Ui_Server):
             self.label_login.setStyleSheet("color: red")
             print("HAVE_THIS_USER")
 
-
     def search_for_change(self):
-        self.listWidget_users.clear()
+        self.listWidget_ch_users.clear()
         users_in_JSON = self.data.DB.find_one({'_id': 'USERS'}, {'_id': 0})
         for user in users_in_JSON:
             if self.lineEdit_ch.text() in user:
-                self.listWidget_users.addItem(user)
+                self.listWidget_ch_users.addItem(user)
 
+    def paste_ch_inf(self):
+        self.textEdit_ch_pass.setPlainText(self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.listWidget_ch_users.currentItem().text()]["password"])
+        self.textEdit_ch_fio.setPlainText(self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.listWidget_ch_users.currentItem().text()]["FIO"])
+        self.textEdit_ch_post.setPlainText(self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.listWidget_ch_users.currentItem().text()]["post"])
+        self.textEdit_ch_phone.setPlainText(self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.listWidget_ch_users.currentItem().text()]["phone"])
+        self.textEdit_ch_mail.setPlainText(self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.listWidget_ch_users.currentItem().text()]["mail"])
 
     def change_user(self):
-        user = self.listWidget_users.currentItem().text()
-        param_pass = self.textEdit_ch_pass.currentText()
-        param_fio = self.textEdit_ch_fio.currentText()
-        param_post = self.textEdit_ch_post.currentText()
-        param_phone = self.textEdit_ch_phone.currentText()
-        param_mail = self.textEdit_ch_mail.currentText()
-        self.data.DB.update_one({'_id': 'USERS'}, {'$set': {user + ".password": param_pass}})
-        self.data.DB.update_one({'_id': 'USERS'}, {'$set': {user + ".FIO": param_fio}})
-        self.data.DB.update_one({'_id': 'USERS'}, {'$set': {user + ".post": param_post}})
-        self.data.DB.update_one({'_id': 'USERS'}, {'$set': {user + ".phone": param_phone}})
-        self.data.DB.update_one({'_id': 'USERS'}, {'$set': {user + ".mail": param_mail}})
-        self.label_ch_info.setText("Пользователь успешно изменен")
+        try:
+            user = self.listWidget_ch_users.currentItem().text()
+            param_pass = self.textEdit_ch_pass.toPlainText()
+            param_fio = self.textEdit_ch_fio.toPlainText()
+            param_post = self.textEdit_ch_post.toPlainText()
+            param_phone = self.textEdit_ch_phone.toPlainText()
+            param_mail = self.textEdit_ch_mail.toPlainText()
+            self.data.DB.update_one({'_id': 'USERS'}, {'$set': {user + ".password": param_pass}})
+            self.data.DB.update_one({'_id': 'USERS'}, {'$set': {user + ".FIO": param_fio}})
+            self.data.DB.update_one({'_id': 'USERS'}, {'$set': {user + ".post": param_post}})
+            self.data.DB.update_one({'_id': 'USERS'}, {'$set': {user + ".phone": param_phone}})
+            self.data.DB.update_one({'_id': 'USERS'}, {'$set': {user + ".mail": param_mail}})
+            self.label_ch_info.setText("Пользователь успешно изменен")
+            self.label_ch_info.setStyleSheet("color:green")
+            self.textEdit_ch_pass.clear()
+            self.textEdit_ch_fio.clear()
+            self.textEdit_ch_post.clear()
+            self.textEdit_ch_phone.clear()
+            self.textEdit_ch_mail.clear()
+        except Exception:
+            self.label_ch_info.setText("Возникла ошибка!")
+            self.label_ch_info.setStyleSheet("color:red")
 
     def search_for_delete(self):
-        self.listWidget_users.clear()
+        self.listWidget_ch_users.clear()
         users_in_JSON = self.data.DB.find_one({'_id': 'USERS'}, {'_id': 0})
         for user in users_in_JSON:
             if self.lineEdit_ch.text() in user:
