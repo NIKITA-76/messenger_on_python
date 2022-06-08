@@ -19,7 +19,7 @@ class Server(socket.socket, Ui_Server):
         self.x = threading.Thread(target=self.start_server).start()
         app = QtWidgets.QApplication(sys.argv)
         Ui_Server = QtWidgets.QMainWindow()
-        super().setupUi(Ui_Server, )
+        super().setupUi(Ui_Server,)
         Ui_Server.show()
         app.lastWindowClosed.connect(self.shotdown)
         sys.exit(app.exec_())
@@ -27,7 +27,7 @@ class Server(socket.socket, Ui_Server):
     def shotdown(self):  # К хренам обрумаем ему все его костыли и прога умирает от нажатия на Крестик
         print("ОКНО ЗАКРЫТО ПО ЖЕЛАНИЮ ПОЛЬЗОВАТЕЛЯ")
         raise Exception
-
+    
     def listen_socket(self, ip_user, socket_user, ):  # Accept text from client
         try:
             while True:  # Accepting a message
@@ -216,7 +216,7 @@ class Server(socket.socket, Ui_Server):
     def crt_new_user(self, ):
         self.data.idUser += 1
         if self.lineEdit_login.text() not in self.data.DB.find_one({'_id': 'USERS'}, {'_id': 0}):
-            if self.lineEdit_pass.text() == self.lineEdit_passw_2.text():
+            if self.lineEdit_pass.text() == self.lineEdit_pass_2.text():
                 self.data.DB.update_one({"_id": "USERS"},
                                         {"$set": {self.lineEdit_login.text(): {"password": self.lineEdit_pass.text(),
                                                                                "FIO": self.lineEdit_fio.text(),
@@ -225,7 +225,7 @@ class Server(socket.socket, Ui_Server):
                                                                                "mail": self.lineEdit_mail.text(),
                                                                                # Пока нигде не используется
                                                                                "ROOMS": {}
-                                                                               }}})
+                                                                                                                                                       }}})
                 self.data.DB.update_one({'_id': 'COUNT'}, {'$set': {"USERS": self.data.idUser}})
                 print(f"ПОЛЬЗОВАТЕЛЬ ЗАРЕГИСТРИРОВАН ")
                 self.label_crt_info.setText("Пользователь успешно зарегистрирован!")
@@ -234,7 +234,7 @@ class Server(socket.socket, Ui_Server):
                 self.lineEdit_post.clear()
                 self.lineEdit_login.clear()
                 self.lineEdit_pass.clear()
-                self.lineEdit_passw_2.clear()
+                self.lineEdit_pass_2.clear()
                 self.lineEdit_mail.clear()
             else:
                 self.label_crt_info.setText("Пароли не совпадают!")
@@ -245,13 +245,6 @@ class Server(socket.socket, Ui_Server):
             self.label_login.setStyleSheet("color: red")
             print("HAVE_THIS_USER")
 
-    def add_in_combo_ch(self):
-        self.comboBox.clear()
-        self.plainTextEdit_ch_data.setPlainText("")
-        data = self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.listWidget_users.currentItem().text()].keys()
-        for i in data:
-            if i != "ROOMS":
-                self.comboBox.addItem(i)
 
     def search_for_change(self):
         self.listWidget_users.clear()
@@ -260,18 +253,10 @@ class Server(socket.socket, Ui_Server):
             if self.lineEdit_ch.text() in user:
                 self.listWidget_users.addItem(user)
 
-    def combo_date_add(self):
-        self.plainTextEdit_ch_data.setPlainText(
-            self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.listWidget_users.currentItem().text()][
-                self.comboBox.currentText()])
-        self.label_ch_inf.setText(self.comboBox.currentText())
 
     def change_user(self):
         user = self.listWidget_users.currentItem().text()
-        param = self.comboBox.currentText()
-        new_data = self.plainTextEdit_ch_data.toPlainText()
-        self.data.DB.update_one({'_id': 'USERS'}, {'$set': {user + "." + param: new_data}})
-        self.label_ch_info.setText("Пользователь успешно изменен")
+
 
     def search_for_delete(self):
         self.listWidget_users.clear()
