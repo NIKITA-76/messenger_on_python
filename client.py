@@ -61,15 +61,14 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
                 self.LP_RForm.lineEdit_2.setStyleSheet("border: 1px solid rgb(94, 0, 1);")
                 print("USER_IS_NOT_SIGN")
             elif data[0] == "MSGROOM":
-                if self.listWidget_people.currentItem().text() == data[3]:
+                if self.listWidget_people.currentItem().text() == data[3] or self.listWidget_people.currentItem().text() == data[1]:
                     self.listWidget_msgRoom.addItem(f"{data[1]}: {''.join(data[2])}")
                     time.sleep(0.01)
                     self.listWidget_msgRoom.verticalScrollBar().setValue(
                         self.listWidget_msgRoom.verticalScrollBar().maximum())
                     self.notify.title = f"New message from '{data[1]}': "
                     self.notify.message = f"{''.join(data[2])}"
-                    if data[1] != self.nick_name:
-                        self.notify.send()
+                    self.notify.send()
             elif data[0] == "CRT_ROOM":
                 try:
                     self.roomsForLoad[0].update(data[1])
