@@ -225,7 +225,7 @@ class Server(socket.socket, Ui_Server):
                                                                                "mail": self.lineEdit_mail.text(),
                                                                                # Пока нигде не используется
                                                                                "ROOMS": {}
-                                                                                                                                                       }}})
+                                                                               }}})
                 self.data.DB.update_one({'_id': 'COUNT'}, {'$set': {"USERS": self.data.idUser}})
                 print(f"ПОЛЬЗОВАТЕЛЬ ЗАРЕГИСТРИРОВАН ")
                 self.label_crt_info.setText("Пользователь успешно зарегистрирован!")
@@ -256,7 +256,17 @@ class Server(socket.socket, Ui_Server):
 
     def change_user(self):
         user = self.listWidget_users.currentItem().text()
-
+        param_pass = self.textEdit_ch_pass.currentText()
+        param_fio = self.textEdit_ch_fio.currentText()
+        param_post = self.textEdit_ch_post.currentText()
+        param_phone = self.textEdit_ch_phone.currentText()
+        param_mail = self.textEdit_ch_mail.currentText()
+        self.data.DB.update_one({'_id': 'USERS'}, {'$set': {user + ".password": param_pass}})
+        self.data.DB.update_one({'_id': 'USERS'}, {'$set': {user + ".FIO": param_fio}})
+        self.data.DB.update_one({'_id': 'USERS'}, {'$set': {user + ".post": param_post}})
+        self.data.DB.update_one({'_id': 'USERS'}, {'$set': {user + ".phone": param_phone}})
+        self.data.DB.update_one({'_id': 'USERS'}, {'$set': {user + ".mail": param_mail}})
+        self.label_ch_info.setText("Пользователь успешно изменен")
 
     def search_for_delete(self):
         self.listWidget_users.clear()
