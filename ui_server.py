@@ -692,16 +692,16 @@ class Ui_Server(object):
                                                 "")
         self.pushButton_ch_search.setObjectName("pushButton_ch_search")
         self.verticalLayout.addWidget(self.pushButton_ch_search)
-        self.listWidget_users = QtWidgets.QListWidget(self.frame_40)
-        self.listWidget_users.setMaximumSize(QtCore.QSize(300, 16777215))
-        self.listWidget_users.setStyleSheet("background-color: rgb(30, 30, 30);\n"
+        self.listWidget_ch_users = QtWidgets.QListWidget(self.frame_40)
+        self.listWidget_ch_users.setMaximumSize(QtCore.QSize(300, 16777215))
+        self.listWidget_ch_users.setStyleSheet("background-color: rgb(30, 30, 30);\n"
                                             "font: 14pt \"Cantarell\";\n"
                                             "color: rgb(158, 158, 158);\n"
                                             "border:0px;\n"
                                             "border-radius: 12px;\n"
                                             "")
-        self.listWidget_users.setObjectName("listWidget_users")
-        self.verticalLayout.addWidget(self.listWidget_users)
+        self.listWidget_ch_users.setObjectName("listWidget_ch_users")
+        self.verticalLayout.addWidget(self.listWidget_ch_users)
         self.horizontalLayout_21.addWidget(self.frame_40)
         self.frame_41 = QtWidgets.QFrame(self.frame_12)
         self.frame_41.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -1073,6 +1073,7 @@ class Ui_Server(object):
         self.pushButton_ch_save.clicked.connect(self.change_user)
         self.pushButton_ch_search.clicked.connect(self.search_for_change)
         self.pushButton_ch_cancel.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(0))
+        self.listWidget_ch_users.clicked.connect(self.paste_ch_inf)
 
         self.pushButton_del_cancel.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(0))
         self.pushButton_del_save.clicked.connect(self.delete_user)
