@@ -1057,8 +1057,8 @@ class Ui_Server(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(2)
-        self.stackedWidget_change.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget_change.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
         self.pushButton_crt_user.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(2))
