@@ -32,7 +32,7 @@ The problem of similar messengers is the lack of guarantees that your company wi
 
 'The_CorpMess' solves the main problem of similar services.
 
-![Program pros](https://sun9-64.userapi.com/s/v1/ig2/txEgqz_xDGiYcGOP_G6dVAC2xmcx48JzUfluZ29LKriZ0w-PXL79JUfInkasH6CScMKtdoUxmXiEp9c2xHtVwEY7.jpg?size=1864x1080&quality=96&type=album)
+![image](https://user-images.githubusercontent.com/73834676/173209956-a6671daa-0a39-4eaf-99da-2aca816d01cc.png)
 
 This software provides:
 - Server (and UI for server)
