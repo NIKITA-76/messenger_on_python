@@ -71,7 +71,8 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
                     self.notify.title = f"New message from '{data[1]}': "
                     self.notify.message = f"{''.join(data[2])}"
                     self.notify.icon = "ui/logo_Unitum.png"
-                    self.notify.send()
+                    if data[1] != self.nick_name:
+                        self.notify.send()
             elif data[0] == "CRT_ROOM":
                 try:
                     self.roomsForLoad[0].update(data[1])
