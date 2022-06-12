@@ -1066,6 +1066,7 @@ class Ui_Server(object):
         self.pushButton_crt_user_2.clicked.connect(lambda: self.stackedWidget_change.setCurrentIndex(0))
         self.pushButton_change_user.clicked.connect(lambda: self.stackedWidget_change.setCurrentIndex(1))
         self.pushButton_delete_user.clicked.connect(lambda: self.stackedWidget_change.setCurrentIndex(2))
+        self.pushButton_back_main_page_usr.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(0))
 
         self.pushButton_save.clicked.connect(self.crt_new_user)
         self.pushButton_crt_cancel.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(0))
@@ -1083,10 +1084,11 @@ class Ui_Server(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "The_CorpMess(Server)"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Unitum(Server)"))
         self.pushButton_show_all_usr.setText(_translate("MainWindow", "Просмотр всех пользователей"))
         self.pushButton_crt_user.setText(_translate("MainWindow", "Настройка  пользователей"))
-        self.pushButton_crt_cancel.setText(_translate("MainWindow", "Назад"))
+        self.pushButton_crt_cancel.setText(_translate("MainWindow", "Отмена"))
+        self.pushButton_back_main_page_usr.setText(_translate("MainWindow", "Назад"))
         self.label_passw.setText(_translate("MainWindow", "Пароль:"))
         self.label_phone.setText(_translate("MainWindow", "Телефон:"))
         self.label_crt_info.setText(_translate("MainWindow", "Создание пользователя"))
