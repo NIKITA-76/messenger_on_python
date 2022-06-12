@@ -7,7 +7,10 @@ This program is positioned as a way of communication between employees, as well 
 
 **This project is still under development**
 
-![App Screenshot](https://sun9-29.userapi.com/s/v1/ig2/a-MU-9Iu6W5LvZpT6TkpIfP3qwhG-IVzipQYCy44LFE5Op110yDn31X0uNZO1fpXPditQY5O-3o6ai6VSLIcDefK.jpg?size=1350x773&quality=96&type=album)
+
+![image](https://user-images.githubusercontent.com/73834676/173209563-ac4aa21f-2da2-4d5b-8ac4-f142e372ed49.png)
+![image](https://user-images.githubusercontent.com/73834676/173209576-6014d35b-df41-475c-b87a-c921d0bbedc9.png)
+## With what was created
 ![Frameworks](https://sun9-16.userapi.com/s/v1/ig2/SUI6nEGkFR5-Y-uCCp7dFwI25Fkpq6YeYd5DyZNfiudNcgU_MPeu7lRgDkvBF4djsOxb9-UxQtxQtDZZz8armQZm.jpg?size=1318x771&quality=96&type=album)
 
 ## [MongoDB](https://www.mongodb.com/)
