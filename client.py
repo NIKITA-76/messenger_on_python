@@ -32,10 +32,12 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
         super().setupUi(MainWindow, ChildWindow, )
         self.cl = Client()
         threading.Thread(target=self.get_text).start()
+        self.setMouseTracking(True)
         self.canLoad = True
         self.roomsForLoad = []
         self.animation_play = True
         self.notify = Notify()
+
     def get_text(self, ):
         # We receive text from the server USING the client (Client)
         while True:
@@ -68,6 +70,7 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
                         self.listWidget_msgRoom.verticalScrollBar().maximum())
                     self.notify.title = f"New message from '{data[1]}': "
                     self.notify.message = f"{''.join(data[2])}"
+                    self.notify.icon = "ui/logo_Unitum.png"
                     self.notify.send()
             elif data[0] == "CRT_ROOM":
                 try:
@@ -122,6 +125,7 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
         data_of_sign = pickle.dumps(data_of_sign)
 
         self.cl.send_data(data_of_sign)
+
 
     def shotdown(self):  # К хренам обрумаем ему все его костыли и прога умирает от нажатия на Крестик
         print("ОКНО ЗАКРЫТО ПО ЖЕЛАНИЮ ПОЛЬЗОВАТЕЛЯ")
@@ -225,6 +229,8 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
         new_room = pickle.dumps(new_room)
         self.AddFRNDWindow.close()
         self.cl.send_data(new_room)
+
+
 
 
 
