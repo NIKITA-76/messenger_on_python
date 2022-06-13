@@ -571,4 +571,4 @@ class UI_ForMain(object):
         self.label_card_mail.setText(_translate("MainWindow", "Кабинет:"))
         self.pushButton_quit.setText(_translate("MainWindow", "Выйти"))
         self.label_of_creator.setText(
-            _translate("MainWindow", "The_messenger             |               Nikita Tarasov"))
+            _translate("MainWindow", "Unitum             |               Nikita Tarasov"))
