@@ -1,4 +1,4 @@
-# The_CorpMess
+# Unitum
 Server and client with database on MongoDB.
 
 Corporate messenger for communication between employees in a closed network.
@@ -7,7 +7,10 @@ This program is positioned as a way of communication between employees, as well 
 
 **This project is still under development**
 
-![App Screenshot](https://sun9-29.userapi.com/s/v1/ig2/a-MU-9Iu6W5LvZpT6TkpIfP3qwhG-IVzipQYCy44LFE5Op110yDn31X0uNZO1fpXPditQY5O-3o6ai6VSLIcDefK.jpg?size=1350x773&quality=96&type=album)
+
+![image](https://user-images.githubusercontent.com/73834676/173209563-ac4aa21f-2da2-4d5b-8ac4-f142e372ed49.png)
+![image](https://user-images.githubusercontent.com/73834676/173209576-6014d35b-df41-475c-b87a-c921d0bbedc9.png)
+## With what was created
 ![Frameworks](https://sun9-16.userapi.com/s/v1/ig2/SUI6nEGkFR5-Y-uCCp7dFwI25Fkpq6YeYd5DyZNfiudNcgU_MPeu7lRgDkvBF4djsOxb9-UxQtxQtDZZz8armQZm.jpg?size=1318x771&quality=96&type=album)
 
 ## [MongoDB](https://www.mongodb.com/)
@@ -27,9 +30,9 @@ The problem of similar messengers is the lack of guarantees that your company wi
 
 ![Similar messengers](https://sun9-84.userapi.com/s/v1/ig2/IxONIRwGj3kVHK-B7_GcGuXDLpamLSR3KV62Onw6DqtQ7P1sEJywCfZ0n_vVfAHk5Yi3vae8fZpQI--42rFU8j43.jpg?size=1850x1080&quality=96&type=album)
 
-'The_CorpMess' solves the main problem of similar services.
+'Unitim' solves the main problem of similar services.
 
-![Program pros](https://sun9-64.userapi.com/s/v1/ig2/txEgqz_xDGiYcGOP_G6dVAC2xmcx48JzUfluZ29LKriZ0w-PXL79JUfInkasH6CScMKtdoUxmXiEp9c2xHtVwEY7.jpg?size=1864x1080&quality=96&type=album)
+![image](https://user-images.githubusercontent.com/73834676/173209956-a6671daa-0a39-4eaf-99da-2aca816d01cc.png)
 
 This software provides:
 - Server (and UI for server)
