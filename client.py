@@ -3,13 +3,12 @@ import socket
 import sys
 import threading
 import time
-from notifypy import Notify
-
 from configparser import ConfigParser
 
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import QPropertyAnimation
 from PyQt5.QtWidgets import QWidget
+from notifypy import Notify
 
 import ui_client
 
@@ -32,11 +31,11 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
         super().setupUi(MainWindow, ChildWindow, )
         self.cl = Client()
         threading.Thread(target=self.get_text).start()
-        self.setMouseTracking(True)
         self.canLoad = True
         self.roomsForLoad = []
         self.animation_play = True
         self.notify = Notify()
+        print("Connect")
 
     def get_text(self, ):
         # We receive text from the server USING the client (Client)
@@ -85,10 +84,6 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
                 self.listWidget_msgRoom.verticalScrollBar().setValue(3)
                 self.listWidget_msgRoom.insertItems(0, data[1])
             elif data[0] == "LOADMSG":
-                self.label_card_fio.setText(data[1])
-                self.label_card_post.setText("Должность: " + data[2])
-                self.label_card_mail.setText("Эл.Почта: " + data[3])
-                self.label_card_phone.setText("Телефон: " + data[4])
                 if data[-1] == "NOMSG":
                     self.listWidget_msgRoom.clear()
                 else:
@@ -116,7 +111,11 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
                                 self.AddFRNDForm.listWidget.addItem(item)
                         except IndexError:
                             self.AddFRNDForm.listWidget.addItem(item)
-
+            elif data[0] == "INFO_CARD":
+                self.label_card_fio.setText(data[1])
+                self.label_card_post.setText("Должность: " + data[2])
+                self.label_card_mail.setText("Эл.Почта: " + data[3])
+                self.label_card_phone.setText("Телефон: " + data[4])
 
     def Sign_in(self):
         login = self.LP_RForm.lineEdit.text()
@@ -126,7 +125,6 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
         data_of_sign = pickle.dumps(data_of_sign)
 
         self.cl.send_data(data_of_sign)
-
 
     def shotdown(self):  # К хренам обрумаем ему все его костыли и прога умирает от нажатия на Крестик
         print("ОКНО ЗАКРЫТО ПО ЖЕЛАНИЮ ПОЛЬЗОВАТЕЛЯ")
@@ -224,15 +222,14 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
             self.anim.setEndValue(600)
             self.anim.start()
 
-
     def addNewFriend(self):
         new_room = ["CRT_ROOM", self.AddFRNDForm.listWidget.currentItem().text(), self.nick_name, ]
         new_room = pickle.dumps(new_room)
         self.AddFRNDWindow.close()
         self.cl.send_data(new_room)
 
-
-
+    def load_info_card(self):
+        new_room = ["INFO_CARD", self.listWidget_people.currentItem().text(), self.nick_name, ]
 
 
 if __name__ == "__main__":
