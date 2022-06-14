@@ -201,10 +201,10 @@ class Server(socket.socket, Ui_Server):
             user.send(for_load_MSG)
 
     def send_info_card(self, user_socket, ):
-        fio_of_user = self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.signal[2]]["FIO"]
-        cabinet_of_mess = self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.signal[2]]["post"]
-        mail_of_mess = self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.signal[2]]["mail"]
-        post_of_mess = self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.signal[2]]["phone"]
+        fio_of_user = self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.signal[1]]["FIO"]
+        cabinet_of_mess = self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.signal[1]]["post"]
+        mail_of_mess = self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.signal[1]]["mail"]
+        post_of_mess = self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.signal[1]]["phone"]
 
         for_load_info_card = ["INFO_CARD", fio_of_user, cabinet_of_mess, mail_of_mess, post_of_mess,]
         for_load_info_card = pickle.dumps(for_load_info_card)
