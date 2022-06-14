@@ -144,7 +144,6 @@ class Server(socket.socket, Ui_Server):
 
         for name in name_of_rooms:
             self.data.rooms[name] = [{}]
-        print(self.data.rooms)
 
     def recreating_room_from_JSON(self):
         name_of_rooms = self.data.DB.find_one({"_id": "ROOMS"}, {"_id": 0}).keys()  # Воссоздание комнат из JSON
@@ -170,14 +169,10 @@ class Server(socket.socket, Ui_Server):
         cut_bank_of_messg = []
         bank_of_mess = self.data.DB.find_one({"_id": "MESSAGE"}, {"_id": 0})[self.signal[1]]
         bank_of_mess.reverse()
-        fio_of_user = self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.signal[2]]["FIO"]
-        cabinet_of_mess = self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.signal[2]]["post"]
-        mail_of_mess = self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.signal[2]]["mail"]
-        post_of_mess = self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.signal[2]]["phone"]
         try:
             if not bank_of_mess:
                 for_load_MSG = pickle.dumps(
-                    ["LOADMSG", fio_of_user, cabinet_of_mess, mail_of_mess, post_of_mess, "NOMSG", ])
+                    ["LOADMSG", "NOMSG", ])
                 user.send(for_load_MSG)
             else:
                 for i in bank_of_mess:
@@ -185,7 +180,7 @@ class Server(socket.socket, Ui_Server):
                     if len(cut_bank_of_messg) == 50:
                         break
                 for_load_MSG = pickle.dumps(
-                    ["LOADMSG", fio_of_user, cabinet_of_mess, mail_of_mess, post_of_mess, cut_bank_of_messg])
+                    ["LOADMSG", cut_bank_of_messg])
                 user.send(for_load_MSG)
 
         except KeyError as error:
@@ -202,6 +197,13 @@ class Server(socket.socket, Ui_Server):
         if cut_bank_of_messg:
             for_load_MSG = pickle.dumps(["LOADMSG_ADD", cut_bank_of_messg])
             user.send(for_load_MSG)
+
+    def send_info_card(self, user_socket, ):
+        fio_of_user = self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.signal[2]]["FIO"]
+        cabinet_of_mess = self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.signal[2]]["post"]
+        mail_of_mess = self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.signal[2]]["mail"]
+        post_of_mess = self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.signal[2]]["phone"]
+
 
     def search_people(self, user_socket):
         users_in_JSON = self.data.DB.find_one({'_id': 'USERS'}, {'_id': 0})
@@ -253,7 +255,7 @@ class Server(socket.socket, Ui_Server):
                 self.listWidget_ch_users.addItem(user)
 
     def paste_ch_inf(self):
-        self.textEdit_ch_pass.setPlainText(self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.listWidget_ch_users.currentItem().text()]["password"])
+        self.textEdit_ch_pass.setText(self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.listWidget_ch_users.currentItem().text()]["password"])
         self.textEdit_ch_fio.setPlainText(self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.listWidget_ch_users.currentItem().text()]["FIO"])
         self.textEdit_ch_post.setPlainText(self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.listWidget_ch_users.currentItem().text()]["post"])
         self.textEdit_ch_phone.setPlainText(self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.listWidget_ch_users.currentItem().text()]["phone"])
