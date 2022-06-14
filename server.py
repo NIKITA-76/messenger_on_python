@@ -48,6 +48,8 @@ class Server(socket.socket, Ui_Server):
                     self.add_load_MSG_for_client(socket_user, self.signal[2])
                 elif self.signal[0] == "LOADMSG":
                     self.load_MSG_for_client(socket_user)
+                elif self.signal[0] == "INFO_CARD":
+                    self.send_info_card(socket_user)
                 elif self.signal[0] == "USER_OUT":
                     """
                      Удаление пользователя из комнаты ЛС, так как при подключении пользователя меняеться его 'fd',
@@ -204,6 +206,9 @@ class Server(socket.socket, Ui_Server):
         mail_of_mess = self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.signal[2]]["mail"]
         post_of_mess = self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.signal[2]]["phone"]
 
+        for_load_info_card = ["INFO_CARD", fio_of_user, cabinet_of_mess, mail_of_mess, post_of_mess,]
+        for_load_info_card = pickle.dumps(for_load_info_card)
+        user_socket.send(for_load_info_card)
 
     def search_people(self, user_socket):
         users_in_JSON = self.data.DB.find_one({'_id': 'USERS'}, {'_id': 0})
