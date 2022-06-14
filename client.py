@@ -34,7 +34,7 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
         threading.Thread(target=self.get_text).start()
         self.canLoad = True
         self.roomsForLoad = []
-        self.animation_play = True
+        self.animation_play = False
         self.notify = Notify()
         print("Connect")
 
@@ -183,7 +183,7 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
             self.anim.setStartValue(600)
             self.anim.setEndValue(0)
             self.anim.start()
-            self.animation_play = True
+            self.animation_play = False
         self.pushButton_room.show()
         try:
             for IDRoom, nameRoom in self.roomsForLoad[0].items():
@@ -203,14 +203,14 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
         if self.animation_play:
             self.animation_play = False
             self.anim.setDuration(50)
-            self.anim.setStartValue(0)
-            self.anim.setEndValue(600)
+            self.anim.setStartValue(600)
+            self.anim.setEndValue(0)
             self.anim.start()
         else:
             self.animation_play = True
             self.anim.setDuration(50)
-            self.anim.setStartValue(600)
-            self.anim.setEndValue(0)
+            self.anim.setStartValue(0)
+            self.anim.setEndValue(600)
             self.anim.start()
 
     def searchPeople(self):
