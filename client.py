@@ -229,8 +229,9 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
         self.cl.send_data(new_room)
 
     def load_info_card(self):
-        new_room = ["INFO_CARD", self.listWidget_people.currentItem().text(), self.nick_name, ]
-
+        info_card = ["INFO_CARD", self.listWidget_people.currentItem().text(), self.nick_name, ]
+        info_card = pickle.dumps(info_card)
+        self.cl.send_data(info_card)
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
