@@ -515,6 +515,7 @@ class Ui_Server(object):
         self.verticalLayout_13 = QtWidgets.QVBoxLayout(self.frame_30)
         self.verticalLayout_13.setObjectName("verticalLayout_13")
         self.lineEdit_pass = QtWidgets.QLineEdit(self.frame_30)
+        self.lineEdit_pass.setEchoMode(QtWidgets.QLineEdit.Password)
         self.lineEdit_pass.setStyleSheet("background-color: rgb(30, 30, 30);\n"
                                          "font: 14pt \"Cantarell\";\n"
                                          "color: rgb(158, 158, 158);\n"
@@ -551,6 +552,7 @@ class Ui_Server(object):
         self.verticalLayout_14 = QtWidgets.QVBoxLayout(self.frame_31)
         self.verticalLayout_14.setObjectName("verticalLayout_14")
         self.lineEdit_pass_2 = QtWidgets.QLineEdit(self.frame_31)
+        self.lineEdit_pass_2.setEchoMode(QtWidgets.QLineEdit.Password)
         self.lineEdit_pass_2.setStyleSheet("background-color: rgb(30, 30, 30);\n"
                                            "font: 14pt \"Cantarell\";\n"
                                            "color: rgb(158, 158, 158);\n"
@@ -870,7 +872,8 @@ class Ui_Server(object):
         self.frame_58.setObjectName("frame_58")
         self.verticalLayout_33 = QtWidgets.QVBoxLayout(self.frame_58)
         self.verticalLayout_33.setObjectName("verticalLayout_33")
-        self.textEdit_ch_pass = QtWidgets.QTextEdit(self.frame_58)
+        self.textEdit_ch_pass = QtWidgets.QLineEdit(self.frame_58)
+        self.textEdit_ch_pass.setEchoMode(QtWidgets.QLineEdit.Password)
         self.textEdit_ch_pass.setStyleSheet("background-color: rgb(30, 30, 30);\n"
                                             "font: 14pt \"Cantarell\";\n"
                                             "color: rgb(158, 158, 158);\n"
