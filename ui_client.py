@@ -541,6 +541,7 @@ class UI_ForMain(object):
         self.pushButton_room.clicked.connect(self.roomMessage)
         self.pushButton_addFriend.clicked.connect(lambda: self.AddFRNDWindow.show())
         self.pushButton_label.clicked.connect(self.show_card_of_user)
+        self.pushButton_label.clicked.connect(self.load_info_card)
 
         self.listWidget_people.clicked.connect(self.loadMSG)
         self.pushButton_addFriend.hide()
