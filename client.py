@@ -30,6 +30,7 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
         super().__init__()
         super().setupUi(MainWindow, ChildWindow, )
         self.cl = Client()
+
         threading.Thread(target=self.get_text).start()
         self.canLoad = True
         self.roomsForLoad = []
@@ -174,7 +175,14 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
         except IndexError as error:
             print(f"{error}, value_ofScrollBar --> {value_ofScrollBar}")
 
+
     def loadMSG(self):
+
+        if self.frame.maximumWidth() == 600:
+            self.anim.setDuration(50)
+            self.anim.setStartValue(600)
+            self.anim.setEndValue(0)
+            self.anim.start()
         self.pushButton_room.show()
         try:
             for IDRoom, nameRoom in self.roomsForLoad[0].items():
@@ -188,6 +196,21 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
                     break
         except IndexError:
             print("IndexError IN loadMSG")
+
+    def show_card_of_user(self):
+        self.anim = QPropertyAnimation(self.frame, b'maximumWidth')
+        if self.animation_play:
+            self.animation_play = False
+            self.anim.setDuration(50)
+            self.anim.setStartValue(600)
+            self.anim.setEndValue(0)
+            self.anim.start()
+        else:
+            self.animation_play = True
+            self.anim.setDuration(50)
+            self.anim.setStartValue(0)
+            self.anim.setEndValue(600)
+            self.anim.start()
 
     def searchPeople(self):
         self.AddFRNDWindow.show()
@@ -207,21 +230,6 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
                 self.textEdit_room.setFocus()
                 break
 
-    def show_card_of_user(self):
-        self.anim = QPropertyAnimation(self.frame, b'maximumWidth')
-        if self.animation_play:
-            self.animation_play = False
-            self.anim.setDuration(50)
-            self.anim.setStartValue(600)
-            self.anim.setEndValue(0)
-            self.anim.start()
-        else:
-            self.animation_play = True
-            self.anim.setDuration(50)
-            self.anim.setStartValue(0)
-            self.anim.setEndValue(600)
-            self.anim.start()
-
     def addNewFriend(self):
         new_room = ["CRT_ROOM", self.AddFRNDForm.listWidget.currentItem().text(), self.nick_name, ]
         new_room = pickle.dumps(new_room)
@@ -229,9 +237,10 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
         self.cl.send_data(new_room)
 
     def load_info_card(self):
-        info_card = ["INFO_CARD", self.listWidget_people.currentItem().text(), self.nick_name, ]
-        info_card = pickle.dumps(info_card)
-        self.cl.send_data(info_card)
+        if self.pushButton_label.text() != "":
+            info_card = ["INFO_CARD", self.listWidget_people.currentItem().text(), self.nick_name, ]
+            info_card = pickle.dumps(info_card)
+            self.cl.send_data(info_card)
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
