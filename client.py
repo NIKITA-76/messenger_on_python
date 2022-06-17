@@ -70,7 +70,7 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
                         self.listWidget_msgRoom.verticalScrollBar().maximum())
                     self.notify.title = f"New message from '{data[1]}': "
                     self.notify.message = f"{''.join(data[2])}"
-                    self.notify.icon = "ui/logo_Unitum.png"
+                    self.notify.icon = "ui/icons/logo_Unitum.png"
                     if data[1] != self.nick_name:
                         self.notify.send()
             elif data[0] == "CRT_ROOM":
