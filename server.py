@@ -179,10 +179,11 @@ class Server(socket.socket, Ui_Server):
             else:
                 for i in bank_of_mess:
                     cut_bank_of_messg.append(i)
-                    if len(cut_bank_of_messg) == 50:
+                    if len(cut_bank_of_messg) == 30:
                         break
-                for_load_MSG = pickle.dumps(
-                    ["LOADMSG", cut_bank_of_messg])
+                for_load_MSG = ["LOADMSG", cut_bank_of_messg]
+                print(for_load_MSG)
+                for_load_MSG = pickle.dumps(for_load_MSG)
                 user.send(for_load_MSG)
 
         except KeyError as error:

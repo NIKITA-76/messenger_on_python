@@ -41,7 +41,8 @@ class Ui_MainWindow(ui_client.UI_ForMain, QWidget):
     def get_text(self, ):
         # We receive text from the server USING the client (Client)
         while True:
-            data = self.cl.recv(2048)
+            data = self.cl.recv(4096)
+            print(data)
             data = pickle.loads(data)
             print(f"Данные от сервера --- >{data}")
             if data[0] == "USER IS SIGN":  # Login check (Server confirmed login with a message)
