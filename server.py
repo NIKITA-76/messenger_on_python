@@ -267,34 +267,32 @@ class Server(socket.socket, Ui_Server):
         self.textEdit_ch_mail.setPlainText(self.data.DB.find_one({"_id": "USERS"}, {"_id": 0})[self.listWidget_ch_users.currentItem().text()]["mail"])
 
     def change_user(self):
-        try:
-            user = self.listWidget_ch_users.currentItem().text()
-            param_pass = self.textEdit_ch_pass.toPlainText()
-            param_fio = self.textEdit_ch_fio.toPlainText()
-            param_post = self.textEdit_ch_post.toPlainText()
-            param_phone = self.textEdit_ch_phone.toPlainText()
-            param_mail = self.textEdit_ch_mail.toPlainText()
-            self.data.DB.update_one({'_id': 'USERS'}, {'$set': {user + ".password": param_pass}})
-            self.data.DB.update_one({'_id': 'USERS'}, {'$set': {user + ".FIO": param_fio}})
-            self.data.DB.update_one({'_id': 'USERS'}, {'$set': {user + ".post": param_post}})
-            self.data.DB.update_one({'_id': 'USERS'}, {'$set': {user + ".phone": param_phone}})
-            self.data.DB.update_one({'_id': 'USERS'}, {'$set': {user + ".mail": param_mail}})
-            self.label_ch_info.setText("Пользователь успешно изменен")
-            self.label_ch_info.setStyleSheet("color:green")
-            self.textEdit_ch_pass.clear()
-            self.textEdit_ch_fio.clear()
-            self.textEdit_ch_post.clear()
-            self.textEdit_ch_phone.clear()
-            self.textEdit_ch_mail.clear()
-        except Exception:
-            self.label_ch_info.setText("Возникла ошибка!")
-            self.label_ch_info.setStyleSheet("color:red")
+
+        user = self.listWidget_ch_users.currentItem().text()
+        param_pass = self.textEdit_ch_pass.text()
+        param_fio = self.textEdit_ch_fio.toPlainText()
+        param_post = self.textEdit_ch_post.toPlainText()
+        param_phone = self.textEdit_ch_phone.toPlainText()
+        param_mail = self.textEdit_ch_mail.toPlainText()
+        self.data.DB.update_one({'_id': 'USERS'}, {'$set': {user + ".password": param_pass}})
+        self.data.DB.update_one({'_id': 'USERS'}, {'$set': {user + ".FIO": param_fio}})
+        self.data.DB.update_one({'_id': 'USERS'}, {'$set': {user + ".post": param_post}})
+        self.data.DB.update_one({'_id': 'USERS'}, {'$set': {user + ".phone": param_phone}})
+        self.data.DB.update_one({'_id': 'USERS'}, {'$set': {user + ".mail": param_mail}})
+        self.label_ch_info.setText("Пользователь успешно изменен")
+        self.label_ch_info.setStyleSheet("color:green")
+        self.textEdit_ch_pass.clear()
+        self.textEdit_ch_fio.clear()
+        self.textEdit_ch_post.clear()
+        self.textEdit_ch_phone.clear()
+        self.textEdit_ch_mail.clear()
+
 
     def search_for_delete(self):
-        self.listWidget_ch_users.clear()
+        self.listWidget_del_users.clear()
         users_in_JSON = self.data.DB.find_one({'_id': 'USERS'}, {'_id': 0})
         for user in users_in_JSON:
-            if self.lineEdit_ch.text() in user:
+            if self.lineEdit_del_search.text() in user:
                 self.listWidget_del_users.addItem(user)
 
     def delete_user(self):
