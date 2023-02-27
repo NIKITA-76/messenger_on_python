@@ -5,8 +5,6 @@ Corporate messenger for communication between employees in a closed network.
 
 This program is positioned as a way of communication between employees, as well as customer settings for them. This software will include an interface for the client, as well as an interface for configuring and working with the server.
 
-**This project is still under development**
-
 
 ![image](https://user-images.githubusercontent.com/73834676/173209563-ac4aa21f-2da2-4d5b-8ac4-f142e372ed49.png)
 ![image](https://user-images.githubusercontent.com/73834676/173209576-6014d35b-df41-475c-b87a-c921d0bbedc9.png)
